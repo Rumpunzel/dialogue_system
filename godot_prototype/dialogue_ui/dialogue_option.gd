@@ -80,8 +80,6 @@ func check_success():
 	
 	if required_approval_for_success > 0:
 		for listener in listeners:
-			print(listener.calculate_approval_rating(speaker))
-			print(required_approval_for_success)
 			if listener.calculate_approval_rating(speaker) >= required_approval_for_success:
 				return true
 			else:
