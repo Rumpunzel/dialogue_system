@@ -15,7 +15,12 @@ export(int, -10, 10) var sincerity_change
 
 export var big_deal:bool = false
 
-export(float, 0, 1) var required_approval_for_success
+export(float, 0, 1) var required_approval_for_success = 0
+
+export var requires_politeness_for_success = false
+export var requires_reliability_for_success = false
+export var requires_selflessness_for_success = false
+export var requires_sincerity_for_success = false
 
 onready var value_changes:Array = [politeness_change, reliability_change, selflessness_change, sincerity_change]
 
@@ -27,7 +32,7 @@ var listeners:Array = []
 func _ready():
 	update_appearance()
 	
-	connect("button_up", self, "option_chosen")
+	connect("button_up", self, "check_option")
 	
 	if not speaker_node == null:
 		speaker = get_node(speaker_node)
@@ -46,7 +51,59 @@ func _process(_delta):
 		update_appearance()
 
 
-func option_chosen():
+func check_option():
+	var option_success = check_success()
+	
+	print("\n" + ("SUCCESS!" if option_success else "FAILURE!"))
+	
+	confirm_option(option_success)
+
+func check_success():
+	var success = true
+	
+	if required_approval_for_success > 0:
+		for listener in listeners:
+			if listener.calculate_approval_rating(speaker) >= required_approval_for_success:
+				return true
+			else:
+				success = false
+	
+	if requires_politeness_for_success:
+		if check_perception_for_listeners(Character.POLITENESS):
+			return true
+		else:
+			success = false
+	
+	if requires_reliability_for_success:
+		if check_perception_for_listeners(Character.RELIABILITY):
+			return true
+		else:
+			success = false
+	
+	if requires_selflessness_for_success:
+		if check_perception_for_listeners(Character.SELFLESSNESS):
+			return true
+		else:
+			success = false
+	
+	if requires_sincerity_for_success:
+		if check_perception_for_listeners(Character.SINCERITY):
+			return true
+		else:
+			success = false
+	
+	return success
+
+func check_perception_for_listeners(value):
+	for listener in listeners:
+		var values = listener.calculate_perception_value(listener.character_perceptions.get(speaker, speaker.percieved_starting_values))
+		
+		if not listener.personal_values[value] == 0 and values[value] / listener.personal_values[value] < 1:
+			return false
+	
+	return true
+
+func confirm_option(option_success):
 	var value_update = ""
 	for i in value_changes.size():
 		var change = value_changes[i]

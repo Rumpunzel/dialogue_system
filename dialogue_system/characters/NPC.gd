@@ -24,20 +24,25 @@ func modify_perception(target:Character, value_changes):
 	character_perceptions[target] = math_helper.vector_add_arrays([character_perceptions[target], value_changes])
 	
 	print("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target], calculate_perception_value(character_perceptions[target])])
-	print("Approval Rating of %s towards %s is now: %f%% of a possible %f%%" % [name, target.name, calculate_approval_rating(target) * 100, maximum_possible_approval_rating()])
+	print("Approval Rating of %s towards %s is now: %f%% of a possible %f%%" % [name, target.name, calculate_approval_rating(target, true) * 100, maximum_possible_approval_rating()])
 	
 
-func calculate_approval_rating(target:Character):
+func calculate_approval_rating(target:Character, print_update = false):
 	var approval_rating = 0
+	var update_string = "Approval Changes: "
 	
 	if not character_perceptions.get(target, null) == null:
 		var perception_values = calculate_perception_value(character_perceptions[target])
+		
 		for i in personal_values.size():
 			var approval_change = perception_values[i] * personal_values[i]
 			
 			if not approval_change == 0:
-				print(("+" if approval_change >= 0 else "") + str(approval_change) + " from " + VALUE_NAMES[i])
+				update_string += ("+" if approval_change >= 0 else "") + str(approval_change) + " from " + VALUE_NAMES[i] + ", "
 			approval_rating += approval_change
+	
+	if print_update:
+		print(update_string.substr(0, update_string.length() - 2))
 	
 	return approval_rating
 
