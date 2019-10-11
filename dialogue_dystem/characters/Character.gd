@@ -17,6 +17,8 @@ export(float, -1, 1) var sincerity
 
 onready var percieved_starting_values:Array = [politeness, reliability, selflessness, sincerity]
 
+var dialogue_memories:Array = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,9 @@ func _ready():
 #func _process(delta):
 #	pass
 
+
+func remember_response(target:Character, value_changes, big_deal):
+	dialogue_memories.append([target, value_changes, big_deal])
 
 func calculate_perception_value(perception_values):
 	var values = []

@@ -53,7 +53,7 @@ func option_chosen():
 	print(value_update.substr(0, value_update.length() - 2))
 	
 	for listener in listeners:
-		listener.modify_perception(speaker, value_changes, big_deal)
+		listener.remember_response(speaker, value_changes, big_deal)
 
 func update_appearance():
 	if big_deal:

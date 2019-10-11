@@ -15,7 +15,11 @@ var character_perceptions:Dictionary
 #	pass
 
 
-func modify_perception(target:Character, value_changes, _big_deal):
+func remember_response(target:Character, value_changes, big_deal):
+	.remember_response(target, value_changes, big_deal)
+	modify_perception(target, value_changes)
+
+func modify_perception(target:Character, value_changes):
 	character_perceptions[target] = character_perceptions.get(target, target.percieved_starting_values)
 	character_perceptions[target] = math_helper.vector_add_arrays([character_perceptions[target], value_changes])
 	
