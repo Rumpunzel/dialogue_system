@@ -20,10 +20,25 @@ stretch_mode = 7
 
 [node name="dialogue_text" parent="." instance=ExtResource( 3 )]
 
+[node name="dialogue_options" parent="dialogue_text/options_container" index="0"]
+default_speaker_node = NodePath("../../../Player")
+default_listener_nodes = [ NodePath("../../../NPC") ]
+
+[node name="dialogue_option" parent="dialogue_text/options_container/dialogue_options" index="0"]
+speaker_node = null
+
+[node name="dialogue_option2" parent="dialogue_text/options_container/dialogue_options" index="1"]
+speaker_node = null
+
+[node name="dialogue_option3" parent="dialogue_text/options_container/dialogue_options" index="2"]
+speaker_node = null
+
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
 [node name="NPC" parent="." instance=ExtResource( 5 )]
 politeness = 0.2
 reliability = 0.4
-selflessness = -0.2
+selflessness = -0.5
 sincerity = 0.6
+
+[editable path="dialogue_text"]
