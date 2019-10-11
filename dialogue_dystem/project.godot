@@ -36,6 +36,10 @@ config/name="dialogue_system"
 run/main_scene="res://main/main.tscn"
 config/icon="res://assets/images/icon.png"
 
+[autoload]
+
+math_helper="*res://helpers/math_helper.gd"
+
 [debug]
 
 gdscript/warnings/return_value_discarded=false
