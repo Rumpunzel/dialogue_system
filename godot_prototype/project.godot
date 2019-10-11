@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://characters/Player.gd"
+}, {
+"base": "ToolButton",
+"class": "dialogue_option",
+"language": "GDScript",
+"path": "res://dialogue_ui/dialogue_option.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "NPC": "",
-"Player": ""
+"Player": "",
+"dialogue_option": ""
 }
 
 [application]
@@ -48,6 +54,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1200
 window/size/height=800
+window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
