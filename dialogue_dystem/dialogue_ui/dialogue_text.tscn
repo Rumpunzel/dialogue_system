@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://dialogue_ui/dialogue_option.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_ui/dialogue_options.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_ui/dialogue_option.tscn" type="PackedScene" id=4]
 
 [node name="dialogue_text" type="VBoxContainer"]
 anchor_right = 1.0
@@ -34,15 +35,38 @@ autowrap = true
 [node name="options_container" type="MarginContainer" parent="."]
 margin_top = 145.0
 margin_right = 700.0
-margin_bottom = 176.0
+margin_bottom = 246.0
 custom_constants/margin_right = 32
 custom_constants/margin_left = 32
 
 [node name="dialogue_options" type="VBoxContainer" parent="options_container"]
 margin_left = 32.0
 margin_right = 668.0
-margin_bottom = 31.0
+margin_bottom = 101.0
+script = ExtResource( 3 )
 
-[node name="dialogue_option" parent="options_container/dialogue_options" instance=ExtResource( 3 )]
+[node name="dialogue_option" parent="options_container/dialogue_options" instance=ExtResource( 4 )]
 margin_right = 272.0
 margin_bottom = 31.0
+hint_tooltip = "It is small and polite."
+politeness_change = 1
+
+[node name="dialogue_option2" parent="options_container/dialogue_options" instance=ExtResource( 4 )]
+margin_top = 35.0
+margin_right = 332.0
+margin_bottom = 66.0
+hint_tooltip = "It is a heroic option, indeed."
+text = "This is another dialogue option."
+reliability_change = 1
+selflessness_change = 1
+
+[node name="dialogue_option3" parent="options_container/dialogue_options" instance=ExtResource( 4 )]
+margin_top = 70.0
+margin_right = 362.0
+margin_bottom = 101.0
+hint_tooltip = "It will have drastic effects on this relationship."
+custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
+text = "This dialogue option is a big deal."
+politeness_change = -3
+sincerity_change = 5
+big_deal = true
