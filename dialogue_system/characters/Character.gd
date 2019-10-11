@@ -32,8 +32,8 @@ func _ready():
 #	pass
 
 
-func remember_response(target:Character, value_changes, big_deal):
-	dialogue_memories.append([target, value_changes, big_deal])
+func remember_response(target:Character, option_success, value_changes, big_deal):
+	dialogue_memories.append([target, option_success, value_changes, big_deal])
 
 func calculate_perception_value(perception_values):
 	var values = []

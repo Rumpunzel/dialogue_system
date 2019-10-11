@@ -17,10 +17,7 @@ export var big_deal:bool = false
 
 export(float, 0, 1) var required_approval_for_success = 0
 
-export var requires_politeness_for_success = false
-export var requires_reliability_for_success = false
-export var requires_selflessness_for_success = false
-export var requires_sincerity_for_success = false
+export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var values_enable_success
 
 onready var value_changes:Array = [politeness_change, reliability_change, selflessness_change, sincerity_change]
 
@@ -68,29 +65,12 @@ func check_success():
 			else:
 				success = false
 	
-	if requires_politeness_for_success:
-		if check_perception_for_listeners(Character.POLITENESS):
-			return true
-		else:
-			success = false
-	
-	if requires_reliability_for_success:
-		if check_perception_for_listeners(Character.RELIABILITY):
-			return true
-		else:
-			success = false
-	
-	if requires_selflessness_for_success:
-		if check_perception_for_listeners(Character.SELFLESSNESS):
-			return true
-		else:
-			success = false
-	
-	if requires_sincerity_for_success:
-		if check_perception_for_listeners(Character.SINCERITY):
-			return true
-		else:
-			success = false
+	for i in Character.VALUE_NAMES.size():
+		if int(pow(2, i)) & values_enable_success:
+			if check_perception_for_listeners(i):
+				return true
+			else:
+				success = false
 	
 	return success
 
@@ -112,7 +92,7 @@ func confirm_option(option_success):
 	print(value_update.substr(0, value_update.length() - 2))
 	
 	for listener in listeners:
-		listener.remember_response(speaker, value_changes, big_deal)
+		listener.remember_response(speaker, option_success, value_changes, big_deal)
 
 func update_appearance():
 	if big_deal:
