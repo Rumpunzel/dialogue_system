@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=2]
-[ext_resource path="res://dialogue_ui/dialogue_text.tscn" type="PackedScene" id=3]
-[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=3]
+[ext_resource path="res://dialogue_ui/dialogue_text.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=6]
 
 [node name="main" type="Control"]
 margin_right = 1200.0
@@ -18,24 +19,24 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
 
-[node name="dialogue_text" parent="." instance=ExtResource( 3 )]
+[node name="waterfall" type="TextureRect" parent="parchment_background"]
+margin_left = 940.0
+margin_top = 470.0
+margin_right = 1170.0
+margin_bottom = 760.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="dialogue_text" parent="." instance=ExtResource( 4 )]
 
 [node name="dialogue_options" parent="dialogue_text/options_container" index="0"]
 default_speaker_node = NodePath("../../../Player")
 default_listener_nodes = [ NodePath("../../../NPC") ]
 
-[node name="dialogue_option" parent="dialogue_text/options_container/dialogue_options" index="0"]
-speaker_node = null
+[node name="Player" parent="." instance=ExtResource( 5 )]
 
-[node name="dialogue_option2" parent="dialogue_text/options_container/dialogue_options" index="1"]
-speaker_node = null
-
-[node name="dialogue_option3" parent="dialogue_text/options_container/dialogue_options" index="2"]
-speaker_node = null
-
-[node name="Player" parent="." instance=ExtResource( 4 )]
-
-[node name="NPC" parent="." instance=ExtResource( 5 )]
+[node name="NPC" parent="." instance=ExtResource( 6 )]
 politeness = 0.2
 reliability = 0.4
 selflessness = -0.5
