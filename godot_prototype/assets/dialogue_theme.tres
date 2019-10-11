@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=3 format=2]
 
 [ext_resource path="res://assets/fonts/default_font.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [resource]
 default_font = ExtResource( 1 )
@@ -24,6 +26,23 @@ Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/fonts/font = null
 Label/styles/normal = null
+RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/font_color_selected = Color( 1, 1, 1, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.513726, 0.0117647, 0.0117647, 1 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+RichTextLabel/styles/focus = SubResource( 1 )
+RichTextLabel/styles/normal = null
 TooltipLabel/colors/font_color = Color( 0, 0, 0, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 0.1 )
 TooltipLabel/constants/shadow_offset_x = 1
