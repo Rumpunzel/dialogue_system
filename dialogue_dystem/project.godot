@@ -1,0 +1,57 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://characters/Character.gd"
+}, {
+"base": "Character",
+"class": "NPC",
+"language": "GDScript",
+"path": "res://characters/NPC.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://characters/Player.gd"
+} ]
+_global_script_class_icons={
+"Character": "",
+"NPC": "",
+"Player": ""
+}
+
+[application]
+
+config/name="dialogue_system"
+run/main_scene="res://main/main.tscn"
+config/icon="res://assets/images/icon.png"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=1200
+window/size/height=800
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[node]
+
+name_casing=2
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false
