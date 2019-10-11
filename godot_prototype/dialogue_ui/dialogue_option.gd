@@ -1,5 +1,6 @@
 tool
 extends ToolButton
+class_name dialogue_option
 
 export(NodePath) var speaker_node = null
 export(Array, NodePath) var listener_nodes = []
@@ -15,14 +16,30 @@ export(int, -10, 10) var sincerity_change
 
 export var big_deal:bool = false
 
+#warning-ignore:unused_class_variable
+export(String, MULTILINE) var success_description
+#warning-ignore:unused_class_variable
+export(PackedScene) var success_tree
+
 export(float, 0, 1) var required_approval_for_success = 0
 
 export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var values_enable_success
+
+#warning-ignore:unused_class_variable
+export(String, MULTILINE) var failure_description
+#warning-ignore:unused_class_variable
+export(PackedScene) var failure_tree
+
+export var single_use = true
 
 onready var value_changes:Array = [politeness_change, reliability_change, selflessness_change, sincerity_change]
 
 var speaker:Character
 var listeners:Array = []
+
+var succeeded = false
+
+signal option_confirmed
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,17 +66,22 @@ func _process(_delta):
 
 
 func check_option():
-	var option_success = check_success()
+	succeeded = check_success() or succeeded
 	
-	print("\n" + ("SUCCESS!" if option_success else "FAILURE!"))
+	print("\n" + ("SUCCESS!" if succeeded else "FAILURE!"))
 	
-	confirm_option(option_success)
+	confirm_option(succeeded)
+	
+	if single_use or succeeded:
+		visible = false
 
 func check_success():
 	var success = true
 	
 	if required_approval_for_success > 0:
 		for listener in listeners:
+			print(listener.calculate_approval_rating(speaker))
+			print(required_approval_for_success)
 			if listener.calculate_approval_rating(speaker) >= required_approval_for_success:
 				return true
 			else:
@@ -93,6 +115,12 @@ func confirm_option(option_success):
 	
 	for listener in listeners:
 		listener.remember_response(speaker, self, option_success, value_changes, big_deal)
+	
+	emit_signal("option_confirmed", { "success": option_success, "tree": success_tree if option_success else failure_tree, "description": success_description if option_success else failure_description })
+
+func reevaluate_availability():
+	if visible == false and not succeeded and check_success():
+		visible = true
 
 func update_appearance():
 	if big_deal:
