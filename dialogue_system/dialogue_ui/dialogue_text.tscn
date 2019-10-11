@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://dialogue_ui/dialogue_options.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_ui/dialogue_tree.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_ui/dialogue_option.tscn" type="PackedScene" id=4]
 
 [node name="dialogue_text" type="VBoxContainer"]
@@ -51,6 +51,7 @@ script = ExtResource( 3 )
 margin_right = 272.0
 margin_bottom = 31.0
 hint_tooltip = "It is small and polite."
+speaker_node = null
 politeness_change = 1
 
 [node name="dialogue_option2" parent="options_container/dialogue_options" instance=ExtResource( 4 )]
@@ -59,6 +60,7 @@ margin_right = 332.0
 margin_bottom = 66.0
 hint_tooltip = "It is a heroic option, indeed."
 text = "This is another dialogue option."
+speaker_node = null
 reliability_change = 1
 selflessness_change = 1
 
@@ -69,8 +71,9 @@ margin_bottom = 101.0
 hint_tooltip = "It will have drastic effects on this relationship."
 custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
 text = "This dialogue option is a big deal."
+speaker_node = null
 politeness_change = -3
 sincerity_change = 5
 big_deal = true
 required_approval_for_success = 0.5
-requires_politeness_for_success = true
+values_enable_success = 1
