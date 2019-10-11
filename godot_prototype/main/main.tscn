@@ -34,8 +34,28 @@ stretch_mode = 5
 default_speaker_node = NodePath("../../../Player")
 default_listener_nodes = [ NodePath("../../../NPC") ]
 
+[node name="dialogue_option" parent="dialogue_text/options_container/dialogue_options" index="0"]
+listener_nodes = [  ]
+reliability_change = 0
+selflessness_change = 0
+sincerity_change = 0
+big_deal = false
+required_approval_for_success = 0.0
+values_enable_success = 0
+
+[node name="dialogue_option2" parent="dialogue_text/options_container/dialogue_options" index="1"]
+listener_nodes = [  ]
+politeness_change = 0
+sincerity_change = 0
+big_deal = false
+required_approval_for_success = 0.0
+values_enable_success = 0
+
 [node name="dialogue_option3" parent="dialogue_text/options_container/dialogue_options" index="2"]
 custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
+listener_nodes = [  ]
+reliability_change = 0
+selflessness_change = 0
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 

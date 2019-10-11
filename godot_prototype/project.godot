@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="dialogue_system"
+config/name="godot_prototype"
 run/main_scene="res://main/main.tscn"
 config/icon="res://assets/images/icon.png"
 
