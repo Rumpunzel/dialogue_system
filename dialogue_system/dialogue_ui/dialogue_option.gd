@@ -15,6 +15,8 @@ export(int, -10, 10) var sincerity_change
 
 export var big_deal:bool = false
 
+export(float, 0, 1) var required_approval_for_success
+
 onready var value_changes:Array = [politeness_change, reliability_change, selflessness_change, sincerity_change]
 
 var speaker:Character

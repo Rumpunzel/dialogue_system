@@ -24,7 +24,7 @@ func modify_perception(target:Character, value_changes):
 	character_perceptions[target] = math_helper.vector_add_arrays([character_perceptions[target], value_changes])
 	
 	print("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target], calculate_perception_value(character_perceptions[target])])
-	print("Approval Rating of %s towards %s is now: %f%%" % [name, target.name, calculate_approval_rating(target) * 100])
+	print("Approval Rating of %s towards %s is now: %f%% of a possible %f%%" % [name, target.name, calculate_approval_rating(target) * 100, maximum_possible_approval_rating()])
 	
 
 func calculate_approval_rating(target:Character):
@@ -40,3 +40,11 @@ func calculate_approval_rating(target:Character):
 			approval_rating += approval_change
 	
 	return approval_rating
+
+func maximum_possible_approval_rating():
+	var poss_max =  0
+	
+	for value in personal_values:
+		poss_max += abs(value)
+	
+	return poss_max * 100
