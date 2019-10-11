@@ -5,6 +5,9 @@ enum { POLITENESS, RELIABILITY, SELFLESSNESS, SINCERITY }
 
 const VALUE_NAMES = [ "Politeness", "Reliability", "Selflessness", "Sincerity" ]
 
+const perception_value_slope = 0.5
+const perception_value_growth_point = 5.0
+
 #warning-ignore:unused_class_variable
 export(float, -1, 1) var politeness
 #warning-ignore:unused_class_variable
@@ -36,7 +39,7 @@ func calculate_perception_value(perception_values):
 	var values = []
 	
 	for value in perception_values:
-		values.append(atan(value))
-		#values.append(tanh(value))
+		# Philipp dark magic fuckery
+		values.append(0.5 * (tanh(perception_value_slope * (value + perception_value_growth_point)) + tanh(perception_value_slope * (value - perception_value_growth_point))))
 	
 	return values
