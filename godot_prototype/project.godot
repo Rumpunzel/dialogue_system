@@ -54,12 +54,12 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1200
 window/size/height=800
-window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
 [node]
 
+name_num_separator=2
 name_casing=2
 
 [rendering]
