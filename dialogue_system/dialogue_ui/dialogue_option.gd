@@ -92,7 +92,7 @@ func confirm_option(option_success):
 	print(value_update.substr(0, value_update.length() - 2))
 	
 	for listener in listeners:
-		listener.remember_response(speaker, option_success, value_changes, big_deal)
+		listener.remember_response(speaker, self, option_success, value_changes, big_deal)
 
 func update_appearance():
 	if big_deal:

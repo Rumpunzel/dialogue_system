@@ -15,8 +15,8 @@ var character_perceptions:Dictionary
 #	pass
 
 
-func remember_response(target:Character, option_success, value_changes, big_deal):
-	.remember_response(target, option_success, value_changes, big_deal)
+func remember_response(target:Character, dialogue_tree_root, option_success, value_changes, big_deal):
+	.remember_response(target, dialogue_tree_root, option_success, value_changes, big_deal)
 	modify_perception(target, value_changes)
 
 func modify_perception(target:Character, value_changes):
