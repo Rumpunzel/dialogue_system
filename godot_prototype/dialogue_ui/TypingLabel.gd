@@ -1,16 +1,18 @@
 extends RichTextLabel
 class_name TypingLabel
 
-const SENTENCE_ENDS = [".", "?", "!", ":"]
-const PUNCTUATIONS = [",", ";"]
+const SENTENCE_ENDS = [ ".", "?", "!", ":" ]
+const PUNCTUATIONS = [ ",", ";" ]
+
+const META_MARKDOWN = [ "<", "{", "|", "}", ">" ]
+const META_BBCODE = [ "[color=#830303]", "[url=\"", "\"]", "[/url]", "[/color]" ]
 
 export var typing_speed:float = 50
 export var pause_on_sentence_end:float = 0.3
 export var pause_on_comma:float = 0.2
 
+#warning-ignore:unused_class_variable
 export(Color) var highlight_color = Color("830303")
-export(String) var start_highlight_markdown = "<"
-export(String) var end_highlight_markdown = ">"
 
 export var type_first_message = true
 
@@ -31,6 +33,9 @@ func _ready():
 	else:
 		parse_markdown(text)
 		visible_counter = text.length()
+	
+	connect("meta_hover_started", self, "modify_tooltip")
+	connect("meta_hover_ended", self, "modify_tooltip", [true])
 
 func _process(delta):
 	if currently_counting and typing:
@@ -62,10 +67,19 @@ func type_text(new_text):
 	typing = true
 
 func parse_markdown(parse_text:String):
-	parse_text = parse_text.replace(start_highlight_markdown, "[color=#" + highlight_color.to_html() + "]")
-	parse_text = parse_text.replace(end_highlight_markdown, "[/color]")
+	for i in META_MARKDOWN.size():
+		parse_text = parse_text.replace(META_MARKDOWN[i], META_BBCODE[i])
+	
+	var parsed_text = ""
+	
+	while not parse_text == parsed_text:
+		parsed_text = parse_text
+		parse_text = parse_text.replace("  ", " ")
 	
 	parse_bbcode(parse_text)
 
 func continue_counting():
 	currently_counting = true
+
+func modify_tooltip(new_tooltip, erase_instead = false):
+	hint_tooltip = new_tooltip if not erase_instead else ""

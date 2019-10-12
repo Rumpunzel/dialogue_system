@@ -32,7 +32,8 @@ margin_bottom = 182.0
 rect_min_size = Vector2( 0, 100 )
 focus_mode = 2
 size_flags_vertical = 0
-text = "This is a <glorious> dialogue system.
+meta_underlined = false
+text = "This is a <{I made dis!|glorious}> dialogue system.
 We all know that it is and that it will be that forever. It is known."
 scroll_following = true
 selection_enabled = true
