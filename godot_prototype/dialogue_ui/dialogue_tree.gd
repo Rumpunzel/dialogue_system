@@ -25,21 +25,32 @@ func _enter_tree():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("choice_made", description_field, "update_description")
+	
+	update_list_numbers(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(_delta):
+	update_list_numbers()
 
 
 func choice_made(updated_info):
 	emit_signal("choice_made", updated_info["description"])
+
+func update_list_numbers(init = false):
+	var list_counter = 1
 	
 	for option in get_children():
-		option.reevaluate_availability()
-
-#func connect_choices_to_description():
-#	for option in get_children():
-#		option.connect(
+		if option.visible:
+			if init:
+				var new_shortcut = ShortCut.new() 
+				new_shortcut.shortcut = InputEventKey.new()
+				option.shortcut = new_shortcut
+			
+			option.shortcut.shortcut.scancode = KEY_0 + list_counter
+			
+			option.update_list_number(list_counter)
+			
+			list_counter += 1
 
 
 func set_default_speaker(new_speaker):

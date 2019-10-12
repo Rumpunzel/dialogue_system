@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=2]
@@ -6,6 +6,17 @@
 [ext_resource path="res://dialogue_ui/dialogue_tree.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_ui/dialogue_option.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_ui/exit_option.gd" type="Script" id=6]
+
+[sub_resource type="InputEventKey" id=3]
+scancode = 49
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=1]
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
 [node name="dialogue_text" type="VBoxContainer"]
 anchor_right = 1.0
@@ -43,7 +54,7 @@ script = ExtResource( 3 )
 [node name="options_container" type="MarginContainer" parent="."]
 margin_top = 232.0
 margin_right = 426.0
-margin_bottom = 368.0
+margin_bottom = 403.0
 size_flags_horizontal = 0
 custom_constants/margin_right = 32
 custom_constants/margin_left = 32
@@ -51,7 +62,7 @@ custom_constants/margin_left = 32
 [node name="dialogue_tree" type="VBoxContainer" parent="options_container"]
 margin_left = 32.0
 margin_right = 394.0
-margin_bottom = 136.0
+margin_bottom = 171.0
 size_flags_vertical = 0
 script = ExtResource( 4 )
 description_node = NodePath("../../description")
@@ -60,22 +71,21 @@ description_node = NodePath("../../description")
 margin_right = 272.0
 margin_bottom = 31.0
 hint_tooltip = "It is small and polite."
-speaker_node = null
+shortcut = SubResource( 4 )
 politeness_change = 1
-success_description = "You say something polite yet ultimately meaningless."
-single_use = false
+success_descriptions = [ "You say something polite yet ultimately meaningless." ]
 
 [node name="heroic_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
 margin_top = 35.0
 margin_right = 332.0
 margin_bottom = 66.0
 hint_tooltip = "It is a heroic option, indeed."
+shortcut = SubResource( 2 )
 text = "This is another dialogue option."
-speaker_node = null
 reliability_change = 1
 selflessness_change = 1
-success_description = "You boast about your heroic deed.
-It is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+success_descriptions = [ "You boast about your heroic deed.
+It is quite impressive. Especially as seemingly no one has yet tired of listening to your stories." ]
 single_use = false
 
 [node name="big_deal_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
@@ -85,20 +95,33 @@ margin_bottom = 101.0
 hint_tooltip = "It will have drastic effects on this relationship."
 custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
 text = "This dialogue option is a big deal."
-speaker_node = null
 politeness_change = -3
 selflessness_change = 1
 sincerity_change = 5
 big_deal = true
-success_description = "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still."
-required_approval_for_success = 0.28
-values_enable_success = 1
-failure_description = "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
+required_approval_for_success = 0.29
+values_enable_success = 4
+success_descriptions = [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still." ]
+approval_rating_change_on_success = 0.1
+failure_descriptions = [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today.", "You blew your second change, congratz, mate.", "No idea how you're getting any more chances here..." ]
+loop_failures_from = 2
+
+[node name="weather_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
+margin_top = 105.0
+margin_right = 242.0
+margin_bottom = 136.0
+hint_tooltip = "Wow, what social skills. You must be impressed."
+text = "Talk about the weather."
+selflessness_change = -1
+success_descriptions = [ "Yes, yes, quite indeed. How insightful, truly.", "Again? Seriously? Well ok, then..." ]
+loop_successes_from = 1
+single_use = false
 
 [node name="exit_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_top = 105.0
+margin_top = 140.0
 margin_right = 72.0
-margin_bottom = 136.0
+margin_bottom = 171.0
 hint_tooltip = "Goodbye."
 text = "Leave."
 script = ExtResource( 6 )
+speaker_node = NodePath("")
