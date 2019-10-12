@@ -22,6 +22,8 @@ var visible_counter:float
 var currently_counting = true
 var typing = true
 
+signal finished_typing
+
 
 func _ready():
 	add_child(punctuation_timer)
@@ -38,7 +40,7 @@ func _ready():
 	connect("meta_hover_ended", self, "modify_tooltip", [true])
 
 func _process(delta):
-	if currently_counting and typing:
+	if text.length() > 0 and currently_counting and typing:
 		visible_counter += delta * typing_speed
 		visible_counter = min(text.length(), visible_counter)
 		visible_characters = int(visible_counter)
@@ -54,6 +56,8 @@ func _process(delta):
 		
 		if visible_characters == text.length():
 			typing = false
+			
+			emit_signal("finished_typing")
 
 func _input(event):
 	if event is InputEventMouseButton and typing:

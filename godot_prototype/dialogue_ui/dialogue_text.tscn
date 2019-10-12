@@ -1,16 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://dialogue_ui/description.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_ui/dialogue_tree.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_ui/dialogue_option.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_ui/exit_option.gd" type="Script" id=6]
-
-[sub_resource type="InputEventKey" id=3]
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[ext_resource path="res://dialogue_ui/dialogue_text.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://dialogue_ui/description.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_ui/dialogue_tree.gd" type="Script" id=5]
 
 [node name="dialogue_text" type="VBoxContainer"]
 anchor_right = 1.0
@@ -21,13 +15,14 @@ margin_right = -250.0
 margin_bottom = -200.0
 theme = ExtResource( 1 )
 custom_constants/separation = 50
+script = ExtResource( 2 )
 
 [node name="title" type="Label" parent="."]
 margin_right = 270.0
 margin_bottom = 32.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Dialogue System"
 
 [node name="description" type="RichTextLabel" parent="."]
@@ -38,88 +33,22 @@ rect_min_size = Vector2( 0, 100 )
 focus_mode = 2
 size_flags_vertical = 0
 meta_underlined = false
-text = "This is a <{I made dis!|glorious}> dialogue system.
-We all know that it is and that it will be that forever. It is known."
 scroll_following = true
 selection_enabled = true
 override_selected_font_color = true
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="options_container" type="MarginContainer" parent="."]
 margin_top = 232.0
-margin_right = 426.0
-margin_bottom = 403.0
+margin_right = 64.0
+margin_bottom = 232.0
 size_flags_horizontal = 0
 custom_constants/margin_right = 32
 custom_constants/margin_left = 32
 
 [node name="dialogue_tree" type="VBoxContainer" parent="options_container"]
 margin_left = 32.0
-margin_right = 394.0
-margin_bottom = 171.0
+margin_right = 32.0
 size_flags_vertical = 0
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 description_node = NodePath("../../description")
-
-[node name="polite_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_right = 272.0
-margin_bottom = 31.0
-hint_tooltip = "It is small and polite."
-focus_mode = 0
-politeness_change = 1
-success_descriptions = [ "You say something polite yet ultimately meaningless." ]
-
-[node name="heroic_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_top = 35.0
-margin_right = 332.0
-margin_bottom = 66.0
-hint_tooltip = "It is a heroic option, indeed."
-focus_mode = 0
-shortcut = SubResource( 4 )
-text = "This is another dialogue option."
-reliability_change = 1
-selflessness_change = 1
-success_descriptions = [ "You boast about your heroic deed.
-It is quite impressive. Especially as seemingly no one has yet tired of listening to your stories." ]
-single_use = false
-
-[node name="big_deal_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_top = 70.0
-margin_right = 362.0
-margin_bottom = 101.0
-hint_tooltip = "It will have drastic effects on this relationship."
-focus_mode = 0
-custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
-text = "This dialogue option is a big deal."
-politeness_change = -3
-selflessness_change = 1
-sincerity_change = 5
-big_deal = true
-required_approval_for_success = 0.29
-values_enable_success = 4
-success_descriptions = [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still." ]
-approval_rating_change_on_success = 0.1
-failure_descriptions = [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today.", "You blew your second change, congratz, mate.", "No idea how you're getting any more chances here..." ]
-loop_failures_from = 2
-
-[node name="weather_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_top = 105.0
-margin_right = 242.0
-margin_bottom = 136.0
-hint_tooltip = "Wow, what social skills. You must be impressed."
-focus_mode = 0
-text = "Talk about the weather."
-selflessness_change = -1
-success_descriptions = [ "Yes, yes, quite indeed. How insightful, truly.", "Again? Seriously? Well ok, then..." ]
-loop_successes_from = 1
-single_use = false
-
-[node name="exit_option" parent="options_container/dialogue_tree" instance=ExtResource( 5 )]
-margin_top = 140.0
-margin_right = 72.0
-margin_bottom = 171.0
-hint_tooltip = "Goodbye."
-focus_mode = 0
-text = "Leave."
-script = ExtResource( 6 )
-speaker_node = NodePath("")

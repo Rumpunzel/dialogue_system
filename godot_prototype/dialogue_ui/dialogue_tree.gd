@@ -7,6 +7,8 @@ export(NodePath) var description_node
 
 onready var description_field = get_node(description_node)
 
+var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option.tscn")
+
 var default_speaker:Character setget set_default_speaker, get_default_speaker
 var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
 
@@ -18,33 +20,37 @@ func _enter_tree():
 	
 	for default_listener in default_listener_nodes:
 		default_listeners.append(get_node(default_listener))
-	
-	for option in get_children():
-		option.connect("option_confirmed", self, "choice_made")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("choice_made", description_field, "update_description")
 	
-	update_list_numbers(true)
+	update_list_numbers()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	update_list_numbers()
 
 
-func choice_made(updated_info):
-	emit_signal("choice_made", updated_info["description"])
+func add_option():
+	var new_option = dialogue_option_scene.instance()
+	
+	add_child(new_option)
+	new_option.connect("option_confirmed", self, "choice_made")
+	
+	return new_option
 
-func update_list_numbers(init = false):
+func choice_made(updated_info):
+	emit_signal("choice_made", updated_info["message"])
+
+func update_list_numbers():
 	var list_counter = 1
 	
 	for option in get_children():
 		if option.visible:
-			if init:
-				var new_shortcut = ShortCut.new() 
-				new_shortcut.shortcut = InputEventKey.new()
-				option.shortcut = new_shortcut
+			var new_shortcut = ShortCut.new() 
+			new_shortcut.shortcut = InputEventKey.new()
+			option.shortcut = new_shortcut
 			
 			option.shortcut.shortcut.scancode = KEY_0 + list_counter
 			

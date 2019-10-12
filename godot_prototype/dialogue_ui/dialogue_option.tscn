@@ -6,6 +6,7 @@
 margin_right = 600.0
 margin_bottom = 29.0
 hint_tooltip = "This is a neutral dialogue option."
+focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 shortcut_in_tooltip = false
@@ -13,7 +14,6 @@ enabled_focus_mode = 0
 text = "This is a dialogue option."
 align = 0
 script = ExtResource( 1 )
-speaker_node = null
 
 [node name="list_number" type="Label" parent="."]
 anchor_bottom = 1.0
