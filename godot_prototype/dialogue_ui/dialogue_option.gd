@@ -118,7 +118,7 @@ func check_success():
 
 func check_perception_for_listeners(value):
 	for listener in listeners:
-		var values = listener.calculate_perception_value(listener.character_perceptions.get(speaker, speaker.percieved_starting_values))
+		var values = listener.calculate_perception_value(listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC.PERCEPTION_VALUES])
 		
 		if not listener.personal_values[value] == 0 and values[value] / listener.personal_values[value] < 1:
 			return false
@@ -126,18 +126,21 @@ func check_perception_for_listeners(value):
 	return true
 
 func confirm_option(option_success):
-	if click_status == UNTOUCHED:
-		var value_update = ""
-		for i in value_changes.size():
-			var change = value_changes[i]
-			if not change == 0:
-				value_update += Character.VALUE_NAMES[i] + ": " + ("+" if change >= 0 else "") + str(change) + ", "
-		print(value_update.substr(0, value_update.length() - 2))
+	if click_status < PASSED:
+		if click_status <= UNTOUCHED:
+			var value_update = ""
+			for i in value_changes.size():
+				var change = value_changes[i]
+				if not change == 0:
+					value_update += Character.VALUE_NAMES[i] + ": " + ("+" if change >= 0 else "") + str(change) + ", "
+			print(value_update.substr(0, value_update.length() - 2))
+		else:
+			print("No Perception Updates, this Dialogue Option has already been used before!")
 		
 		for listener in listeners:
-			listener.remember_response(speaker, self, option_success, value_changes, big_deal)
+			listener.remember_response(speaker, self, option_success, value_changes, approval_rating_change_on_success, big_deal)
 	else:
-		print("This dialogue option has already been used before!")
+		print("No Updates, this Dialogue Option has already been passed before!")
 	
 	var success_description = success_descriptions[success_counter] if not success_descriptions.empty() else ""
 	var failure_description = failure_descriptions[failure_counter] if not failure_descriptions.empty() else ""

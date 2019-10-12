@@ -1,6 +1,8 @@
 extends Character
 class_name NPC
 
+enum { PERCEPTION_VALUES, APPROVAL_MODIFIER }
+
 onready var personal_values = [politeness, reliability, selflessness, sincerity]
 
 var character_perceptions:Dictionary
@@ -15,16 +17,23 @@ var character_perceptions:Dictionary
 #	pass
 
 
-func remember_response(target:Character, dialogue_tree_root, option_success, value_changes, big_deal):
-	.remember_response(target, dialogue_tree_root, option_success, value_changes, big_deal)
-	modify_perception(target, value_changes)
+func remember_response(target:Character, dialogue_tree_root, option_success, value_changes, approval_change, big_deal):
+	.remember_response(target, dialogue_tree_root, option_success, value_changes, approval_change, big_deal)
+	modify_perception(target, option_success, value_changes, approval_change)
 
-func modify_perception(target:Character, value_changes):
-	character_perceptions[target] = character_perceptions.get(target, target.percieved_starting_values)
-	character_perceptions[target] = math_helper.vector_add_arrays([character_perceptions[target], value_changes])
+func modify_perception(target:Character, option_success, value_changes, approval_change):
+	character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, [target.percieved_starting_values])[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, [0, 0])[APPROVAL_MODIFIER] }
 	
-	print("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target], calculate_perception_value(character_perceptions[target])])
-	print("Approval Rating of %s towards %s is now: %f%% of a possible %f%%" % [name, target.name, calculate_approval_rating(target, true) * 100, maximum_possible_approval_rating()])
+	character_perceptions[target][PERCEPTION_VALUES] = math_helper.vector_add_arrays([character_perceptions[target][PERCEPTION_VALUES], value_changes])
+	
+	if option_success:
+		character_perceptions[target][APPROVAL_MODIFIER] += approval_change
+		
+		if not character_perceptions[target][APPROVAL_MODIFIER] == 0:
+			print("%s now has a %0.2f%% Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER] * 100, target.name])
+	
+	print("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target][PERCEPTION_VALUES], calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])])
+	print("Approval Rating of %s towards %s is now: %0.2f%% of a possible %0.2f%%" % [name, target.name, calculate_approval_rating(target, true) * 100, maximum_possible_approval_rating()])
 	
 
 func calculate_approval_rating(target:Character, print_update = false):
@@ -32,7 +41,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 	var update_string = "Approval Changes: "
 	
 	if not character_perceptions.get(target, null) == null:
-		var perception_values = calculate_perception_value(character_perceptions[target])
+		var perception_values = calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])
 		
 		for i in personal_values.size():
 			var approval_change = perception_values[i] * personal_values[i]
@@ -40,6 +49,8 @@ func calculate_approval_rating(target:Character, print_update = false):
 			if not approval_change == 0:
 				update_string += ("+" if approval_change >= 0 else "") + str(approval_change) + " from " + VALUE_NAMES[i] + ", "
 			approval_rating += approval_change
+		
+		approval_rating += character_perceptions[target][APPROVAL_MODIFIER]
 	
 	if print_update:
 		print(update_string.substr(0, update_string.length() - 2))

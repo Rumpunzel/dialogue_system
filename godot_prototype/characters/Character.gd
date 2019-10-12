@@ -33,8 +33,8 @@ func _ready():
 #	pass
 
 
-func remember_response(target:Character, dialogue_tree_root, option_success, value_changes, big_deal):
-	var memory = [target, dialogue_tree_root, option_success, value_changes]
+func remember_response(target:Character, dialogue_tree_root, option_success, value_changes, approval_change, big_deal):
+	var memory = [target, dialogue_tree_root, option_success, value_changes, approval_change]
 	
 	if big_deal:
 		big_deal_memories.append(memory)
