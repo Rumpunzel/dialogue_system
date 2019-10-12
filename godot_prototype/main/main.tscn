@@ -43,22 +43,6 @@ stretch_mode = 5
 default_speaker_node = NodePath("../../../Player")
 default_listener_nodes = [ NodePath("../../../NPC") ]
 
-[node name="polite_option" parent="dialogue_text/options_container/dialogue_tree" index="0"]
-focus_mode = 0
-
-[node name="heroic_option" parent="dialogue_text/options_container/dialogue_tree" index="1"]
-focus_mode = 0
-
-[node name="big_deal_option" parent="dialogue_text/options_container/dialogue_tree" index="2"]
-focus_mode = 0
-custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
-
-[node name="weather_option" parent="dialogue_text/options_container/dialogue_tree" index="3"]
-focus_mode = 0
-
-[node name="exit_option" parent="dialogue_text/options_container/dialogue_tree" index="4"]
-focus_mode = 0
-
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="NPC" parent="." instance=ExtResource( 6 )]

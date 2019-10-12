@@ -138,7 +138,7 @@ func confirm_option(option_success):
 			print("No Perception Updates, this Dialogue Option has already been used before!")
 		
 		for listener in listeners:
-			listener.remember_response(speaker, self, option_success, value_changes, approval_rating_change_on_success, big_deal)
+			listener.remember_response(speaker, self, option_success, value_changes if click_status <= UNTOUCHED else [], approval_rating_change_on_success, big_deal)
 	else:
 		print("No Updates, this Dialogue Option has already been passed before!")
 	
