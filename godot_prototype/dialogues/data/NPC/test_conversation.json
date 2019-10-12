@@ -1,0 +1,80 @@
+{
+    "000" :
+    {
+      "description": [ "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known.", "Thanks for trying this out, <{That's you!|friendo.}>" ],
+      "options":
+      [
+        {
+          "title" : "polite_option",
+          "text" : "This is a dialogue option.",
+          "tooltip" : "It is small and polite.",
+          "success_messages" : [ "You say something polite yet ultimately meaningless." ],
+          "politeness_change" : 1
+        },
+        
+        {
+          "title" : "heroic_option",
+          "text" : "This is another dialogue option.",
+          "tooltip" : "It is a heroic option, indeed.",
+          "success_messages" : [ "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories." ],
+          "reliablity_change" : 1,
+          "selflessness_change" : 1,
+          "single_use" : false
+        },
+        
+        {
+          "title": "big_deal_option",
+          "text" : "This dialogue option is a big deal.",
+          "tooltip" : "It will have drastic effects on this relationship.",
+          "failure_messages" : [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today.", "You blew your second change, congratz, mate.", "No idea how you're getting any more chances here..." ],
+          "big_deal" : true,
+          "required_approval_rating" : 0.29,
+          "values_enable_success" : "Selflessness",
+          "loop_failures_from" : 2,
+          "politeness_change" : -3,
+          "sincerity_change" : 5,
+          "approval_rating_change_on_success" : 0.1,
+          "change_to_root_on_success" : "001"
+        },
+        
+        {
+          "title" : "weather_option",
+          "text" : "Talk about the weather." ,
+          "tooltip" : "Wow, what social skills. I am impressed.",
+          "success_messages" :[ "Yes, yes, quite indeed. How insightful, truly.", "Again? Seriously? Well ok, then..." ],
+          "loop_successes_from" : 1,
+          "selflessness_change" : -1 ,
+          "single_use" : false
+        },
+        
+        {
+          "title" : "exit_option",
+          "text" : "Leave.",
+          "tooltip" : "Goodbye.",
+          "exit" : true,
+          "noteworthy": false
+        }
+      ]
+    },
+    
+    "001" :
+    {
+      "description": [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.", "Well done, you've solved the puzzle!", "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.", "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.\nMight as well test out if the scrolling works I suppose. ( ͡° ͜ʖ ͡°)" ],
+      "options":
+      [
+        {
+          "title" : "polite_option",
+          "text" : "Thank you, Jamal.",
+          "tooltip" : "(✿◠‿◠)",
+          "exit" : true
+        },
+        
+        {
+          "title" : "asshole_option",
+          "text" : "Fuck you, Jamal.",
+          "tooltip" : "( ︶︿︶)_╭∩╮",
+          "exit" : true
+        }
+      ]
+    }
+  }

@@ -46,6 +46,7 @@ default_listener_nodes = [ NodePath("../../../NPC") ]
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="NPC" parent="." instance=ExtResource( 6 )]
+dialogue_file_path = "res://dialogues/data/NPC/test_conversation.json"
 politeness = 0.2
 reliability = 0.4
 selflessness = -0.5
