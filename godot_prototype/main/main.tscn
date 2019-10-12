@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main/main.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=2]
@@ -6,6 +6,15 @@
 [ext_resource path="res://dialogue_ui/dialogue_text.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue_ui/perception_graph.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
 
 [node name="main" type="Control"]
 margin_right = 1200.0
@@ -34,8 +43,21 @@ stretch_mode = 5
 default_speaker_node = NodePath("../../../Player")
 default_listener_nodes = [ NodePath("../../../NPC") ]
 
+[node name="polite_option" parent="dialogue_text/options_container/dialogue_tree" index="0"]
+focus_mode = 0
+
+[node name="heroic_option" parent="dialogue_text/options_container/dialogue_tree" index="1"]
+focus_mode = 0
+
 [node name="big_deal_option" parent="dialogue_text/options_container/dialogue_tree" index="2"]
+focus_mode = 0
 custom_colors/font_color = Color( 1, 0.843137, 0, 1 )
+
+[node name="weather_option" parent="dialogue_text/options_container/dialogue_tree" index="3"]
+focus_mode = 0
+
+[node name="exit_option" parent="dialogue_text/options_container/dialogue_tree" index="4"]
+focus_mode = 0
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
@@ -44,5 +66,13 @@ politeness = 0.2
 reliability = 0.4
 selflessness = -0.5
 sincerity = 0.6
+
+[node name="perception_graph" type="PanelContainer" parent="NPC"]
+margin_left = 32.0
+margin_top = 568.0
+margin_right = 232.0
+margin_bottom = 768.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 7 )
 
 [editable path="dialogue_text"]
