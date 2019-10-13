@@ -14,7 +14,6 @@ signal parsed_descriptions
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	dialogue_tree.connect("choice_made", self, "switch_tree")
-	#dialogue_tree.connect("choice_made", description_field, "update_description")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -29,7 +28,7 @@ func switch_dialogue(new_dialogue:Dictionary, new_tree = DEFAULT_TREE):
 
 func switch_tree(update:Dictionary):
 	var new_tree = update.get("new_tree", "")
-	print(update)
+	
 	if not new_tree == "" and not new_tree == current_tree:
 		current_tree = new_tree
 		parse_tree(update)
@@ -39,7 +38,8 @@ func switch_tree(update:Dictionary):
 func parse_tree(update:Dictionary = { }):
 	var dialogue = current_dialogue.get(current_tree, { })
 	
-	var new_message = update.get("message", dialogue.get("message", [ ]))
+	var new_message = update.get("message", [ ])
+	new_message = dialogue.get("message", [ ]) if new_message.empty() else new_message
 	parse_descriptions(new_message.duplicate())
 	yield(self, "parsed_descriptions")
 	
