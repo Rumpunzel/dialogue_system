@@ -3,7 +3,7 @@ class_name NPC
 
 enum { PERCEPTION_VALUES, APPROVAL_MODIFIER }
 
-onready var personal_values = [politeness, reliability, selflessness, sincerity]
+onready var personal_values:Dictionary = { POLITENESS: politeness, RELIABILITY: reliability, SELFLESSNESS: selflessness, SINCERITY: sincerity }
 
 var character_perceptions:Dictionary
 
@@ -20,13 +20,12 @@ func _ready():
 func remember_response(new_memory):
 	.remember_response(new_memory)
 	modify_perception(new_memory["speaker"], new_memory["success"],  new_memory["value_changes"],  new_memory["approval_change"])
-	print(dialogue_memories)
-	print(big_deal_memories)
+	#print(dialogue_memories)
 
 func modify_perception(target:Character, option_success, value_changes, approval_change):
 	character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, [target.percieved_starting_values])[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, [0, 0])[APPROVAL_MODIFIER] }
 	
-	character_perceptions[target][PERCEPTION_VALUES] = math_helper.vector_add_arrays([character_perceptions[target][PERCEPTION_VALUES], value_changes])
+	character_perceptions[target][PERCEPTION_VALUES] = math_helper.vector_add_dictionaries([character_perceptions[target][PERCEPTION_VALUES], value_changes])
 	
 	if option_success:
 		character_perceptions[target][APPROVAL_MODIFIER] += approval_change
@@ -44,11 +43,11 @@ func calculate_approval_rating(target:Character, print_update = false):
 	if not character_perceptions.get(target, null) == null:
 		var perception_values = calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])
 		
-		for i in personal_values.size():
-			var approval_change = perception_values[i] * personal_values[i]
+		for value in personal_values.keys():
+			var approval_change = perception_values[value] * personal_values[value]
 			
 			if not approval_change == 0:
-				update_string += ("+" if approval_change >= 0 else "") + str(approval_change) + " from " + VALUE_NAMES[i] + ", "
+				update_string += ("+" if approval_change >= 0 else "") + str(approval_change) + " from " + value.capitalize() + ", "
 			approval_rating += approval_change
 		
 		approval_rating += character_perceptions[target][APPROVAL_MODIFIER]
@@ -61,7 +60,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 func maximum_possible_approval_rating():
 	var poss_max =  0
 	
-	for value in personal_values:
+	for value in personal_values.values():
 		poss_max += abs(value)
 	
 	return poss_max * 100

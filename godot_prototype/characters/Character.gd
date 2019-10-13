@@ -1,9 +1,20 @@
 extends Node
 class_name Character
 
-enum { POLITENESS, RELIABILITY, SELFLESSNESS, SINCERITY }
+#enum { POLITENESS, RELIABILITY, SELFLESSNESS, SINCERITY }
 
-const VALUE_NAMES = [ "Politeness", "Reliability", "Selflessness", "Sincerity" ]
+const POLITENESS = "politeness"
+const RELIABILITY = "reliability"
+const SELFLESSNESS = "selflessness"
+const SINCERITY = "sincerity"
+
+const PASSED = "passed"
+const FAILED = "failed"
+const BIG_DEAL = "big_deal"
+const NORMAL = "normal"
+
+const SUCCESS_MAP = { true: PASSED, false: FAILED }
+const BIG_DEAL_MAP = { true: BIG_DEAL, false: NORMAL }
 
 const perception_value_slope = 0.3
 const perception_value_growth_point = 5.0
@@ -20,11 +31,9 @@ export(float, -1, 1) var selflessness
 export(float, -1, 1) var sincerity
 #warning-ignore:unused_class_variable
 
-onready var percieved_starting_values:Array = [politeness, reliability, selflessness, sincerity]
+onready var percieved_starting_values:Dictionary =  { POLITENESS: politeness, RELIABILITY: reliability, SELFLESSNESS: selflessness, SINCERITY: sincerity }
 
-# True == dialogue option passed || False == dialogue option failed
-var dialogue_memories:Dictionary = { true: [], false: [] }
-var big_deal_memories:Dictionary = { true: [], false: [] }
+onready var dialogue_memories:Dictionary = { BIG_DEAL: { PASSED: [ ], FAILED: [ ] }, NORMAL: { PASSED: [ ], FAILED: [ ] } }
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,21 +46,18 @@ func _ready():
 
 
 func initiate_dialogue():
-	get_node("/root/main/dialogue_text").start_dialogue(load_dialogue(dialogue_file_path))
+	get_node("/root/main/dialogue_text").switch_dialogue(load_dialogue(dialogue_file_path))
 
 func remember_response(new_memory:Dictionary):
 	if new_memory.get("noteworthy", false):
-		if new_memory.get("big_deal", false):
-			big_deal_memories[new_memory.get("success", true)].append(new_memory)
-		else:
-			dialogue_memories[new_memory.get("success", true)].append(new_memory)
+		dialogue_memories[ BIG_DEAL_MAP[ new_memory.get("big_deal", false) ] ][ SUCCESS_MAP[ new_memory.get("success", true) ] ].append(new_memory)
 
 func calculate_perception_value(perception_values):
-	var values = []
+	var values = { }
 	
-	for value in perception_values:
+	for key in perception_values.keys():
 		# Philipp dark magic fuckery
-		values.append(0.5 * (tanh(perception_value_slope * (value + perception_value_growth_point)) + tanh(perception_value_slope * (value - perception_value_growth_point))))
+		values[key] = (0.5 * (tanh(perception_value_slope * (perception_values[key] + perception_value_growth_point)) + tanh(perception_value_slope * (perception_values[key] - perception_value_growth_point))))
 	
 	return values
 
