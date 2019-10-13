@@ -1,30 +1,24 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://main/main.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=2]
-[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=3]
-[ext_resource path="res://dialogue_ui/dialogue_text.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue_ui/perception_graph.gd" type="Script" id=7]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+[ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
+[ext_resource path="res://main/main.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
+[ext_resource path="res://dialogue_ui/dialogue_text/dialogue_text.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_ui/perception_graph.gd" type="Script" id=8]
 
 [node name="main" type="Control"]
 margin_right = 1200.0
 margin_bottom = 800.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="parchment_background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 7
 
@@ -33,31 +27,37 @@ margin_left = 940.0
 margin_top = 470.0
 margin_right = 1170.0
 margin_bottom = 760.0
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
 
-[node name="dialogue_text" parent="." instance=ExtResource( 4 )]
+[node name="dialogue_text" parent="." instance=ExtResource( 5 )]
+margin_left = 300.0
+margin_right = -300.0
+
+[node name="description" parent="dialogue_text" index="1"]
+margin_right = 600.0
 
 [node name="dialogue_tree" parent="dialogue_text" index="2"]
+margin_right = 600.0
 default_speaker_node = NodePath("../../Player")
 default_listener_nodes = [ NodePath("../../NPC") ]
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 
-[node name="NPC" parent="." instance=ExtResource( 6 )]
+[node name="NPC" parent="." instance=ExtResource( 7 )]
 dialogue_file_path = "res://dialogues/data/NPC/test_conversation.json"
-politeness = 0.2
-reliability = 0.4
-selflessness = -0.5
-sincerity = 0.6
+politeness_preferred = 0.2
+reliability_preferred = 0.4
+selflessness_preferred = -0.5
+sincerity_preferred = 0.6
 
-[node name="perception_graph" type="PanelContainer" parent="NPC"]
-margin_left = 32.0
-margin_top = 568.0
-margin_right = 232.0
-margin_bottom = 768.0
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 7 )
+[node name="perception_graph" type="Control" parent="NPC"]
+margin_left = 20.0
+margin_top = 580.0
+margin_right = 220.0
+margin_bottom = 780.0
+theme = ExtResource( 1 )
+script = ExtResource( 8 )
 
 [editable path="dialogue_text"]

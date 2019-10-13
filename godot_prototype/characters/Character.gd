@@ -14,16 +14,16 @@ const perception_value_growth_point = 5.0
 export(String, FILE, "*.json") var dialogue_file_path
 
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var politeness
+export(float, -1, 1) var politeness_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var reliability
+export(float, -1, 1) var reliability_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var selflessness
+export(float, -1, 1) var selflessness_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var sincerity
+export(float, -1, 1) var sincerity_percieved
 #warning-ignore:unused_class_variable
 
-onready var percieved_starting_values:Dictionary =  { POLITENESS: politeness, RELIABILITY: reliability, SELFLESSNESS: selflessness, SINCERITY: sincerity }
+onready var percieved_starting_values:Dictionary =  { POLITENESS: politeness_percieved, RELIABILITY: reliability_percieved, SELFLESSNESS: selflessness_percieved, SINCERITY: sincerity_percieved }
 
 onready var memories:memories = $memories
 

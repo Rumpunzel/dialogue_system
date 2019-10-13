@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 var polygon_points = []
 
@@ -33,8 +33,20 @@ func get_graph(new_perceptions):
 	var points = []
 	var value_index = 0
 	
-	for perception in new_perceptions.values():
-		points.append(center + Vector2(0, -get_rect().size.y / 4 * (1 + perception)).rotated((value_index / float(points_amount)) * TAU))
+	for perception in new_perceptions.keys():
+		var new_rotation = (value_index / float(points_amount)) * TAU
+		var new_point = center + Vector2(0, -get_rect().size.y / 4 * (1 + new_perceptions[perception])).rotated(new_rotation)
+		points.append(new_point)
+		
+#		var label = Label.new()
+#		add_child(label)
+#		label.grow_horizontal = Control.GROW_DIRECTION_BOTH
+#		label.grow_vertical = Control.GROW_DIRECTION_BOTH
+#		label.text = perception.capitalize()
+#		label.rect_pivot_offset = label.rect_size / 2
+#		label.rect_position = center + Vector2(0, -get_rect().size.y * 0.5).rotated(new_rotation)
+#		label.rect_rotation = int(rad2deg(new_rotation))
+
 		value_index += 1
 	
 	return points

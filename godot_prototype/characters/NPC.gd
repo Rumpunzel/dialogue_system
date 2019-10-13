@@ -3,7 +3,17 @@ class_name NPC
 
 enum { PERCEPTION_VALUES, APPROVAL_MODIFIER }
 
-onready var personal_values:Dictionary = { POLITENESS: politeness, RELIABILITY: reliability, SELFLESSNESS: selflessness, SINCERITY: sincerity }
+#warning-ignore:unused_class_variable
+export(float, -1, 1) var politeness_preferred
+#warning-ignore:unused_class_variable
+export(float, -1, 1) var reliability_preferred
+#warning-ignore:unused_class_variable
+export(float, -1, 1) var selflessness_preferred
+#warning-ignore:unused_class_variable
+export(float, -1, 1) var sincerity_preferred
+#warning-ignore:unused_class_variable
+
+onready var personal_values:Dictionary = { POLITENESS: politeness_preferred, RELIABILITY: reliability_preferred, SELFLESSNESS: selflessness_preferred, SINCERITY: sincerity_preferred }
 
 var character_perceptions:Dictionary
 

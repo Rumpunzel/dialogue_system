@@ -3,7 +3,7 @@ extends VBoxContainer
 export(NodePath) var default_speaker_node
 export(Array, NodePath) var default_listener_nodes = []
 
-export(PackedScene) var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option.tscn")
+export(PackedScene) var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option/dialogue_option.tscn")
 
 var default_speaker:Character setget set_default_speaker, get_default_speaker
 var default_listeners:Array = [] setget set_default_listeners, get_default_listeners

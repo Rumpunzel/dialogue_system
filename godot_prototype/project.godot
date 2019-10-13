@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "ToolButton",
 "class": "dialogue_option",
 "language": "GDScript",
-"path": "res://dialogue_ui/dialogue_option.gd"
+"path": "res://dialogue_ui/dialogue_option/dialogue_option.gd"
 }, {
 "base": "Node",
 "class": "memories",
