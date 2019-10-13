@@ -86,4 +86,4 @@ func continue_counting():
 	currently_counting = true
 
 func modify_tooltip(new_tooltip, erase_instead = false):
-	hint_tooltip = str(new_tooltip) if not erase_instead else ""
+	hint_tooltip = new_tooltip if typeof(new_tooltip) == TYPE_STRING and not erase_instead else ""
