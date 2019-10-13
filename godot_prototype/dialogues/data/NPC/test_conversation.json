@@ -9,7 +9,7 @@
         "name" : "polite_option",
         "text" : "This is a dialogue option.",
         "hint_tooltip" : "It is small and polite.",
-        "success_messages" : [ [ "You say something polite yet ultimately meaningless." ] ],
+        "success_messages" : [ [ "You say something polite, yet ultimately meaningless." ] ],
         "politeness_change" : 1
       },
       
