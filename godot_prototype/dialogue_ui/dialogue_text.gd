@@ -40,7 +40,7 @@ func parse_tree(update:Dictionary = { }):
 	var dialogue = current_dialogue.get(current_tree, { })
 	
 	var new_message = update.get("message", dialogue.get("message", [ ]))
-	parse_descriptions(new_message)
+	parse_descriptions(new_message.duplicate())
 	yield(self, "parsed_descriptions")
 	
 	var new_options = update.get("options", dialogue.get("options", [ ]))
