@@ -29,6 +29,7 @@ func _process(_delta):
 func add_option(option_type):
 	var new_option = dialogue_option_scene.instance()
 	new_option.init(option_type)
+	new_option.update_participants(default_speaker, default_listeners)
 	
 	add_child(new_option)
 	new_option.connect("option_confirmed", self, "choice_made")

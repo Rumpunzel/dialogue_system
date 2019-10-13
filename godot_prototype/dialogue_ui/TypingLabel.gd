@@ -8,8 +8,8 @@ const META_MARKDOWN = [ "<", "{", "|", "}", ">" ]
 const META_BBCODE = [ "[color=#830303]", "[url=\"", "\"]", "[/url]", "[/color]" ]
 
 export var typing_speed:float = 50
-export var pause_on_sentence_end:float = 0.3
-export var pause_on_comma:float = 0.2
+export var pause_on_sentence_end:float = 0.2
+export var pause_on_comma:float = 0.1
 
 #warning-ignore:unused_class_variable
 export(Color) var highlight_color = Color("830303")
