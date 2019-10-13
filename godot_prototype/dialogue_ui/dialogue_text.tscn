@@ -38,16 +38,9 @@ selection_enabled = true
 override_selected_font_color = true
 script = ExtResource( 4 )
 
-[node name="options_container" type="MarginContainer" parent="."]
+[node name="dialogue_tree" type="VBoxContainer" parent="."]
 margin_top = 232.0
-margin_right = 64.0
+margin_right = 700.0
 margin_bottom = 232.0
-size_flags_horizontal = 0
-custom_constants/margin_right = 32
-custom_constants/margin_left = 32
-
-[node name="dialogue_tree" type="VBoxContainer" parent="options_container"]
-margin_left = 32.0
-margin_right = 32.0
 size_flags_vertical = 0
 script = ExtResource( 5 )

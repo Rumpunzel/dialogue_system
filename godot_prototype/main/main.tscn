@@ -39,9 +39,9 @@ stretch_mode = 5
 
 [node name="dialogue_text" parent="." instance=ExtResource( 4 )]
 
-[node name="dialogue_tree" parent="dialogue_text/options_container" index="0"]
-default_speaker_node = NodePath("../../../Player")
-default_listener_nodes = [ NodePath("../../../NPC") ]
+[node name="dialogue_tree" parent="dialogue_text" index="2"]
+default_speaker_node = NodePath("../../Player")
+default_listener_nodes = [ NodePath("../../NPC") ]
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
