@@ -28,7 +28,7 @@
         "hint_tooltip" : "It will have drastic effects on this relationship.",
         "failure_messages" : [ [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."], ["You blew your second change, congratz, mate.", "No idea how you're getting any more chances here..." ] ],
         "big_deal" : true,
-        "required_approval_rating" : 0.01,
+        "required_approval_rating" : 0.3,
         "values_enable_success" : [ "selflessness" ],
         "loop_failures_from" : 2,
         "politeness_change" : -3,
@@ -57,7 +57,7 @@
   
   "001" :
   {
-    "message": [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.", "Well done, you've solved the puzzle!", "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.", "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.\nMight as well test out if the scrolling works I suppose. ( ͡° ͜ʖ ͡°)", ".", ".", ".", "Ligma." ],
+    "message": [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.", "Well done, you've solved the puzzle!", "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.", "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.", "<{Balls.|Ligma.}>" ],
     "options":
     [
       {
