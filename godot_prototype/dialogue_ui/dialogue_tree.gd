@@ -3,11 +3,7 @@ extends VBoxContainer
 export(NodePath) var default_speaker_node
 export(Array, NodePath) var default_listener_nodes = []
 
-export(NodePath) var description_node
-
-onready var description_field = get_node(description_node)
-
-var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option.tscn")
+export(PackedScene) var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option.tscn")
 
 var default_speaker:Character setget set_default_speaker, get_default_speaker
 var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
@@ -23,8 +19,6 @@ func _enter_tree():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("choice_made", description_field, "update_description")
-	
 	update_list_numbers()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,8 +26,9 @@ func _process(_delta):
 	update_list_numbers()
 
 
-func add_option():
+func add_option(option_type):
 	var new_option = dialogue_option_scene.instance()
+	new_option.init(option_type)
 	
 	add_child(new_option)
 	new_option.connect("option_confirmed", self, "choice_made")
@@ -41,7 +36,8 @@ func add_option():
 	return new_option
 
 func choice_made(updated_info):
-	emit_signal("choice_made", updated_info["message"])
+	clear_options()
+	emit_signal("choice_made", updated_info)
 
 func update_list_numbers():
 	var list_counter = 1
@@ -57,6 +53,10 @@ func update_list_numbers():
 			option.update_list_number(list_counter)
 			
 			list_counter += 1
+
+func clear_options():
+	for option in get_children():
+		option.queue_free()
 
 
 func set_default_speaker(new_speaker):
