@@ -2,6 +2,8 @@ tool
 extends ToolButton
 class_name dialogue_option
 
+enum { UNTOUCHED, CLICKED, PASSED }
+
 const DEFAULT = "default"
 const CONTINUE = "continue"
 const EXIT = "exit"
@@ -11,8 +13,6 @@ const DEFAULT_OPTION = { "type": "default" }
 const CONTINUE_OPTION =  { "type": "continue" }
 const EXIT_OPTION =  { "type": "exit" }
 const CUSTOM_OPTION =  { "type": "custom" }
-
-enum { UNTOUCHED, CLICKED, PASSED }
 
 export(NodePath) var speaker_node = null
 export(Array, NodePath) var listener_nodes = []
@@ -57,7 +57,7 @@ onready var value_changes:Dictionary = compose_value_changes()
 var speaker:Character
 var listeners:Array = []
 
-var click_status = UNTOUCHED
+var id
 
 var success_counter = 0
 var failure_counter = 0
@@ -73,20 +73,12 @@ func _ready():
 	update_appearance()
 	
 	connect("button_up", self, "check_option")
-	
-	if not speaker_node == null:
-		speaker = get_node(speaker_node)
-	else:
-		speaker = get_parent().default_speaker
-	
-	if not listener_nodes.empty():
-		for listener in listener_nodes:
-			listeners.append(get_node(listener))
-	else:
-		listeners = get_parent().default_listeners
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if single_use and not untouched():
+		queue_free()
+	
 	update_appearance()
 
 
@@ -112,26 +104,18 @@ func init(option_info = DEFAULT_OPTION):
 		set(key, option_info[key])
 
 func check_option():
-	var new_click_status = max(check_success(), click_status)
+	var new_click_status = check_success()
 	
 	print("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
-		
-	confirm_option(new_click_status >= PASSED)
 	
-#	if single_use:
-#		queue_free()
-#		#visible = false
-	
-	click_status = new_click_status
-	
-	if click_status >= PASSED:
+	if new_click_status >= PASSED:
 		success_counter += 1
-		if success_counter >= success_messages.size():
-			success_counter = min(loop_successes_from, success_messages.size() -1)
-	elif click_status >= CLICKED:
+	elif new_click_status >= CLICKED:
 		failure_counter += 1
 		if failure_counter >= failure_messages.size():
-			failure_counter = min(loop_failures_from, failure_messages.size() -1)
+			failure_counter = min(loop_failures_from, failure_messages.size() - 1)
+	
+	confirm_option(new_click_status >= PASSED)
 	
 	if exits_dialogue:
 		get_tree().quit()
@@ -165,11 +149,11 @@ func check_perception_for_listeners(value):
 	return true
 
 func confirm_option(option_success):
-	if click_status < PASSED:
-		if click_status <= UNTOUCHED:
+	if success_counter <= 1:
+		if failure_counter <= 1:
 			var value_update = ""
 			
-			for key in value_changes:
+			for key in value_changes.keys():
 				var change = value_changes[key]
 				if not change == 0:
 					value_update += key + ": " + ("+" if change >= 0 else "") + str(change) + ", "
@@ -179,21 +163,25 @@ func confirm_option(option_success):
 			print("No Perception Updates, this Dialogue Option has already been used before!")
 		
 		for listener in listeners:
-			listener.remember_response({ "speaker": speaker, "success": option_success, "value_changes": value_changes if click_status <= UNTOUCHED else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "json": option_json, "noteworthy": noteworthy })
+			listener.remember_response({ "id": id, "speaker": speaker, "success": option_success, "value_changes": value_changes if not (success_counter > 1 or failure_counter > 1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
 	else:
 		print("No Updates, this Dialogue Option has already been passed before!")
 	
-	var success_message = success_messages[success_counter] if not success_messages.empty() else [ ]
-	var failure_message = failure_messages[failure_counter] if not failure_messages.empty() else [ ]
+	var succ_mess = success_counter - 1
+	if succ_mess >= success_messages.size():
+			succ_mess = min(loop_successes_from, success_messages.size() - 1)
+			
+	var fail_mess = failure_counter - 1
+	if fail_mess >= failure_messages.size():
+			fail_mess = min(loop_failures_from, failure_messages.size() - 1)
+			
+	var success_message = success_messages[succ_mess] if not success_messages.empty() else [ ]
+	var failure_message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
 	
 	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "json": option_json })
 
 func compose_value_changes():
 	return { Character.POLITENESS: politeness_change, Character.RELIABILITY: reliability_change, Character.SELFLESSNESS: selflessness_change, Character.SINCERITY: sincerity_change }
-
-func reevaluate_availability():
-	if visible == false and check_success() > click_status:
-		visible = true
 
 func update_appearance():
 	if big_deal:
@@ -201,8 +189,30 @@ func update_appearance():
 	else:
 		set("custom_colors/font_color", null)
 		
-		if click_status >= CLICKED:
+		if not untouched():
 			modulate.a = clicked_alpha
+
+func update_participants(default_speaker, default_listeners):
+	if not speaker_node == null:
+		speaker = get_node(speaker_node)
+	else:
+		speaker = default_speaker
+	
+	if not listener_nodes.empty():
+		for listener in listener_nodes:
+			listeners.append(get_node(listener))
+	else:
+		listeners = default_listeners
+	
+	for listener in listeners:
+		var recollection = listener.remembers_dialogue_option(id)
+		
+		if not recollection == null and recollection["speaker"] == speaker:
+			success_counter = recollection["success_counter"]
+			failure_counter = recollection["failure_counter"]
+
+func untouched():
+	return not (success_counter > 0 or failure_counter > 0)
 
 func update_list_number(new_number):
 	$list_number.text = "%d." % [new_number]

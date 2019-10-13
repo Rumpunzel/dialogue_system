@@ -5,6 +5,7 @@
     "options":
     [
       {
+        "id": 0,
         "name" : "polite_option",
         "text" : "This is a dialogue option.",
         "hint_tooltip" : "It is small and polite.",
@@ -13,6 +14,7 @@
       },
       
       {
+        "id": 1,
         "name" : "heroic_option",
         "text" : "This is another dialogue option.",
         "hint_tooltip" : "It is a heroic option, indeed.",
@@ -23,10 +25,11 @@
       },
       
       {
+        "id": 2,
         "name": "big_deal_option",
         "text" : "This dialogue option is a big deal.",
         "hint_tooltip" : "It will have drastic effects on this relationship.",
-        "failure_messages" : [ [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."], ["You blew your second change, congratz, mate.", "No idea how you're getting any more chances here..." ] ],
+        "failure_messages" : [ [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today." ], [ "You blew your second change, congratz, mate." ], [ "No idea how you're getting any more chances here..." ] ],
         "big_deal" : true,
         "required_approval_rating" : 0.3,
         "values_enable_success" : [ "selflessness" ],
@@ -38,10 +41,11 @@
       },
       
       {
+        "id": 3,
         "name" : "weather_option",
         "text" : "Talk about the weather." ,
         "hint_tooltip" : "Wow, what social skills. I am impressed.",
-        "success_messages" :[ [ "Yes, yes, quite indeed. How insightful, truly."], ["Again? Seriously? Well ok, then..." ] ],
+        "success_messages" :[ [ "Yes, yes, quite indeed. How insightful, truly." ], [ "Again? Seriously? Well ok, then..." ] ],
         "loop_successes_from" : 1,
         "selflessness_change" : -1 ,
         "single_use" : false
