@@ -27,14 +27,33 @@ func _process(_delta):
 
 
 func add_option(option_type):
+	var speaker_check = option_type.get("speaker", default_speaker)
+	var listeners_check = option_type.get("listeners", default_listeners)
+	
+	var option_id = option_type.get("id", -1)
+	var success_counter = 0
+	var failure_counter = 0
+	
+	if option_id >= 0:
+		for listener in listeners_check:
+			var recollection = listener.remembers_dialogue_option(option_id)
+			
+			if not recollection == null and recollection["speaker"] == speaker_check:
+				success_counter = recollection["success_counter"]
+				failure_counter = recollection["failure_counter"]
+	
 	var new_option = dialogue_option_scene.instance()
 	new_option.init(option_type)
-	new_option.update_participants(default_speaker, default_listeners)
+	new_option.speaker = speaker_check
+	new_option.listeners = listeners_check
+	new_option.success_counter = success_counter
+	new_option.failure_counter = failure_counter
 	
-	add_child(new_option)
-	new_option.connect("option_confirmed", self, "choice_made")
-	
-	return new_option
+	if not option_type.get("single_use", true) or (success_counter == 0 and failure_counter == 0) or (option_type.get("big_deal", false) and success_counter == 0 and new_option.check_success() >= dialogue_option.PASSED):
+		add_child(new_option)
+		new_option.connect("option_confirmed", self, "choice_made")
+	else:
+		new_option.queue_free()
 
 func choice_made(updated_info):
 	clear_options()

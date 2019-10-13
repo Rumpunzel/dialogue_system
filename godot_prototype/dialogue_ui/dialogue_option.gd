@@ -14,8 +14,8 @@ const CONTINUE_OPTION =  { "type": "continue" }
 const EXIT_OPTION =  { "type": "exit" }
 const CUSTOM_OPTION =  { "type": "custom" }
 
-export(NodePath) var speaker_node = null
-export(Array, NodePath) var listener_nodes = []
+export(String) var speaker
+export(Array, String) var listeners
 
 #warning-ignore:unused_class_variable
 export(int, -10, 10) var politeness_change
@@ -54,9 +54,7 @@ export(float, 0, 1) var clicked_alpha = 0.5
 
 onready var value_changes:Dictionary = compose_value_changes()
 
-var speaker:Character
-var listeners:Array = []
-
+#warning-ignore:unused_class_variable
 var id
 
 var success_counter = 0
@@ -76,9 +74,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if single_use and not untouched():
-		queue_free()
-	
 	update_appearance()
 
 
@@ -163,7 +158,7 @@ func confirm_option(option_success):
 			print("No Perception Updates, this Dialogue Option has already been used before!")
 		
 		for listener in listeners:
-			listener.remember_response({ "id": id, "speaker": speaker, "success": option_success, "value_changes": value_changes if not (success_counter > 1 or failure_counter > 1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
+			listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
 	else:
 		print("No Updates, this Dialogue Option has already been passed before!")
 	
@@ -192,27 +187,8 @@ func update_appearance():
 		if not untouched():
 			modulate.a = clicked_alpha
 
-func update_participants(default_speaker, default_listeners):
-	if not speaker_node == null:
-		speaker = get_node(speaker_node)
-	else:
-		speaker = default_speaker
-	
-	if not listener_nodes.empty():
-		for listener in listener_nodes:
-			listeners.append(get_node(listener))
-	else:
-		listeners = default_listeners
-	
-	for listener in listeners:
-		var recollection = listener.remembers_dialogue_option(id)
-		
-		if not recollection == null and recollection["speaker"] == speaker:
-			success_counter = recollection["success_counter"]
-			failure_counter = recollection["failure_counter"]
-
-func untouched():
-	return not (success_counter > 0 or failure_counter > 0)
+func untouched(bigger_than = 0):
+	return success_counter + failure_counter <= bigger_than
 
 func update_list_number(new_number):
 	$list_number.text = "%d." % [new_number]
