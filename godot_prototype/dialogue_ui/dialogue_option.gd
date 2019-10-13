@@ -74,7 +74,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_appearance()
+	if Engine.editor_hint:
+		update_appearance()
+
+#func _input(event):
+#	if event is InputEventKey:# and event.scancode == shortcut.shortcut.scancode:
+#		print(event)
+#		pressed = true
 
 
 func init(option_info = DEFAULT_OPTION):
@@ -191,4 +197,4 @@ func untouched(bigger_than = 0):
 	return success_counter + failure_counter <= bigger_than
 
 func update_list_number(new_number):
-	$list_number.text = "%d." % [new_number]
+	text = "%d. %s" % [new_number, text]

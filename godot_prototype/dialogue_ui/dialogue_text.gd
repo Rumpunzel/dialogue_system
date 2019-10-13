@@ -3,7 +3,7 @@ extends VBoxContainer
 const DEFAULT_TREE = "000"
 
 onready var description_field = $description
-onready var dialogue_tree = $options_container/dialogue_tree
+onready var dialogue_tree = $dialogue_tree
 
 var current_dialogue:Dictionary
 var current_tree
@@ -53,6 +53,7 @@ func parse_descriptions(descriptions:Array):
 		
 		if not descriptions.empty():
 			dialogue_tree.add_option(dialogue_option.CONTINUE_OPTION)
+			dialogue_tree.update_list_numbers()
 			yield(dialogue_tree, "choice_made")
 	
 	emit_signal("parsed_descriptions")
@@ -63,3 +64,5 @@ func update_description(description):
 func parse_options(options:Array):
 	for option in options:
 		dialogue_tree.add_option(option)
+	
+	dialogue_tree.update_list_numbers()

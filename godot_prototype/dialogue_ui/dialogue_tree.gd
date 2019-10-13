@@ -23,7 +23,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_list_numbers()
+	pass
 
 
 func add_option(option_type):
@@ -63,16 +63,14 @@ func update_list_numbers():
 	var list_counter = 1
 	
 	for option in get_children():
-		if option.visible:
-			var new_shortcut = ShortCut.new() 
-			new_shortcut.shortcut = InputEventKey.new()
-			option.shortcut = new_shortcut
-			
-			option.shortcut.shortcut.scancode = KEY_0 + list_counter
-			
-			option.update_list_number(list_counter)
-			
-			list_counter += 1
+		var new_shortcut = ShortCut.new() 
+		new_shortcut.shortcut = InputEventKey.new()
+		new_shortcut.shortcut.scancode = KEY_0 + list_counter
+		option.shortcut = new_shortcut
+		
+		option.update_list_number(list_counter)
+		
+		list_counter += 1
 
 func clear_options():
 	for option in get_children():
