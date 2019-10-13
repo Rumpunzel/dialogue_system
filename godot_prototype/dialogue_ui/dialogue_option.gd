@@ -2,8 +2,17 @@ tool
 extends ToolButton
 class_name dialogue_option
 
+const DEFAULT = "default"
+const CONTINUE = "continue"
+const EXIT = "exit"
+const CUSTOM = "custom"
+
+const DEFAULT_OPTION = { "type": "default" }
+const CONTINUE_OPTION =  { "type": "continue" }
+const EXIT_OPTION =  { "type": "exit" }
+const CUSTOM_OPTION =  { "type": "custom" }
+
 enum { UNTOUCHED, CLICKED, PASSED }
-enum { DEFAULT, CUSTOM, CONTINUE, EXIT }
 
 export(NodePath) var speaker_node = null
 export(Array, NodePath) var listener_nodes = []
@@ -25,21 +34,25 @@ export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var
 
 export(Array, String, MULTILINE) var success_messages
 export var loop_successes_from = 0
-export(PackedScene) var success_tree
+#warning-ignore:unused_class_variable
+export(String) var success_tree = ""
 
+#warning-ignore:unused_class_variable
 export(float, -1, 1) var approval_rating_change_on_success
 
 export(Array, String, MULTILINE) var failure_messages
 export var loop_failures_from = 0
-export(PackedScene) var failure_tree
+#warning-ignore:unused_class_variable
+export(String) var failure_tree = ""
 
+#warning-ignore:unused_class_variable
 export var single_use = true
 export var exits_dialogue = false
 
 export(Color) var big_deal_color = Color("FFD700")
 export(float, 0, 1) var clicked_alpha = 0.5
 
-onready var value_changes:Array = [politeness_change, reliability_change, selflessness_change, sincerity_change]
+onready var value_changes:Dictionary = compose_value_changes()
 
 var speaker:Character
 var listeners:Array = []
@@ -77,8 +90,8 @@ func _process(_delta):
 	update_appearance()
 
 
-func init(option_type = DEFAULT, option_info = { }):
-	match option_type:
+func init(option_info = DEFAULT_OPTION):
+	match option_info.get("type", CUSTOM):
 		CONTINUE:
 			name = "continue_option"
 			text = "Continue."
@@ -90,29 +103,13 @@ func init(option_type = DEFAULT, option_info = { }):
 			hint_tooltip = ""
 			exits_dialogue = true
 			noteworthy = false
-		CUSTOM:
-			option_json = option_info
-			
-			name = option_info.get("title", name)
-			text = option_info.get("text", text)
-			hint_tooltip = option_info.get("tooltip", hint_tooltip)
-			success_messages = option_info.get("success_messages", success_messages)
-			failure_messages = option_info.get("failure_messages", failure_messages)
-			big_deal = option_info.get("big_deal", big_deal)
-			required_approval_rating = option_info.get("required_approval_rating", required_approval_rating)
-			#"values_enable_success" : "Selflessness",
-			loop_failures_from = option_info.get("loop_failures_from", loop_failures_from)
-			value_changes[Character.POLITENESS] = option_info.get("politeness_change", politeness_change)
-			value_changes[Character.RELIABILITY] = option_info.get("reliablity_change", reliability_change)
-			value_changes[Character.SELFLESSNESS] = option_info.get("selflessness_change", selflessness_change)
-			value_changes[Character.SINCERITY] = option_info.get("sincerity_change", sincerity_change)
-			approval_rating_change_on_success = option_info.get("approval_rating_change_on_success", approval_rating_change_on_success)
-			success_tree = option_info.get("change_to_root_on_success", success_tree)
-			single_use = option_info.get("single_use", single_use)
-			exits_dialogue = option_info.get("exit", exits_dialogue)
-			noteworthy = option_info.get("noteworthy", noteworthy)
-		_:
-			pass
+		DEFAULT:
+			return
+	
+	option_json = option_info
+	
+	for key in option_info.keys():
+		set(key, option_info[key])
 
 func check_option():
 	var new_click_status = max(check_success(), click_status)
@@ -121,9 +118,9 @@ func check_option():
 		
 	confirm_option(new_click_status >= PASSED)
 	
-	if single_use:
-		queue_free()
-		#visible = false
+#	if single_use:
+#		queue_free()
+#		#visible = false
 	
 	click_status = new_click_status
 	
@@ -148,12 +145,13 @@ func check_success():
 			else:
 				new_status = CLICKED
 	
-	for i in Character.VALUE_NAMES.size():
-		if int(pow(2, i)) & values_enable_success:
-			if check_perception_for_listeners(i):
-				return PASSED
-			else:
-				new_status = CLICKED
+	value_changes = compose_value_changes()
+	
+	for value in values_enable_success:
+		if check_perception_for_listeners(value):
+			return PASSED
+		else:
+			new_status = CLICKED
 	
 	return new_status
 
@@ -170,23 +168,28 @@ func confirm_option(option_success):
 	if click_status < PASSED:
 		if click_status <= UNTOUCHED:
 			var value_update = ""
-			for i in value_changes.size():
-				var change = value_changes[i]
+			
+			for key in value_changes:
+				var change = value_changes[key]
 				if not change == 0:
-					value_update += Character.VALUE_NAMES[i] + ": " + ("+" if change >= 0 else "") + str(change) + ", "
+					value_update += key + ": " + ("+" if change >= 0 else "") + str(change) + ", "
+			
 			print(value_update.substr(0, value_update.length() - 2))
 		else:
 			print("No Perception Updates, this Dialogue Option has already been used before!")
 		
 		for listener in listeners:
-			listener.remember_response({ "speaker": speaker, "success": option_success, "value_changes": value_changes if click_status <= UNTOUCHED else [], "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "json": option_json, "noteworthy": noteworthy })
+			listener.remember_response({ "speaker": speaker, "success": option_success, "value_changes": value_changes if click_status <= UNTOUCHED else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "json": option_json, "noteworthy": noteworthy })
 	else:
 		print("No Updates, this Dialogue Option has already been passed before!")
 	
-	var success_message = success_messages[success_counter] if not success_messages.empty() else ""
-	var failure_message = failure_messages[failure_counter] if not failure_messages.empty() else ""
+	var success_message = success_messages[success_counter] if not success_messages.empty() else [ ]
+	var failure_message = failure_messages[failure_counter] if not failure_messages.empty() else [ ]
 	
-	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message , "big_deal": big_deal, "json": option_json })
+	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "json": option_json })
+
+func compose_value_changes():
+	return { Character.POLITENESS: politeness_change, Character.RELIABILITY: reliability_change, Character.SELFLESSNESS: selflessness_change, Character.SINCERITY: sincerity_change }
 
 func reevaluate_availability():
 	if visible == false and check_success() > click_status:
