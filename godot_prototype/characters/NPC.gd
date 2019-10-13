@@ -17,10 +17,9 @@ func _ready():
 #	pass
 
 
-func remember_response(new_memory):
+func remember_response(new_memory:Dictionary):
 	.remember_response(new_memory)
 	modify_perception(new_memory["speaker"], new_memory["success"],  new_memory["value_changes"],  new_memory["approval_change"])
-	#print(dialogue_memories)
 
 func modify_perception(target:Character, option_success, value_changes, approval_change):
 	character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, [target.percieved_starting_values])[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, [0, 0])[APPROVAL_MODIFIER] }

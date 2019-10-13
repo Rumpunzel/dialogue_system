@@ -8,14 +8,6 @@ const RELIABILITY = "reliability"
 const SELFLESSNESS = "selflessness"
 const SINCERITY = "sincerity"
 
-const PASSED = "passed"
-const FAILED = "failed"
-const BIG_DEAL = "big_deal"
-const NORMAL = "normal"
-
-const SUCCESS_MAP = { true: PASSED, false: FAILED }
-const BIG_DEAL_MAP = { true: BIG_DEAL, false: NORMAL }
-
 const perception_value_slope = 0.3
 const perception_value_growth_point = 5.0
 
@@ -33,7 +25,7 @@ export(float, -1, 1) var sincerity
 
 onready var percieved_starting_values:Dictionary =  { POLITENESS: politeness, RELIABILITY: reliability, SELFLESSNESS: selflessness, SINCERITY: sincerity }
 
-onready var dialogue_memories:Dictionary = { BIG_DEAL: { PASSED: [ ], FAILED: [ ] }, NORMAL: { PASSED: [ ], FAILED: [ ] } }
+onready var memories:memories = $memories
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,12 +37,8 @@ func _ready():
 #	pass
 
 
-func initiate_dialogue():
-	get_node("/root/main/dialogue_text").switch_dialogue(load_dialogue(dialogue_file_path))
-
-func remember_response(new_memory:Dictionary):
-	if new_memory.get("noteworthy", false):
-		dialogue_memories[ BIG_DEAL_MAP[ new_memory.get("big_deal", false) ] ][ SUCCESS_MAP[ new_memory.get("success", true) ] ].append(new_memory)
+func initiate_dialogue(dialogue_node, specific_dilaogue = dialogue_file_path):
+	dialogue_node.switch_dialogue(load_dialogue(specific_dilaogue))
 
 func calculate_perception_value(perception_values):
 	var values = { }
@@ -60,6 +48,12 @@ func calculate_perception_value(perception_values):
 		values[key] = (0.5 * (tanh(perception_value_slope * (perception_values[key] + perception_value_growth_point)) + tanh(perception_value_slope * (perception_values[key] - perception_value_growth_point))))
 	
 	return values
+
+func remember_response(new_memory:Dictionary):
+	memories.remember_response(new_memory)
+
+func remembers_dialogue_option(unique_id):
+	return memories.remembers_dialogue_option(unique_id)
 
 
 func load_dialogue(file_path):
