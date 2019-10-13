@@ -60,7 +60,7 @@ func _process(delta):
 			emit_signal("finished_typing")
 
 func _input(event):
-	if event is InputEventMouseButton and typing:
+	if (event is InputEventKey or event is InputEventMouseButton) and typing:
 		visible_counter = text.length()
 
 
