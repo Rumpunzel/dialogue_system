@@ -27,3 +27,5 @@ text = "Dialogue System"
 [node name="description_field" parent="." instance=ExtResource( 3 )]
 
 [node name="options_tree" parent="." instance=ExtResource( 4 )]
+margin_right = 0.0
+size_flags_horizontal = 0

@@ -1,5 +1,5 @@
 tool
-extends ToolButton
+extends Button
 class_name dialogue_option
 
 enum { UNTOUCHED, CLICKED, PASSED }
