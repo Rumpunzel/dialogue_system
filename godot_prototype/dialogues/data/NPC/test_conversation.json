@@ -1,9 +1,12 @@
 {
   "start": {
+    "greeting": [
+      "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known."
+    ],
     "message": [
-      "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known.",
       "Thanks for trying this out, <{That's you!|friendo.}>"
     ],
+    "loop_from": 1,
     "options": {
       "polite_option": {},
       "heroic_option": {},

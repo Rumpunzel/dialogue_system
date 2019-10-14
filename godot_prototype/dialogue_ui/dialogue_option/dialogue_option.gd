@@ -8,7 +8,6 @@ const CONTINUE = "_continue_option"
 const EXIT = "_exit_option"
 const CUSTOM = "custom_option"
 
-const DEFAULT_OPTION = { }
 const CONTINUE_OPTION = { text = "Continue.", hint_tooltip = "", noteworthy = false }
 const EXIT_OPTION = { text = "Exit.", hint_tooltip = "", noteworthy = false, exits_dialogue = true }
 const CUSTOM_OPTION = { }
@@ -31,7 +30,7 @@ export(float, 0, 1) var required_approval_rating
 
 export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var values_enable_success
 
-export(Array, String, MULTILINE) var success_messages
+export(Array, Array, String, MULTILINE) var success_messages = [ [ ] ]
 export var loop_successes_from = 0
 #warning-ignore:unused_class_variable
 export(String) var success_tree = ""
@@ -39,7 +38,7 @@ export(String) var success_tree = ""
 #warning-ignore:unused_class_variable
 export(float, -1, 1) var approval_rating_change_on_success
 
-export(Array, String, MULTILINE) var failure_messages
+export(Array, Array, String, MULTILINE) var failure_messages = [ [ ] ]
 export var loop_failures_from = 0
 #warning-ignore:unused_class_variable
 export(String) var failure_tree = ""
