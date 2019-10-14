@@ -1,0 +1,86 @@
+{
+    "polite_option": {
+      "name": "polite_option",
+      "text": "This is a dialogue option.",
+      "hint_tooltip": "It is small and polite.",
+      "success_messages": [
+        [
+          "You say something polite, yet ultimately meaningless."
+        ]
+      ],
+      "politeness_change": 1
+    },
+    "heroic_option": {
+      "name": "heroic_option",
+      "text": "This is another dialogue option.",
+      "hint_tooltip": "It is a heroic option, indeed.",
+      "success_messages": [
+        [
+          "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+        ]
+      ],
+      "reliablity_change": 1,
+      "selflessness_change": 1,
+      "single_use": false
+    },
+    "big_deal_option": {
+      "name": "big_deal_option",
+      "text": "This dialogue option is a big deal.",
+      "hint_tooltip": "It will have drastic effects on this relationship.",
+      "failure_messages": [
+        [
+          "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
+        ],
+        [
+          "You blew your second change, congratz, mate."
+        ],
+        [
+          "No idea how you're getting any more chances here..."
+        ]
+      ],
+      "big_deal": true,
+      "required_approval_rating": 0.3,
+      "values_enable_success": [
+        "selflessness"
+      ],
+      "loop_failures_from": 2,
+      "politeness_change": -3,
+      "sincerity_change": 5,
+      "approval_rating_change_on_success": 0.1
+    },
+    "weather_option": {
+      "name": "weather_option",
+      "text": "Talk about the weather.",
+      "hint_tooltip": "Wow, what social skills. I am impressed.",
+      "success_messages": [
+        [
+          "Yes, yes, quite indeed. How insightful, truly."
+        ],
+        [
+          "Again? Seriously? Well ok, then..."
+        ]
+      ],
+      "loop_successes_from": 1,
+      "selflessness_change": -1,
+      "single_use": false
+    },
+    "_leave_option": {
+      "type": "_exit_option",
+      "text": "Leave.",
+      "hint_tooltip": "Goodbye."
+    },
+    "nice_exit": {
+      "type": "_exit_option",
+      "name": "polite_option",
+      "text": "Thank you, Jamal.",
+      "hint_tooltip": "(✿◠‿◠)",
+      "noteworthy": true
+    },
+    "rude_exit": {
+      "type": "_exit_option",
+      "name": "asshole_option",
+      "text": "Fuck you, Jamal.",
+      "hint_tooltip": "( ︶︿︶)_╭∩╮",
+      "noteworthy": true
+    }
+  }

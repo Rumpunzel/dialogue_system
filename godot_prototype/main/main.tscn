@@ -34,6 +34,7 @@ stretch_mode = 5
 [node name="dialogue_text" parent="." instance=ExtResource( 5 )]
 margin_left = 300.0
 margin_right = -300.0
+dialogue_options_file_path = "res://dialogues/data/dialogue_options.json"
 
 [node name="description" parent="dialogue_text" index="1"]
 margin_right = 600.0

@@ -1,9 +1,13 @@
 extends VBoxContainer
 
-const DEFAULT_TREE = "000"
+const DEFAULT_TREE = "start"
+
+export(String, FILE, "*.json") var dialogue_options_file_path
 
 onready var description_field = $description
 onready var dialogue_tree = $dialogue_tree
+
+var dialogue_options:Dictionary
 
 var current_dialogue:Dictionary
 var current_tree
@@ -13,6 +17,8 @@ signal parsed_descriptions
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	dialogue_options = json_helper.load_json(dialogue_options_file_path)
+	
 	dialogue_tree.connect("choice_made", self, "switch_tree")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,7 +49,7 @@ func parse_tree(update:Dictionary = { }):
 	parse_descriptions(new_message.duplicate())
 	yield(self, "parsed_descriptions")
 	
-	var new_options = update.get("options", dialogue.get("options", [ ]))
+	var new_options = update.get("options", dialogue.get("options", { }))
 	parse_options(new_options)
 
 func parse_descriptions(descriptions:Array):
@@ -52,7 +58,7 @@ func parse_descriptions(descriptions:Array):
 		yield(description_field, "finished_typing")
 		
 		if not descriptions.empty():
-			dialogue_tree.add_option(dialogue_option.CONTINUE_OPTION)
+			dialogue_tree.add_option(dialogue_option.CONTINUE, dialogue_option.CONTINUE_OPTION)
 			dialogue_tree.update_list_numbers()
 			yield(dialogue_tree, "choice_made")
 	
@@ -61,8 +67,15 @@ func parse_descriptions(descriptions:Array):
 func update_description(description):
 	description_field.update_description({ "message": description })
 
-func parse_options(options:Array):
-	for option in options:
-		dialogue_tree.add_option(option)
+func parse_options(options:Dictionary):
+	for option_id in options.keys():
+		var option_info:Dictionary = dialogue_options.get(option_id, { })
+		
+		var type = option_info.get("type", option_id)
+		print(type)
+		for tree_change in options[option_id].keys():
+			option_info[tree_change] = options[option_id][tree_change]
+		
+		dialogue_tree.add_option(type, option_info)
 	
 	dialogue_tree.update_list_numbers()

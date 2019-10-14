@@ -1,84 +1,30 @@
 {
-  "000" :
-  {
-    "message": [ "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known.", "Thanks for trying this out, <{That's you!|friendo.}>" ],
-    "options":
-    [
-      {
-        "id": 0,
-        "name" : "polite_option",
-        "text" : "This is a dialogue option.",
-        "hint_tooltip" : "It is small and polite.",
-        "success_messages" : [ [ "You say something polite, yet ultimately meaningless." ] ],
-        "politeness_change" : 1
+  "start": {
+    "message": [
+      "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known.",
+      "Thanks for trying this out, <{That's you!|friendo.}>"
+    ],
+    "options": {
+      "polite_option": {},
+      "heroic_option": {},
+      "big_deal_option": {
+        "success_tree": "big_deal"
       },
-      
-      {
-        "id": 1,
-        "name" : "heroic_option",
-        "text" : "This is another dialogue option.",
-        "hint_tooltip" : "It is a heroic option, indeed.",
-        "success_messages" : [ [ "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories." ] ],
-        "reliablity_change" : 1,
-        "selflessness_change" : 1,
-        "single_use" : false
-      },
-      
-      {
-        "id": 2,
-        "name": "big_deal_option",
-        "text" : "This dialogue option is a big deal.",
-        "hint_tooltip" : "It will have drastic effects on this relationship.",
-        "failure_messages" : [ [ "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today." ], [ "You blew your second change, congratz, mate." ], [ "No idea how you're getting any more chances here..." ] ],
-        "big_deal" : true,
-        "required_approval_rating" : 0.3,
-        "values_enable_success" : [ "selflessness" ],
-        "loop_failures_from" : 2,
-        "politeness_change" : -3,
-        "sincerity_change" : 5,
-        "approval_rating_change_on_success" : 0.1,
-        "success_tree" : "001"
-      },
-      
-      {
-        "id": 3,
-        "name" : "weather_option",
-        "text" : "Talk about the weather." ,
-        "hint_tooltip" : "Wow, what social skills. I am impressed.",
-        "success_messages" :[ [ "Yes, yes, quite indeed. How insightful, truly." ], [ "Again? Seriously? Well ok, then..." ] ],
-        "loop_successes_from" : 1,
-        "selflessness_change" : -1 ,
-        "single_use" : false
-      },
-      
-      {
-        "type": "exit",
-        "text" : "Leave.",
-        "hint_tooltip" : "Goodbye."
-      }
-    ]
+      "weather_option": {},
+      "_exit_option": {}
+    }
   },
-  
-  "001" :
-  {
-    "message": [ "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.", "Well done, you've solved the puzzle!", "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.", "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.", "<{Balls.|Ligma.}>" ],
-    "options":
-    [
-      {
-        "type": "exit",
-        "name" : "polite_option",
-        "text" : "Thank you, Jamal.",
-        "hint_tooltip" : "(✿◠‿◠)",
-        "noteworthy": true
-      },
-      
-      {
-        "type": "exit",
-        "name" : "asshole_option",
-        "text" : "Fuck you, Jamal.",
-        "hint_tooltip" : "( ︶︿︶)_╭∩╮",
-        "noteworthy": true
-      }
-    ]
+  "big_deal": {
+    "message": [
+      "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.",
+      "Well done, you've solved the puzzle!",
+      "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.",
+      "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.",
+      "<{Balls.|Ligma.}>"
+    ],
+    "options": {
+      "nice_exit": {},
+      "rude_exit": {}
+    }
   }
 }
