@@ -38,7 +38,7 @@ func _ready():
 
 
 func initiate_dialogue(dialogue_node, specific_dilaogue = dialogue_file_path):
-	dialogue_node.switch_dialogue(load_dialogue(specific_dilaogue))
+	dialogue_node.switch_dialogue(json_helper.load_json(specific_dilaogue))
 
 func calculate_perception_value(perception_values):
 	var values = { }
@@ -54,17 +54,3 @@ func remember_response(new_memory:Dictionary):
 
 func remembers_dialogue_option(unique_id):
 	return memories.remembers_dialogue_option(unique_id)
-
-
-func load_dialogue(file_path):
-	var file = File.new()
-	
-	assert file.file_exists(file_path)
-	
-	file.open(file_path, file.READ)
-	
-	var dialogue = parse_json(file.get_as_text())
-	
-	assert dialogue.size() > 0
-	
-	return dialogue
