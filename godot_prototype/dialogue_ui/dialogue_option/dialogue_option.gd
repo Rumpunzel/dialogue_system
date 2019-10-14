@@ -1,5 +1,4 @@
-tool
-extends Button
+extends Label
 class_name dialogue_option
 
 enum { UNTOUCHED, CLICKED, PASSED }
@@ -59,7 +58,17 @@ var success_counter = 0
 var failure_counter = 0
 
 var option_json:Dictionary
+
+var option_text:Dictionary
+var loop_success_option_text_from = 0
+var loop_failure_option_text_from = 0
+
 var noteworthy = true
+
+var dialogue_counter = ""
+
+var option_number
+var dialogue_option
 
 signal option_confirmed
 
@@ -68,7 +77,7 @@ signal option_confirmed
 func _ready():
 	update_appearance()
 	
-	connect("button_up", self, "check_option")
+	$option_button.connect("button_up", self, "check_option")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -82,6 +91,9 @@ func _process(_delta):
 
 
 func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
+	option_number = $option_text/option_number
+	dialogue_option = $option_text/dialogue_option
+	
 	id = option_id
 	name = id
 	
@@ -93,11 +105,18 @@ func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
 	
 	option_json = option_info
 	
-	parse_option(option_info)
+	parse_option(option_json)
 
 func parse_option(option_info):
 	for key in option_info.keys():
 		set(key, option_info[key])
+	
+	var success = success_counter >= failure_counter
+	var opt_txt:Array = option_text.get("success" if success else "failure", [ text ])
+	var new_option_text = opt_txt[abs(math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from))]
+	
+	text = new_option_text
+	dialogue_option.type_text(new_option_text)
 
 func check_option():
 	var new_click_status = check_success()
@@ -108,8 +127,6 @@ func check_option():
 		success_counter += 1
 	elif new_click_status >= CLICKED:
 		failure_counter += 1
-		if failure_counter >= failure_messages.size():
-			failure_counter = min(loop_failures_from, failure_messages.size() - 1)
 	
 	confirm_option(new_click_status >= PASSED)
 	
@@ -157,19 +174,14 @@ func confirm_option(option_success):
 			print(value_update.substr(0, value_update.length() - 2))
 		else:
 			print("No Perception Updates, this Dialogue Option has already been used before!")
-		
-		for listener in listeners:
-			listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
 	else:
 		print("No Updates, this Dialogue Option has already been passed before!")
 	
-	var succ_mess = success_counter - 1
-	if succ_mess >= success_messages.size():
-			succ_mess = min(loop_successes_from, success_messages.size() - 1)
-			
-	var fail_mess = failure_counter - 1
-	if fail_mess >= failure_messages.size():
-			fail_mess = min(loop_failures_from, failure_messages.size() - 1)
+	for listener in listeners:
+		listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
+	
+	var succ_mess = math_helper.calculate_loop_modulo(success_counter - 1, success_messages.size(), loop_successes_from)
+	var fail_mess = math_helper.calculate_loop_modulo(failure_counter - 1, failure_messages.size(), loop_failures_from)
 			
 	var success_message = success_messages[succ_mess] if not success_messages.empty() else [ ]
 	var failure_message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
@@ -181,15 +193,24 @@ func compose_value_changes():
 
 func update_appearance():
 	if big_deal:
-		set("custom_colors/font_color", big_deal_color)
+		option_number.set("custom_colors/font_color", big_deal_color)
+		dialogue_option.set("custom_colors/default_color", big_deal_color)
 	else:
-		set("custom_colors/font_color", null)
+		option_number.set("custom_colors/font_color", null)
+		dialogue_option.set("custom_colors/default_color", null)
 		
 		if not untouched():
-			modulate.a = clicked_alpha
+			option_number.modulate.a = clicked_alpha
+			dialogue_option.modulate.a = clicked_alpha
 
 func untouched(bigger_than = 0):
 	return success_counter + failure_counter <= bigger_than
 
 func update_list_number(new_number):
-	text = "%d. %s" % [new_number, text]
+	dialogue_counter = "%d." % [new_number]
+	text = "%s %s" % [dialogue_counter, text]
+	
+	option_number.text = dialogue_counter
+
+func set_shortcut(new_shortcut:ShortCut):
+	$option_button.shortcut = new_shortcut

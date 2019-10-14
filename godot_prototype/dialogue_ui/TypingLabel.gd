@@ -14,8 +14,6 @@ export var pause_on_comma:float = 0.1
 #warning-ignore:unused_class_variable
 export(Color) var highlight_color = Color("830303")
 
-export var type_first_message = true
-
 onready var punctuation_timer = Timer.new()
 
 var visible_counter:float
@@ -30,29 +28,27 @@ func _ready():
 	punctuation_timer.one_shot = false
 	punctuation_timer.connect("timeout", self, "continue_counting")
 	
-	if type_first_message:
-		type_text(text)
-	else:
-		parse_markdown(text)
-		visible_counter = text.length()
-	
 	connect("meta_hover_started", self, "modify_tooltip")
 	connect("meta_hover_ended", self, "modify_tooltip", [true])
 
 func _process(delta):
-	if text.length() > 0 and currently_counting and typing:
-		visible_counter += delta * typing_speed
-		visible_counter = min(text.length(), visible_counter)
-		visible_characters = int(visible_counter)
-		
-		var current_character = text[max(0, visible_characters - 1)]
-		
-		if current_character in SENTENCE_ENDS:
-			currently_counting = false
-			punctuation_timer.start(pause_on_sentence_end)
-		elif current_character in PUNCTUATIONS:
-			currently_counting = false
-			punctuation_timer.start(pause_on_comma)
+	if typing:
+		if typing_speed > 0:
+			if text.length() > 0 and currently_counting:
+				visible_counter += delta * typing_speed
+				visible_counter = min(text.length(), visible_counter)
+				visible_characters = int(visible_counter)
+				
+				var current_character = text[max(0, visible_characters - 1)]
+				
+				if current_character in SENTENCE_ENDS:
+					currently_counting = false
+					punctuation_timer.start(pause_on_sentence_end)
+				elif current_character in PUNCTUATIONS:
+					currently_counting = false
+					punctuation_timer.start(pause_on_comma)
+		else:
+			visible_characters = text.length()
 		
 		if visible_characters == text.length():
 			typing = false

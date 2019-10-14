@@ -30,11 +30,11 @@ func add_option(option_id:String, option_type):
 				failure_counter = recollection["failure_counter"]
 	
 	var new_option = dialogue_option_scene.instance()
-	new_option.init(option_id, option_type)
 	new_option.speaker = speaker_check
 	new_option.listeners = listeners_check
 	new_option.success_counter = success_counter
 	new_option.failure_counter = failure_counter
+	new_option.init(option_id, option_type)
 	
 	if not option_type.get("single_use", true) or (success_counter == 0 and failure_counter == 0) or (option_type.get("big_deal", false) and success_counter == 0 and new_option.check_success() >= dialogue_option.PASSED):
 		add_child(new_option)
@@ -53,7 +53,7 @@ func update_list_numbers():
 		var new_shortcut = ShortCut.new() 
 		new_shortcut.shortcut = InputEventKey.new()
 		new_shortcut.shortcut.scancode = KEY_0 + list_counter
-		option.shortcut = new_shortcut
+		option.set_shortcut(new_shortcut)
 		
 		option.update_list_number(list_counter)
 		
