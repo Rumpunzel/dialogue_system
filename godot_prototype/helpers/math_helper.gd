@@ -1,7 +1,7 @@
 extends Node
 
 
-func vector_add_arrays(arrays:Array):
+func vector_add_arrays(arrays:Array) -> Array:
 	var return_array = []
 	
 	if not arrays.empty():
@@ -21,7 +21,7 @@ func vector_add_arrays(arrays:Array):
 	
 	return return_array
 
-func vector_add_dictionaries(dictionaries:Array, main_dictionary = 0):
+func vector_add_dictionaries(dictionaries:Array, main_dictionary = 0) -> Dictionary:
 	var return_dictionary = { }
 	
 	if not dictionaries.empty():
@@ -34,3 +34,8 @@ func vector_add_dictionaries(dictionaries:Array, main_dictionary = 0):
 			return_dictionary[key] = value
 	
 	return return_dictionary
+
+func calculate_loop_modulo(index:int, array_size:int, loop_from:int) -> int:
+	if index >= array_size:
+		index = loop_from + (index % array_size) % (array_size - loop_from)
+	return index
