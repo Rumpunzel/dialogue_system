@@ -96,7 +96,7 @@ func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
 	
 	id = option_id
 	name = id
-	
+	# TODO: fix tooltips
 	match option_id:
 		CONTINUE:
 			parse_option(CONTINUE_OPTION)
