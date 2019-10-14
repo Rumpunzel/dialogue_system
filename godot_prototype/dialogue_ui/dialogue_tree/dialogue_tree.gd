@@ -26,15 +26,14 @@ func _process(_delta):
 	pass
 
 
-func add_option(option_type):
+func add_option(option_id:String, option_type):
 	var speaker_check = option_type.get("speaker", default_speaker)
 	var listeners_check = option_type.get("listeners", default_listeners)
 	
-	var option_id = option_type.get("id", -1)
 	var success_counter = 0
 	var failure_counter = 0
 	
-	if option_id >= 0:
+	if not option_id.begins_with("_"):
 		for listener in listeners_check:
 			var recollection = listener.remembers_dialogue_option(option_id)
 			
@@ -43,7 +42,7 @@ func add_option(option_type):
 				failure_counter = recollection["failure_counter"]
 	
 	var new_option = dialogue_option_scene.instance()
-	new_option.init(option_type)
+	new_option.init(option_id, option_type)
 	new_option.speaker = speaker_check
 	new_option.listeners = listeners_check
 	new_option.success_counter = success_counter

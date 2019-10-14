@@ -4,15 +4,14 @@ class_name dialogue_option
 
 enum { UNTOUCHED, CLICKED, PASSED }
 
-const DEFAULT = "default"
-const CONTINUE = "continue"
-const EXIT = "exit"
-const CUSTOM = "custom"
+const CONTINUE = "_continue_option"
+const EXIT = "_exit_option"
+const CUSTOM = "custom_option"
 
-const DEFAULT_OPTION = { "type": "default" }
-const CONTINUE_OPTION =  { "type": "continue" }
-const EXIT_OPTION =  { "type": "exit" }
-const CUSTOM_OPTION =  { "type": "custom" }
+const DEFAULT_OPTION = { }
+const CONTINUE_OPTION = { text = "Continue.", hint_tooltip = "", noteworthy = false }
+const EXIT_OPTION = { text = "Exit.", hint_tooltip = "", noteworthy = false, exits_dialogue = true }
+const CUSTOM_OPTION = { }
 
 export(String) var speaker
 export(Array, String) var listeners
@@ -83,24 +82,21 @@ func _process(_delta):
 #		pressed = true
 
 
-func init(option_info = DEFAULT_OPTION):
-	match option_info.get("type", CUSTOM):
+func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
+	id = option_id
+	name = id
+	
+	match option_id:
 		CONTINUE:
-			name = "continue_option"
-			text = "Continue."
-			hint_tooltip = ""
-			noteworthy = false
+			parse_option(CONTINUE_OPTION)
 		EXIT:
-			name = "exit_option"
-			text = "Exit."
-			hint_tooltip = ""
-			exits_dialogue = true
-			noteworthy = false
-		DEFAULT:
-			return
+			parse_option(EXIT_OPTION)
 	
 	option_json = option_info
 	
+	parse_option(option_info)
+
+func parse_option(option_info):
 	for key in option_info.keys():
 		set(key, option_info[key])
 

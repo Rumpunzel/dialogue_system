@@ -72,7 +72,7 @@ func parse_options(options:Dictionary):
 		var option_info:Dictionary = dialogue_options.get(option_id, { })
 		
 		var type = option_info.get("type", option_id)
-		print(type)
+		
 		for tree_change in options[option_id].keys():
 			option_info[tree_change] = options[option_id][tree_change]
 		
