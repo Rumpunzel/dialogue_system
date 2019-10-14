@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://dialogue_ui/dialogue_tree/dialogue_tree.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_ui/options_tree/options_tree.gd" type="Script" id=1]
+
+
 
 [node name="dialogue_tree" type="VBoxContainer"]
 margin_top = 232.0

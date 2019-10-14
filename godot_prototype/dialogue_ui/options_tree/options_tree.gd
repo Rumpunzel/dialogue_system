@@ -1,21 +1,9 @@
 extends VBoxContainer
 
-export(NodePath) var default_speaker_node
-export(Array, NodePath) var default_listener_nodes = []
-
 export(PackedScene) var dialogue_option_scene = preload("res://dialogue_ui/dialogue_option/dialogue_option.tscn")
-
-var default_speaker:Character setget set_default_speaker, get_default_speaker
-var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
 
 signal choice_made
 
-
-func _enter_tree():
-	default_speaker = get_node(default_speaker_node)
-	
-	for default_listener in default_listener_nodes:
-		default_listeners.append(get_node(default_listener))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,8 +15,8 @@ func _process(_delta):
 
 
 func add_option(option_id:String, option_type):
-	var speaker_check = option_type.get("speaker", default_speaker)
-	var listeners_check = option_type.get("listeners", default_listeners)
+	var speaker_check = option_type.get("speaker", get_default_speaker())
+	var listeners_check = option_type.get("listeners", get_default_listeners())
 	
 	var success_counter = 0
 	var failure_counter = 0
@@ -76,14 +64,8 @@ func clear_options():
 		option.queue_free()
 
 
-func set_default_speaker(new_speaker):
-	default_speaker = new_speaker
-
-func set_default_listeners(new_listeners):
-	default_listeners = new_listeners
-
 func get_default_speaker():
-	return default_speaker
+	return get_parent().default_speaker
 
 func get_default_listeners():
-	return default_listeners
+	return get_parent().default_listeners

@@ -2,4 +2,4 @@ extends Control
 
 
 func _ready():
-	$NPC.initiate_dialogue($dialogue_text)
+	$NPC.initiate_dialogue($dialogue_window)

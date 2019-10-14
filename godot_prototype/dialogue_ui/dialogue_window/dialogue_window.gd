@@ -2,10 +2,16 @@ extends VBoxContainer
 
 const DEFAULT_TREE = "start"
 
+export(NodePath) var default_speaker_node
+export(Array, NodePath) var default_listener_nodes = []
+
 export(String, FILE, "*.json") var dialogue_options_file_path
 
-onready var description_field = $description
-onready var dialogue_tree = $dialogue_tree
+onready var description_field = $description_field
+onready var dialogue_tree = $options_tree
+
+var default_speaker:Character setget set_default_speaker, get_default_speaker
+var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
 
 var dialogue_options:Dictionary
 
@@ -17,6 +23,12 @@ var first_time = true
 
 signal parsed_descriptions
 
+
+func _enter_tree():
+	default_speaker = get_node(default_speaker_node)
+	
+	for default_listener in default_listener_nodes:
+		default_listeners.append(get_node(default_listener))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -84,3 +96,16 @@ func parse_options(options:Dictionary = current_options):
 		dialogue_tree.add_option(type, option_info)
 	
 	dialogue_tree.update_list_numbers()
+
+
+func set_default_speaker(new_speaker):
+	default_speaker = new_speaker
+
+func set_default_listeners(new_listeners):
+	default_listeners = new_listeners
+
+func get_default_speaker():
+	return default_speaker
+
+func get_default_listeners():
+	return default_listeners
