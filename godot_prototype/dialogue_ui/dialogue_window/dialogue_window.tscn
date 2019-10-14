@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 250.0
 margin_top = 100.0
-margin_right = -250.0
+margin_right = -350.0
 margin_bottom = -200.0
 custom_constants/separation = 50
 script = ExtResource( 1 )
@@ -25,7 +25,8 @@ custom_fonts/font = ExtResource( 2 )
 text = "Dialogue System"
 
 [node name="description_field" parent="." instance=ExtResource( 3 )]
+margin_right = 600.0
+text = "Here is the dialogue feedback field."
 
 [node name="options_tree" parent="." instance=ExtResource( 4 )]
-margin_right = 0.0
-size_flags_horizontal = 0
+margin_right = 600.0

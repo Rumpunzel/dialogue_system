@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_ui/TypingLabel.gd"
 }, {
-"base": "Button",
+"base": "Label",
 "class": "dialogue_option",
 "language": "GDScript",
 "path": "res://dialogue_ui/dialogue_option/dialogue_option.gd"
