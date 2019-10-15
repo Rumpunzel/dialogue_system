@@ -190,7 +190,7 @@ func confirm_option(option_success):
 	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
 
 func compose_value_changes():
-	return { Character.POLITENESS: politeness_change, Character.RELIABILITY: reliability_change, Character.SELFLESSNESS: selflessness_change, Character.SINCERITY: sincerity_change }
+	return { CONSTANTS.PERCEPTION_VALUES[0]: politeness_change, CONSTANTS.PERCEPTION_VALUES[1]: reliability_change, CONSTANTS.PERCEPTION_VALUES[2]: selflessness_change, CONSTANTS.PERCEPTION_VALUES[3]: sincerity_change }
 
 func update_appearance(theme_color = null):
 	var new_color = null

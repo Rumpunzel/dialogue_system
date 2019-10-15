@@ -1,15 +1,13 @@
 extends Node
 class_name memories
 
-const PASSED = "passed"
-const FAILED = "failed"
-const BIG_DEAL = "big_deal"
-const NORMAL = "normal"
+enum { PASSED, FAILED }
+enum { NORMAL, BIG_DEAL }
 
 const SUCCESS_MAP = { true: PASSED, false: FAILED }
 const BIG_DEAL_MAP = { true: BIG_DEAL, false: NORMAL }
 
-onready var dialogue_memories:Dictionary = { BIG_DEAL: { PASSED: { }, FAILED: { } }, NORMAL: { PASSED: { }, FAILED: { } } }
+onready var dialogue_memories:Dictionary = { NORMAL: { PASSED: { }, FAILED: { } }, BIG_DEAL: { PASSED: { }, FAILED: { } } }
 
 
 # Called when the node enters the scene tree for the first time.

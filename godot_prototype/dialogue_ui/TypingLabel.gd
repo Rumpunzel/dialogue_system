@@ -5,7 +5,7 @@ const SENTENCE_ENDS = [ ".", "?", "!", ":" ]
 const PUNCTUATIONS = [ ",", ";" ]
 
 const META_MARKDOWN = [ "<", "{", "|", "}", ">" ]
-const META_BBCODE = [ "[color=#830303]", "[url=\"", "\"]", "[/url]", "[/color]" ]
+const META_BBCODE = [ "[color=%s]" % [CONSTANTS.HIGHLIGHT_COLOR], "[url=\"", "\"]", "[/url]", "[/color]" ]
 
 export var typing_speed:float = 50
 export var pause_on_sentence_end:float = 0.2

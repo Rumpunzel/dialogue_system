@@ -27,7 +27,6 @@ margin_bottom = 800.0
 size_flags_vertical = 1
 text = "1."
 align = 2
-valign = 1
 
 [node name="dialogue_option" type="RichTextLabel" parent="option_text"]
 margin_left = 16.0

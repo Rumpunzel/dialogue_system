@@ -13,7 +13,7 @@ export(float, -1, 1) var selflessness_preferred
 export(float, -1, 1) var sincerity_preferred
 #warning-ignore:unused_class_variable
 
-onready var personal_values:Dictionary = { POLITENESS: politeness_preferred, RELIABILITY: reliability_preferred, SELFLESSNESS: selflessness_preferred, SINCERITY: sincerity_preferred }
+onready var personal_values:Dictionary = { CONSTANTS.PERCEPTION_VALUES[0]: politeness_preferred, CONSTANTS.PERCEPTION_VALUES[1]: reliability_preferred, CONSTANTS.PERCEPTION_VALUES[2]: selflessness_preferred, CONSTANTS.PERCEPTION_VALUES[3]: sincerity_preferred }
 
 var character_perceptions:Dictionary
 
@@ -43,7 +43,7 @@ func modify_perception(target:Character, option_success, value_changes, approval
 			print("%s now has a %0.2f%% Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER] * 100, target.name])
 	
 	print("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target][PERCEPTION_VALUES], calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])])
-	print("Approval Rating of %s towards %s is now: %0.2f%% of a possible %0.2f%%" % [name, target.name, calculate_approval_rating(target, true) * 100, maximum_possible_approval_rating()])
+	print("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f" % [name, target.name, calculate_approval_rating(target, true) * 100, maximum_possible_approval_rating() * 100])
 
 func calculate_approval_rating(target:Character, print_update = false):
 	var approval_rating = 0
@@ -56,7 +56,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 			var approval_change = perception_values[value] * personal_values[value]
 			
 			if not approval_change == 0:
-				update_string += ("+" if approval_change >= 0 else "") + str(approval_change) + " from " + value.capitalize() + ", "
+				update_string += "%s%0.2f from %s, " % ["+" if approval_change >= 0 else "", approval_change * 100, value.capitalize()]
 			approval_rating += approval_change
 		
 		approval_rating += character_perceptions[target][APPROVAL_MODIFIER]
@@ -72,4 +72,4 @@ func maximum_possible_approval_rating():
 	for value in personal_values.values():
 		poss_max += abs(value)
 	
-	return poss_max * 100
+	return poss_max

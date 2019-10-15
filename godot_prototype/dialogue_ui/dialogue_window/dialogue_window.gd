@@ -1,7 +1,5 @@
 extends VBoxContainer
 
-const DEFAULT_TREE = "start"
-
 export(NodePath) var default_speaker_node
 export(Array, NodePath) var default_listener_nodes = []
 
@@ -43,7 +41,7 @@ func _ready():
 #	pass
 
 
-func switch_dialogue(new_dialogue:Dictionary, new_tree = DEFAULT_TREE):
+func switch_dialogue(new_dialogue:Dictionary, new_tree = CONSTANTS.DEFAULT_TREE):
 	current_dialogue = new_dialogue
 	current_tree_stack.push_front(new_tree)
 	
@@ -102,10 +100,10 @@ func parse_options(options:Dictionary = current_options):
 	
 	if not current_dialogue[current_tree_stack.front()].get("sub_tree", false):
 		if not has_option.get(CONSTANTS.EXIT_OPTION, 0) > 0:
-			dialogue_tree.add_option(CONSTANTS.EXIT_OPTION, dialogue_option.EXIT_JSON)
+			dialogue_tree.add_option(CONSTANTS.EXIT_OPTION)
 	else:
 		if not has_option.get(CONSTANTS.BACK_OPTION, 0) > 0:
-			dialogue_tree.add_option(CONSTANTS.BACK_OPTION, dialogue_option.BACK_JSON)
+			dialogue_tree.add_option(CONSTANTS.BACK_OPTION)
 	
 	dialogue_tree.update_list_numbers()
 
