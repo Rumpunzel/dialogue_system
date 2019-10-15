@@ -12,32 +12,32 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Character",
 "language": "GDScript",
-"path": "res://characters/Character.gd"
+"path": "res://dialogue_engine/characters/Character.gd"
 }, {
 "base": "Character",
 "class": "NPC",
 "language": "GDScript",
-"path": "res://characters/NPC.gd"
+"path": "res://dialogue_engine/characters/NPC.gd"
 }, {
 "base": "Character",
 "class": "Player",
 "language": "GDScript",
-"path": "res://characters/Player.gd"
+"path": "res://dialogue_engine/characters/Player.gd"
 }, {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
-"path": "res://dialogue_ui/TypingLabel.gd"
+"path": "res://dialogue_engine/dialogue_ui/TypingLabel.gd"
 }, {
 "base": "Label",
 "class": "dialogue_option",
 "language": "GDScript",
-"path": "res://dialogue_ui/dialogue_option/dialogue_option.gd"
+"path": "res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd"
 }, {
 "base": "Node",
 "class": "memories",
 "language": "GDScript",
-"path": "res://characters/memories.gd"
+"path": "res://dialogue_engine/characters/memories.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -56,9 +56,10 @@ config/icon="res://assets/images/icon.png"
 
 [autoload]
 
-math_helper="*res://helpers/math_helper.gd"
-json_helper="*res://helpers/json_helper.gd"
-CONSTANTS="*res://dialogue_ui/CONSTANTS.gd"
+CONSTANTS="*res://dialogue_engine/dialogue_ui/CONSTANTS.gd"
+GAME_CONSTANTS="*res://GAME_CONSTANTS.gd"
+json_helper="*res://dialogue_engine/helpers/json_helper.gd"
+math_helper="*res://dialogue_engine/helpers/math_helper.gd"
 
 [debug]
 

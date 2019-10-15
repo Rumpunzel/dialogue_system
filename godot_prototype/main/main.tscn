@@ -4,10 +4,10 @@
 [ext_resource path="res://main/main.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=3]
 [ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
-[ext_resource path="res://dialogue_ui/dialogue_window/dialogue_window.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://characters/NPC.tscn" type="PackedScene" id=7]
-[ext_resource path="res://dialogue_ui/perception_graph.gd" type="Script" id=8]
+[ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph.gd" type="Script" id=8]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -35,11 +35,12 @@ stretch_mode = 5
 [node name="dialogue_window" parent="." instance=ExtResource( 5 )]
 default_speaker_node = NodePath("../Player")
 default_listener_nodes = [ NodePath("../NPC") ]
+dialogue_options_file_path = "res://data/dialogues/dialogue_options.json"
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 
 [node name="NPC" parent="." instance=ExtResource( 7 )]
-dialogue_file_path = "res://dialogues/data/NPC/test_conversation.json"
+dialogue_file_path = "res://data/dialogues/NPC/test_conversation.json"
 politeness_preferred = 0.2
 reliability_preferred = 0.4
 selflessness_preferred = -0.5
