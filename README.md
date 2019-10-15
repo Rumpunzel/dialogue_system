@@ -1,4 +1,4 @@
-# Relationship-based Dialogue System
+# Relationship-Based Dialogue System
 
 ## Purpose
 
