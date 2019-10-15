@@ -110,8 +110,9 @@ func parse_option(option_info, only_parse = false):
 	
 	if not only_parse:
 		var success = success_counter >= failure_counter
+		
 		var opt_txt:Array = option_text.get("success" if success else "failure", [ text ])
-		var new_option_text = opt_txt[abs(math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from))]
+		var new_option_text = opt_txt[math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from)]
 		
 		text = new_option_text
 		dialogue_option.type_text(new_option_text)

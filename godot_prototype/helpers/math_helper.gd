@@ -38,4 +38,5 @@ func vector_add_dictionaries(dictionaries:Array, main_dictionary = 0) -> Diction
 func calculate_loop_modulo(index:int, array_size:int, loop_from:int) -> int:
 	if index >= array_size:
 		index = loop_from + (index % array_size) % (array_size - loop_from)
+	
 	return index

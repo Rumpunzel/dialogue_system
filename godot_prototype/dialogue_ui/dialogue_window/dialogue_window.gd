@@ -52,7 +52,7 @@ func switch_dialogue(new_dialogue:Dictionary, new_tree = DEFAULT_TREE):
 func switch_tree(update:Dictionary):
 	var new_tree = update.get("new_tree", "")
 	
-	if not new_tree == "":
+	if not new_tree == "" and not new_tree == current_tree_stack.front():
 		current_tree_stack.push_front(new_tree)
 	elif update.get("is_back_option", false):
 		current_tree_stack.pop_front()

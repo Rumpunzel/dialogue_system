@@ -116,9 +116,9 @@
       "success": [
         "This option will open a new tree.",
         "And here it is again (still opens a new tree)."
-      ],
-      "loop_success_option_text_from": 1
+      ]
     },
+    "loop_success_option_text_from": 1,
     "single_use": false
   }
 }

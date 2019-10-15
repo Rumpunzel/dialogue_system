@@ -40,6 +40,18 @@
     "options": {
       "heroic_option": {},
       "back_test": {
+        "success_tree": "back_test_2"
+      }
+    }
+  },
+  "back_test_2": {
+    "message": [
+      "You are now in a new (recursive) tree. Don't go too <{No seriously, don't.|deep.}>"
+    ],
+    "sub_tree": true,
+    "options": {
+      "heroic_option": {},
+      "back_test": {
         "success_tree": "back_test"
       }
     }
