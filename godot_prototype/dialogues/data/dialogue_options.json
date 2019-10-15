@@ -1,6 +1,5 @@
 {
   "polite_option": {
-    "name": "polite_option",
     "option_text": {
       "success": [
         "This is a dialogue option."
@@ -15,7 +14,6 @@
     "politeness_change": 1
   },
   "heroic_option": {
-    "name": "heroic_option",
     "option_text": {
       "success": [
         "This is another dialogue option.",
@@ -33,7 +31,6 @@
     "single_use": false
   },
   "big_deal_option": {
-    "name": "big_deal_option",
     "option_text": {
       "success": [
         "This dialogue option is a <big deal.>"
@@ -65,7 +62,6 @@
     "approval_rating_change_on_success": 0.1
   },
   "weather_option": {
-    "name": "weather_option",
     "option_text": {
       "success": [
         "Talk about the weather.",
@@ -97,7 +93,6 @@
   },
   "nice_exit": {
     "type": "_exit_option",
-    "name": "polite_option",
     "option_text": {
       "success": [
         "Thank you, Jamal."
@@ -108,7 +103,6 @@
   },
   "rude_exit": {
     "type": "_exit_option",
-    "name": "asshole_option",
     "option_text": {
       "success": [
         "Fuck you, Jamal."
@@ -116,5 +110,15 @@
     },
     "tooltip": "( ︶︿︶)_╭∩╮",
     "noteworthy": true
+  },
+  "back_test": {
+    "option_text": {
+      "success": [
+        "This option will open a new tree.",
+        "And here it is again (still opens a new tree)."
+      ],
+      "loop_success_option_text_from": 1
+    },
+    "single_use": false
   }
 }

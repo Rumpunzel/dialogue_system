@@ -16,7 +16,7 @@ var default_listeners:Array = [] setget set_default_listeners, get_default_liste
 var dialogue_options:Dictionary
 
 var current_dialogue:Dictionary
-var current_tree
+var current_tree_stack:Array
 var current_options:Dictionary
 
 var first_time = true
@@ -45,20 +45,22 @@ func _ready():
 
 func switch_dialogue(new_dialogue:Dictionary, new_tree = DEFAULT_TREE):
 	current_dialogue = new_dialogue
-	current_tree = new_tree
+	current_tree_stack.push_front(new_tree)
 	
 	parse_tree()
 
 func switch_tree(update:Dictionary):
 	var new_tree = update.get("new_tree", "")
 	
-	if not new_tree == "" and not new_tree == current_tree:
-		current_tree = new_tree
+	if not new_tree == "":
+		current_tree_stack.push_front(new_tree)
+	elif update.get("is_back_option", false):
+		current_tree_stack.pop_front()
 	
 	parse_tree(update)
 
 func parse_tree(update:Dictionary = { }):
-	var dialogue = current_dialogue.get(current_tree, { })
+	var dialogue = current_dialogue.get(current_tree_stack.front(), { })
 	
 	var new_message:Array = update.get("message", [ ])
 	var default_message:Array = (dialogue.get("greeting", [ ]) if first_time else [ ]) + dialogue.get("message", [ ])
@@ -74,9 +76,9 @@ func parse_descriptions(descriptions:Array):
 	yield(description_field, "finished_typing")
 	
 	if not descriptions.empty():
-		var continue_info = dialogue_option.CONTINUE_OPTION
+		var continue_info = dialogue_option.CONTINUE_JSON
 		continue_info["success_messages"] = [descriptions]
-		dialogue_tree.add_option(dialogue_option.CONTINUE, continue_info)
+		dialogue_tree.add_option(CONSTANTS.CONTINUE_OPTION, continue_info)
 		dialogue_tree.update_list_numbers()
 	else:
 		emit_signal("parsed_descriptions")
@@ -85,15 +87,25 @@ func update_description(description):
 	description_field.update_description({ "message": description })
 
 func parse_options(options:Dictionary = current_options):
+	var has_option:Dictionary = { }
+	
 	for option_id in options.keys():
-		var option_info:Dictionary = dialogue_options.get(option_id, dialogue_option.CUSTOM_OPTION)
+		var option_info:Dictionary = dialogue_options.get(option_id, dialogue_option.CUSTOM_JSON)
 		
 		var type = option_info.get("type", option_id)
+		has_option[type] = has_option.get(type, 0) + 1
 		
 		for tree_change in options[option_id].keys():
 			option_info[tree_change] = options[option_id][tree_change]
 		
 		dialogue_tree.add_option(type, option_info)
+	
+	if not current_dialogue[current_tree_stack.front()].get("sub_tree", false):
+		if not has_option.get(CONSTANTS.EXIT_OPTION, 0) > 0:
+			dialogue_tree.add_option(CONSTANTS.EXIT_OPTION, dialogue_option.EXIT_JSON)
+	else:
+		if not has_option.get(CONSTANTS.BACK_OPTION, 0) > 0:
+			dialogue_tree.add_option(CONSTANTS.BACK_OPTION, dialogue_option.BACK_JSON)
 	
 	dialogue_tree.update_list_numbers()
 
