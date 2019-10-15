@@ -3,13 +3,10 @@ class_name dialogue_option
 
 enum { UNTOUCHED, CLICKED, PASSED }
 
-const CONTINUE = "_continue_option"
-const EXIT = "_exit_option"
-const CUSTOM = "custom_option"
-
-const CONTINUE_OPTION = { text = "Continue.", noteworthy = false }
-const EXIT_OPTION = { text = "Exit.", noteworthy = false, exits_dialogue = true }
-const CUSTOM_OPTION = { }
+const BACK_JSON = { text = "Back.", noteworthy = false, is_back_option = true }
+const CONTINUE_JSON = { text = "Continue.", noteworthy = false }
+const EXIT_JSON = { text = "Exit.", noteworthy = false, exits_dialogue = true }
+const CUSTOM_JSON = { }
 
 export(String) var speaker
 export(Array, String) var listeners
@@ -47,6 +44,8 @@ export(String, MULTILINE) var tooltip = ""
 #warning-ignore:unused_class_variable
 export var single_use = true
 export var exits_dialogue = false
+#warning-ignore:unused_class_variable
+export var is_back_option = false
 
 export(Color) var big_deal_color = Color("FFD700")
 export(float, 0, 1) var clicked_alpha = 0.5
@@ -83,7 +82,7 @@ func _ready():
 	option_button.connect("button_up", self, "check_option")
 
 
-func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
+func init(option_id:String, option_info:Dictionary = CUSTOM_JSON):
 	option_button = $option_button
 	option_number = $option_text/option_number
 	dialogue_option = $option_text/dialogue_option
@@ -94,10 +93,12 @@ func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
 	name = id
 	# TODO: fix tooltips
 	match option_id:
-		CONTINUE:
-			parse_option(CONTINUE_OPTION, true)
-		EXIT:
-			parse_option(EXIT_OPTION, true)
+		CONSTANTS.BACK_OPTION:
+			parse_option(BACK_JSON, true)
+		CONSTANTS.CONTINUE_OPTION:
+			parse_option(CONTINUE_JSON, true)
+		CONSTANTS.EXIT_OPTION:
+			parse_option(EXIT_JSON, true)
 	
 	option_json = option_info
 	
@@ -185,7 +186,7 @@ func confirm_option(option_success):
 	var success_message = success_messages[succ_mess] if not success_messages.empty() else [ ]
 	var failure_message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
 	
-	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "json": option_json })
+	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
 
 func compose_value_changes():
 	return { Character.POLITENESS: politeness_change, Character.RELIABILITY: reliability_change, Character.SELFLESSNESS: selflessness_change, Character.SINCERITY: sincerity_change }
