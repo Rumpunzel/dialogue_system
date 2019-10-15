@@ -1,0 +1,59 @@
+{
+  "start": {
+    "greeting": [
+      "This is a <{I made dis!|glorious}> dialogue system.\nWe all know that it is and that it will be that forever. It is known."
+    ],
+    "message": [
+      "Thanks for trying this out, <{That's you!|friendo.}>"
+    ],
+    "loop_from": 1,
+    "options": {
+      "polite_option": {},
+      "heroic_option": {},
+      "big_deal_option": {
+        "success_tree": "big_deal"
+      },
+      "weather_option": {},
+      "back_test": {
+        "success_tree": "back_test"
+      }
+    }
+  },
+  "big_deal": {
+    "message": [
+      "Even though this is a <big deal,> you've proven to be worthy of such trust and this bond grows only tighter still.",
+      "Well done, you've solved the puzzle!",
+      "Doesn't mean I want to talk with you about the weather, though. Still, thanks for trying this out.",
+      "If you're wondering why there is so much text here, that is because I am currently testing loading all this from JSONs and I'm just packing a lot of stuff in here.",
+      "<{Balls.|Ligma.}>"
+    ],
+    "options": {
+      "nice_exit": {},
+      "rude_exit": {}
+    }
+  },
+  "back_test": {
+    "message": [
+      "You are now in a new (recursive) tree. Don't go too <{No seriously, don't.|deep.}>"
+    ],
+    "sub_tree": true,
+    "options": {
+      "heroic_option": {},
+      "back_test": {
+        "success_tree": "back_test_2"
+      }
+    }
+  },
+  "back_test_2": {
+    "message": [
+      "You are now in a new (recursive) tree. Don't go too <{No seriously, don't.|deep.}>"
+    ],
+    "sub_tree": true,
+    "options": {
+      "heroic_option": {},
+      "back_test": {
+        "success_tree": "back_test"
+      }
+    }
+  }
+}
