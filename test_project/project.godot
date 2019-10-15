@@ -50,7 +50,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="godot_prototype"
+config/name="test_project"
 run/main_scene="res://main/main.tscn"
 config/icon="res://assets/images/icon.png"
 
