@@ -33,7 +33,7 @@
   "big_deal_option": {
     "option_text": {
       "success": [
-        "This dialogue option is a <big deal.>"
+        "This dialogue option is a <{BIG DEAL!|big deal.}>"
       ],
       "failure": [
         "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table."

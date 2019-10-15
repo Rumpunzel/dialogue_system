@@ -29,3 +29,4 @@ text = "Here is the dialogue feedback field."
 
 [node name="options_tree" parent="." instance=ExtResource( 4 )]
 margin_right = 600.0
+custom_constants/separation = 10
