@@ -3,7 +3,7 @@ extends Node
 
 func load_json(file_path):
 	var file = File.new()
-	print(file_path)
+	
 	assert file.file_exists(file_path)
 	
 	file.open(file_path, file.READ)
