@@ -1,87 +1,120 @@
 {
-    "polite_option": {
-      "name": "polite_option",
-      "option_text": { "success": [ "This is a dialogue option." ] },
-      "hint_tooltip": "It is small and polite.",
-      "success_messages": [
-        [
-          "You say something polite, yet ultimately meaningless."
-        ]
+  "polite_option": {
+    "name": "polite_option",
+    "option_text": {
+      "success": [
+        "This is a dialogue option."
+      ]
+    },
+    "tooltip": "It is small and polite.",
+    "success_messages": [
+      [
+        "You say something polite, yet ultimately meaningless."
+      ]
+    ],
+    "politeness_change": 1
+  },
+  "heroic_option": {
+    "name": "heroic_option",
+    "option_text": {
+      "success": [
+        "This is another dialogue option.",
+        "This is the dialogue option again."
+      ]
+    },
+    "tooltip": "It is a heroic option, indeed.",
+    "success_messages": [
+      [
+        "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+      ]
+    ],
+    "reliablity_change": 1,
+    "selflessness_change": 1,
+    "single_use": false
+  },
+  "big_deal_option": {
+    "name": "big_deal_option",
+    "option_text": {
+      "success": [
+        "This dialogue option is a <big deal.>"
       ],
-      "politeness_change": 1
+      "failure": [
+        "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table."
+      ]
     },
-    "heroic_option": {
-      "name": "heroic_option",
-      "option_text": { "success": [ "This is another dialogue option.", "This is the dialogue option again." ] },
-      "hint_tooltip": "It is a heroic option, indeed.",
-      "success_messages": [
-        [
-          "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
-        ]
+    "tooltip": "It will have drastic effects on this relationship.",
+    "failure_messages": [
+      [
+        "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
       ],
-      "reliablity_change": 1,
-      "selflessness_change": 1,
-      "single_use": false
-    },
-    "big_deal_option": {
-      "name": "big_deal_option",
-      "option_text": { "success": [ "This dialogue option is a <big deal.>" ], "failure": [ "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table." ] },
-      "hint_tooltip": "It will have drastic effects on this relationship.",
-      "failure_messages": [
-        [
-          "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
-        ],
-        [
-          "You blew your second change, congratz, mate."
-        ],
-        [
-          "No idea how you're getting any more chances here..."
-        ]
+      [
+        "You blew your second change, congratz, mate."
       ],
-      "big_deal": true,
-      "required_approval_rating": 0.3,
-      "values_enable_success": [
-        "selflessness"
+      [
+        "No idea how you're getting any more chances here..."
+      ]
+    ],
+    "big_deal": true,
+    "required_approval_rating": 0.3,
+    "values_enable_success": [
+      "selflessness"
+    ],
+    "loop_failures_from": 2,
+    "politeness_change": -3,
+    "sincerity_change": 5,
+    "approval_rating_change_on_success": 0.1
+  },
+  "weather_option": {
+    "name": "weather_option",
+    "option_text": {
+      "success": [
+        "Talk about the weather.",
+        "Talk about the weather some more."
+      ]
+    },
+    "loop_success_option_text_from": 1,
+    "tooltip": "Wow, what social skills. I am impressed.",
+    "success_messages": [
+      [
+        "Yes, yes, quite indeed. How insightful, truly."
       ],
-      "loop_failures_from": 2,
-      "politeness_change": -3,
-      "sincerity_change": 5,
-      "approval_rating_change_on_success": 0.1
+      [
+        "Again? Seriously? Well ok, then..."
+      ]
+    ],
+    "loop_successes_from": 1,
+    "selflessness_change": -1,
+    "single_use": false
+  },
+  "_leave_option": {
+    "type": "_exit_option",
+    "option_text": {
+      "success": [
+        "Leave."
+      ]
     },
-    "weather_option": {
-      "name": "weather_option",
-      "option_text": { "success": [ "Talk about the weather.", "Talk about the weather some more." ] },
-      "loop_success_option_text_from": 1,
-      "hint_tooltip": "Wow, what social skills. I am impressed.",
-      "success_messages": [
-        [
-          "Yes, yes, quite indeed. How insightful, truly."
-        ],
-        [
-          "Again? Seriously? Well ok, then..."
-        ]
-      ],
-      "loop_successes_from": 1,
-      "selflessness_change": -1,
-      "single_use": false
+    "tooltip": "Goodbye."
+  },
+  "nice_exit": {
+    "type": "_exit_option",
+    "name": "polite_option",
+    "option_text": {
+      "success": [
+        "Thank you, Jamal."
+      ]
     },
-    "_leave_option": {
-      "type": "_exit_option",
-      "option_text": { "success": [ "Leave." ] },
-      "hint_tooltip": "Goodbye."
+    "tooltip": "(✿◠‿◠)",
+    "noteworthy": true
+  },
+  "rude_exit": {
+    "type": "_exit_option",
+    "name": "asshole_option",
+    "option_text": {
+      "success": [
+        "Fuck you, Jamal."
+      ]
     },
-    "nice_exit": {
-      "type": "_exit_option",
-      "name": "polite_option",
-      "option_text": { "success": [ "Thank you, Jamal." ] },
-      "hint_tooltip": "(✿◠‿◠)",
-      "noteworthy": true
-    },
-    "rude_exit": {
-      "type": "_exit_option",
-      "name": "asshole_option",
-      "option_text": { "success": [ "Fuck you, Jamal." ] },
-      "hint_tooltip": "( ︶︿︶)_╭∩╮",
-      "noteworthy": true
-    }
+    "tooltip": "( ︶︿︶)_╭∩╮",
+    "noteworthy": true
   }
+}

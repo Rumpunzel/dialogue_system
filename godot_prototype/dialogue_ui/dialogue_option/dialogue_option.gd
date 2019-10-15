@@ -7,25 +7,25 @@ const CONTINUE = "_continue_option"
 const EXIT = "_exit_option"
 const CUSTOM = "custom_option"
 
-const CONTINUE_OPTION = { text = "Continue.", hint_tooltip = "", noteworthy = false }
-const EXIT_OPTION = { text = "Exit.", hint_tooltip = "", noteworthy = false, exits_dialogue = true }
+const CONTINUE_OPTION = { text = "Continue.", noteworthy = false }
+const EXIT_OPTION = { text = "Exit.", noteworthy = false, exits_dialogue = true }
 const CUSTOM_OPTION = { }
 
 export(String) var speaker
 export(Array, String) var listeners
 
 #warning-ignore:unused_class_variable
-export(int, -10, 10) var politeness_change
+export(int, -10, 10) var politeness_change = 0
 #warning-ignore:unused_class_variable
-export(int, -10, 10) var reliability_change
+export(int, -10, 10) var reliability_change = 0
 #warning-ignore:unused_class_variable
-export(int, -10, 10) var selflessness_change
+export(int, -10, 10) var selflessness_change = 0
 #warning-ignore:unused_class_variable
-export(int, -10, 10) var sincerity_change
+export(int, -10, 10) var sincerity_change = 0
 
 export var big_deal:bool = false
 
-export(float, 0, 1) var required_approval_rating
+export(float, 0, 1) var required_approval_rating = 0
 
 export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var values_enable_success
 
@@ -41,6 +41,8 @@ export(Array, Array, String, MULTILINE) var failure_messages = [ [ ] ]
 export var loop_failures_from = 0
 #warning-ignore:unused_class_variable
 export(String) var failure_tree = ""
+
+export(String, MULTILINE) var tooltip = ""
 
 #warning-ignore:unused_class_variable
 export var single_use = true
@@ -67,6 +69,7 @@ var noteworthy = true
 
 var dialogue_counter = ""
 
+var option_button
 var option_number
 var dialogue_option
 
@@ -77,46 +80,42 @@ signal option_confirmed
 func _ready():
 	update_appearance()
 	
-	$option_button.connect("button_up", self, "check_option")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if Engine.editor_hint:
-		update_appearance()
-
-#func _input(event):
-#	if event is InputEventKey:# and event.scancode == shortcut.shortcut.scancode:
-#		print(event)
-#		pressed = true
+	option_button.connect("button_up", self, "check_option")
 
 
 func init(option_id:String, option_info:Dictionary = CUSTOM_OPTION):
+	option_button = $option_button
 	option_number = $option_text/option_number
 	dialogue_option = $option_text/dialogue_option
+	
+	option_button.connect("current_color", self, "update_appearance")
 	
 	id = option_id
 	name = id
 	# TODO: fix tooltips
 	match option_id:
 		CONTINUE:
-			parse_option(CONTINUE_OPTION)
+			parse_option(CONTINUE_OPTION, true)
 		EXIT:
-			parse_option(EXIT_OPTION)
+			parse_option(EXIT_OPTION, true)
 	
 	option_json = option_info
 	
 	parse_option(option_json)
 
-func parse_option(option_info):
+func parse_option(option_info, only_parse = false):
 	for key in option_info.keys():
 		set(key, option_info[key])
 	
-	var success = success_counter >= failure_counter
-	var opt_txt:Array = option_text.get("success" if success else "failure", [ text ])
-	var new_option_text = opt_txt[abs(math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from))]
-	
-	text = new_option_text
-	dialogue_option.type_text(new_option_text)
+	if not only_parse:
+		var success = success_counter >= failure_counter
+		var opt_txt:Array = option_text.get("success" if success else "failure", [ text ])
+		var new_option_text = opt_txt[abs(math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from))]
+		
+		text = new_option_text
+		dialogue_option.type_text(new_option_text)
+		
+		option_button.hint_tooltip = tooltip
 
 func check_option():
 	var new_click_status = check_success()
@@ -191,17 +190,19 @@ func confirm_option(option_success):
 func compose_value_changes():
 	return { Character.POLITENESS: politeness_change, Character.RELIABILITY: reliability_change, Character.SELFLESSNESS: selflessness_change, Character.SINCERITY: sincerity_change }
 
-func update_appearance():
+func update_appearance(theme_color = null):
+	var new_color = null
+	
 	if big_deal:
-		option_number.set("custom_colors/font_color", big_deal_color)
-		dialogue_option.set("custom_colors/default_color", big_deal_color)
-	else:
-		option_number.set("custom_colors/font_color", null)
-		dialogue_option.set("custom_colors/default_color", null)
-		
-		if not untouched():
-			option_number.modulate.a = clicked_alpha
-			dialogue_option.modulate.a = clicked_alpha
+		new_color = big_deal_color
+	elif not untouched():
+		option_number.modulate.a = clicked_alpha
+		dialogue_option.modulate.a = clicked_alpha
+	
+	new_color = theme_color
+	
+	option_number.set("custom_colors/font_color", new_color)
+	dialogue_option.set("custom_colors/default_color", new_color)
 
 func untouched(bigger_than = 0):
 	return success_counter + failure_counter <= bigger_than
@@ -213,4 +214,4 @@ func update_list_number(new_number):
 	option_number.text = dialogue_counter
 
 func set_shortcut(new_shortcut:ShortCut):
-	$option_button.shortcut = new_shortcut
+	option_button.shortcut = new_shortcut
