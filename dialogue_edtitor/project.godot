@@ -56,9 +56,10 @@ config/icon="res://assets/images/icon.png"
 
 [autoload]
 
-math_helper="*res://helpers/math_helper.gd"
-json_helper="*res://helpers/json_helper.gd"
-CONSTANTS="*res://dialogue_ui/CONSTANTS.gd"
+CONSTANTS="*res://dialogue_engine/CONSTANTS.gd"
+GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
+json_helper="*res://dialogue_engine/helpers/json_helper.gd"
+math_helper="*res://dialogue_engine/helpers/math_helper.gd"
 
 [debug]
 
