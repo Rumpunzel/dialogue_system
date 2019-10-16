@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://main/main.gd" type="Script" id=2]
-[ext_resource path="res://editor/editor_tab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_editor/Characters.tscn" type="PackedScene" id=3]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -18,7 +18,7 @@ margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
 
-[node name="game properties" type="TabContainer" parent="editor"]
+[node name="Game Properties" type="TabContainer" parent="editor"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -26,14 +26,15 @@ margin_top = 41.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="characters" parent="editor" instance=ExtResource( 3 )]
+[node name="Characters" parent="editor" instance=ExtResource( 3 )]
 visible = false
 margin_left = 4.0
 margin_top = 41.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="dialogue trees" type="VSplitContainer" parent="editor"]
+[node name="Dialogue Trees" type="VSplitContainer" parent="editor"]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,11 +43,12 @@ margin_top = 41.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="tree" type="Tree" parent="editor/dialogue trees"]
+[node name="tree" type="Tree" parent="editor/Dialogue Trees"]
 margin_right = 1192.0
 margin_bottom = 755.0
 
-[node name="dialogue options" type="VSplitContainer" parent="editor"]
+[node name="Dialogue Options" type="VSplitContainer" parent="editor"]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,6 +57,6 @@ margin_top = 41.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="tree" type="Tree" parent="editor/dialogue options"]
+[node name="tree" type="Tree" parent="editor/Dialogue Options"]
 margin_right = 1192.0
 margin_bottom = 755.0

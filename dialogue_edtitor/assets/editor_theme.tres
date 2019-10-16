@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/default_font.tres" type="DynamicFont" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [resource]
 default_font = ExtResource( 1 )
@@ -41,7 +41,7 @@ RichTextLabel/fonts/bold_italics_font = null
 RichTextLabel/fonts/italics_font = null
 RichTextLabel/fonts/mono_font = null
 RichTextLabel/fonts/normal_font = null
-RichTextLabel/styles/focus = SubResource( 3 )
+RichTextLabel/styles/focus = SubResource( 1 )
 RichTextLabel/styles/normal = null
 TooltipLabel/colors/font_color = Color( 0, 0, 0, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 0.1 )
