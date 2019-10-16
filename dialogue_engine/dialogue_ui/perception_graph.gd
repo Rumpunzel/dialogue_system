@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_perceptions_graph(get_parent().calculate_perception_value(get_parent().character_perceptions.get(get_node("/root/main/Player"), { NPC.PERCEPTION_VALUES: { } })[ NPC.PERCEPTION_VALUES ]))
+	update_perceptions_graph(get_parent().calculate_perception_value(get_parent().character_perceptions.get(get_node("/root/main/Player"), { NPC._PERCEPTION_VALUES: { } })[ NPC._PERCEPTION_VALUES ]))
 
 func _draw():
 	draw_colored_polygon(get_approval_rating_graph(), Color.maroon)
@@ -54,4 +54,4 @@ func get_graph(new_perceptions):
 func get_approval_rating_graph():
 	var approval_rating = get_parent().calculate_approval_rating(get_node("/root/main/Player"))
 	
-	return [Vector2(0, get_rect().size.y) * (1 - approval_rating / GAME_CONSTANTS.MAX_PERCEPTION_VALUE), Vector2(get_rect().size.x, get_rect().size.y  * (1 - approval_rating / GAME_CONSTANTS.MAX_PERCEPTION_VALUE)), Vector2(get_rect().size.x, get_rect().size.y), Vector2(0, get_rect().size.y)]
+	return [Vector2(0, get_rect().size.y) * (1 - approval_rating / GAME_CONSTANTS._MAX_PERCEPTION_VALUE), Vector2(get_rect().size.x, get_rect().size.y  * (1 - approval_rating / GAME_CONSTANTS._MAX_PERCEPTION_VALUE)), Vector2(get_rect().size.x, get_rect().size.y), Vector2(0, get_rect().size.y)]

@@ -155,7 +155,7 @@ func check_success():
 
 func check_perception_for_listeners(value):
 	for listener in listeners:
-		var values = listener.calculate_perception_value(listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC.PERCEPTION_VALUES])
+		var values = listener.calculate_perception_value(listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC._PERCEPTION_VALUES])
 		
 		if not listener.personal_values[value] == 0 and values[value] / listener.personal_values[value] < 1:
 			return false
@@ -190,7 +190,7 @@ func confirm_option(option_success):
 	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
 
 func compose_value_changes():
-	return { GAME_CONSTANTS.PERCEPTION_VALUES[0]: politeness_change, GAME_CONSTANTS.PERCEPTION_VALUES[1]: reliability_change, GAME_CONSTANTS.PERCEPTION_VALUES[2]: selflessness_change, GAME_CONSTANTS.PERCEPTION_VALUES[3]: sincerity_change }
+	return { GAME_CONSTANTS._PERCEPTION_VALUES[0]: politeness_change, GAME_CONSTANTS._PERCEPTION_VALUES[1]: reliability_change, GAME_CONSTANTS._PERCEPTION_VALUES[2]: selflessness_change, GAME_CONSTANTS._PERCEPTION_VALUES[3]: sincerity_change }
 
 func update_appearance(theme_color = null):
 	var new_color = null

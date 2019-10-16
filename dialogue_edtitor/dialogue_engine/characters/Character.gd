@@ -13,7 +13,7 @@ export(int, -10, 10) var selflessness_percieved
 export(int, -10, 10) var sincerity_percieved
 #warning-ignore:unused_class_variable
 
-onready var percieved_starting_values:Dictionary =  { GAME_CONSTANTS.PERCEPTION_VALUES[0]: politeness_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[1]: reliability_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[2]: selflessness_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[3]: sincerity_percieved }
+onready var percieved_starting_values:Dictionary =  { GAME_CONSTANTS._PERCEPTION_VALUES[0]: politeness_percieved, GAME_CONSTANTS._PERCEPTION_VALUES[1]: reliability_percieved, GAME_CONSTANTS._PERCEPTION_VALUES[2]: selflessness_percieved, GAME_CONSTANTS._PERCEPTION_VALUES[3]: sincerity_percieved }
 
 onready var memories:memories = $memories
 
@@ -35,7 +35,7 @@ func calculate_perception_value(perception_values):
 	
 	for key in perception_values.keys():
 		# Philipp dark magic fuckery
-		values[key] = (0.5 * (tanh(GAME_CONSTANTS.PERCEPTION_VALUE_SLOPE * (perception_values[key] + GAME_CONSTANTS.PECERPTION_VALUE_GROWTH_POINT)) + tanh(GAME_CONSTANTS.PERCEPTION_VALUE_SLOPE * (perception_values[key] - GAME_CONSTANTS.PECERPTION_VALUE_GROWTH_POINT))))
+		values[key] = (0.5 * (tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] + GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT)) + tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] - GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT))))
 	
 	return values
 
