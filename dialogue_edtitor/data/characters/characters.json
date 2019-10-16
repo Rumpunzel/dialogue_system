@@ -1,0 +1,10 @@
+{
+    "Klaus": {
+      "preferred_values": {
+        "politeness": 0.2,
+        "reliability": 0.4,
+        "selflessness": -0.5,
+        "sincerity": 0.6
+      }
+    }
+  }
