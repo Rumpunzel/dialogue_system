@@ -28,5 +28,5 @@ size_flags_vertical = 4
 min_value = -10.0
 max_value = 10.0
 align = 2
-[connection signal="value_changed" from="slider" to="spin_box" method="set_value"]
-[connection signal="value_changed" from="spin_box" to="slider" method="set_value"]
+[connection signal="value_changed" from="slider" to="." method="update_value" binds= [ "slider" ]]
+[connection signal="value_changed" from="spin_box" to="." method="update_value" binds= [ "spin_box" ]]
