@@ -32,7 +32,7 @@ export var loop_successes_from = 0
 export(String) var success_tree = ""
 
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var approval_rating_change_on_success
+export(int, -10, 10) var approval_rating_change_on_success
 
 export(Array, Array, String, MULTILINE) var failure_messages = [ [ ] ]
 export var loop_failures_from = 0
@@ -111,7 +111,7 @@ func parse_option(option_info, only_parse = false):
 	if not only_parse:
 		var success = success_counter >= failure_counter
 		
-		var opt_txt:Array = option_text.get("success" if success else "failure", [ text ])
+		var opt_txt:Array = option_text.get(CONSTANTS.BUTTON_TEXT if success else CONSTANTS.BUTTON_TEXT_FAILURE, [ text ])
 		var new_option_text = opt_txt[math_helper.calculate_loop_modulo(success_counter if success else failure_counter, opt_txt.size(), loop_success_option_text_from if success else loop_failure_option_text_from)]
 		
 		text = new_option_text
@@ -122,7 +122,7 @@ func parse_option(option_info, only_parse = false):
 func check_option():
 	var new_click_status = check_success()
 	
-	print("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
+	GAME_CONSTANTS.print_to_console("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
 	
 	if new_click_status >= PASSED:
 		success_counter += 1
@@ -172,11 +172,11 @@ func confirm_option(option_success):
 				if not change == 0:
 					value_update += key + ": " + ("+" if change >= 0 else "") + str(change) + ", "
 			
-			print(value_update.substr(0, value_update.length() - 2))
+			GAME_CONSTANTS.print_to_console(value_update.substr(0, value_update.length() - 2))
 		else:
-			print("No Perception Updates, this Dialogue Option has already been used before!")
+			GAME_CONSTANTS.print_to_console("No Perception Updates, this Dialogue Option has already been used before!")
 	else:
-		print("No Updates, this Dialogue Option has already been passed before!")
+		GAME_CONSTANTS.print_to_console("No Updates, this Dialogue Option has already been passed before!")
 	
 	for listener in listeners:
 		listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })

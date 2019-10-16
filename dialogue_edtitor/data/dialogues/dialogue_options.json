@@ -1,7 +1,7 @@
 {
   "polite_option": {
     "option_text": {
-      "success": [
+      "button_text": [
         "This is a dialogue option."
       ]
     },
@@ -15,7 +15,7 @@
   },
   "heroic_option": {
     "option_text": {
-      "success": [
+      "button_text": [
         "This is another dialogue option.",
         "This is the dialogue option again."
       ]
@@ -32,10 +32,10 @@
   },
   "big_deal_option": {
     "option_text": {
-      "success": [
+      "button_text": [
         "This dialogue option is a <{BIG DEAL!|big deal.}>"
       ],
-      "failure": [
+      "button_text_after_failure": [
         "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table."
       ]
     },
@@ -52,18 +52,18 @@
       ]
     ],
     "big_deal": true,
-    "required_approval_rating": 0.3,
+    "required_approval_rating": 2.9,
     "values_enable_success": [
       "selflessness"
     ],
     "loop_failures_from": 2,
     "politeness_change": -3,
     "sincerity_change": 5,
-    "approval_rating_change_on_success": 0.1
+    "approval_rating_change_on_success": 1
   },
   "weather_option": {
     "option_text": {
-      "success": [
+      "button_text": [
         "Talk about the weather.",
         "Talk about the weather some more."
       ]
@@ -85,7 +85,7 @@
   "_leave_option": {
     "type": "_exit_option",
     "option_text": {
-      "success": [
+      "button_text": [
         "Leave."
       ]
     },
@@ -94,7 +94,7 @@
   "nice_exit": {
     "type": "_exit_option",
     "option_text": {
-      "success": [
+      "button_text": [
         "Thank you, Jamal."
       ]
     },
@@ -104,7 +104,7 @@
   "rude_exit": {
     "type": "_exit_option",
     "option_text": {
-      "success": [
+      "button_text": [
         "Fuck you, Jamal."
       ]
     },
@@ -113,7 +113,7 @@
   },
   "back_test": {
     "option_text": {
-      "success": [
+      "button_text": [
         "This option will open a new tree.",
         "And here it is again (still opens a new tree)."
       ]
