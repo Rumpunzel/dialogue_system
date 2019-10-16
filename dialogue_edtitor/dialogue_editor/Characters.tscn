@@ -218,7 +218,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 509.0
 margin_bottom = 21.0
-custom_constants/separation = 20
+custom_constants/separation = 10
 
 [node name="maximum_approval" type="Label" parent="vertical_separator/property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/approval_container/number_divider"]
 margin_right = 171.0
@@ -226,7 +226,7 @@ margin_bottom = 14.0
 text = "Maximum Approval Rating:"
 
 [node name="progress_bar" type="ProgressBar" parent="vertical_separator/property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/approval_container/number_divider"]
-margin_left = 191.0
+margin_left = 181.0
 margin_right = 502.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
