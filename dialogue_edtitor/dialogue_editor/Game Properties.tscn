@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://dialogue_editor/properties/perception_values_editor.gd" type="Script" id=1]
+
+[node name="Game Properties" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 41.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="perception_values_editor" type="VBoxContainer" parent="."]
+margin_right = 1192.0
+margin_bottom = 755.0
+script = ExtResource( 1 )

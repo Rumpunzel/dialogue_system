@@ -16,6 +16,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 min_value = -10.0
 max_value = 10.0
+scrollable = false
 tick_count = 11
 ticks_on_borders = true
 

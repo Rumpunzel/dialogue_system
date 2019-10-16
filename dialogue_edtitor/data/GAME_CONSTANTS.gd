@@ -1,11 +1,13 @@
 extends Node
 
 # Values
-var _PERCEPTION_VALUES = [ "politeness", "reliability", "selflessness", "sincerity" ]
+var _PERCEPTION_VALUES = [ "politeness", "reliability", "selflessness", "sincerity" ] setget set_PERCEPTION_VALUES, get_PERCEPTION_VALUES
 
 # Value calculation constants. See 'calculate_perception_value' function in Character.gd
 #warning-ignore:unused_class_variable
 var _MAX_PERCEPTION_VALUE = 10
+#warning-ignore:unused_class_variable
+var _MAX_APPROVAL_VALUE = 100
 #warning-ignore:unused_class_variable
 var _PERCEPTION_VALUE_SLOPE = 0.4
 #warning-ignore:unused_class_variable
@@ -14,6 +16,8 @@ var _PECERPTION_VALUE_GROWTH_POINT = 5.0
 # Print updates to console?
 var verbose_mode = true
 var log_history:Dictionary = { }
+
+signal values_changed
 
 
 func get_perception_value_dictionary():
@@ -32,3 +36,12 @@ func print_to_console(print_string):
 	
 	if verbose_mode:
 		print(print_string)
+
+
+func set_PERCEPTION_VALUES(new_values):
+	_PERCEPTION_VALUES = new_values
+	
+	emit_signal("values_changed", _PERCEPTION_VALUES)
+
+func get_PERCEPTION_VALUES() -> Array:
+	return _PERCEPTION_VALUES

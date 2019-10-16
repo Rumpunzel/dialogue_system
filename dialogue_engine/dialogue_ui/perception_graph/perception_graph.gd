@@ -11,41 +11,27 @@ onready var center = get_rect().size / 2
 onready var radius = min(get_rect().size.y / 2, get_rect().size.x / 2)
 
 var perception_names:Dictionary
+
 var perception_values:Dictionary
 var polygon_points:Array = []
 
 
+func _ready():
+	GAME_CONSTANTS.connect("values_changed", self, "update_perception_values")
+	
+	update_perception_values(GAME_CONSTANTS._PERCEPTION_VALUES)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	center = get_rect().size / 2
-	radius = min(get_rect().size.y / 2, get_rect().size.x / 2)
+	radius = min(get_rect().size.x / 2, get_rect().size.y / 2)
 	
-	for i in GAME_CONSTANTS._PERCEPTION_VALUES.size():
-		var perception = GAME_CONSTANTS._PERCEPTION_VALUES[i]
-		var perception_label = perception_names.get(perception)
-		
-		if perception_label == null:
-			perception_label = Label.new()
-			perception_names[perception] = perception_label
-			add_child(perception_label)
-		
-		perception_label.text = perception.capitalize()
-		
-		var label_middle = perception_label.rect_size / 2
-		perception_label.rect_pivot_offset = label_middle
-		
-		var new_rotation =  modified_rotation(i)
-		perception_label.rect_position = center + Vector2(0, -radius * 1.2).rotated(new_rotation) - label_middle
-		perception_label.rect_rotation = int(rad2deg(new_rotation))
-		
-		var rot = abs(int(perception_label.rect_rotation) % 360)
-		if rot > 90 and rot < 270:
-			perception_label.rect_rotation += 180
+	update_perception_values(GAME_CONSTANTS._PERCEPTION_VALUES)
 	
 	if not subject == null:
 		perception_values = subject.personal_values
 		if not object == null:
-			var new_perceptions = subject.calculate_perception_value(subject.character_perceptions.get(object, { }).get(NPC._PERCEPTION_VALUES, { }))
+			var new_perceptions = subject.calculate_perception_value(subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { }))
 			update_perceptions_graph(new_perceptions)
 	
 	update()
@@ -64,6 +50,28 @@ func _draw():
 	draw_empty_circle(center, radius, Color.black, 10)
 	draw_empty_circle(center, radius / 2, Color.black, 10)
 
+
+func update_perception_values(new_perception_values:Array):
+	for i in new_perception_values.size():
+		var perception_label = perception_names.get(i)
+		
+		if perception_label == null:
+			perception_label = Label.new()
+			perception_names[i] = perception_label
+			add_child(perception_label)
+		
+		perception_label.text = new_perception_values[i].capitalize()
+		
+		var label_middle = perception_label.get_rect().size / 2
+		perception_label.rect_pivot_offset = label_middle
+		
+		var new_rotation =  modified_rotation(i)
+		perception_label.rect_position = center + Vector2(0, -radius * 1.2).rotated(new_rotation) - label_middle
+		perception_label.rect_rotation = int(rad2deg(new_rotation))
+		
+		var rot = abs(int(perception_label.rect_rotation) % 360)
+		if rot > 90 and rot < 270:
+			perception_label.rect_rotation += 180
 
 func update_perceptions_graph(new_perceptions:Dictionary, manually_called = false):
 	if manually_called:
