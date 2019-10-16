@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "perception_graph",
 "language": "GDScript",
-"path": "res://dialogue_engine/dialogue_ui/perception_graph.gd"
+"path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
 } ]
 _global_script_class_icons={
 "Character": "",

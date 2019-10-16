@@ -1,7 +1,7 @@
 extends Node
 
 # Values
-var _PERCEPTION_VALUES = [ "politeness", "reliability", "selflessness", "sincerity", "loyalty" ]
+var _PERCEPTION_VALUES = [ "politeness", "reliability", "selflessness", "sincerity" ]
 
 # Value calculation constants. See 'calculate_perception_value' function in Character.gd
 #warning-ignore:unused_class_variable

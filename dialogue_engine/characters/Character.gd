@@ -30,7 +30,7 @@ func _ready():
 func initiate_dialogue(dialogue_node, specific_dilaogue = dialogue_file_path):
 	dialogue_node.switch_dialogue(json_helper.load_json(specific_dilaogue))
 
-func calculate_perception_value(perception_values):
+func calculate_perception_value(perception_values:Dictionary):
 	var values = { }
 	
 	for key in perception_values.keys():
