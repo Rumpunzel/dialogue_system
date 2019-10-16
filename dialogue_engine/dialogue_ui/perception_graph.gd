@@ -35,7 +35,7 @@ func get_graph(new_perceptions):
 	
 	for perception in new_perceptions.keys():
 		var new_rotation = (value_index / float(points_amount)) * TAU
-		var new_point = center + Vector2(0, -get_rect().size.y / 4 * (1 + new_perceptions[perception])).rotated(new_rotation)
+		var new_point = center + Vector2(0, -get_rect().size.y / 4 * (1 + new_perceptions[perception] / 10.0)).rotated(new_rotation)
 		points.append(new_point)
 		
 #		var label = Label.new()
@@ -53,4 +53,5 @@ func get_graph(new_perceptions):
 
 func get_approval_rating_graph():
 	var approval_rating = get_parent().calculate_approval_rating(get_node("/root/main/Player"))
-	return [Vector2(0, get_rect().size.y) * (1 - approval_rating), Vector2(get_rect().size.x, get_rect().size.y  * (1 - approval_rating)), Vector2(get_rect().size.x, get_rect().size.y), Vector2(0, get_rect().size.y)]
+	
+	return [Vector2(0, get_rect().size.y) * (1 - approval_rating / GAME_CONSTANTS.MAX_PERCEPTION_VALUE), Vector2(get_rect().size.x, get_rect().size.y  * (1 - approval_rating / GAME_CONSTANTS.MAX_PERCEPTION_VALUE)), Vector2(get_rect().size.x, get_rect().size.y), Vector2(0, get_rect().size.y)]

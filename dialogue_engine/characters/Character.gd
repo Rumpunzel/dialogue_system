@@ -4,13 +4,13 @@ class_name Character
 export(String, FILE, "*.json") var dialogue_file_path
 
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var politeness_percieved
+export(int, -10, 10) var politeness_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var reliability_percieved
+export(int, -10, 10) var reliability_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var selflessness_percieved
+export(int, -10, 10) var selflessness_percieved
 #warning-ignore:unused_class_variable
-export(float, -1, 1) var sincerity_percieved
+export(int, -10, 10) var sincerity_percieved
 #warning-ignore:unused_class_variable
 
 onready var percieved_starting_values:Dictionary =  { GAME_CONSTANTS.PERCEPTION_VALUES[0]: politeness_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[1]: reliability_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[2]: selflessness_percieved, GAME_CONSTANTS.PERCEPTION_VALUES[3]: sincerity_percieved }
