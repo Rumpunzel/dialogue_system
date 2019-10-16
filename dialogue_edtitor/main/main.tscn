@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://main/main.gd" type="Script" id=2]
-[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=3]
-[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
+[ext_resource path="res://editor/editor_tab.tscn" type="PackedScene" id=3]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -11,19 +10,51 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="parchment_background" type="TextureRect" parent="."]
-editor/display_folded = true
+[node name="editor" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 7
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 
-[node name="waterfall" type="TextureRect" parent="parchment_background"]
-margin_left = 940.0
-margin_top = 470.0
-margin_right = 1170.0
-margin_bottom = 760.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 5
+[node name="game properties" type="TabContainer" parent="editor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 41.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="characters" parent="editor" instance=ExtResource( 3 )]
+visible = false
+margin_left = 4.0
+margin_top = 41.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="dialogue trees" type="VSplitContainer" parent="editor"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 41.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="tree" type="Tree" parent="editor/dialogue trees"]
+margin_right = 1192.0
+margin_bottom = 755.0
+
+[node name="dialogue options" type="VSplitContainer" parent="editor"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 41.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="tree" type="Tree" parent="editor/dialogue options"]
+margin_right = 1192.0
+margin_bottom = 755.0
