@@ -21,18 +21,24 @@ func _ready():
 	
 	GAME_CONSTANTS.connect("values_changed", self, "update_perception_entries")
 	
-	update_perception_entries(GAME_CONSTANTS._PERCEPTION_VALUES)
+	update_perception_entries()
+	
+	for value in GAME_CONSTANTS._PERCEPTION_VALUES:
+		update_perceptions_graph(value, slider_values.get(value, 0))
 
 
 func update_perceptions_graph(value_name:String, new_value):
-	slider_values[value_name] = new_value
-	
-	emit_signal("update_perceptions_graph", NPC_Singleton.calculate_perception_value(slider_values), true)
-	
-	if not maximum_approval_display == null:
-		get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)
+	if value_name.length() > 0:
+		slider_values[value_name] = new_value
+		
+		emit_signal("update_perceptions_graph", NPC_Singleton.calculate_perception_value(slider_values), true)
+		
+		if not maximum_approval_display == null:
+			get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)
 
-func update_perception_entries(new_perception_values:Array):
+func update_perception_entries():
+	var new_perception_values = GAME_CONSTANTS._PERCEPTION_VALUES
+	
 	for i in max(perception_entries.size(), new_perception_values.size()):
 		if i < new_perception_values.size():
 			var perception = new_perception_values[i]

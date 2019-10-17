@@ -21,12 +21,6 @@ func update_perception_globals(_new_text = ""):
 			new_perception_values.append(entry.get_value().to_lower())
 	
 	GAME_CONSTANTS.set_PERCEPTION_VALUES(new_perception_values)
-	
-#	for i in entries.size():
-#		if i < new_perception_values.size():
-#			entries[i].name_entry(new_perception_values[i])
-#		else:
-#			entries[i].queue_free()
 
 func add_entry():
 	var perception_field = entry_scene.instance()
@@ -49,6 +43,8 @@ func parse_option(entry, id):
 		elif id & int(pow(2, menu_option.INSERT)):
 			var new_entry = add_entry()
 			move_child(new_entry, current_index + up_or_down(id, 0))
+			
+			new_entry.entry_field.grab_focus()
 	
 	update_perception_globals()
 

@@ -5,13 +5,13 @@ var _PERCEPTION_VALUES:Array = [ "politeness", "reliability", "selflessness", "s
 
 # Value calculation constants. See 'calculate_perception_value' function in Character.gd
 #warning-ignore:unused_class_variable
-var _MAX_PERCEPTION_VALUE:int = 10
+var _MAX_PERCEPTION_VALUE:int = 10 setget set_MAX_PERCEPTION_VALUE, get_MAX_PERCEPTION_VALUE
 #warning-ignore:unused_class_variable
-var _MAX_APPROVAL_VALUE:int = 100
+var _MAX_APPROVAL_VALUE:int = 100 setget set_MAX_APPROVAL_VALUE, get_MAX_APPROVAL_VALUE
 #warning-ignore:unused_class_variable
-var _PERCEPTION_VALUE_SLOPE:float = 0.15
+var _PERCEPTION_VALUE_SLOPE:float = 0.15 setget set_PERCEPTION_VALUE_SLOPE, get_PERCEPTION_VALUE_SLOPE
 #warning-ignore:unused_class_variable
-var _PECERPTION_VALUE_GROWTH_POINT:float = 10
+var _PECERPTION_VALUE_GROWTH_POINT:float = 10 setget set_PECERPTION_VALUE_GROWTH_POINT, get_PECERPTION_VALUE_GROWTH_POINT
 
 # Print updates to console?
 var verbose_mode = true
@@ -38,10 +38,38 @@ func print_to_console(print_string):
 		print(print_string)
 
 
-func set_PERCEPTION_VALUES(new_values):
+func set_PERCEPTION_VALUES(new_values:Array):
 	_PERCEPTION_VALUES = new_values
-	
-	emit_signal("values_changed", _PERCEPTION_VALUES)
+	emit_signal("values_changed")
+
+func set_MAX_PERCEPTION_VALUE(new_value):
+	_MAX_PERCEPTION_VALUE = int(new_value)
+	emit_signal("values_changed")
+
+func set_MAX_APPROVAL_VALUE(new_value):
+	_MAX_APPROVAL_VALUE = int(new_value)
+	emit_signal("values_changed")
+
+func set_PERCEPTION_VALUE_SLOPE(new_value):
+	_PERCEPTION_VALUE_SLOPE = float(new_value)
+	emit_signal("values_changed")
+
+func set_PECERPTION_VALUE_GROWTH_POINT(new_value):
+	_PECERPTION_VALUE_GROWTH_POINT = float(new_value)
+	emit_signal("values_changed")
+
 
 func get_PERCEPTION_VALUES() -> Array:
 	return _PERCEPTION_VALUES
+
+func get_MAX_PERCEPTION_VALUE() -> int:
+	return _MAX_PERCEPTION_VALUE
+
+func get_MAX_APPROVAL_VALUE() -> int:
+	return _MAX_APPROVAL_VALUE
+
+func get_PERCEPTION_VALUE_SLOPE() -> float:
+	return _PERCEPTION_VALUE_SLOPE
+
+func get_PECERPTION_VALUE_GROWTH_POINT() -> float:
+	return _PECERPTION_VALUE_GROWTH_POINT

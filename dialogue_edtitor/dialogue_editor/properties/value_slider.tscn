@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/value_slider.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/slider.gd" type="Script" id=2]
 
 [node name="value_slider" type="HBoxContainer"]
 margin_right = 425.0
@@ -20,7 +19,6 @@ max_value = 10.0
 scrollable = false
 tick_count = 11
 ticks_on_borders = true
-script = ExtResource( 2 )
 
 [node name="spin_box" type="SpinBox" parent="."]
 margin_left = 351.0
