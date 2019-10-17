@@ -3,6 +3,8 @@ extends ProgressBar
 class_name BetterProgressBar
 
 export var decimal_points = 1
+#warning-ignore:unused_class_variable
+export var percentage = true
 
 onready var percentage_label = Label.new()
 
@@ -21,7 +23,9 @@ func _ready():
 		percentage_label.margin_bottom = 0
 		
 		connect("value_changed", self, "update_percentage")
+	
+	update_percentage(value)
 
 
 func update_percentage(new_value):
-	percentage_label.text = ("%0." + str(decimal_points) + "f%%") % [new_value]
+	percentage_label.text = ("%0." + str(decimal_points) + "f%s") % [new_value, "%" if percentage else ""]

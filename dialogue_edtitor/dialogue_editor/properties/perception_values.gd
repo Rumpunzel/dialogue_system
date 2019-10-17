@@ -22,9 +22,6 @@ func _ready():
 	GAME_CONSTANTS.connect("values_changed", self, "update_perception_entries")
 	
 	update_perception_entries()
-	
-	for value in GAME_CONSTANTS._PERCEPTION_VALUES:
-		update_perceptions_graph(value, slider_values.get(value, 0))
 
 
 func update_perceptions_graph(value_name:String, new_value):

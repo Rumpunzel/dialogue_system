@@ -2,7 +2,7 @@
 
 [ext_resource path="res://dialogue_editor/properties/better_line_edit.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/properties/menu_button.gd" type="Script" id=2]
-[ext_resource path="res://assets/images/icon.png" type="Texture" id=3]
+[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=3]
 [ext_resource path="res://dialogue_editor/properties/perception_values.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_editor/properties/better_progress_bar.gd" type="Script" id=5]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=6]
@@ -78,13 +78,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 
-[node name="Portrait" type="TextureRect" parent="vertical_separator/property_divider/character_divider/charatcer_info"]
+[node name="Portrait" type="PanelContainer" parent="vertical_separator/property_divider/character_divider/charatcer_info"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="iamge" type="TextureRect" parent="vertical_separator/property_divider/character_divider/charatcer_info/Portrait"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 379.0
+margin_bottom = 324.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
@@ -243,6 +249,7 @@ size_flags_vertical = 3
 step = 0.0
 percent_visible = false
 script = ExtResource( 5 )
+percentage = false
 
 [node name="graph_container" type="PanelContainer" parent="vertical_separator/property_divider/data_divider/properties/categories/Perception Values"]
 margin_top = 352.0

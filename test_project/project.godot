@@ -58,7 +58,7 @@ _global_script_class_icons={
 
 config/name="test_project"
 run/main_scene="res://main/main.tscn"
-config/icon="res://assets/images/icon.png"
+config/icon="res://data/assets/images/icon.png"
 
 [autoload]
 

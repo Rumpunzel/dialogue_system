@@ -30,8 +30,8 @@ func _ready():
 func remember_response(new_memory:Dictionary):
 	.remember_response(new_memory)
 	
-	if new_memory["value_changes"].values().max() > 0 or new_memory["value_changes"].values().min() < 0:
-		modify_perception(new_memory["speaker"], new_memory["success"],  new_memory["value_changes"],  new_memory["approval_change"])
+	if not new_memory["approval_change"] == 0 or (not new_memory["value_changes"].values().empty() and (new_memory["value_changes"].values().max() > 0 or new_memory["value_changes"].values().min() < 0)):
+		modify_perception(new_memory["speaker"], new_memory["success"],  new_memory["value_changes"], new_memory["approval_change"])
 
 func modify_perception(target:Character, option_success, value_changes, approval_change):
 	character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, [target.percieved_starting_values])[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, [0, 0])[APPROVAL_MODIFIER] }
@@ -42,10 +42,10 @@ func modify_perception(target:Character, option_success, value_changes, approval
 		character_perceptions[target][APPROVAL_MODIFIER] += approval_change
 		
 		if not character_perceptions[target][APPROVAL_MODIFIER] == 0:
-			GAME_CONSTANTS.print_to_console("%s now has a %0.2f%% Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER], target.name])
+			GAME_CONSTANTS.print_to_console("%s now has a %0.2f point Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER], target.name])
 	
 	GAME_CONSTANTS.print_to_console("New Values for %s towards %s: %s" % [name, target.name, character_perceptions[target][PERCEPTION_VALUES]])
-	GAME_CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f" % [name, target.name, calculate_approval_rating(target, true), maximum_possible_approval_rating()])
+	GAME_CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f%s" % [name, target.name, calculate_approval_rating(target, true), maximum_possible_approval_rating() + character_perceptions[target][APPROVAL_MODIFIER], (" (%0.2f base + %0.2f bonus)" % [maximum_possible_approval_rating(), character_perceptions[target][APPROVAL_MODIFIER]] if not character_perceptions[target][APPROVAL_MODIFIER] == 0 else "")])
 
 func calculate_approval_rating(target:Character, print_update = false):
 	var approval_rating = 0

@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
-[ext_resource path="res://assets/hover_style.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/pressed_style.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/fonts/default_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://data/assets/hover_style.tres" type="StyleBox" id=1]
+[ext_resource path="res://data/assets/pressed_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://data/assets/fonts/default_font.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

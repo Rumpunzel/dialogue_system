@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
+[ext_resource path="res://data/assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://main/main.gd" type="Script" id=2]
-[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=3]
-[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
+[ext_resource path="res://data/assets/images/parchment_background.jpg" type="Texture" id=3]
+[ext_resource path="res://data/assets/images/waterfall.png" type="Texture" id=4]
 [ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=6]
 [ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=7]
@@ -38,12 +38,9 @@ default_listener_nodes = [ NodePath("../Klaus") ]
 dialogue_options_file_path = "res://data/dialogues/dialogue_options.json"
 
 [node name="perception_graph" parent="." instance=ExtResource( 6 )]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 75.0
-margin_top = -275.0
-margin_right = 275.0
-margin_bottom = -75.0
+margin_left = 900.0
+margin_right = 1050.0
+margin_bottom = 200.0
 subject_node = NodePath("../Klaus")
 object_node = NodePath("../Player")
 

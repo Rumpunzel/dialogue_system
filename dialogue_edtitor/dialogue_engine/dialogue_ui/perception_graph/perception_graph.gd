@@ -43,8 +43,8 @@ func _draw():
 	
 	#draw_empty_circle(center, radius / 2, Color.black, 10)
 	
-	for i in perception_values.size():
-		draw_line(center, center + Vector2(0, -radius).rotated((i / float(perception_values.size()) * TAU)), Color.black)
+	for i in perception_names.size():
+		draw_line(center, center + Vector2(0, -radius).rotated((i / float(perception_names.size()) * TAU)), Color.black)
 	
 	var graph_points = get_graph(perception_values)
 	
@@ -56,11 +56,11 @@ func _draw():
 			per_color.a = 0.7
 			draw_colored_polygon(polygon_points, per_color)
 	
-	for i in perception_values.size():
-		draw_line(center + Vector2(0, -radius / 2).rotated((i / float(perception_values.size()) * TAU)), center + Vector2(0, -radius / 2).rotated(((i + 1) / float(perception_values.size()) * TAU)), Color.black)
+	for i in perception_names.size():
+		draw_line(center + Vector2(0, -radius / 2).rotated((i / float(perception_names.size()) * TAU)), center + Vector2(0, -radius / 2).rotated(((i + 1) / float(perception_names.size()) * TAU)), Color.black)
 	
-	for i in perception_values.size():
-		draw_line(center + Vector2(0, -radius).rotated((i / float(perception_values.size()) * TAU)), center + Vector2(0, -radius).rotated(((i + 1) / float(perception_values.size()) * TAU)), Color.black)
+	for i in perception_names.size():
+		draw_line(center + Vector2(0, -radius).rotated((i / float(perception_names.size()) * TAU)), center + Vector2(0, -radius).rotated(((i + 1) / float(perception_names.size()) * TAU)), Color.black)
 	
 	draw_empty_circle(center, radius, Color.black, 10)
 
@@ -86,7 +86,7 @@ func update_perception_values():
 			var label_middle = Vector2(perception_label.get_rect().size.x * (0.5 - 0.5 * sin(new_rotation)), perception_label.get_rect().size.y * 0.5)
 			
 			perception_label.rect_pivot_offset = label_middle
-			perception_label.rect_position = center + Vector2(0, -radius * 1.3).rotated(new_rotation) - label_middle
+			perception_label.rect_position = center + Vector2(0, -radius - 20).rotated(new_rotation) - label_middle
 		else:
 			perception_names[i].queue_free()
 	
