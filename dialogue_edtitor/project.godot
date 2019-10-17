@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "LineEdit",
+"class": "BetterLineEdit",
+"language": "GDScript",
+"path": "res://dialogue_editor/properties/better_line_edit.gd"
+}, {
+"base": "ProgressBar",
+"class": "BetterProgressBar",
+"language": "GDScript",
+"path": "res://dialogue_editor/properties/better_progress_bar.gd"
+}, {
 "base": "Node",
 "class": "Character",
 "language": "GDScript",
@@ -27,7 +37,7 @@ _global_script_classes=[ {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
-"path": "res://dialogue_engine/dialogue_ui/TypingLabel.gd"
+"path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
 }, {
 "base": "Label",
 "class": "dialogue_option",
@@ -39,18 +49,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/characters/memories.gd"
 }, {
+"base": "MenuButton",
+"class": "menu_option",
+"language": "GDScript",
+"path": "res://dialogue_editor/properties/options_button.gd"
+}, {
 "base": "Control",
 "class": "perception_graph",
 "language": "GDScript",
 "path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
 } ]
 _global_script_class_icons={
+"BetterLineEdit": "",
+"BetterProgressBar": "",
 "Character": "",
 "NPC": "",
 "Player": "",
 "TypingLabel": "",
 "dialogue_option": "",
 "memories": "",
+"menu_option": "",
 "perception_graph": ""
 }
 

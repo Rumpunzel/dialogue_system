@@ -9,9 +9,9 @@ var _MAX_PERCEPTION_VALUE = 10
 #warning-ignore:unused_class_variable
 var _MAX_APPROVAL_VALUE = 100
 #warning-ignore:unused_class_variable
-var _PERCEPTION_VALUE_SLOPE = 0.4
+var _PERCEPTION_VALUE_SLOPE = 0.25
 #warning-ignore:unused_class_variable
-var _PECERPTION_VALUE_GROWTH_POINT = 5.0
+var _PECERPTION_VALUE_GROWTH_POINT = 10.0
 
 # Print updates to console?
 var verbose_mode = true

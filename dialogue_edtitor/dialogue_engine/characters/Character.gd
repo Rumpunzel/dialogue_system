@@ -35,7 +35,7 @@ func calculate_perception_value(perception_values:Dictionary):
 	
 	for key in perception_values.keys():
 		# Philipp dark magic fuckery
-		values[key] = (0.5 * (tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] + GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT)) + tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] - GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT))))
+		values[key] = min(GAME_CONSTANTS._MAX_PERCEPTION_VALUE, tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] + GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT)) + tanh(GAME_CONSTANTS._PERCEPTION_VALUE_SLOPE * (perception_values[key] - GAME_CONSTANTS._PECERPTION_VALUE_GROWTH_POINT)))
 	
 	return values
 

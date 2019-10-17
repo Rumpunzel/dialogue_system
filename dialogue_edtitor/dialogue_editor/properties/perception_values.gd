@@ -27,10 +27,10 @@ func _ready():
 func update_perceptions_graph(value_name:String, new_value):
 	slider_values[value_name] = new_value
 	
-	emit_signal("update_perceptions_graph", slider_values, true)
+	emit_signal("update_perceptions_graph", NPC_Singleton.calculate_perception_value(slider_values), true)
 	
 	if not maximum_approval_display == null:
-		get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)#"%0.2f / %d" % [NPC_Singleton.maximum_possible_approval_rating(slider_values), GAME_CONSTANTS._MAX_APPROVAL_VALUE]
+		get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)
 
 func update_perception_entries(new_perception_values:Array):
 	for i in max(perception_entries.size(), new_perception_values.size()):
@@ -52,9 +52,11 @@ func update_perception_entries(new_perception_values:Array):
 			perception_entries[i][VALUE_NAME].name = "%s_%s" % [perception, "label"]
 			perception_entries[i][SLIDER].value_name = perception
 			perception_entries[i][SLIDER].name = "%s_%s" % [perception, "slider"]
+			
+			if slider_values.has(perception):
+				perception_entries[i][SLIDER].update_value(slider_values[perception])
 		else:
 			for stuff in perception_entries[i]:
-				print(stuff.name)
 				stuff.queue_free()
 	
 	perception_entries.resize(new_perception_values.size())

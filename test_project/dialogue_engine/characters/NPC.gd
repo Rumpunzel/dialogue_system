@@ -42,7 +42,7 @@ func modify_perception(target:Character, option_success, value_changes, approval
 		if not character_perceptions[target][APPROVAL_MODIFIER] == 0:
 			GAME_CONSTANTS.print_to_console("%s now has a %0.2f%% Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER], target.name])
 	
-	GAME_CONSTANTS.print_to_console("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target][PERCEPTION_VALUES], calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])])
+	GAME_CONSTANTS.print_to_console("New Values for %s towards %s: %s, %s" % [name, target.name, character_perceptions[target][PERCEPTION_VALUES], character_perceptions[target][PERCEPTION_VALUES]])
 	GAME_CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f" % [name, target.name, calculate_approval_rating(target, true), maximum_possible_approval_rating()])
 
 func calculate_approval_rating(target:Character, print_update = false):
@@ -50,7 +50,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 	var update_string = "Approval Changes: "
 	
 	if not character_perceptions.get(target, null) == null:
-		var perception_values = calculate_perception_value(character_perceptions[target][PERCEPTION_VALUES])
+		var perception_values = character_perceptions[target][PERCEPTION_VALUES]
 		
 		for value in personal_values.keys():
 			var approval_change = perception_values[value] * personal_values[value]
@@ -69,7 +69,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 func maximum_possible_approval_rating(values:Dictionary = personal_values):
 	var poss_max =  0
 	
-	for value in values.values():
+	for value in calculate_perception_value(values).values():
 		poss_max += abs(value)
 	
-	return poss_max * ((float(GAME_CONSTANTS._MAX_APPROVAL_VALUE) / float(GAME_CONSTANTS._MAX_PERCEPTION_VALUE)) / float(GAME_CONSTANTS._PERCEPTION_VALUES.size()))
+	return stepify((poss_max * (float(GAME_CONSTANTS._MAX_APPROVAL_VALUE) / float(GAME_CONSTANTS._MAX_PERCEPTION_VALUE))) / float(GAME_CONSTANTS._PERCEPTION_VALUES.size()), 0.01)

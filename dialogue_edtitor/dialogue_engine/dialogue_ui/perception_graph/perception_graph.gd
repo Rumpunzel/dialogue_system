@@ -31,7 +31,7 @@ func _process(_delta):
 	if not subject == null:
 		perception_values = subject.personal_values
 		if not object == null:
-			var new_perceptions = subject.calculate_perception_value(subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { }))
+			var new_perceptions = subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { })
 			update_perceptions_graph(new_perceptions)
 	
 	update()
@@ -40,8 +40,10 @@ func _draw():
 	if not object == null:
 		draw_colored_polygon(get_approval_rating_graph(), Color.maroon)
 	
-	if GAME_CONSTANTS._PERCEPTION_VALUES.size() >= 3:
-		draw_colored_polygon(get_graph(perception_values), Color.cornflower)
+	var graph_points = get_graph(perception_values)
+	
+	if math_helper.get_unique_values_in_array(graph_points, 0.1) >= 3:
+		draw_colored_polygon(graph_points, Color.cornflower)
 		
 		if not object == null and not polygon_points.empty():
 			var per_color = Color.wheat
@@ -61,6 +63,7 @@ func update_perception_values(new_perception_values:Array):
 				perception_label = perception_names[i]
 			else:
 				perception_label = Label.new()
+				perception_label.align = Label.ALIGN_CENTER
 				perception_names.append(perception_label)
 				add_child(perception_label)
 			
@@ -70,7 +73,7 @@ func update_perception_values(new_perception_values:Array):
 			perception_label.rect_pivot_offset = label_middle
 			
 			var new_rotation =  modified_rotation(i)
-			perception_label.rect_position = center + Vector2(0, -radius * 1.2).rotated(new_rotation) - label_middle
+			perception_label.rect_position = center + Vector2(0, -radius * 1.3).rotated(new_rotation) - label_middle
 			perception_label.rect_rotation = int(rad2deg(new_rotation))
 			
 			var rot = abs(int(perception_label.rect_rotation) % 360)
@@ -94,7 +97,7 @@ func get_graph(new_perceptions:Dictionary):
 	for i in GAME_CONSTANTS._PERCEPTION_VALUES.size():
 		var perception = GAME_CONSTANTS._PERCEPTION_VALUES[i]
 		var new_rotation = modified_rotation(i)
-		var new_point = center + Vector2(0, -radius / 2 * (1 + new_perceptions.get(perception, 0) / 10.0)).rotated(new_rotation)
+		var new_point = center + Vector2(0, -radius / 2 * (1 + new_perceptions.get(perception, 0))).rotated(new_rotation)
 		
 		points[(int(get_modified_index(i)) + points.size()) % points.size()] = new_point
 	
@@ -103,7 +106,7 @@ func get_graph(new_perceptions:Dictionary):
 func get_approval_rating_graph():
 	var approval_rating = subject.calculate_approval_rating(object)
 	
-	return [Vector2(0, get_rect().size.y / 2) * (1 - approval_rating / GAME_CONSTANTS._MAX_PERCEPTION_VALUE), Vector2(get_rect().size.x, (get_rect().size.y / 2)  * (1 - approval_rating / GAME_CONSTANTS._MAX_PERCEPTION_VALUE)), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
+	return [Vector2(0, get_rect().size.y / 2) * (1 - approval_rating), Vector2(get_rect().size.x, (get_rect().size.y / 2)  * (1 - approval_rating)), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
 
 func modified_rotation(index):
 	var value_size = GAME_CONSTANTS._PERCEPTION_VALUES.size()

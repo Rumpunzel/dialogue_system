@@ -17,6 +17,7 @@ func _process(_delta):
 
 func update_value(new_value, node_name = null):
 	set_property_value(new_value, node_name)
+	
 	emit_signal("value_changed", value_name, new_value)
 
 

@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_engine/dialogue_ui/TypingLabel.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_engine/dialogue_ui/typing_label.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_option/option_button.gd" type="Script" id=3]
+
 
 [node name="dummy_label" type="Label"]
 self_modulate = Color( 1, 1, 1, 0 )
