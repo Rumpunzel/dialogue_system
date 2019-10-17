@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
-"path": "res://dialogue_engine/dialogue_ui/TypingLabel.gd"
+"path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
 }, {
 "base": "Label",
 "class": "dialogue_option",

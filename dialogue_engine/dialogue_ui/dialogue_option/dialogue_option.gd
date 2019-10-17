@@ -155,7 +155,7 @@ func check_success():
 
 func check_perception_for_listeners(value):
 	for listener in listeners:
-		var values = listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC._PERCEPTION_VALUES]
+		var values = listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC.PERCEPTION_VALUES]
 		
 		if not listener.personal_values[value] == 0 and values[value] / listener.personal_values[value] < 1:
 			return false

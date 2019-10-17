@@ -4,8 +4,8 @@ class_name perception_graph
 export(NodePath) var subject_node = null
 export(NodePath) var object_node = null
 
-onready var subject = get_node(subject_node) if not subject_node == null else null
-onready var object = get_node(object_node) if not object_node == null else null
+onready var subject:NPC = get_node(subject_node) if not subject_node == null else null
+onready var object:Character = get_node(object_node) if not object_node == null else null
 
 onready var center = get_rect().size / 2
 onready var radius = min(get_rect().size.y / 2, get_rect().size.x / 2)
@@ -29,9 +29,9 @@ func _process(_delta):
 	update_perception_values(GAME_CONSTANTS._PERCEPTION_VALUES)
 	
 	if not subject == null:
-		perception_values = subject.personal_values
+		perception_values = subject.calculate_perception_value(subject.personal_values)
 		if not object == null:
-			var new_perceptions = subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { })
+			var new_perceptions = subject.calculate_perception_value(subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { }))
 			update_perceptions_graph(new_perceptions)
 	
 	update()
@@ -39,6 +39,11 @@ func _process(_delta):
 func _draw():
 	if not object == null:
 		draw_colored_polygon(get_approval_rating_graph(), Color.maroon)
+	
+	draw_empty_circle(center, radius / 2, Color.black, 10)
+	
+	for i in perception_values.size():
+		draw_line(center, center + Vector2(0, -radius).rotated((i / float(perception_values.size()) * TAU)), Color.black)
 	
 	var graph_points = get_graph(perception_values)
 	
@@ -50,8 +55,15 @@ func _draw():
 			per_color.a = 0.7
 			draw_colored_polygon(polygon_points, per_color)
 	
+	for i in perception_values.size():
+		draw_line(center + Vector2(0, -radius / 2).rotated((i / float(perception_values.size()) * TAU)), center + Vector2(0, -radius / 2).rotated(((i + 1) / float(perception_values.size()) * TAU)), Color.black)
+	
+	for i in perception_values.size():
+		draw_line(center + Vector2(0, -radius).rotated((i / float(perception_values.size()) * TAU)), center + Vector2(0, -radius).rotated(((i + 1) / float(perception_values.size()) * TAU)), Color.black)
+	
+	
+	
 	draw_empty_circle(center, radius, Color.black, 10)
-	draw_empty_circle(center, radius / 2, Color.black, 10)
 
 
 func update_perception_values(new_perception_values:Array):
@@ -106,7 +118,7 @@ func get_graph(new_perceptions:Dictionary):
 func get_approval_rating_graph():
 	var approval_rating = subject.calculate_approval_rating(object)
 	
-	return [Vector2(0, get_rect().size.y / 2) * (1 - approval_rating), Vector2(get_rect().size.x, (get_rect().size.y / 2)  * (1 - approval_rating)), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
+	return [Vector2(0, get_rect().size.y / 2) * (1 - (approval_rating / GAME_CONSTANTS._MAX_APPROVAL_VALUE)), Vector2(get_rect().size.x, (get_rect().size.y / 2)  * (1 - (approval_rating / GAME_CONSTANTS._MAX_APPROVAL_VALUE))), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
 
 func modified_rotation(index):
 	var value_size = GAME_CONSTANTS._PERCEPTION_VALUES.size()

@@ -24,4 +24,4 @@ func _ready():
 
 
 func update_percentage(new_value):
-	percentage_label.text = ("%0." + str(decimal_points) + "f%%") % [new_value * max_value]
+	percentage_label.text = ("%0." + str(decimal_points) + "f%%") % [new_value]

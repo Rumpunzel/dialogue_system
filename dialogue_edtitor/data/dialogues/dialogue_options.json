@@ -52,14 +52,14 @@
       ]
     ],
     "big_deal": true,
-    "required_approval_rating": 2.9,
+    "required_approval_rating": 20,
     "values_enable_success": [
       "selflessness"
     ],
     "loop_failures_from": 2,
     "politeness_change": -3,
     "sincerity_change": 5,
-    "approval_rating_change_on_success": 1
+    "approval_rating_change_on_success": 10
   },
   "weather_option": {
     "option_text": {

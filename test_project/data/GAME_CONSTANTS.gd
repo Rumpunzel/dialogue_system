@@ -1,17 +1,17 @@
 extends Node
 
 # Values
-var _PERCEPTION_VALUES = [ "politeness", "reliability", "selflessness", "sincerity" ] setget set_PERCEPTION_VALUES, get_PERCEPTION_VALUES
+var _PERCEPTION_VALUES:Array = [ "politeness", "reliability", "selflessness", "sincerity" ] setget set_PERCEPTION_VALUES, get_PERCEPTION_VALUES
 
 # Value calculation constants. See 'calculate_perception_value' function in Character.gd
 #warning-ignore:unused_class_variable
-var _MAX_PERCEPTION_VALUE = 10
+var _MAX_PERCEPTION_VALUE:int = 10
 #warning-ignore:unused_class_variable
-var _MAX_APPROVAL_VALUE = 100
+var _MAX_APPROVAL_VALUE:int = 100
 #warning-ignore:unused_class_variable
-var _PERCEPTION_VALUE_SLOPE = 0.25
+var _PERCEPTION_VALUE_SLOPE:float = 0.15
 #warning-ignore:unused_class_variable
-var _PECERPTION_VALUE_GROWTH_POINT = 10.0
+var _PECERPTION_VALUE_GROWTH_POINT:float = 10
 
 # Print updates to console?
 var verbose_mode = true
