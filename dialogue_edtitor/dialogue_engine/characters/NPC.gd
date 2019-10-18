@@ -45,7 +45,7 @@ func calculate_approval_rating(target:Character, print_update = false):
 		var calculated_personal_values = calculate_perception_value(personal_values)
 		
 		for value in perception_values.keys():
-			var approval_change = (perception_values[value] * calculated_personal_values[value]) * (1.0 / GC.CONSTANTS[GC.PERCEPTION_VALUES].size()) * GC.CONSTANTS[GC.MAX_PERCEPTION_VALUE]
+			var approval_change = ((perception_values[value] / GC.CONSTANTS[GC.MAX_PERCEPTION_VALUE]) * calculated_personal_values[value]) * (1.0 / GC.CONSTANTS[GC.PERCEPTION_VALUES].size()) * GC.CONSTANTS[GC.MAX_APPROVAL_VALUE]
 			
 			if not approval_change == 0:
 				update_string += "%s%0.2f from %s, " % ["+" if approval_change >= 0 else "", approval_change, value.capitalize()]

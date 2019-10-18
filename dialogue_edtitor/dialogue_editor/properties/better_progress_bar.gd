@@ -25,7 +25,12 @@ func _ready():
 		connect("value_changed", self, "update_percentage")
 	
 	update_percentage(value)
+	
+	GC.connect("values_changed", self, "update_max_value")
 
 
 func update_percentage(new_value):
 	percentage_label.text = ("%0." + str(decimal_points) + "f%s") % [new_value, "%" if percentage else ""]
+
+func update_max_value():
+	max_value = GC.CONSTANTS[GC.MAX_APPROVAL_VALUE]

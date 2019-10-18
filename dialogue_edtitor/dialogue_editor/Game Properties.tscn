@@ -1,11 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/perception_values_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/properties/max_approval_label.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/properties/maximum_approval_rating.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_editor/properties/value_slider.tscn" type="PackedScene" id=4]
-[ext_resource path="res://dialogue_editor/properties/slope_value_slider.gd" type="Script" id=5]
-[ext_resource path="res://dialogue_editor/properties/growth_point_value_slider.gd" type="Script" id=6]
 
 [node name="Game Properties" type="MarginContainer"]
 anchor_right = 1.0
@@ -30,7 +27,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="name_container" type="PanelContainer" parent="value_tabs/Perception Values"]
-margin_right = 586.0
+margin_right = 1184.0
 margin_bottom = 719.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -38,58 +35,58 @@ size_flags_vertical = 3
 [node name="value_names" type="VBoxContainer" parent="value_tabs/Perception Values/name_container"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 579.0
+margin_right = 1177.0
 margin_bottom = 712.0
 custom_constants/separation = 10
 
 [node name="title" type="Label" parent="value_tabs/Perception Values/name_container/value_names"]
-margin_right = 572.0
+margin_right = 1170.0
 margin_bottom = 14.0
 text = "Value Names"
 
 [node name="title_separator" type="HSeparator" parent="value_tabs/Perception Values/name_container/value_names"]
 margin_top = 24.0
-margin_right = 572.0
+margin_right = 1170.0
 margin_bottom = 28.0
 
 [node name="description" type="Label" parent="value_tabs/Perception Values/name_container/value_names"]
 margin_top = 38.0
-margin_right = 572.0
-margin_bottom = 69.0
+margin_right = 1170.0
+margin_bottom = 52.0
 text = "Edit the values the Characters in the game use to determine how well they like each other (most importanly how they feel about the player)."
 autowrap = true
 
 [node name="scroll_container" type="ScrollContainer" parent="value_tabs/Perception Values/name_container/value_names"]
-margin_top = 79.0
-margin_right = 572.0
+margin_top = 62.0
+margin_right = 1170.0
 margin_bottom = 657.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="perception_values_editor" type="VBoxContainer" parent="value_tabs/Perception Values/name_container/value_names/scroll_container"]
-margin_right = 572.0
-margin_bottom = 578.0
+margin_right = 1170.0
+margin_bottom = 595.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 
 [node name="panel_container" type="PanelContainer" parent="value_tabs/Perception Values/name_container/value_names"]
 margin_top = 667.0
-margin_right = 572.0
+margin_right = 1170.0
 margin_bottom = 705.0
 size_flags_horizontal = 3
 
 [node name="max_value_splitter" type="HSplitContainer" parent="value_tabs/Perception Values/name_container/value_names/panel_container"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 565.0
+margin_right = 1163.0
 margin_bottom = 31.0
 size_flags_vertical = 3
 collapsed = true
 dragger_visibility = 1
 
 [node name="max_approval_label" type="Label" parent="value_tabs/Perception Values/name_container/value_names/panel_container/max_value_splitter"]
-margin_right = 487.0
+margin_right = 1085.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -98,8 +95,8 @@ autowrap = true
 script = ExtResource( 2 )
 
 [node name="maximum_approval_rating" type="LineEdit" parent="value_tabs/Perception Values/name_container/value_names/panel_container/max_value_splitter"]
-margin_left = 499.0
-margin_right = 558.0
+margin_left = 1097.0
+margin_right = 1156.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 59, 0 )
 size_flags_horizontal = 8
@@ -109,64 +106,3 @@ caret_blink = true
 script = ExtResource( 3 )
 expand = true
 clear_button = false
-
-[node name="math_container" type="PanelContainer" parent="value_tabs/Perception Values"]
-margin_left = 598.0
-margin_right = 1184.0
-margin_bottom = 719.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="math_constants" type="VBoxContainer" parent="value_tabs/Perception Values/math_container"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 579.0
-margin_bottom = 712.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 10
-
-[node name="title" type="Label" parent="value_tabs/Perception Values/math_container/math_constants"]
-margin_right = 572.0
-margin_bottom = 14.0
-text = "Calculation Values"
-
-[node name="title_separator" type="HSeparator" parent="value_tabs/Perception Values/math_container/math_constants"]
-margin_top = 24.0
-margin_right = 572.0
-margin_bottom = 28.0
-
-[node name="slider_container" type="VBoxContainer" parent="value_tabs/Perception Values/math_container/math_constants"]
-margin_top = 38.0
-margin_right = 572.0
-margin_bottom = 126.0
-
-[node name="slope_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slider_container"]
-margin_right = 572.0
-margin_bottom = 14.0
-text = "Perception Value Slope"
-autowrap = true
-
-[node name="slope_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slider_container" instance=ExtResource( 4 )]
-margin_top = 18.0
-margin_right = 572.0
-margin_bottom = 42.0
-script = ExtResource( 5 )
-min_value = 0.0
-max_value = 0.5
-step = 0.01
-
-[node name="growth_point_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slider_container"]
-margin_top = 46.0
-margin_right = 572.0
-margin_bottom = 60.0
-text = "Perception Value Growth Point"
-autowrap = true
-
-[node name="growth_point_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slider_container" instance=ExtResource( 4 )]
-margin_top = 64.0
-margin_right = 572.0
-margin_bottom = 88.0
-script = ExtResource( 6 )
-min_value = 0.0
-step = 0.1

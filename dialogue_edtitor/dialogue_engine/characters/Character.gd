@@ -36,7 +36,7 @@ func calculate_perception_value(perception_values:Dictionary):
 	
 	for key in perception_values.keys():
 		var slope = GC.CONSTANTS[GC.PERCEPTION_VALUE_SLOPE]
-		var growth_point = GC.CONSTANTS[GC.PECERPTION_VALUE_GROWTH_POINT]
+		var growth_point = GC.CONSTANTS[GC.PERCERPTION_VALUE_GROWTH_POINT]
 		# Philipp dark magic fuckery
 		values[key] = tanh(slope * (perception_values[key] + growth_point)) + tanh(slope * (perception_values[key] - growth_point))
 	

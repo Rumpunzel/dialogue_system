@@ -9,4 +9,4 @@ func _ready():
 
 
 func update_max_approval_value(new_value):
-	GC.CONSTANTS[GC.MAX_APPROVAL_VALUE] = new_value
+	GC.CONSTANTS[GC.MAX_APPROVAL_VALUE] = int(new_value)
