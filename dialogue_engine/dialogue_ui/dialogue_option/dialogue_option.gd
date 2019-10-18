@@ -11,15 +11,6 @@ const CUSTOM_JSON = { }
 export(String) var speaker
 export(Array, String) var listeners
 
-#warning-ignore:unused_class_variable
-export(int, -10, 10) var politeness_change = 0
-#warning-ignore:unused_class_variable
-export(int, -10, 10) var reliability_change = 0
-#warning-ignore:unused_class_variable
-export(int, -10, 10) var selflessness_change = 0
-#warning-ignore:unused_class_variable
-export(int, -10, 10) var sincerity_change = 0
-
 export var big_deal:bool = false
 
 export(float, 0, 1) var required_approval_rating = 0
@@ -50,7 +41,7 @@ export var is_back_option = false
 export(Color) var big_deal_color = Color("FFD700")
 export(float, 0, 1) var clicked_alpha = 0.5
 
-onready var value_changes:Dictionary = compose_value_changes()
+onready var value_changes:Dictionary
 
 #warning-ignore:unused_class_variable
 var id
@@ -122,7 +113,7 @@ func parse_option(option_info, only_parse = false):
 func check_option():
 	var new_click_status = check_success()
 	
-	GAME_CONSTANTS.print_to_console("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
+	CONSTANTS.print_to_console("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
 	
 	if new_click_status >= PASSED:
 		success_counter += 1
@@ -143,8 +134,6 @@ func check_success():
 			else:
 				new_status = CLICKED
 	
-	value_changes = compose_value_changes()
-	
 	for value in values_enable_success:
 		if check_perception_for_listeners(value):
 			return PASSED
@@ -157,7 +146,7 @@ func check_perception_for_listeners(value):
 	for listener in listeners:
 		var values = listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC.PERCEPTION_VALUES]
 		
-		if not listener.personal_values[value] == 0 and values[value] / listener.personal_values[value] < 1:
+		if not listener.personal_values.get(value, 0) == 0 and values[value] / listener.personal_values[value] < 1:
 			return false
 	
 	return true
@@ -172,11 +161,11 @@ func confirm_option(option_success):
 				if not change == 0:
 					value_update += key + ": " + ("+" if change >= 0 else "") + str(change) + ", "
 			
-			GAME_CONSTANTS.print_to_console(value_update.substr(0, value_update.length() - 2))
+			CONSTANTS.print_to_console(value_update.substr(0, value_update.length() - 2))
 		else:
-			GAME_CONSTANTS.print_to_console("No Perception Updates, this Dialogue Option has already been used before!")
+			CONSTANTS.print_to_console("No Perception Updates, this Dialogue Option has already been used before!")
 	else:
-		GAME_CONSTANTS.print_to_console("No Updates, this Dialogue Option has already been passed before!")
+		CONSTANTS.print_to_console("No Updates, this Dialogue Option has already been passed before!")
 	
 	for listener in listeners:
 		listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
@@ -188,9 +177,6 @@ func confirm_option(option_success):
 	var failure_message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
 	
 	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
-
-func compose_value_changes():
-	return { GAME_CONSTANTS._PERCEPTION_VALUES[0]: politeness_change, GAME_CONSTANTS._PERCEPTION_VALUES[1]: reliability_change, GAME_CONSTANTS._PERCEPTION_VALUES[2]: selflessness_change, GAME_CONSTANTS._PERCEPTION_VALUES[3]: sincerity_change }
 
 func update_appearance(theme_color = null):
 	var new_color = null
@@ -214,6 +200,7 @@ func update_list_number(new_number):
 	text = "%s %s" % [dialogue_counter, text]
 	
 	option_number.text = dialogue_counter
+
 
 func set_shortcut(new_shortcut:ShortCut):
 	option_button.shortcut = new_shortcut

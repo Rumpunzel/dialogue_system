@@ -1,3 +1,4 @@
+tool
 extends HBoxContainer
 class_name value_slider
 
@@ -11,13 +12,13 @@ signal value_changed
 
 
 func _ready():
-	GAME_CONSTANTS.connect("values_changed", self, "setup_children")
-	
 	if get_property_value() == 0:
 		set_property_value(1, null)
 		update_value(0)
 	
 	setup_children()
+	
+	GC.connect("values_changed", self, "setup_children")
 
 
 func update_value(new_value, node_name = null):

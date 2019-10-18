@@ -6,7 +6,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GAME_CONSTANTS.connect("values_changed", self, "update_approvals")
+	GC.connect("values_changed", self, "update_approvals")
 	
 	update_approvals()
 
@@ -16,4 +16,4 @@ func _ready():
 
 
 func update_approvals():
-	text = "Each Value can generate up to %0.2f Approval Rating to a total of:" % [(1 / float(GAME_CONSTANTS._PERCEPTION_VALUES.size())) * GAME_CONSTANTS._MAX_APPROVAL_VALUE]
+	text = "Each Value can generate up to %0.2f Approval Rating to a total of:" % [(1 / float(GC.CONSTANTS[GC.PERCEPTION_VALUES].size())) * GC.CONSTANTS[GC.MAX_APPROVAL_VALUE]]

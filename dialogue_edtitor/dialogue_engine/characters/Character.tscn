@@ -3,7 +3,6 @@
 [ext_resource path="res://dialogue_engine/characters/Character.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_engine/characters/memories.gd" type="Script" id=2]
 
-
 [node name="Character" type="Node"]
 script = ExtResource( 1 )
 

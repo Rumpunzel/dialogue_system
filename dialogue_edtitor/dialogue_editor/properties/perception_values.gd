@@ -19,7 +19,7 @@ func _ready():
 	if not perception_graph == null:
 		connect("update_perceptions_graph", get_node(perception_graph), "update_perceptions_graph")
 	
-	GAME_CONSTANTS.connect("values_changed", self, "update_perception_entries")
+	GC.connect("values_changed", self, "update_perception_entries")
 	
 	update_perception_entries()
 
@@ -34,7 +34,7 @@ func update_perceptions_graph(value_name:String, new_value):
 			get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)
 
 func update_perception_entries():
-	var new_perception_values = GAME_CONSTANTS._PERCEPTION_VALUES
+	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
 	
 	for i in max(perception_entries.size(), new_perception_values.size()):
 		if i < new_perception_values.size():

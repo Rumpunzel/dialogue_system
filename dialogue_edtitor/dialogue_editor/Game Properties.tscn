@@ -104,10 +104,10 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 59, 0 )
 size_flags_horizontal = 8
 align = 2
-clear_button_enabled = true
 placeholder_text = "100"
 caret_blink = true
 script = ExtResource( 3 )
+expand = true
 clear_button = false
 
 [node name="math_container" type="PanelContainer" parent="value_tabs/Perception Values"]
@@ -136,19 +136,18 @@ margin_top = 24.0
 margin_right = 572.0
 margin_bottom = 28.0
 
-[node name="slope_container" type="VBoxContainer" parent="value_tabs/Perception Values/math_container/math_constants"]
-editor/display_folded = true
+[node name="slider_container" type="VBoxContainer" parent="value_tabs/Perception Values/math_container/math_constants"]
 margin_top = 38.0
 margin_right = 572.0
 margin_bottom = 126.0
 
-[node name="slope_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slope_container"]
+[node name="slope_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slider_container"]
 margin_right = 572.0
 margin_bottom = 14.0
 text = "Perception Value Slope"
 autowrap = true
 
-[node name="slope_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slope_container" instance=ExtResource( 4 )]
+[node name="slope_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slider_container" instance=ExtResource( 4 )]
 margin_top = 18.0
 margin_right = 572.0
 margin_bottom = 42.0
@@ -157,14 +156,14 @@ min_value = 0.0
 max_value = 0.5
 step = 0.01
 
-[node name="growth_point_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slope_container"]
+[node name="growth_point_label" type="Label" parent="value_tabs/Perception Values/math_container/math_constants/slider_container"]
 margin_top = 46.0
 margin_right = 572.0
 margin_bottom = 60.0
 text = "Perception Value Growth Point"
 autowrap = true
 
-[node name="growth_point_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slope_container" instance=ExtResource( 4 )]
+[node name="growth_point_value_slider" parent="value_tabs/Perception Values/math_container/math_constants/slider_container" instance=ExtResource( 4 )]
 margin_top = 64.0
 margin_right = 572.0
 margin_bottom = 88.0

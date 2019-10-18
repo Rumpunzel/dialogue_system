@@ -1,10 +1,1 @@
-{
-    "Klaus": {
-      "preferred_values": {
-        "politeness": 2,
-        "reliability": 4,
-        "selflessness": -5,
-        "sincerity": 6
-      }
-    }
-  }
+{"Klaus":{"character_perceptions":{},"personal_values":{"politeness":2,"reliability":4,"selflessness":-5,"sincerity":6}}}

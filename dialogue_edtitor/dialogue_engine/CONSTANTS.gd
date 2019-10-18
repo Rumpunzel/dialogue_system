@@ -15,3 +15,17 @@ const BACK_OPTION = "_back_option"
 const CONTINUE_OPTION = "_continue_option"
 const EXIT_OPTION = "_exit_option"
 const CUSTOM_OPTION = "custom_option"
+
+# Print updates to console?
+var verbose_mode = true
+var log_history:Dictionary = { }
+
+
+func print_to_console(print_string):
+	print_string = str(print_string)
+	
+	var current_time = OS.get_system_time_msecs()
+	log_history[current_time] = print_string
+	
+	if verbose_mode:
+		print(print_string)

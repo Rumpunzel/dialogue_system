@@ -17,7 +17,7 @@ var polygon_points:Array = []
 
 
 func _ready():
-	GAME_CONSTANTS.connect("values_changed", self, "update_perception_values")
+	GC.connect("values_changed", self, "update_perception_values")
 	
 	update_perception_values()
 
@@ -66,7 +66,7 @@ func _draw():
 
 
 func update_perception_values():
-	var new_perception_values = GAME_CONSTANTS._PERCEPTION_VALUES
+	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
 	
 	for i in max(perception_names.size(), new_perception_values.size()):
 		if i < new_perception_values.size():
@@ -100,11 +100,12 @@ func update_perceptions_graph(new_perceptions:Dictionary, manually_called = fals
 
 func get_graph(new_perceptions:Dictionary):
 	var points = []
-	points.resize(GAME_CONSTANTS._PERCEPTION_VALUES.size())
+	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	points.resize(perception_values.size())
 	
 	if not radius == null and not center == null:
-		for i in GAME_CONSTANTS._PERCEPTION_VALUES.size():
-			var perception = GAME_CONSTANTS._PERCEPTION_VALUES[i]
+		for i in perception_values.size():
+			var perception = perception_values[i]
 			var new_rotation = modified_rotation(i)
 			var new_point = center + Vector2(0, -radius / 2 * (1 + new_perceptions.get(perception, 0))).rotated(new_rotation)
 			
@@ -114,11 +115,12 @@ func get_graph(new_perceptions:Dictionary):
 
 func get_approval_rating_graph():
 	var approval_rating = subject.calculate_approval_rating(object)
+	var approval_ratio = (get_rect().size.y / 2) *  (1 - approval_rating / GC.CONSTANTS[GC.MAX_APPROVAL_VALUE])
 	
-	return [Vector2(0, get_rect().size.y / 2) * (1 - (approval_rating / GAME_CONSTANTS._MAX_APPROVAL_VALUE)), Vector2(get_rect().size.x, (get_rect().size.y / 2)  * (1 - (approval_rating / GAME_CONSTANTS._MAX_APPROVAL_VALUE))), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
+	return [Vector2(0, approval_ratio), Vector2(get_rect().size.x, approval_ratio), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
 
 func modified_rotation(index):
-	var value_size = GAME_CONSTANTS._PERCEPTION_VALUES.size()
+	var value_size = GC.CONSTANTS[GC.PERCEPTION_VALUES].size()
 	var modified_index = get_modified_index(index)
 	
 	return (modified_index / float(value_size)) * TAU

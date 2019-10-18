@@ -47,8 +47,3 @@ object_node = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource( 7 )]
 
 [node name="Klaus" parent="." instance=ExtResource( 8 )]
-dialogue_file_path = "res://data/dialogues/NPC/test_conversation.json"
-politeness_preferred = 2
-reliability_preferred = 4
-selflessness_preferred = -5
-sincerity_preferred = 6
