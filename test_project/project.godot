@@ -64,6 +64,7 @@ config/icon="res://data/assets/images/icon.png"
 
 CONSTANTS="*res://dialogue_engine/CONSTANTS.gd"
 GC="*res://data/GAME_CONSTANTS.gd"
+NPC_Singleton="*res://dialogue_engine/characters/NPC.tscn"
 json_helper="*res://dialogue_engine/helpers/json_helper.gd"
 math_helper="*res://dialogue_engine/helpers/math_helper.gd"
 

@@ -27,7 +27,6 @@ func _ready():
 #	pass
 
 func initiate_dialogue(dialogue_node, specific_dilaogue = DIALOGUE_PATHS):
-	print(specific_dilaogue)
 	var loaded_json = json_helper.load_json(specific_dilaogue)
 	if not loaded_json == null:
 		dialogue_node.switch_dialogue(loaded_json)
@@ -39,16 +38,16 @@ func calculate_perception_value(perception_values:Dictionary):
 		var slope = GC.CONSTANTS[GC.PERCEPTION_VALUE_SLOPE]
 		var growth_point = GC.CONSTANTS[GC.PECERPTION_VALUE_GROWTH_POINT]
 		# Philipp dark magic fuckery
-		values[key] = min(GC.CONSTANTS[GC.MAX_PERCEPTION_VALUE], tanh(slope * (perception_values[key] + growth_point)) + tanh(slope * (perception_values[key] - growth_point)))
+		values[key] = tanh(slope * (perception_values[key] + growth_point)) + tanh(slope * (perception_values[key] - growth_point))
 	
 	return values
 
 func load_values():
 	var loaded_json = json_helper.load_json(json_paths[STATS_PATHS.MODIFIED])
-	print(loaded_json)
+	
 	loaded_json = loaded_json.get(id) if not loaded_json == null else null
 	character_json = loaded_json if not loaded_json == null else json_helper.load_json(json_paths[STATS_PATHS.DEFAULT])
-	print(character_json)
+	
 	for key in character_json.keys():
 		set(key, character_json[key])
 
@@ -59,7 +58,7 @@ func store_values():
 	var loaded_json = json_helper.load_json(json_paths[STATS_PATHS.MODIFIED])
 	loaded_json[id] = character_json
 	
-	json_helper.save_json(loaded_json, json_paths[STATS_PATHS.MODIFIED])
+	#json_helper.save_json(loaded_json, json_paths[STATS_PATHS.MODIFIED])
 
 func remember_response(new_memory:Dictionary):
 	memories.remember_response(new_memory)

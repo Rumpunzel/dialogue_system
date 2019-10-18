@@ -28,7 +28,7 @@ func update_perceptions_graph(value_name:String, new_value):
 	if value_name.length() > 0:
 		slider_values[value_name] = new_value
 		
-		emit_signal("update_perceptions_graph", NPC_Singleton.calculate_perception_value(slider_values), true)
+		emit_signal("update_perceptions_graph", slider_values, true)
 		
 		if not maximum_approval_display == null:
 			get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)

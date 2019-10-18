@@ -29,10 +29,11 @@ func _process(_delta):
 	update_perception_values()
 	
 	if not subject == null:
-		perception_values = subject.calculate_perception_value(subject.personal_values)
-		
+		perception_values = subject.personal_values
+
 		if not object == null:
-			var new_perceptions = subject.calculate_perception_value(subject.character_perceptions.get(object, { }).get(NPC.PERCEPTION_VALUES, { }))
+			var new_perceptions = subject.character_perceptions.get(object.id, { }).get(NPC.PERCEPTION_VALUES, { })
+			
 			update_perceptions_graph(new_perceptions)
 	
 	update()
@@ -99,6 +100,7 @@ func update_perceptions_graph(new_perceptions:Dictionary, manually_called = fals
 	polygon_points = get_graph(new_perceptions)
 
 func get_graph(new_perceptions:Dictionary):
+	new_perceptions = NPC_Singleton.calculate_perception_value(new_perceptions)
 	var points = []
 	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
 	points.resize(perception_values.size())

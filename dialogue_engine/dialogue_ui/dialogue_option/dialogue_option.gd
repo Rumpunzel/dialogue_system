@@ -13,37 +13,31 @@ export(Array, String) var listeners
 
 export var big_deal:bool = false
 
-export(float, 0, 1) var required_approval_rating = 0
+var required_approval_rating:float = 0
 
-export(int, FLAGS, "Politeness", "Reliability", "Selflessness", "Sincerity") var values_enable_success
+var values_enable_success:Dictionary
 
-export(Array, Array, String, MULTILINE) var success_messages = [ [ ] ]
-export var loop_successes_from = 0
-#warning-ignore:unused_class_variable
-export(String) var success_tree = ""
+var success_messages = [ [ ] ]
+var loop_successes_from = 0
+var success_tree = ""
 
-#warning-ignore:unused_class_variable
-export(int, -10, 10) var approval_rating_change_on_success
+var approval_rating_change_on_success:float
 
-export(Array, Array, String, MULTILINE) var failure_messages = [ [ ] ]
-export var loop_failures_from = 0
-#warning-ignore:unused_class_variable
-export(String) var failure_tree = ""
+var failure_messages = [ [ ] ]
+var loop_failures_from = 0
+var failure_tree = ""
 
-export(String, MULTILINE) var tooltip = ""
+var tooltip = ""
 
-#warning-ignore:unused_class_variable
-export var single_use = true
-export var exits_dialogue = false
-#warning-ignore:unused_class_variable
-export var is_back_option = false
+var single_use = true
+var exits_dialogue = false
+var is_back_option = false
 
-export(Color) var big_deal_color = Color("FFD700")
-export(float, 0, 1) var clicked_alpha = 0.5
+var big_deal_color = Color("FFD700")
+var clicked_alpha = 0.5
 
-onready var value_changes:Dictionary
+var value_changes:Dictionary
 
-#warning-ignore:unused_class_variable
 var id
 
 var success_counter = 0
@@ -144,9 +138,9 @@ func check_success():
 
 func check_perception_for_listeners(value):
 	for listener in listeners:
-		var values = listener.character_perceptions.get(speaker, [speaker.percieved_starting_values])[NPC.PERCEPTION_VALUES]
+		var values = listener.character_perceptions.get(speaker, { NPC.PERCEPTION_VALUES: speaker.percieved_starting_values })[NPC.PERCEPTION_VALUES]
 		
-		if not listener.personal_values.get(value, 0) == 0 and values[value] / listener.personal_values[value] < 1:
+		if not listener.personal_values.get(value, 0) == 0 and values.get(value, 0) < listener.personal_values[value]:
 			return false
 	
 	return true

@@ -21,17 +21,12 @@ func vector_add_arrays(arrays:Array) -> Array:
 	
 	return return_array
 
-func vector_add_dictionaries(dictionaries:Array, main_dictionary = 0) -> Dictionary:
-	var return_dictionary = { }
+func vector_add_dictionaries(dictionaries:Array) -> Dictionary:
+	var return_dictionary:Dictionary = { }
 	
-	if not dictionaries.empty():
-		for key in dictionaries[main_dictionary]:
-			var value = 0
-			
-			for dictionary in dictionaries:
-				value += dictionary.get(key, 0)
-			
-			return_dictionary[key] = value
+	for dictionary in dictionaries:
+		for key in dictionary.keys():
+			return_dictionary[key] = return_dictionary.get(key, 0) + dictionary[key]
 	
 	return return_dictionary
 

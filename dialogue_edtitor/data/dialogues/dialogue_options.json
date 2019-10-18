@@ -11,7 +11,9 @@
         "You say something polite, yet ultimately meaningless."
       ]
     ],
-    "politeness_change": 1
+    "value_changes": {
+      "politeness": 2
+    }
   },
   "heroic_option": {
     "option_text": {
@@ -26,8 +28,10 @@
         "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
       ]
     ],
-    "reliablity_change": 1,
-    "selflessness_change": 1,
+    "value_changes": {
+      "reliability": 1,
+      "selflessness": 2
+    },
     "single_use": false
   },
   "big_deal_option": {
@@ -57,8 +61,10 @@
       "selflessness"
     ],
     "loop_failures_from": 2,
-    "politeness_change": -3,
-    "sincerity_change": 5,
+    "value_changes": {
+      "politeness": -3,
+      "sincerity": 10
+    },
     "approval_rating_change_on_success": 10
   },
   "weather_option": {
@@ -79,7 +85,9 @@
       ]
     ],
     "loop_successes_from": 1,
-    "selflessness_change": -1,
+    "value_changes": {
+      "selflessness": -3
+    },
     "single_use": false
   },
   "_leave_option": {
