@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://data/assets/dialogue_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://main/main.gd" type="Script" id=2]
-[ext_resource path="res://data/assets/images/parchment_background.jpg" type="Texture" id=3]
-[ext_resource path="res://data/assets/images/waterfall.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
 [ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=6]
 [ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=7]
