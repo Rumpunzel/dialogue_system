@@ -7,9 +7,9 @@ const DEFAULT_CHARACTER_STATS:String = "res://dialogue_engine/characters/DEFAULT
 const CHARACTERS_JSON:String = "res://data/characters/characters.json"
 const DIALOGUE_PATHS:String = "data/dialogues/default.json"
 
-onready var id:String = name
-onready var json_paths:Dictionary = { STATS_PATHS.MODIFIED: CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
+const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
 
+onready var id:String = name
 onready var memories:memories = $memories
 
 var percieved_starting_values:Dictionary
@@ -58,7 +58,7 @@ func store_values():
 	var loaded_json = json_helper.load_json(json_paths[STATS_PATHS.MODIFIED])
 	loaded_json[id] = character_json
 	
-	#json_helper.save_json(loaded_json, json_paths[STATS_PATHS.MODIFIED])
+	json_helper.save_json(loaded_json, json_paths[STATS_PATHS.MODIFIED])
 
 func remember_response(new_memory:Dictionary):
 	memories.remember_response(new_memory)

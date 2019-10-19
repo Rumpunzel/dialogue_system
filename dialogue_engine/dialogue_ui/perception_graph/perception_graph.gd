@@ -93,14 +93,11 @@ func update_perception_values():
 	
 	perception_names.resize(new_perception_values.size())
 
-func update_perceptions_graph(new_perceptions:Dictionary, manually_called = false):
-	if manually_called:
-		perception_values = new_perceptions
-	
+func update_perceptions_graph(new_perceptions:Dictionary):
 	polygon_points = get_graph(new_perceptions)
 
 func get_graph(new_perceptions:Dictionary):
-	new_perceptions = NPC_Singleton.calculate_perception_value(new_perceptions)
+	new_perceptions = subject.calculate_perception_value(new_perceptions)
 	var points = []
 	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
 	points.resize(perception_values.size())

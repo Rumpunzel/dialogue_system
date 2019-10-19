@@ -4,21 +4,16 @@ enum { VALUE_NAME, SLIDER }
 
 export(PackedScene) var value_slider = preload("res://dialogue_editor/properties/value_slider.tscn")
 
-export(NodePath) var perception_graph = null
-export(NodePath) var maximum_approval_display = null
+export(NodePath) var NPC_node
+
+onready var NPC:NPC = get_node(NPC_node)
 
 var perception_entries:Array
-
 var slider_values:Dictionary
-
-signal update_perceptions_graph
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not perception_graph == null:
-		connect("update_perceptions_graph", get_node(perception_graph), "update_perceptions_graph")
-	
 	GC.connect("values_changed", self, "update_perception_entries")
 	
 	update_perception_entries()
@@ -28,10 +23,7 @@ func update_perceptions_graph(value_name:String, new_value):
 	if value_name.length() > 0:
 		slider_values[value_name] = new_value
 		
-		emit_signal("update_perceptions_graph", slider_values, true)
-		
-		if not maximum_approval_display == null:
-			get_node(maximum_approval_display).value = NPC_Singleton.maximum_possible_approval_rating(slider_values)
+		NPC.personal_values = slider_values
 
 func update_perception_entries():
 	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]

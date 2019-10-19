@@ -35,12 +35,19 @@ func calculate_growth_point():
 
 func load_values():
 	var loaded_json = json_helper.load_json(JSON_PATHS[CONSTANTS_PATHS.MODIFIED])
-	CONSTANTS = loaded_json if not loaded_json == null else json_helper.load_json(JSON_PATHS[CONSTANTS_PATHS.DEFAULT])
+	
+	if not loaded_json == null:
+		CONSTANTS = loaded_json
+	else:
+		reset_values_to_default()
 	
 	emit_signal("values_loaded")
 
 func store_values():
 	json_helper.save_json(CONSTANTS, JSON_PATHS[CONSTANTS_PATHS.MODIFIED])
+
+func reset_values_to_default():
+	CONSTANTS = json_helper.load_json(JSON_PATHS[CONSTANTS_PATHS.DEFAULT])
 
 
 func set_CONSTANTS(new_values:Dictionary):

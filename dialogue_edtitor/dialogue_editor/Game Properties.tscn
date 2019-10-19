@@ -1,8 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/perception_values_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/properties/max_approval_label.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/properties/maximum_approval_rating.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"pressed\", GC, \"reset_values_to_default\")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
 
 [node name="Game Properties" type="MarginContainer"]
 anchor_right = 1.0
@@ -39,25 +52,44 @@ margin_right = 1177.0
 margin_bottom = 712.0
 custom_constants/separation = 10
 
-[node name="title" type="Label" parent="value_tabs/Perception Values/name_container/value_names"]
+[node name="title_divider" type="HBoxContainer" parent="value_tabs/Perception Values/name_container/value_names"]
 margin_right = 1170.0
-margin_bottom = 14.0
+margin_bottom = 20.0
+
+[node name="title" type="Label" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_top = 3.0
+margin_right = 949.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
 text = "Value Names"
 
-[node name="title_separator" type="HSeparator" parent="value_tabs/Perception Values/name_container/value_names"]
-margin_top = 24.0
+[node name="reset" type="Button" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_left = 953.0
+margin_right = 1068.0
+margin_bottom = 20.0
+text = "Reset to Default"
+script = SubResource( 1 )
+
+[node name="save" type="Button" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_left = 1072.0
 margin_right = 1170.0
-margin_bottom = 28.0
+margin_bottom = 20.0
+text = "Save Changes"
+
+[node name="title_separator" type="HSeparator" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_top = 30.0
+margin_right = 1170.0
+margin_bottom = 34.0
 
 [node name="description" type="Label" parent="value_tabs/Perception Values/name_container/value_names"]
-margin_top = 38.0
+margin_top = 44.0
 margin_right = 1170.0
-margin_bottom = 52.0
+margin_bottom = 58.0
 text = "Edit the values the Characters in the game use to determine how well they like each other (most importanly how they feel about the player)."
 autowrap = true
 
 [node name="scroll_container" type="ScrollContainer" parent="value_tabs/Perception Values/name_container/value_names"]
-margin_top = 62.0
+margin_top = 68.0
 margin_right = 1170.0
 margin_bottom = 657.0
 size_flags_horizontal = 3
@@ -65,10 +97,12 @@ size_flags_vertical = 3
 
 [node name="perception_values_editor" type="VBoxContainer" parent="value_tabs/Perception Values/name_container/value_names/scroll_container"]
 margin_right = 1170.0
-margin_bottom = 595.0
+margin_bottom = 589.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+save_button = NodePath("../../title_divider/save")
+reset_button = NodePath("../../title_divider/reset")
 
 [node name="panel_container" type="PanelContainer" parent="value_tabs/Perception Values/name_container/value_names"]
 margin_top = 667.0

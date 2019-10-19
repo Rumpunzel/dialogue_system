@@ -64,7 +64,7 @@ signal option_confirmed
 func _ready():
 	update_appearance()
 	
-	option_button.connect("button_up", self, "check_option")
+	option_button.connect("pressed", self, "check_option")
 
 
 func init(option_id:String, option_info:Dictionary = CUSTOM_JSON):
