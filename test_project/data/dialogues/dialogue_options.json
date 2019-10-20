@@ -56,7 +56,7 @@
       ]
     ],
     "big_deal": true,
-    "required_approval_rating": 40,
+    "required_approval_rating": 20,
     "values_enable_success": [
       "selflessness"
     ],
