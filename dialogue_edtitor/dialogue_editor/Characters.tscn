@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue_editor/Characters.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/Character Editor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=2]
 
 [node name="Characters" type="TabContainer"]
 anchor_right = 1.0
@@ -11,6 +11,7 @@ size_flags_vertical = 3
 tab_align = 0
 drag_to_rearrange_enabled = true
 script = ExtResource( 1 )
+new_character_button = NodePath("Menu/buttons_container/new_character")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -20,11 +21,16 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Character Editor" parent="." instance=ExtResource( 2 )]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+[node name="buttons_container" type="HBoxContainer" parent="Menu"]
+margin_right = 1192.0
+margin_bottom = 20.0
+
+[node name="new_character" type="Button" parent="Menu/buttons_container"]
+margin_right = 104.0
+margin_bottom = 20.0
+text = "New Character"
+
+[node name="character_directory" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 24.0
+margin_right = 1192.0
+margin_bottom = 764.0

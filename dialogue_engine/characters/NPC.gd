@@ -7,6 +7,9 @@ const APPROVAL_MODIFIER = "APPROVAL_MODIFIER"
 var personal_values:Dictionary setget set_personal_values, get_personal_values
 var character_perceptions:Dictionary  setget set_character_perceptions, get_character_perceptions
 
+signal values_changed
+signal perceptions_changed
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,6 +38,8 @@ func modify_perception(target:Character, option_success, value_changes, approval
 	
 	CONSTANTS.print_to_console("New Values for %s towards %s: %s" % [name, target.id, character_perceptions[target.id][PERCEPTION_VALUES]])
 	CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f%s" % [name, target.id, calculate_approval_rating(target, true), maximum_possible_approval_rating() + character_perceptions[target.id][APPROVAL_MODIFIER], (" (%0.2f base + %0.2f bonus)" % [maximum_possible_approval_rating(), character_perceptions[target.id][APPROVAL_MODIFIER]] if not character_perceptions[target.id][APPROVAL_MODIFIER] == 0 else "")])
+	
+	emit_signal("perceptions_changed", character_perceptions, target.id)
 
 func calculate_approval_rating(target:Character, print_update = false):
 	var approval_rating = 0
@@ -76,6 +81,8 @@ func store_values():
 
 func set_personal_values(new_values:Dictionary):
 	personal_values = new_values
+	
+	emit_signal("values_changed", personal_values)
 
 func set_character_perceptions(new_values:Dictionary):
 	personal_values = new_values

@@ -1,12 +1,16 @@
 extends TabContainer
 
-const NEW_CHARACTER = "NEW_CHARACTER"
+const NEW_CHARACTER = "New Character"
 
 export(PackedScene) var character_editor = preload("res://dialogue_editor/properties/Character Editor.tscn")
+export(PackedScene) var NPC_scene = preload("res://dialogue_engine/characters/NPC.tscn")
+
+export(NodePath) var new_character_button
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	get_node(new_character_button).connect("pressed", self, "open_new_character")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -17,16 +21,18 @@ func open_new_character(character_id:String = NEW_CHARACTER):
 	var tabs = get_children()
 	var has_character = -1
 	
-	for i in tabs.size():
-		if tabs[i].name == character_id:
-			has_character = i
-			break
+	if not character_id == NEW_CHARACTER:
+		for i in range(1, tabs.size()):
+			if tabs[i].name == character_id:
+				has_character = i
+				break
 	
 	if has_character < 0:
 		var new_character_tab:character_editor = character_editor.instance()
-		new_character_tab.character_id = character_id
 		add_child(new_character_tab)
-		has_character = current_tab + 1
+		new_character_tab.setup(character_id if not character_id == NEW_CHARACTER else "")
+		
+		has_character = (current_tab + 1) if not current_tab == 0 else tabs.size()
 		move_child(new_character_tab, has_character)
 		
 		if not character_id == null:

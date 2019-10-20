@@ -10,7 +10,7 @@ onready var object:Character = get_node(object_node) if not object_node == null 
 onready var center = get_rect().size / 2
 onready var radius = min(get_rect().size.y / 2, get_rect().size.x / 2)
 
-var perception_names:Array
+var perception_names:Array = []
 
 var perception_values:Dictionary
 var polygon_points:Array = []
@@ -47,7 +47,7 @@ func _draw():
 	for i in perception_names.size():
 		draw_line(center, center + Vector2(0, -radius).rotated((i / float(perception_names.size()) * TAU)), Color.black)
 	
-	var graph_points = get_graph(perception_values)
+	var graph_points = get_graph(perception_values) if not subject == null else []
 	
 	if math_helper.get_unique_values_in_array(graph_points, 0.1) >= 3:
 		draw_colored_polygon(graph_points, Color.cornflower)

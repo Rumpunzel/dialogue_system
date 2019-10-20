@@ -11,6 +11,7 @@ func _ready():
 
 
 func init(id:String):
+	name = id
 	$name.text = id
 
 

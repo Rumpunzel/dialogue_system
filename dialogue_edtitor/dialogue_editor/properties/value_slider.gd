@@ -21,10 +21,11 @@ func _ready():
 	GC.connect("values_changed", self, "setup_children")
 
 
-func update_value(new_value, node_name = null):
+func update_value(new_value, node_name = null, emit_signal = true):
 	set_property_value(new_value, node_name)
 	
-	emit_signal("value_changed", value_name, new_value)
+	if emit_signal:
+		emit_signal("value_changed", value_name, new_value)
 
 func setup_children():
 	for child in get_children():

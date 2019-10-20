@@ -8,8 +8,8 @@ func _ready():
 	load_entries()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(_delta):
+	load_entries()
 
 
 func load_entries():
@@ -17,6 +17,14 @@ func load_entries():
 	var loaded_json = json_helper.load_json(json_path)
 	
 	for entry in loaded_json.keys():
-		var new_entry = character_entry.instance()
-		new_entry.init(entry)
-		add_child(new_entry)
+		if not has_entry(entry):
+			var new_entry = character_entry.instance()
+			new_entry.init(entry)
+			add_child(new_entry)
+
+func has_entry(entry_name:String):
+	for entry in get_children():
+		if entry.name == entry_name:
+			return true
+	
+	return false

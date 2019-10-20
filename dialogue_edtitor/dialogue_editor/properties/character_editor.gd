@@ -1,15 +1,15 @@
 extends VBoxContainer
 class_name character_editor
 
-export(NodePath) var NPC_node
-
 export(NodePath) var save_button
 export(NodePath) var close_button
 export(NodePath) var delete_button
 
-onready var NPC:NPC = get_node(NPC_node)
+onready var NPC:NPC = $NPC
 
 var character_id:String setget set_character_id, get_character_id
+
+signal current_NPC
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +22,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
+
+func setup(id:String):
+	set_character_id(id)
+	
+	emit_signal("current_NPC", NPC)
 
 func save_changes():
 	NPC.store_values()
@@ -39,10 +44,25 @@ func delete_character():
 	
 	close_tab()
 
+func character_exists(id:String):
+	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]
+	var loaded_json = json_helper.load_json(json_path)
+	
+	for NPC in loaded_json.keys():
+		if NPC == id:
+			return true
+	
+	return false
+
 
 func set_character_id(new_id:String):
 	character_id = new_id
-	name = character_id
+	NPC.id = character_id
+	
+	if not character_id == "":
+		name = character_id
+		
+		NPC.load_values()
 
 
 func get_character_id() -> String:

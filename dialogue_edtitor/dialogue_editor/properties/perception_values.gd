@@ -4,26 +4,25 @@ enum { VALUE_NAME, SLIDER }
 
 export(PackedScene) var value_slider = preload("res://dialogue_editor/properties/value_slider.tscn")
 
-export(NodePath) var NPC_node
+export(NodePath) var root_node
 
-onready var NPC:NPC = get_node(NPC_node)
+onready var editor_root:character_editor = get_node(root_node)
 
-var perception_entries:Array
-var slider_values:Dictionary
+var perception_entries:Array = []
+var NPC:NPC = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GC.connect("values_changed", self, "update_perception_entries")
-	
 	update_perception_entries()
+	
+	GC.connect("values_changed", self, "update_perception_entries")
+	editor_root.connect("current_NPC", self, "set_NPC")
 
 
 func update_perceptions_graph(value_name:String, new_value):
 	if value_name.length() > 0:
-		slider_values[value_name] = new_value
-		
-		NPC.personal_values = slider_values
+		NPC.personal_values[value_name] = new_value
 
 func update_perception_entries():
 	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
@@ -48,10 +47,26 @@ func update_perception_entries():
 			perception_entries[i][SLIDER].value_name = perception
 			perception_entries[i][SLIDER].name = "%s_%s" % [perception, "slider"]
 			
-			if slider_values.has(perception):
-				perception_entries[i][SLIDER].update_value(slider_values[perception])
+			if not NPC == null and NPC.personal_values.has(perception):
+				perception_entries[i][SLIDER].update_value(NPC.personal_values[perception])
 		else:
 			for stuff in perception_entries[i]:
 				stuff.queue_free()
 	
 	perception_entries.resize(new_perception_values.size())
+
+func update_perception_values(new_values):
+	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	print("%s %s %s %s %s" % [perception_entries, name, editor_root, NPC.name, new_values])
+	for i in perception_values.size():
+		var perception = perception_values[i]
+
+		if NPC.personal_values.has(perception):
+			perception_entries[i][SLIDER].update_value(new_values[perception], null, false)
+
+func set_NPC(new_NPC):
+	NPC = new_NPC
+	
+	update_perception_values(NPC.personal_values)
+	
+	#NPC.connect("values_changed", self, "update_perception_values")

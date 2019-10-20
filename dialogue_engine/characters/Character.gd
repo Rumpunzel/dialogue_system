@@ -9,7 +9,7 @@ const DIALOGUE_PATHS:String = "data/dialogues/default.json"
 
 const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
 
-onready var id:String = name
+onready var id:String = name setget set_id, get_id
 onready var memories:memories = $memories
 
 var percieved_starting_values:Dictionary
@@ -66,3 +66,14 @@ func remember_response(new_memory:Dictionary):
 
 func remembers_dialogue_option(unique_id):
 	return memories.remembers_dialogue_option(unique_id)
+
+
+func set_id(new_id:String):
+	id = new_id
+	
+	if not id == "":
+		name = id
+
+
+func get_id() -> String:
+	return id
