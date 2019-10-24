@@ -16,7 +16,7 @@ var NPC:NPC = null
 func _ready():
 	update_perception_entries()
 	
-	GC.connect("values_changed", self, "update_perception_entries")
+	GAME_CONSTANTS.connect("values_changed", self, "update_perception_entries")
 	editor_root.connect("current_NPC", self, "set_NPC")
 
 
@@ -25,7 +25,7 @@ func update_perceptions_graph(value_name:String, new_value):
 		NPC.personal_values[value_name] = new_value
 
 func update_perception_entries():
-	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	var new_perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
 	
 	for i in max(perception_entries.size(), new_perception_values.size()):
 		if i < new_perception_values.size():
@@ -56,7 +56,7 @@ func update_perception_entries():
 	perception_entries.resize(new_perception_values.size())
 
 func update_perception_values(new_values):
-	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	var perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
 	print("%s %s %s %s %s" % [perception_entries, name, editor_root, NPC.name, new_values])
 	for i in perception_values.size():
 		var perception = perception_values[i]

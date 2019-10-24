@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/dialogue_theme.tres" type="Theme" id=1]
 [ext_resource path="res://main/main.gd" type="Script" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://assets/images/waterfall.png" type="Texture" id=4]
 [ext_resource path="res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=8]
+[ext_resource path="res://dialogue_engine/characters/Characters.gd" type="Script" id=7]
+[ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=9]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -33,17 +34,20 @@ expand = true
 stretch_mode = 5
 
 [node name="dialogue_window" parent="." instance=ExtResource( 5 )]
-default_speaker_node = NodePath("../Player")
-default_listener_nodes = [ NodePath("../Klaus") ]
+default_speaker = "Player"
+default_listeners = [ "Klaus" ]
 dialogue_options_file_path = "res://data/dialogues/dialogue_options.json"
 
 [node name="perception_graph" parent="." instance=ExtResource( 6 )]
 margin_left = 900.0
 margin_right = 1050.0
 margin_bottom = 200.0
-subject_node = NodePath("../Klaus")
-object_node = NodePath("../Player")
+subject_node = NodePath("../Characters/Klaus")
+object_node = NodePath("../Characters/Player")
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
+[node name="Characters" type="Node" parent="."]
+script = ExtResource( 7 )
 
-[node name="Klaus" parent="." instance=ExtResource( 8 )]
+[node name="Player" parent="Characters" instance=ExtResource( 8 )]
+
+[node name="Klaus" parent="Characters" instance=ExtResource( 9 )]

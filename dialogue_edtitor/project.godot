@@ -93,7 +93,7 @@ config/icon="res://assets/images/icon.png"
 [autoload]
 
 CONSTANTS="*res://dialogue_engine/CONSTANTS.gd"
-GC="*res://data/GAME_CONSTANTS.gd"
+GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
 json_helper="*res://dialogue_engine/helpers/json_helper.gd"
 math_helper="*res://dialogue_engine/helpers/math_helper.gd"
 

@@ -9,9 +9,9 @@ export(NodePath) var reset_button
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(save_button).connect("pressed", self, "update_perception_globals")
-	get_node(reset_button).connect("pressed", self, "update_perception_entries", [GC.CONSTANTS[GC.PERCEPTION_VALUES]])
+	get_node(reset_button).connect("pressed", self, "update_perception_entries", [GAME_CONSTANTS.PERCEPTION_VALUES])
 	
-	update_perception_entries(GC.CONSTANTS[GC.PERCEPTION_VALUES])
+	update_perception_entries(GAME_CONSTANTS.PERCEPTION_VALUES)
 
 
 func update_perception_entries(new_perception_values:Array):
@@ -31,7 +31,7 @@ func update_perception_globals(_new_text = ""):
 		if not entry.get_value() == "" and not new_perception_values.has(entry.get_value().to_lower()):
 			new_perception_values.append(entry.get_value().to_lower())
 	
-	GC.CONSTANTS[GC.PERCEPTION_VALUES] = new_perception_values
+	GAME_CONSTANTS.PERCEPTION_VALUES = new_perception_values
 
 func add_entry():
 	var perception_field = entry_scene.instance()

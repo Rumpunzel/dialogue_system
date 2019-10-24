@@ -17,7 +17,7 @@ var polygon_points:Array = []
 
 
 func _ready():
-	GC.connect("values_changed", self, "update_perception_values")
+	GAME_CONSTANTS.connect("values_changed", self, "update_perception_values")
 	
 	update_perception_values()
 
@@ -67,7 +67,7 @@ func _draw():
 
 
 func update_perception_values():
-	var new_perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	var new_perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
 	
 	for i in max(perception_names.size(), new_perception_values.size()):
 		if i < new_perception_values.size():
@@ -99,7 +99,7 @@ func update_perceptions_graph(new_perceptions:Dictionary):
 func get_graph(new_perceptions:Dictionary):
 	new_perceptions = subject.calculate_perception_value(new_perceptions)
 	var points = []
-	var perception_values = GC.CONSTANTS[GC.PERCEPTION_VALUES]
+	var perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
 	points.resize(perception_values.size())
 	
 	if not radius == null and not center == null:
@@ -114,12 +114,12 @@ func get_graph(new_perceptions:Dictionary):
 
 func get_approval_rating_graph():
 	var approval_rating = subject.calculate_approval_rating(object)
-	var approval_ratio = (get_rect().size.y / 2) *  (1 - approval_rating / GC.CONSTANTS[GC.MAX_APPROVAL_VALUE])
+	var approval_ratio = (get_rect().size.y / 2) *  (1 - approval_rating / GAME_CONSTANTS.MAX_APPROVAL_VALUE)
 	
 	return [Vector2(0, approval_ratio), Vector2(get_rect().size.x, approval_ratio), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]
 
 func modified_rotation(index):
-	var value_size = GC.CONSTANTS[GC.PERCEPTION_VALUES].size()
+	var value_size = GAME_CONSTANTS.PERCEPTION_VALUES.size()
 	var modified_index = get_modified_index(index)
 	
 	return (modified_index / float(value_size)) * TAU

@@ -6,11 +6,13 @@
       ]
     },
     "tooltip": "It is small and polite.",
-    "success_messages": [
-      [
-        "You say something polite, yet ultimately meaningless."
+    "success_messages": {
+      "text": [
+        [
+          "You say something polite, yet ultimately meaningless."
+        ]
       ]
-    ],
+    },
     "value_changes": {
       "politeness": 2
     }
@@ -23,11 +25,13 @@
       ]
     },
     "tooltip": "It is a heroic option, indeed.",
-    "success_messages": [
-      [
-        "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+    "success_messages": {
+      "text": [
+        [
+          "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+        ]
       ]
-    ],
+    },
     "value_changes": {
       "reliability": 1,
       "selflessness": 2
@@ -44,17 +48,19 @@
       ]
     },
     "tooltip": "It will have drastic effects on this relationship.",
-    "failure_messages": [
-      [
-        "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
-      ],
-      [
-        "You blew your second change, congratz, mate."
-      ],
-      [
-        "No idea how you're getting any more chances here..."
+    "failure_messages": {
+      "text": [
+        [
+          "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
+        ],
+        [
+          "You blew your second change, congratz, mate."
+        ],
+        [
+          "No idea how you're getting any more chances here..."
+        ]
       ]
-    ],
+    },
     "big_deal": true,
     "required_approval_rating": 20,
     "values_enable_success": [
@@ -76,14 +82,16 @@
     },
     "loop_success_option_text_from": 1,
     "tooltip": "Wow, what social skills. I am impressed.",
-    "success_messages": [
-      [
-        "Yes, yes, quite indeed. How insightful, truly."
-      ],
-      [
-        "Again? Seriously? Well ok, then..."
+    "success_messages": {
+      "text": [
+        [
+          "Yes, yes, quite indeed. How insightful, truly."
+        ],
+        [
+          "Again? Seriously? Well ok, then..."
+        ]
       ]
-    ],
+    },
     "loop_successes_from": 1,
     "value_changes": {
       "selflessness": -3

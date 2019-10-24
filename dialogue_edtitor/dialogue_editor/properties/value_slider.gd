@@ -18,7 +18,7 @@ func _ready():
 	
 	setup_children()
 	
-	GC.connect("values_changed", self, "setup_children")
+	GAME_CONSTANTS.connect("values_changed", self, "setup_children")
 
 
 func update_value(new_value, node_name = null, emit_signal = true):
