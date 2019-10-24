@@ -113,7 +113,7 @@ func get_graph(new_perceptions:Dictionary):
 	return points
 
 func get_approval_rating_graph():
-	var approval_rating = subject.calculate_approval_rating(object)
+	var approval_rating = subject.calculate_approval_rating(object.id)
 	var approval_ratio = (get_rect().size.y / 2) *  (1 - approval_rating / GAME_CONSTANTS.MAX_APPROVAL_VALUE)
 	
 	return [Vector2(0, approval_ratio), Vector2(get_rect().size.x, approval_ratio), Vector2(get_rect().size.x, get_rect().size.y / 2), Vector2(0, get_rect().size.y / 2)]

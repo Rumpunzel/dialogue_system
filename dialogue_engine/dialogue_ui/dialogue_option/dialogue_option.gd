@@ -11,15 +11,15 @@ const CUSTOM_JSON = { }
 var id:String
 
 var option_text:Dictionary
-var loop_success_option_text_from:int = 0
-var loop_failure_option_text_from:int = 0
+var loop_success_option_text_from = 0
+var loop_failure_option_text_from = 0
 
-var required_approval_rating:float = 0
+var required_approval_rating = 0
 
 var values_enable_success:Dictionary
 
 var success_messages:Array = [ ]
-var loop_successes_from:int = 0
+var loop_successes_from = 0
 var success_tree:String = ""
 
 var approval_rating_change_on_success:float setget , get_approval_rating_change_on_success
@@ -30,8 +30,8 @@ var failure_tree:String = ""
 
 var value_changes:Dictionary
 
-var success_counter:int = 0
-var failure_counter:int = 0
+var success_counter = 0
+var failure_counter = 0
 
 var tooltip:String = ""
 
@@ -45,7 +45,7 @@ var noteworthy:bool = true setget , get_noteworthy
 var single_use:bool = true setget , get_single_use
 
 var big_deal_color:Color = Color("FFD700")
-var clicked_alpha:float = 0.5
+var clicked_alpha = 0.5
 
 
 var option_json:Dictionary
@@ -189,6 +189,7 @@ func confirm_option(option_success):
 	
 	if option_success:
 		var succ_mess = math_helper.calculate_loop_modulo(success_counter - 1, success_messages.size(), loop_successes_from)
+		
 		message = success_messages[succ_mess] if not success_messages.empty() else [ ]
 		
 		new_tree = success_tree
