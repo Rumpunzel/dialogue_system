@@ -19,7 +19,7 @@ func _ready():
 
 func update_name(new_name):
 	if not editor_root.character_exists(new_name):
-		editor_root.set_character_id(new_name)
+		editor_root.character_id = new_name
 	else:
 		text = editor_root.NPC.id
 

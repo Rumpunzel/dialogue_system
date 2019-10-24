@@ -12,17 +12,21 @@ const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CHARACTERS_JSON, STATS_PAT
 onready var id:String = name setget set_id, get_id
 onready var memories:memories = $memories
 
+onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
+
 var percieved_starting_values:Dictionary setget set_percieved_starting_values, get_percieved_starting_values
 
 var character_json:Dictionary
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_values()
 	#memories.load_values(id)
 	
-	CONSTANTS.get_CHARACTERS().register_character(id, self)
+	if not CHARACTERS == null:
+		CHARACTERS.register_character(id, self)
+	else:
+		CONSTANTS.print_to_console("%s instanced outside of character manager!" % [name])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

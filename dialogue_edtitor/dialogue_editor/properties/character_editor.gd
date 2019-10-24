@@ -8,6 +8,7 @@ export(NodePath) var delete_button
 onready var NPC:NPC = $NPC
 
 var character_id:String setget set_character_id, get_character_id
+var old_id:String
 
 signal current_NPC
 
@@ -27,22 +28,28 @@ func setup(id:String):
 	set_character_id(id)
 	
 	emit_signal("current_NPC", NPC)
+	
+	old_id = id
 
 func save_changes():
 	NPC.store_values()
+	
+	if not character_id == old_id:
+		delete_character(old_id)
 
 func close_tab():
 	queue_free()
 
-func delete_character():
+func delete_character(id = NPC.id):
 	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]
 	
 	var loaded_json = json_helper.load_json(json_path)
-	loaded_json.erase(NPC.id)
+	loaded_json.erase(id)
 	
 	json_helper.save_json(loaded_json, json_path)
 	
-	close_tab()
+	if id == character_id:
+		close_tab()
 
 func character_exists(id:String):
 	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]

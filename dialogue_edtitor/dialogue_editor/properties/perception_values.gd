@@ -57,7 +57,7 @@ func update_perception_entries():
 
 func update_perception_values(new_values):
 	var perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
-	print("%s %s %s %s %s" % [perception_entries, name, editor_root, NPC.name, new_values])
+	
 	for i in perception_values.size():
 		var perception = perception_values[i]
 

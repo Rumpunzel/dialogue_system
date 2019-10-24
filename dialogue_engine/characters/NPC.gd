@@ -4,8 +4,6 @@ class_name NPC
 const PERCEPTION_VALUES = "PERCEPTION_VALUES"
 const APPROVAL_MODIFIER = "APPROVAL_MODIFIER"
 
-onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
-
 var personal_values:Dictionary setget set_personal_values, get_personal_values
 var character_perceptions:Dictionary  setget set_character_perceptions, get_character_perceptions
 
