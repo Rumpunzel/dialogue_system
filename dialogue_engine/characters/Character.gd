@@ -12,7 +12,7 @@ const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CHARACTERS_JSON, STATS_PAT
 onready var id:String = name setget set_id, get_id
 onready var memories:memories = $memories
 
-var percieved_starting_values:Dictionary
+var percieved_starting_values:Dictionary setget set_percieved_starting_values, get_percieved_starting_values
 
 var character_json:Dictionary
 
@@ -76,6 +76,12 @@ func set_id(new_id:String):
 	if not id == "":
 		name = id
 
+func set_percieved_starting_values(new_values:Dictionary):
+	percieved_starting_values = new_values
+
 
 func get_id() -> String:
 	return id
+
+func get_percieved_starting_values() -> Dictionary:
+	return percieved_starting_values
