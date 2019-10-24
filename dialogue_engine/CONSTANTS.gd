@@ -1,7 +1,5 @@
 extends Node
 
-const CHARACTERS_PATH = "/root/main/Characters"
-
 # Default dialogue tree name
 const DEFAULT_TREE = "start"
 
@@ -18,6 +16,8 @@ const CONTINUE_OPTION = "_continue_option"
 const EXIT_OPTION = "_exit_option"
 const CUSTOM_OPTION = "custom_option"
 
+export(String) var characters_path = ""
+
 # Print updates to console?
 var verbose_mode = true
 var log_history:Dictionary = { }
@@ -33,4 +33,4 @@ func print_to_console(print_string):
 		print(print_string)
 
 func get_CHARACTERS():
-	return get_node(CHARACTERS_PATH)
+	return get_node(characters_path) if not characters_path == "" else null
