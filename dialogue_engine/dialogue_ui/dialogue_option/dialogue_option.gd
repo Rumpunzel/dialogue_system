@@ -13,17 +13,19 @@ export(Array, String) var listeners
 
 export var big_deal:bool = false
 
+var CHARACTERS
+
 var required_approval_rating:float = 0
 
 var values_enable_success:Dictionary
 
-var success_messages = [ [ ] ]
+var success_messages:Dictionary = { }
 var loop_successes_from = 0
 var success_tree = ""
 
 var approval_rating_change_on_success:float
 
-var failure_messages = [ [ ] ]
+var failure_messages:Dictionary = { }
 var loop_failures_from = 0
 var failure_tree = ""
 
@@ -57,6 +59,8 @@ var option_button
 var option_number
 var dialogue_option
 
+var listener_nodes:Array
+
 signal option_confirmed
 
 
@@ -88,6 +92,10 @@ func init(option_id:String, option_info:Dictionary = CUSTOM_JSON):
 	option_json = option_info
 	
 	parse_option(option_json)
+	
+	CHARACTERS = CONSTANTS.get_CHARACTERS()
+	
+	listener_nodes = get_listener_nodes()
 
 func parse_option(option_info, only_parse = false):
 	for key in option_info.keys():
@@ -122,7 +130,7 @@ func check_option():
 func check_success():
 	var new_status = PASSED
 	if required_approval_rating > 0:
-		for listener in listeners:
+		for listener in listener_nodes:
 			if listener.calculate_approval_rating(speaker) >= required_approval_rating:
 				return PASSED
 			else:
@@ -137,7 +145,7 @@ func check_success():
 	return new_status
 
 func check_perception_for_listeners(value):
-	for listener in listeners:
+	for listener in listener_nodes:
 		var values = listener.character_perceptions.get(speaker, { NPC.PERCEPTION_VALUES: speaker.percieved_starting_values })[NPC.PERCEPTION_VALUES]
 		
 		if not listener.personal_values.get(value, 0) == 0 and values.get(value, 0) < listener.personal_values[value]:
@@ -161,16 +169,17 @@ func confirm_option(option_success):
 	else:
 		CONSTANTS.print_to_console("No Updates, this Dialogue Option has already been passed before!")
 	
-	for listener in listeners:
+	for listener in listener_nodes:
+		
 		listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
 	
 	var succ_mess = math_helper.calculate_loop_modulo(success_counter - 1, success_messages.size(), loop_successes_from)
 	var fail_mess = math_helper.calculate_loop_modulo(failure_counter - 1, failure_messages.size(), loop_failures_from)
 			
-	var success_message = success_messages[succ_mess] if not success_messages.empty() else [ ]
-	var failure_message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
+	var success_message = success_messages["text"][succ_mess] if not success_messages.get("text", [ ]).empty() else [ ]
+	var failure_message = failure_messages["text"][fail_mess] if not failure_messages.get("text", [ ]).empty() else [ ]
 	
-	emit_signal("option_confirmed", { "success": option_success, "message": success_message if option_success else failure_message, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
+	emit_signal("option_confirmed", { "success": option_success, "message": { "text": success_message if option_success else failure_message }, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
 
 func update_appearance(theme_color = null):
 	var new_color = null
@@ -198,3 +207,15 @@ func update_list_number(new_number):
 
 func set_shortcut(new_shortcut:ShortCut):
 	option_button.shortcut = new_shortcut
+
+
+func get_listener_nodes():
+	var nodes:Array = []
+	
+	for listener in listeners:
+		var node = CHARACTERS.character_nodes.get(listener)
+		
+		if not node == null:
+			nodes.append(node)
+	
+	return nodes

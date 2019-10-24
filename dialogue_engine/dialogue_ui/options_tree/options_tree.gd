@@ -2,6 +2,8 @@ extends VBoxContainer
 
 export(PackedScene) var dialogue_option_scene = preload("res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.tscn")
 
+onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
+
 signal choice_made
 
 
@@ -26,7 +28,7 @@ func add_option(option_id:String, option_type = null):
 		listeners_check = option_type.get("listeners", listeners_check)
 		
 		if not option_id.begins_with("_"):
-			for listener in listeners_check:
+			for listener in get_listener_nodes(listeners_check):
 				var recollection = listener.remembers_dialogue_option(option_id)
 				
 				if not recollection == null and recollection["speaker"] == speaker_check:
@@ -76,6 +78,17 @@ func clear_options():
 	for option in get_children():
 		option.queue_free()
 
+
+func get_listener_nodes(listeners:Array):
+	var nodes:Array = []
+	
+	for listener in listeners:
+		var node = CHARACTERS.character_nodes.get(listener)
+		
+		if not node == null:
+			nodes.append(node)
+	
+	return nodes
 
 func get_default_speaker():
 	return get_parent().default_speaker
