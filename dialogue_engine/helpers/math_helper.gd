@@ -31,7 +31,7 @@ func vector_add_dictionaries(dictionaries:Array) -> Dictionary:
 	return return_dictionary
 
 func calculate_loop_modulo(index:int, array_size:int, loop_from:int) -> int:
-	if index >= array_size:
+	if index >= array_size and not array_size == 0:
 		index = loop_from + (index % array_size) % (array_size - loop_from)
 	
 	return index
@@ -53,3 +53,11 @@ func get_unique_values_in_array(array:Array, stepify_value = 0):
 			already_checked_values.append(value)
 	
 	return unique_points
+
+func generate_array(length, content):
+	var array:Array = [ ]
+	
+	for _i in range(length):
+		array.append(content)
+	
+	return array

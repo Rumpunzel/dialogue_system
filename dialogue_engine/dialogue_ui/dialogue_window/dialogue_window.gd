@@ -1,15 +1,13 @@
-extends VBoxContainer
+extends GridContainer
 
-export(NodePath) var default_speaker_node
-export(Array, NodePath) var default_listener_nodes = []
+export(String) var default_speaker:String setget set_default_speaker, get_default_speaker
+export(Array, String) var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
 
 export(String, FILE, "*.json") var dialogue_options_file_path
 
+onready var speaker_name = $speaker_name
 onready var description_field = $description_field
 onready var dialogue_tree = $options_tree
-
-var default_speaker:Character setget set_default_speaker, get_default_speaker
-var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
 
 var dialogue_options:Dictionary
 
@@ -22,14 +20,10 @@ var first_time = true
 signal parsed_descriptions
 
 
-func _enter_tree():
-	default_speaker = get_node(default_speaker_node)
-	
-	for default_listener in default_listener_nodes:
-		default_listeners.append(get_node(default_listener))
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#default_speaker = get_node(default_speaker_node).id
+	
 	dialogue_options = json_helper.load_json(dialogue_options_file_path)
 	
 	dialogue_tree.connect("choice_made", self, "switch_tree")
@@ -60,16 +54,27 @@ func switch_tree(update:Dictionary):
 func parse_tree(update:Dictionary = { }):
 	var dialogue = current_dialogue.get(current_tree_stack.front(), { })
 	
-	var new_message:Array = update.get("message", [ ])
-	var default_message:Array = (dialogue.get("greeting", [ ]) if first_time else [ ]) + dialogue.get("message", [ ])
-	first_time = false
+	#var speaker = update.get("speaker", "")
+	#update_speaker(speaker)
 	
-	new_message = default_message if new_message.empty() else new_message
-	parse_descriptions(new_message.duplicate())
+	var new_message:Array = update.get("message", { }).get("text", [ ])
+	var greetings_message:Array = (dialogue.get("greeting", { }).get("text", [ ]) if first_time else [ ])
+	var message = dialogue.get("message", { }).get("text", [ ])
+	
+	var new_speakers:Array = update.get("message", { }).get("speakers", math_helper.generate_array(new_message.size(), ""))
+	var greetings_speakers:Array = (dialogue.get("greeting", { }).get("speakers", math_helper.generate_array(greetings_message.size(), "")) if first_time else [ ]) + dialogue.get("message", { }).get("speakers", math_helper.generate_array(message.size(), ""))
+	
+	first_time = false 
+	
+	new_message = (greetings_message + message) if new_message.empty() else new_message
+	new_speakers = greetings_speakers if new_speakers.empty() else new_speakers
+	
+	parse_descriptions(new_message.duplicate(), new_speakers.duplicate())
 	
 	current_options = update.get("options", dialogue.get("options", { }))
 
-func parse_descriptions(descriptions:Array):
+func parse_descriptions(descriptions:Array, speakers:Array):
+	update_speaker(speakers.pop_front())
 	update_description(descriptions.pop_front())
 	yield(description_field, "finished_typing")
 	
@@ -81,8 +86,18 @@ func parse_descriptions(descriptions:Array):
 	else:
 		emit_signal("parsed_descriptions")
 
+func update_speaker(speaker):
+	if not speaker == null:
+		if typeof(speaker) == TYPE_REAL:
+			speaker = default_listeners[min(int(speaker), default_listeners.size() - 1)]
+		
+		speaker_name.type_text("[right]<%s:>[/right]" % [speaker] if speaker.length() > 0 else "")
+	else:
+		speaker_name.text = ""
+
 func update_description(description):
-	description_field.update_description({ "message": description })
+	if not description == null:
+		description_field.update_description({ "message": description })
 
 func parse_options(options:Dictionary = current_options):
 	var has_option:Dictionary = { }
