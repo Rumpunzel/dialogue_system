@@ -37,7 +37,7 @@ margin_right = 150.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 150, 0 )
 script = ExtResource( 3 )
-typing_speed = 30.0
+typing_speed = 0.0
 pause_on_sentence_end = 0.0
 pause_on_comma = 0.0
 

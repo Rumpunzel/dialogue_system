@@ -36,7 +36,7 @@ func calculate_loop_modulo(index:int, array_size:int, loop_from:int) -> int:
 	
 	return index
 
-func get_unique_values_in_array(array:Array, stepify_value = 0):
+func get_unique_values_in_array(array:Array, stepify_value = 0) -> int:
 	var unique_points = 0
 	var already_checked_values:Array = []
 	
@@ -54,10 +54,18 @@ func get_unique_values_in_array(array:Array, stepify_value = 0):
 	
 	return unique_points
 
-func generate_array(length, content):
+func generate_array(length, content) -> Array:
 	var array:Array = [ ]
 	
 	for _i in range(length):
 		array.append(content)
 	
 	return array
+
+func get_array_from(array:Array, index:int) -> Array:
+	var return_array:Array = [ ]
+	
+	for i in range(index, array.size()):
+		return_array.append(array[i])
+	
+	return return_array

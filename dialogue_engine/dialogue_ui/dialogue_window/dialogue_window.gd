@@ -54,33 +54,29 @@ func switch_tree(update:Dictionary):
 func parse_tree(update:Dictionary = { }):
 	var dialogue = current_dialogue.get(current_tree_stack.front(), { })
 	
-	#var speaker = update.get("speaker", "")
-	#update_speaker(speaker)
-	
-	var new_message:Array = update.get("message", { }).get("text", [ ])
-	var greetings_message:Array = (dialogue.get("greeting", { }).get("text", [ ]) if first_time else [ ])
-	var message = dialogue.get("message", { }).get("text", [ ])
-	
-	var new_speakers:Array = update.get("message", { }).get("speakers", math_helper.generate_array(new_message.size(), ""))
-	var greetings_speakers:Array = (dialogue.get("greeting", { }).get("speakers", math_helper.generate_array(greetings_message.size(), "")) if first_time else [ ]) + dialogue.get("message", { }).get("speakers", math_helper.generate_array(message.size(), ""))
+	var new_message:Array = update.get("message", [ ])
+	var greeting_message:Array = dialogue["greeting"] if first_time else [ ]
+	var message = dialogue["message"]
 	
 	first_time = false 
 	
-	new_message = (greetings_message + message) if new_message.empty() else new_message
-	new_speakers = greetings_speakers if new_speakers.empty() else new_speakers
+	new_message = (greeting_message + message) if new_message.empty() else new_message
 	
-	parse_descriptions(new_message.duplicate(), new_speakers.duplicate())
+	parse_descriptions(new_message.duplicate())
 	
 	current_options = update.get("options", dialogue.get("options", { }))
 
-func parse_descriptions(descriptions:Array, speakers:Array):
-	update_speaker(speakers.pop_front())
-	update_description(descriptions.pop_front())
+func parse_descriptions(descriptions:Array):
+	var new_description:Dictionary = descriptions.pop_front()
+	
+	update_speaker(new_description.get("speaker", ""))
+	update_description(new_description["text"])
 	yield(description_field, "finished_typing")
 	
 	if not descriptions.empty():
 		var continue_info = dialogue_option.CONTINUE_JSON
 		continue_info["success_messages"] = [descriptions]
+		
 		dialogue_tree.add_option(CONSTANTS.CONTINUE_OPTION, continue_info)
 		dialogue_tree.update_list_numbers()
 	else:
@@ -91,7 +87,8 @@ func update_speaker(speaker):
 		if typeof(speaker) == TYPE_REAL:
 			speaker = default_listeners[min(int(speaker), default_listeners.size() - 1)]
 		
-		speaker_name.type_text("[right]<%s:>[/right]" % [speaker] if speaker.length() > 0 else "")
+		if not speaker_name.text == speaker + ":":
+			speaker_name.type_text("[right]<%s:>[/right]" % [speaker] if speaker.length() > 0 else "")
 	else:
 		speaker_name.text = ""
 

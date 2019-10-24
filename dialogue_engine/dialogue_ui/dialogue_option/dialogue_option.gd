@@ -8,58 +8,59 @@ const CONTINUE_JSON = { text = "Continue.", noteworthy = false }
 const EXIT_JSON = { text = "Exit.", noteworthy = false, exits_dialogue = true }
 const CUSTOM_JSON = { }
 
-export(String) var speaker
-export(Array, String) var listeners
+var id:String
 
-export var big_deal:bool = false
-
-var CHARACTERS
+var option_text:Dictionary
+var loop_success_option_text_from:int = 0
+var loop_failure_option_text_from:int = 0
 
 var required_approval_rating:float = 0
 
 var values_enable_success:Dictionary
 
-var success_messages:Dictionary = { }
-var loop_successes_from = 0
-var success_tree = ""
+var success_messages:Array = [ ]
+var loop_successes_from:int = 0
+var success_tree:String = ""
 
-var approval_rating_change_on_success:float
+var approval_rating_change_on_success:float setget , get_approval_rating_change_on_success
 
-var failure_messages:Dictionary = { }
+var failure_messages:Array = [ ]
 var loop_failures_from = 0
-var failure_tree = ""
-
-var tooltip = ""
-
-var single_use = true
-var exits_dialogue = false
-var is_back_option = false
-
-var big_deal_color = Color("FFD700")
-var clicked_alpha = 0.5
+var failure_tree:String = ""
 
 var value_changes:Dictionary
 
-var id
+var success_counter:int = 0
+var failure_counter:int = 0
 
-var success_counter = 0
-var failure_counter = 0
+var tooltip:String = ""
+
+var speaker:String
+var listeners:Array
+
+var big_deal:bool = false
+var exits_dialogue:bool = false
+var is_back_option:bool = false setget , get_is_back_option
+var noteworthy:bool = true setget , get_noteworthy
+var single_use:bool = true setget , get_single_use
+
+var big_deal_color:Color = Color("FFD700")
+var clicked_alpha:float = 0.5
+
 
 var option_json:Dictionary
 
-var option_text:Dictionary
-var loop_success_option_text_from = 0
-var loop_failure_option_text_from = 0
 
-var noteworthy = true
+var CHARACTERS
 
-var dialogue_counter = ""
+var dialogue_counter:String = ""
 
 var option_button
 var option_number
 var dialogue_option
 
 var listener_nodes:Array
+
 
 signal option_confirmed
 
@@ -171,15 +172,39 @@ func confirm_option(option_success):
 	
 	for listener in listener_nodes:
 		
-		listener.remember_response({ "id": id, "speaker": speaker, "listeners": listeners, "success": option_success, "value_changes": value_changes if untouched(1) else { }, "approval_change": approval_rating_change_on_success, "big_deal": big_deal, "success_counter": success_counter, "failure_counter": failure_counter, "json": option_json, "noteworthy": noteworthy })
+		listener.remember_response({ "id": id,
+				"speaker": speaker,
+				"listeners": listeners,
+				"success": option_success,
+				"value_changes": value_changes if untouched(1) else { },
+				"approval_change": approval_rating_change_on_success,
+				"big_deal": big_deal,
+				"success_counter": success_counter,
+				"failure_counter": failure_counter,
+				"json": option_json,
+				"noteworthy": noteworthy })
 	
-	var succ_mess = math_helper.calculate_loop_modulo(success_counter - 1, success_messages.size(), loop_successes_from)
-	var fail_mess = math_helper.calculate_loop_modulo(failure_counter - 1, failure_messages.size(), loop_failures_from)
-			
-	var success_message = success_messages["text"][succ_mess] if not success_messages.get("text", [ ]).empty() else [ ]
-	var failure_message = failure_messages["text"][fail_mess] if not failure_messages.get("text", [ ]).empty() else [ ]
+	var message:Array = [ ]
+	var new_tree:String = ""
 	
-	emit_signal("option_confirmed", { "success": option_success, "message": { "text": success_message if option_success else failure_message }, "new_tree": success_tree if option_success else failure_tree, "big_deal": big_deal, "is_back_option": is_back_option, "json": option_json })
+	if option_success:
+		var succ_mess = math_helper.calculate_loop_modulo(success_counter - 1, success_messages.size(), loop_successes_from)
+		message = success_messages[succ_mess] if not success_messages.empty() else [ ]
+		
+		new_tree = success_tree
+	else:
+		var fail_mess = math_helper.calculate_loop_modulo(failure_counter - 1, failure_messages.size(), loop_failures_from)
+		message = failure_messages[fail_mess] if not failure_messages.empty() else [ ]
+		
+		new_tree = failure_tree
+	
+	emit_signal("option_confirmed",
+			{ "success": option_success,
+			"message": message,
+			"new_tree": new_tree,
+			"big_deal": big_deal,
+			"is_back_option": is_back_option,
+			"json": option_json })
 
 func update_appearance(theme_color = null):
 	var new_color = null
@@ -219,3 +244,15 @@ func get_listener_nodes():
 			nodes.append(node)
 	
 	return nodes
+
+func get_approval_rating_change_on_success() -> float:
+	return approval_rating_change_on_success
+
+func get_is_back_option() -> bool:
+	return is_back_option
+
+func get_noteworthy() -> bool:
+	return noteworthy
+
+func get_single_use() -> bool:
+	return single_use
