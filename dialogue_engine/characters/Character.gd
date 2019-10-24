@@ -21,6 +21,8 @@ var character_json:Dictionary
 func _ready():
 	load_values()
 	#memories.load_values(id)
+	
+	CONSTANTS.get_CHARACTERS().register_character(id, self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -35,8 +37,8 @@ func calculate_perception_value(perception_values:Dictionary):
 	var values = { }
 	
 	for key in perception_values.keys():
-		var slope = GC.CONSTANTS[GC.PERCEPTION_VALUE_SLOPE]
-		var growth_point = GC.CONSTANTS[GC.PERCERPTION_VALUE_GROWTH_POINT]
+		var slope = GAME_CONSTANTS.PERCEPTION_VALUE_SLOPE
+		var growth_point = GAME_CONSTANTS.PERCERPTION_VALUE_GROWTH_POINT
 		# Philipp dark magic fuckery
 		values[key] = tanh(slope * (perception_values[key] + growth_point)) + tanh(slope * (perception_values[key] - growth_point))
 	

@@ -1,5 +1,7 @@
 extends Node
 
+const CHARACTERS_PATH = "/root/main/Characters"
+
 # Default dialogue tree name
 const DEFAULT_TREE = "start"
 
@@ -29,3 +31,6 @@ func print_to_console(print_string):
 	
 	if verbose_mode:
 		print(print_string)
+
+func get_CHARACTERS():
+	return get_node(CHARACTERS_PATH)
