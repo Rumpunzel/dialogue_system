@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/name_field.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_editor/utility/better_text_edit.gd" type="Script" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends ButtonWithConfirmation
@@ -47,6 +48,7 @@ save_button = NodePath("name_bar/help_divider/buttons_container/save")
 close_button = NodePath("name_bar/help_divider/buttons_container/close")
 delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
 portrait = NodePath("property_divider/character_divider/charatcer_info/Portrait")
+bio = NodePath("property_divider/character_divider/charatcer_info/Bio")
 
 [node name="NPC" parent="." instance=ExtResource( 2 )]
 
@@ -145,8 +147,15 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+hiding_enabled = 1
+wrap_enabled = true
+caret_blink = true
+script = ExtResource( 6 )
 
-[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 6 )]
+[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 7 )]
 
 [node name="data_divider" type="HSplitContainer" parent="property_divider"]
 margin_left = 406.0
@@ -178,5 +187,5 @@ margin_bottom = 746.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CharacterProperties" parent="property_divider/data_divider" instance=ExtResource( 7 )]
+[node name="CharacterProperties" parent="property_divider/data_divider" instance=ExtResource( 8 )]
 root_node = NodePath("../../..")

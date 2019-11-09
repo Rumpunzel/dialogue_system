@@ -19,6 +19,8 @@ var percieved_starting_values:Dictionary setget set_percieved_starting_values, g
 var portrait:Texture setget set_portrait, get_portrait
 var portrait_path:String setget set_portrait_path, get_portrait_path
 
+var bio:String setget set_bio, get_bio
+
 var character_json:Dictionary
 
 
@@ -78,6 +80,10 @@ func remembers_dialogue_option(unique_id):
 	return memories.remembers_dialogue_option(unique_id)
 
 
+func set_bio(new_bio:String):
+	bio = new_bio
+	character_json["bio"] = bio
+
 func set_id(new_id:String):
 	id = new_id
 	
@@ -96,6 +102,9 @@ func set_portrait_path(new_path:String):
 	portrait = load(portrait_path)
 	character_json["portrait_path"] = portrait_path
 
+
+func get_bio() -> String:
+	return bio
 
 func get_id() -> String:
 	return id
