@@ -14,4 +14,4 @@ func _ready():
 
 
 func get_json_path():
-	return Character.json_paths[Character.STATS_PATHS.MODIFIED]
+	return Character.DIALOGUE_PATHS

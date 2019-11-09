@@ -55,4 +55,5 @@ func add_child_alphabetically(new_child):
 
 
 func get_json_path():
+	print("4" % [4])
 	return ""

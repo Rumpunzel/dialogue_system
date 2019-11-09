@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://dialogue_editor/default_editor_tab.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/name_field.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ButtonWithConfirmation
+
+
+func create_dialog():
+	var dialog = .create_dialog()
+	
+	dialog.get_cancel().queue_free()
+	dialog.get_ok().queue_free()
+	
+	dialog.add_button(\"Yes\", true, \"yes\")
+	dialog.add_button(\"No\", true, \"no\")
+	dialog.connect(\"custom_action\", self, \"parse_action\")
+	
+	dialog.add_cancel(\"Cancel\")
+	
+	return dialog
+
+func confirm_dialog(save_changes = true):
+	emit_signal(\"confirmed\", save_changes)
+
+func parse_action(action):
+	match action:
+		\"yes\":
+			 confirm_dialog()
+		\"no\":
+			 confirm_dialog(false)
+"
+
+[node name="default_editor_tab" type="VBoxContainer"]
+margin_right = 1200.0
+margin_bottom = 800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+save_button = NodePath("name_bar/help_divider/buttons_container/save")
+close_button = NodePath("name_bar/help_divider/buttons_container/close")
+delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
+
+[node name="name_bar" type="MarginContainer" parent="."]
+editor/display_folded = true
+margin_right = 1200.0
+margin_bottom = 50.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="help_divider" type="HSplitContainer" parent="name_bar"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 1180.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="name_field" type="LineEdit" parent="name_bar/help_divider"]
+margin_right = 137.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 137, 0 )
+clear_button_enabled = true
+placeholder_text = "Character Name"
+caret_blink = true
+script = ExtResource( 2 )
+expand = true
+root_node = NodePath("../../..")
+
+[node name="buttons_container" type="HBoxContainer" parent="name_bar/help_divider"]
+margin_left = 949.0
+margin_right = 1160.0
+margin_bottom = 30.0
+size_flags_horizontal = 8
+
+[node name="delete" type="Button" parent="name_bar/help_divider/buttons_container"]
+margin_right = 55.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 50, 30 )
+size_flags_horizontal = 8
+text = "Delete"
+script = ExtResource( 3 )
+confirmation_text = "Delete Character?"
+
+[node name="close" type="Button" parent="name_bar/help_divider/buttons_container"]
+margin_left = 59.0
+margin_right = 109.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 50, 30 )
+size_flags_horizontal = 8
+text = "Close"
+script = SubResource( 1 )
+confirmation_text = "Save Changes?"
+
+[node name="save" type="Button" parent="name_bar/help_divider/buttons_container"]
+margin_left = 113.0
+margin_right = 211.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 50, 30 )
+size_flags_horizontal = 8
+text = "Save Changes"
