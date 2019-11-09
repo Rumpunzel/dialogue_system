@@ -7,12 +7,15 @@
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_properties.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/character_directory.gd" type="Script" id=6]
 
-[node name="character_editor" index="0" instance=ExtResource( 1 )]
+[node name="character_editor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 portrait = NodePath("character_properties/character_divider/charatcer_info/Portrait")
 bio = NodePath("character_properties/character_divider/charatcer_info/Bio")
 
 [node name="NPC" parent="." index="0" instance=ExtResource( 3 )]
+
+[node name="name_bar" parent="." index="1"]
+editor/display_folded = true
 
 [node name="name_field" parent="name_bar/help_divider" index="0"]
 placeholder_text = "Character Name"
