@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_values.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/approval__bar.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=4]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_graph.gd" type="Script" id=5]
+[ext_resource path="res://dialogue_editor/utility/value_slider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/approval__bar.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_graph.gd" type="Script" id=6]
 
 [node name="CharacterProperties" type="VBoxContainer"]
 margin_left = 270.0
@@ -70,6 +71,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 script = ExtResource( 2 )
+value_slider = ExtResource( 3 )
 root_node = NodePath("../../../../../..")
 
 [node name="approval_container" type="PanelContainer" parent="categories/Perception Values/loyalty_divier"]
@@ -97,7 +99,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 step = 0.0
 percent_visible = false
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 root_node = NodePath("../../../../../..")
 
 [node name="graph_container" type="PanelContainer" parent="categories/Perception Values"]
@@ -117,7 +119,7 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
 
-[node name="perception_graph" parent="categories/Perception Values/graph_container/margin_container" instance=ExtResource( 4 )]
+[node name="perception_graph" parent="categories/Perception Values/graph_container/margin_container" instance=ExtResource( 5 )]
 margin_bottom = 276.0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 root_node = NodePath("../../../../..")

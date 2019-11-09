@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/characters_list.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/character_entry.tscn" type="PackedScene" id=2]
 
 [node name="character_directory" type="TabContainer"]
 margin_top = 379.0
@@ -40,3 +41,4 @@ margin_top = 10.0
 margin_right = 376.0
 margin_bottom = 321.0
 script = ExtResource( 1 )
+character_entry = ExtResource( 2 )
