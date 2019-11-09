@@ -5,7 +5,7 @@ export(PackedScene) var character_entry = preload("res://dialogue_editor/propert
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	load_entries()#
+	load_entries()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
