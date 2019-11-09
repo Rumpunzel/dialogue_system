@@ -5,7 +5,7 @@
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/name_field.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/utility/better_text_edit.gd" type="Script" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Bio/Bio.tscn" type="PackedScene" id=6]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=8]
 
@@ -137,7 +137,7 @@ tab_align = 0
 
 [node name="Portrait" parent="property_divider/character_divider/charatcer_info" instance=ExtResource( 5 )]
 
-[node name="Bio" type="TextEdit" parent="property_divider/character_divider/charatcer_info"]
+[node name="Bio" parent="property_divider/character_divider/charatcer_info" instance=ExtResource( 6 )]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,15 +145,6 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-highlight_current_line = true
-syntax_highlighting = true
-show_line_numbers = true
-hiding_enabled = 1
-wrap_enabled = true
-caret_blink = true
-script = ExtResource( 6 )
 
 [node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 7 )]
 

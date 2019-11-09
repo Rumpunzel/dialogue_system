@@ -1,4 +1,5 @@
 extends TextEdit
+class_name BetterTextEdit
 
 signal new_text
 

@@ -23,7 +23,7 @@ func _ready():
 	get_node(delete_button).connect("confirmed", self, "delete_character")
 	
 	get_node(portrait).connect("new_portrait", NPC, "set_portrait_path")
-	get_node(bio).connect("new_text", NPC, "set_bio")
+	get_node(bio).connect("new_bio", NPC, "set_bio")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -38,7 +38,7 @@ func setup(id:String):
 	old_id = id
 	
 	get_node(portrait).set_portrait(NPC.portrait_path, true)
-	get_node(bio).set_text(NPC.bio)
+	get_node(bio).set_bio(NPC.bio)
 
 func save_changes():
 	NPC.store_values()
