@@ -119,6 +119,18 @@ texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
+[node name="file_dialog" type="FileDialog" parent="property_divider/character_divider/charatcer_info/Portrait"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 379.0
+margin_bottom = 324.0
+window_title = "Open a File"
+dialog_text = "Select the Character's Portrait."
+mode = 0
+access = 2
+current_dir = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor"
+current_path = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor/"
+
 [node name="Bio" type="TextEdit" parent="property_divider/character_divider/charatcer_info"]
 visible = false
 anchor_right = 1.0

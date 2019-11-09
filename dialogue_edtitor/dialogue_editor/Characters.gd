@@ -3,7 +3,6 @@ extends TabContainer
 const NEW_CHARACTER = "New Character"
 
 export(PackedScene) var character_editor = preload("res://dialogue_editor/properties/Character Editor.tscn")
-export(PackedScene) var NPC_scene = preload("res://dialogue_engine/characters/NPC.tscn")
 
 export(NodePath) var new_character_button
 

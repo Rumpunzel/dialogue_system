@@ -33,4 +33,4 @@ func print_to_console(print_string):
 		print(print_string)
 
 func get_CHARACTERS():
-	return get_node(characters_path) if not characters_path == "" else null
+	return get_node(characters_path) if has_node(characters_path) else null

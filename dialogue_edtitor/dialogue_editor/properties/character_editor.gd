@@ -34,8 +34,9 @@ func setup(id:String):
 func save_changes():
 	NPC.store_values()
 	
-	if not character_id == old_id:
+	if not old_id == character_id:
 		delete_character(old_id)
+		old_id = character_id
 
 func close_tab():
 	queue_free()
