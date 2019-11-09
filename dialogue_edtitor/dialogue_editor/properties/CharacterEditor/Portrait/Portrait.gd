@@ -1,4 +1,3 @@
-tool
 extends PanelContainer
 
 export(NodePath) var portrait_node
@@ -6,7 +5,7 @@ export(NodePath) var portrait_node
 export(NodePath) var change_button
 export(NodePath) var reset_button
 
-export(String, FILE, GLOBAL, "*.png") var default_portrait
+export(String, FILE, "*.png") var default_portrait
 
 onready var portrait = get_node(portrait_node)
 
