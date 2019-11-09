@@ -86,9 +86,13 @@ func set_personal_values(new_values:Dictionary):
 	personal_values = new_values
 	
 	emit_signal("values_changed", personal_values)
+	
+	character_json["personal_values"] = personal_values
 
 func set_character_perceptions(new_values:Dictionary):
-	personal_values = new_values
+	character_perceptions = new_values
+	
+	character_json["character_perceptions"] = character_perceptions
 
 
 func get_personal_values() -> Dictionary:

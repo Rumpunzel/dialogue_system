@@ -5,6 +5,8 @@ export(NodePath) var save_button
 export(NodePath) var close_button
 export(NodePath) var delete_button
 
+export(NodePath) var portrait
+
 onready var NPC:NPC = $NPC
 
 var character_id:String setget set_character_id, get_character_id
@@ -16,8 +18,10 @@ signal current_NPC
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(save_button).connect("pressed", self, "save_changes")
-	get_node(close_button).connect("pressed", self, "close_tab")
-	get_node(delete_button).connect("pressed", self, "delete_character")
+	get_node(close_button).connect("confirmed", self, "close_tab")
+	get_node(delete_button).connect("confirmed", self, "delete_character")
+	
+	get_node(portrait).connect("new_portrait", NPC, "set_portrait_path")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -30,6 +34,8 @@ func setup(id:String):
 	emit_signal("current_NPC", NPC)
 	
 	old_id = id
+	
+	get_node(portrait).set_portrait(NPC.portrait_path, true)
 
 func save_changes():
 	NPC.store_values()
@@ -37,8 +43,14 @@ func save_changes():
 	if not old_id == character_id:
 		delete_character(old_id)
 		old_id = character_id
+	
+	if CONSTANTS.verbose_mode:
+		CONSTANTS.print_to_console("%s changes saved." % [character_id])
 
-func close_tab():
+func close_tab(save_changes = true):
+	if save_changes:
+		save_changes()
+	
 	queue_free()
 
 func delete_character(id = NPC.id):
@@ -49,8 +61,11 @@ func delete_character(id = NPC.id):
 	
 	json_helper.save_json(loaded_json, json_path)
 	
+	if CONSTANTS.verbose_mode:
+		CONSTANTS.print_to_console("%s deleted." % [id])
+	
 	if id == character_id:
-		close_tab()
+		close_tab(false)
 
 func character_exists(id:String):
 	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]

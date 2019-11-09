@@ -1,13 +1,86 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/character_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/properties/name_field.gd" type="Script" id=3]
-[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=4]
-[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/properties/perception_values.gd" type="Script" id=6]
-[ext_resource path="res://dialogue_editor/properties/approval__bar.gd" type="Script" id=7]
-[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=8]
+[ext_resource path="res://dialogue_editor/properties/button_with_confirmation.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/properties/Portrait.gd" type="Script" id=5]
+[ext_resource path="res://data/assets/images/icon.png" type="Texture" id=6]
+[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=7]
+[ext_resource path="res://dialogue_editor/properties/image_dialog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=9]
+[ext_resource path="res://dialogue_editor/properties/perception_values.gd" type="Script" id=10]
+[ext_resource path="res://dialogue_editor/properties/approval__bar.gd" type="Script" id=11]
+[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=12]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ButtonWithConfirmation
+
+
+func create_dialog():
+	var dialog = .create_dialog()
+	
+	dialog.get_cancel().queue_free()
+	dialog.get_ok().queue_free()
+	
+	dialog.add_button(\"Yes\", true, \"yes\")
+	dialog.add_button(\"No\", true, \"no\")
+	dialog.connect(\"custom_action\", self, \"parse_action\")
+	
+	dialog.add_cancel(\"Cancel\")
+	
+	return dialog
+
+func confirm_dialog(save_changes = true):
+	emit_signal(\"confirmed\", save_changes)
+
+func parse_action(action):
+	match action:
+		\"yes\":
+			 confirm_dialog()
+		\"no\":
+			 confirm_dialog(false)
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+export(PackedScene) var file_dialog
+
+var current_image_path:String
+
+signal new_image
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"pressed\", self, \"open_dialog\")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func open_dialog():
+	var dialog = create_dialog()
+	
+	dialog.connect(\"file_selected\", self, \"confirm_dialog\")
+	
+	dialog.popup_centered_ratio(0.6)
+
+func create_dialog():
+	var dialog = file_dialog.instance()
+	
+	dialog.current_path = current_image_path
+	
+	add_child(dialog)
+	
+	return dialog
+
+func confirm_dialog(selected_image):
+	current_image_path = selected_image
+	emit_signal(\"new_image\", selected_image)
+"
 
 [node name="New Character" type="VBoxContainer"]
 margin_right = 1200.0
@@ -18,6 +91,7 @@ script = ExtResource( 1 )
 save_button = NodePath("name_bar/help_divider/buttons_container/save")
 close_button = NodePath("name_bar/help_divider/buttons_container/close")
 delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
+portrait = NodePath("property_divider/character_divider/charatcer_info/Portrait")
 
 [node name="NPC" parent="." instance=ExtResource( 2 )]
 
@@ -61,6 +135,8 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 50, 30 )
 size_flags_horizontal = 8
 text = "Delete"
+script = ExtResource( 4 )
+confirmation_text = "Delete Character?"
 
 [node name="close" type="Button" parent="name_bar/help_divider/buttons_container"]
 margin_left = 59.0
@@ -69,6 +145,8 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 50, 30 )
 size_flags_horizontal = 8
 text = "Close"
+script = SubResource( 1 )
+confirmation_text = "Save Changes?"
 
 [node name="save" type="Button" parent="name_bar/help_divider/buttons_container"]
 margin_left = 113.0
@@ -107,29 +185,48 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+script = ExtResource( 5 )
+portrait_node = NodePath("portrait_container/portrait")
+change_button = NodePath("portrait_container/buttons_container/change")
+reset_button = NodePath("portrait_container/buttons_container/reset")
+default_portrait = ExtResource( 6 )
 
-[node name="image" type="TextureRect" parent="property_divider/character_divider/charatcer_info/Portrait"]
+[node name="portrait_container" type="VBoxContainer" parent="property_divider/character_divider/charatcer_info/Portrait"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 379.0
 margin_bottom = 324.0
+
+[node name="portrait" type="TextureRect" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container"]
+margin_right = 372.0
+margin_bottom = 293.0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
 
-[node name="file_dialog" type="FileDialog" parent="property_divider/character_divider/charatcer_info/Portrait"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 379.0
-margin_bottom = 324.0
-window_title = "Open a File"
-dialog_text = "Select the Character's Portrait."
-mode = 0
-access = 2
-current_dir = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor"
-current_path = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor/"
+[node name="buttons_container" type="HBoxContainer" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container"]
+margin_top = 297.0
+margin_right = 372.0
+margin_bottom = 317.0
+
+[node name="reset" type="Button" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container/buttons_container"]
+margin_right = 99.0
+margin_bottom = 20.0
+text = "Reset Portrait"
+script = ExtResource( 4 )
+confirmation_text = "Reset Portrait?"
+
+[node name="change" type="Button" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container/buttons_container"]
+margin_left = 103.0
+margin_right = 372.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Change Portrait"
+script = SubResource( 2 )
+file_dialog = ExtResource( 8 )
 
 [node name="Bio" type="TextEdit" parent="property_divider/character_divider/charatcer_info"]
 visible = false
@@ -142,7 +239,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 5 )]
+[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 9 )]
 
 [node name="data_divider" type="HSplitContainer" parent="property_divider"]
 margin_left = 406.0
@@ -236,7 +333,7 @@ margin_bottom = 294.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
-script = ExtResource( 6 )
+script = ExtResource( 10 )
 root_node = NodePath("../../../../../../../../..")
 
 [node name="approval_container" type="PanelContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier"]
@@ -264,7 +361,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 step = 0.0
 percent_visible = false
-script = ExtResource( 7 )
+script = ExtResource( 11 )
 root_node = NodePath("../../../../../../../../..")
 
 [node name="graph_container" type="PanelContainer" parent="property_divider/data_divider/properties/categories/Perception Values"]
@@ -284,6 +381,6 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
 
-[node name="perception_graph" parent="property_divider/data_divider/properties/categories/Perception Values/graph_container/margin_container" instance=ExtResource( 8 )]
+[node name="perception_graph" parent="property_divider/data_divider/properties/categories/Perception Values/graph_container/margin_container" instance=ExtResource( 12 )]
 margin_bottom = 276.0
 subject_node = NodePath("../../../../../../../../NPC")

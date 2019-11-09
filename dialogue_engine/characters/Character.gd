@@ -16,7 +16,11 @@ onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
 
 var percieved_starting_values:Dictionary setget set_percieved_starting_values, get_percieved_starting_values
 
+var portrait:Texture setget set_portrait, get_portrait
+var portrait_path:String setget set_portrait_path, get_portrait_path
+
 var character_json:Dictionary
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -82,6 +86,15 @@ func set_id(new_id:String):
 
 func set_percieved_starting_values(new_values:Dictionary):
 	percieved_starting_values = new_values
+	character_json["percieved_starting_values"] = percieved_starting_values
+
+func set_portrait(new_portrait:Texture):
+	portrait = new_portrait
+
+func set_portrait_path(new_path:String):
+	portrait_path = new_path
+	portrait = load(portrait_path)
+	character_json["portrait_path"] = portrait_path
 
 
 func get_id() -> String:
@@ -89,3 +102,9 @@ func get_id() -> String:
 
 func get_percieved_starting_values() -> Dictionary:
 	return percieved_starting_values
+
+func get_portrait() -> Texture:
+	return portrait
+
+func get_portrait_path() -> String:
+	return portrait_path
