@@ -10,10 +10,6 @@ signal confirmed
 func _ready():
 	connect("pressed", self, "open_dialog")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func open_dialog():
 	var dialog = create_dialog()

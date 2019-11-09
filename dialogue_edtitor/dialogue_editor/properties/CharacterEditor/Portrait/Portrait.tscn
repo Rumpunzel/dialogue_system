@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.gd" type="Script" id=1]
-[ext_resource path="res://data/assets/images/icon.png" type="Texture" id=2]
-[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=3]
-[ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/change_portrait_button.tres.gd" type="Script" id=5]
-[ext_resource path="res://dialogue_editor/utility/image_dialog.tscn" type="PackedScene" id=6]
-
-
+[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=2]
+[ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/change_portrait_button.tres.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/utility/image_dialog.tscn" type="PackedScene" id=5]
 
 [node name="Portrait" type="PanelContainer"]
 anchor_right = 1.0
@@ -20,7 +17,7 @@ script = ExtResource( 1 )
 portrait_node = NodePath("portrait_container/portrait")
 change_button = NodePath("portrait_container/buttons_container/change")
 reset_button = NodePath("portrait_container/buttons_container/reset")
-default_portrait = ExtResource( 2 )
+default_portrait = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor/data/assets/images/icon.png"
 
 [node name="portrait_container" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -34,7 +31,7 @@ margin_bottom = 726.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
@@ -47,7 +44,7 @@ margin_bottom = 750.0
 margin_right = 99.0
 margin_bottom = 20.0
 text = "Reset Portrait"
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 confirmation_text = "Reset Portrait?"
 
 [node name="change" type="Button" parent="portrait_container/buttons_container"]
@@ -56,5 +53,6 @@ margin_right = 1178.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Change Portrait"
-script = ExtResource( 5 )
-file_dialog = ExtResource( 6 )
+script = ExtResource( 4 )
+file_dialog = ExtResource( 5 )
+root_node = NodePath("../../..")
