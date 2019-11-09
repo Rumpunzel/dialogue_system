@@ -83,6 +83,11 @@ _global_script_classes=[ {
 "class": "value_slider",
 "language": "GDScript",
 "path": "res://dialogue_editor/utility/value_slider.gd"
+}, {
+"base": "VBoxContainer",
+"class": "values_list",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/values_list.gd"
 } ]
 _global_script_class_icons={
 "BetterLineEdit": "",
@@ -99,7 +104,8 @@ _global_script_class_icons={
 "memories": "",
 "menu_option": "",
 "perception_graph": "",
-"value_slider": ""
+"value_slider": "",
+"values_list": ""
 }
 
 [application]

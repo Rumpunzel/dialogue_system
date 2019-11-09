@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/GameProperties/perception_values_editor.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/GameProperties/max_approval_label.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/properties/GameProperties/maximum_approval_rating.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/entry_container.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/max_approval_label.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/maximum_approval_rating.gd" type="Script" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -86,7 +87,6 @@ text = "Edit the values the Characters in the game use to determine how well the
 autowrap = true
 
 [node name="scroll_container" type="ScrollContainer" parent="value_tabs/Perception Values/name_container/value_names"]
-editor/display_folded = true
 margin_top = 68.0
 margin_right = 1178.0
 margin_bottom = 702.0
@@ -99,6 +99,7 @@ margin_bottom = 634.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+entry_scene = ExtResource( 2 )
 save_button = NodePath("../../title_divider/save")
 reset_button = NodePath("../../title_divider/reset")
 
@@ -124,7 +125,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 valign = 1
 autowrap = true
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="maximum_approval_rating" type="LineEdit" parent="value_tabs/Perception Values/name_container/value_names/panel_container/max_value_splitter"]
 margin_left = 1105.0
@@ -135,6 +136,6 @@ size_flags_horizontal = 8
 align = 2
 placeholder_text = "100"
 caret_blink = true
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 expand = true
 clear_button = false
