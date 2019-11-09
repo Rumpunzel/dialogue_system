@@ -42,3 +42,6 @@ func parse_tree(options, root_entry, column_offset = 0):
 			#entry.set_editable(column_offset + 1, true)
 		
 		entry.collapsed = true
+		
+		if root_entry == root:
+			entry.add_button(column_offset + 1, preload("res://assets/images/icon.png"))
