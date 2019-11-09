@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/characters_list.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/characters_list.gd" type="Script" id=1]
 
 [node name="character_directory" type="TabContainer"]
 margin_top = 379.0

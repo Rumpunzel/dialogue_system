@@ -6,7 +6,7 @@
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/Bio/Bio.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/character_directory.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
