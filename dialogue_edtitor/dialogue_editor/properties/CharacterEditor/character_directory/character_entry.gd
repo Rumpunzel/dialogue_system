@@ -16,4 +16,4 @@ func init(id:String):
 
 
 func _on_open_pressed():
-	get_node("/root/main/editor/Characters").open_new_character($name.text)
+	get_node("/root/main/editor/Characters").open_new_tab($name.text)

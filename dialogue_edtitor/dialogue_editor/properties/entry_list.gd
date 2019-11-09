@@ -1,6 +1,9 @@
 extends VBoxContainer
+class_name entry_list
 
-export(PackedScene) var character_entry
+export(PackedScene) var entry_scene
+
+var json_path
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +16,7 @@ func _process(_delta):
 
 
 func load_entries():
-	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]
+	json_path = get_json_path()
 	var loaded_json = json_helper.load_json(json_path)
 	
 	for entry in get_children():
@@ -23,7 +26,7 @@ func load_entries():
 	
 	for entry in loaded_json.keys():
 		if has_entry(entry) < 0:
-			var new_entry = character_entry.instance()
+			var new_entry = entry_scene.instance()
 			new_entry.init(entry)
 			add_child_alphabetically(new_entry)
 
@@ -49,3 +52,7 @@ func add_child_alphabetically(new_child):
 				break
 			elif i == children.size() - 1:
 				add_child(new_child)
+
+
+func get_json_path():
+	return ""

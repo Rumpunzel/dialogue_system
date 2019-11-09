@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://dialogue_editor/properties/directory.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/entry_list.gd" type="Script" id=2]
+
+[node name="directory" type="TabContainer"]
+margin_top = 379.0
+margin_right = 394.0
+margin_bottom = 746.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+script = ExtResource( 1 )
+main_tab_name = "All Entries"
+main_tab = NodePath("All Entries")
+
+[node name="All Entries" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll_container" type="ScrollContainer" parent="All Entries"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="margin_container" type="MarginContainer" parent="All Entries/scroll_container"]
+margin_right = 386.0
+margin_bottom = 331.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="entry_list" type="VBoxContainer" parent="All Entries/scroll_container/margin_container"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 376.0
+margin_bottom = 321.0
+script = ExtResource( 2 )
