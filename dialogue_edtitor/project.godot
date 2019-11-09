@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "LineEdit",
 "class": "BetterLineEdit",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/better_line_edit.gd"
+"path": "res://dialogue_editor/utility/better_line_edit.gd"
 }, {
 "base": "ProgressBar",
 "class": "BetterProgressBar",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/better_progress_bar.gd"
+"path": "res://dialogue_editor/utility/better_progress_bar.gd"
 }, {
 "base": "Button",
 "class": "ButtonWithConfirmation",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/button_with_confirmation.gd"
+"path": "res://dialogue_editor/utility/button_with_confirmation.gd"
 }, {
 "base": "Node",
 "class": "Character",
@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "VBoxContainer",
 "class": "character_editor",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/character_editor.gd"
+"path": "res://dialogue_editor/properties/CharacterEditor/character_editor.gd"
 }, {
 "base": "Label",
 "class": "dialogue_option",
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "MenuButton",
 "class": "menu_option",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/options_button.gd"
+"path": "res://dialogue_editor/utility/options_button.gd"
 }, {
 "base": "Control",
 "class": "perception_graph",
@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "HBoxContainer",
 "class": "value_slider",
 "language": "GDScript",
-"path": "res://dialogue_editor/properties/value_slider.gd"
+"path": "res://dialogue_editor/utility/value_slider.gd"
 } ]
 _global_script_class_icons={
 "BetterLineEdit": "",

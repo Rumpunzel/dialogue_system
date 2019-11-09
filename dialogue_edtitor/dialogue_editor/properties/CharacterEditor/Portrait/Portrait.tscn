@@ -1,11 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/Portrait.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.gd" type="Script" id=1]
 [ext_resource path="res://data/assets/images/icon.png" type="Texture" id=2]
 [ext_resource path="res://data/assets/images/dood.png" type="Texture" id=3]
-[ext_resource path="res://dialogue_editor/properties/button_with_confirmation.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_editor/properties/Portrait/change_portrait_button.tres.gd" type="Script" id=5]
-[ext_resource path="res://dialogue_editor/properties/image_dialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/change_portrait_button.tres.gd" type="Script" id=5]
+[ext_resource path="res://dialogue_editor/utility/image_dialog.tscn" type="PackedScene" id=6]
+
+
 
 [node name="Portrait" type="PanelContainer"]
 anchor_right = 1.0

@@ -2,7 +2,7 @@ extends GridContainer
 
 enum { VALUE_NAME, SLIDER }
 
-export(PackedScene) var value_slider = preload("res://dialogue_editor/properties/value_slider.tscn")
+export(PackedScene) var value_slider = preload("res://dialogue_editor/utility/value_slider.tscn")
 
 export(NodePath) var root_node
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/CharacterProperties/CharacterProperties.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/perception_values.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/properties/approval__bar.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_values.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/approval__bar.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=4]
-[ext_resource path="res://dialogue_editor/properties/CharacterProperties/perception_graph.gd" type="Script" id=5]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_graph.gd" type="Script" id=5]
 
 [node name="CharacterProperties" type="VBoxContainer"]
 margin_left = 270.0

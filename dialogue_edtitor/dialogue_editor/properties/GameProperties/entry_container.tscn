@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/entry_container.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/better_line_edit.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/properties/options_button.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/entry_container.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/utility/better_line_edit.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/utility/options_button.gd" type="Script" id=3]
+
 
 [node name="entry_container" type="HBoxContainer"]
 margin_right = 1192.0

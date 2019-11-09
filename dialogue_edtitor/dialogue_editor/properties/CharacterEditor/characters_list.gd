@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-export(PackedScene) var character_entry = preload("res://dialogue_editor/properties/character_entry.tscn")
+export(PackedScene) var character_entry = preload("res://dialogue_editor/properties/CharacterEditor/character_entry.tscn")
 
 
 # Called when the node enters the scene tree for the first time.

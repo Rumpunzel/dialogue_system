@@ -1,12 +1,14 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/character_editor.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=2]
-[ext_resource path="res://dialogue_editor/properties/name_field.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_editor/properties/button_with_confirmation.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_editor/properties/Portrait/Portrait.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue_editor/properties/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/name_field.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/Portrait/Portrait.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=7]
+
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends ButtonWithConfirmation

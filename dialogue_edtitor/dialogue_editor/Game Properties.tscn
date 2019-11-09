@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://dialogue_editor/properties/perception_values_editor.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/max_approval_label.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/properties/maximum_approval_rating.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/perception_values_editor.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/max_approval_label.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/properties/GameProperties/maximum_approval_rating.gd" type="Script" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button

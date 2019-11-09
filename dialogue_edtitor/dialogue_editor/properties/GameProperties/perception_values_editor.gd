@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-export(PackedScene) var entry_scene = preload("res://dialogue_editor/properties/entry_container.tscn")
+export(PackedScene) var entry_scene = preload("res://dialogue_editor/properties/GameProperties/entry_container.tscn")
 
 export(NodePath) var save_button
 export(NodePath) var reset_button
