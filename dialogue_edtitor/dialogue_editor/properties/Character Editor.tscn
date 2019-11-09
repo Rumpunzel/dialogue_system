@@ -1,17 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://dialogue_editor/properties/character_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/properties/name_field.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_editor/properties/button_with_confirmation.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_editor/properties/Portrait.gd" type="Script" id=5]
-[ext_resource path="res://data/assets/images/icon.png" type="Texture" id=6]
-[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=7]
-[ext_resource path="res://dialogue_editor/properties/image_dialog.tscn" type="PackedScene" id=8]
-[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=9]
-[ext_resource path="res://dialogue_editor/properties/perception_values.gd" type="Script" id=10]
-[ext_resource path="res://dialogue_editor/properties/approval__bar.gd" type="Script" id=11]
-[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=12]
+[ext_resource path="res://dialogue_editor/properties/Portrait/Portrait.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_editor/properties/character_directory.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends ButtonWithConfirmation
@@ -40,46 +35,6 @@ func parse_action(action):
 			 confirm_dialog()
 		\"no\":
 			 confirm_dialog(false)
-"
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Button
-
-export(PackedScene) var file_dialog
-
-var current_image_path:String
-
-signal new_image
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	connect(\"pressed\", self, \"open_dialog\")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func open_dialog():
-	var dialog = create_dialog()
-	
-	dialog.connect(\"file_selected\", self, \"confirm_dialog\")
-	
-	dialog.popup_centered_ratio(0.6)
-
-func create_dialog():
-	var dialog = file_dialog.instance()
-	
-	dialog.current_path = current_image_path
-	
-	add_child(dialog)
-	
-	return dialog
-
-func confirm_dialog(selected_image):
-	current_image_path = selected_image
-	emit_signal(\"new_image\", selected_image)
 "
 
 [node name="New Character" type="VBoxContainer"]
@@ -178,55 +133,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 
-[node name="Portrait" type="PanelContainer" parent="property_divider/character_divider/charatcer_info"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-script = ExtResource( 5 )
-portrait_node = NodePath("portrait_container/portrait")
-change_button = NodePath("portrait_container/buttons_container/change")
-reset_button = NodePath("portrait_container/buttons_container/reset")
-default_portrait = ExtResource( 6 )
-
-[node name="portrait_container" type="VBoxContainer" parent="property_divider/character_divider/charatcer_info/Portrait"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 379.0
-margin_bottom = 324.0
-
-[node name="portrait" type="TextureRect" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container"]
-margin_right = 372.0
-margin_bottom = 293.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 6
-
-[node name="buttons_container" type="HBoxContainer" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container"]
-margin_top = 297.0
-margin_right = 372.0
-margin_bottom = 317.0
-
-[node name="reset" type="Button" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container/buttons_container"]
-margin_right = 99.0
-margin_bottom = 20.0
-text = "Reset Portrait"
-script = ExtResource( 4 )
-confirmation_text = "Reset Portrait?"
-
-[node name="change" type="Button" parent="property_divider/character_divider/charatcer_info/Portrait/portrait_container/buttons_container"]
-margin_left = 103.0
-margin_right = 372.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Change Portrait"
-script = SubResource( 2 )
-file_dialog = ExtResource( 8 )
+[node name="Portrait" parent="property_divider/character_divider/charatcer_info" instance=ExtResource( 5 )]
 
 [node name="Bio" type="TextEdit" parent="property_divider/character_divider/charatcer_info"]
 visible = false
@@ -239,7 +146,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 9 )]
+[node name="character_directory" parent="property_divider/character_divider" instance=ExtResource( 6 )]
 
 [node name="data_divider" type="HSplitContainer" parent="property_divider"]
 margin_left = 406.0
@@ -271,116 +178,5 @@ margin_bottom = 746.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="properties" type="VBoxContainer" parent="property_divider/data_divider"]
-margin_left = 270.0
-margin_right = 794.0
-margin_bottom = 746.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="title" type="Label" parent="property_divider/data_divider/properties"]
-margin_right = 524.0
-margin_bottom = 14.0
-text = "NPC Properties"
-align = 1
-valign = 1
-
-[node name="categories" type="TabContainer" parent="property_divider/data_divider/properties"]
-margin_top = 18.0
-margin_right = 524.0
-margin_bottom = 746.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-tab_align = 0
-
-[node name="Perception Values" type="VSplitContainer" parent="property_divider/data_divider/properties/categories"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/autohide = 0
-
-[node name="loyalty_divier" type="VBoxContainer" parent="property_divider/data_divider/properties/categories/Perception Values"]
-margin_right = 516.0
-margin_bottom = 340.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="value_container" type="PanelContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier"]
-margin_right = 516.0
-margin_bottom = 308.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="values" type="ScrollContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/value_container"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 509.0
-margin_bottom = 301.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_horizontal_enabled = false
-
-[node name="perception_values" type="GridContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/value_container/values"]
-margin_right = 502.0
-margin_bottom = 294.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
-script = ExtResource( 10 )
-root_node = NodePath("../../../../../../../../..")
-
-[node name="approval_container" type="PanelContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier"]
-margin_top = 312.0
-margin_right = 516.0
-margin_bottom = 340.0
-
-[node name="number_divider" type="HBoxContainer" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/approval_container"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 509.0
-margin_bottom = 21.0
-custom_constants/separation = 10
-
-[node name="maximum_approval" type="Label" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/approval_container/number_divider"]
-margin_right = 171.0
-margin_bottom = 14.0
-text = "Maximum Approval Rating:"
-
-[node name="approval_bar" type="ProgressBar" parent="property_divider/data_divider/properties/categories/Perception Values/loyalty_divier/approval_container/number_divider"]
-margin_left = 181.0
-margin_right = 502.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-step = 0.0
-percent_visible = false
-script = ExtResource( 11 )
-root_node = NodePath("../../../../../../../../..")
-
-[node name="graph_container" type="PanelContainer" parent="property_divider/data_divider/properties/categories/Perception Values"]
-margin_top = 352.0
-margin_right = 516.0
-margin_bottom = 692.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="margin_container" type="MarginContainer" parent="property_divider/data_divider/properties/categories/Perception Values/graph_container"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 509.0
-margin_bottom = 333.0
-custom_constants/margin_right = 50
-custom_constants/margin_top = 50
-custom_constants/margin_left = 50
-custom_constants/margin_bottom = 50
-
-[node name="perception_graph" parent="property_divider/data_divider/properties/categories/Perception Values/graph_container/margin_container" instance=ExtResource( 12 )]
-margin_bottom = 276.0
-subject_node = NodePath("../../../../../../../../NPC")
+[node name="CharacterProperties" parent="property_divider/data_divider" instance=ExtResource( 7 )]
+root_node = NodePath("../../..")

@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://dialogue_editor/properties/Portrait.gd" type="Script" id=1]
+[ext_resource path="res://data/assets/images/icon.png" type="Texture" id=2]
+[ext_resource path="res://data/assets/images/dood.png" type="Texture" id=3]
+[ext_resource path="res://dialogue_editor/properties/button_with_confirmation.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/properties/Portrait/change_portrait_button.tres.gd" type="Script" id=5]
+[ext_resource path="res://dialogue_editor/properties/image_dialog.tscn" type="PackedScene" id=6]
+
+[node name="Portrait" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+portrait_node = NodePath("portrait_container/portrait")
+change_button = NodePath("portrait_container/buttons_container/change")
+reset_button = NodePath("portrait_container/buttons_container/reset")
+default_portrait = ExtResource( 2 )
+
+[node name="portrait_container" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1185.0
+margin_bottom = 757.0
+
+[node name="portrait" type="TextureRect" parent="portrait_container"]
+margin_right = 1178.0
+margin_bottom = 726.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="buttons_container" type="HBoxContainer" parent="portrait_container"]
+margin_top = 730.0
+margin_right = 1178.0
+margin_bottom = 750.0
+
+[node name="reset" type="Button" parent="portrait_container/buttons_container"]
+margin_right = 99.0
+margin_bottom = 20.0
+text = "Reset Portrait"
+script = ExtResource( 4 )
+confirmation_text = "Reset Portrait?"
+
+[node name="change" type="Button" parent="portrait_container/buttons_container"]
+margin_left = 103.0
+margin_right = 1178.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Change Portrait"
+script = ExtResource( 5 )
+file_dialog = ExtResource( 6 )

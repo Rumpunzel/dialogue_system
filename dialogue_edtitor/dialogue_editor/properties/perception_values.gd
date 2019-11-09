@@ -6,7 +6,7 @@ export(PackedScene) var value_slider = preload("res://dialogue_editor/properties
 
 export(NodePath) var root_node
 
-onready var editor_root:character_editor = get_node(root_node)
+onready var editor_root:character_editor = get_node(root_node).root_node
 
 var perception_entries:Array = []
 var NPC:NPC = null

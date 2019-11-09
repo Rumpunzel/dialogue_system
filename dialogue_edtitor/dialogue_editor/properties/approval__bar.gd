@@ -2,7 +2,7 @@ extends BetterProgressBar
 
 export(NodePath) var root_node
 
-onready var editor_root:character_editor = get_node(root_node)
+onready var editor_root:character_editor = get_node(root_node).root_node
 
 var NPC:NPC = null
 
