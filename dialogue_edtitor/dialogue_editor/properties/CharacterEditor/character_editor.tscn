@@ -14,10 +14,8 @@ bio = NodePath("character_properties/character_divider/charatcer_info/Bio")
 
 [node name="NPC" parent="." index="0" instance=ExtResource( 3 )]
 
-[node name="name_bar" parent="." index="1"]
-editor/display_folded = false
-
 [node name="name_field" parent="name_bar/help_divider" index="0"]
+placeholder_text = "Character Name"
 script = ExtResource( 4 )
 
 [node name="character_properties" parent="." index="2" instance=ExtResource( 5 )]
