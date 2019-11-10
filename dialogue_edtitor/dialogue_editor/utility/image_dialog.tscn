@@ -1,17 +1,13 @@
 [gd_scene format=2]
 
 [node name="image_dialog" type="FileDialog"]
-visible = true
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 379.0
 margin_bottom = 324.0
-window_title = "Open Image"
+window_title = "Open a File"
 resizable = true
 dialog_text = "Select the Character's Portrait."
 dialog_hide_on_ok = true
 mode = 0
-access = 2
 filters = PoolStringArray( "*.png ; PNG Images" )
-current_dir = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor"
-current_path = "D:/Kesepian/Projekte/GitHub/dialogue_system/dialogue_edtitor/"
