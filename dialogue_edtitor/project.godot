@@ -67,12 +67,12 @@ _global_script_classes=[ {
 "base": "TabContainer",
 "class": "default_editor",
 "language": "GDScript",
-"path": "res://dialogue_editor/_DefaultEditor/DefaultEditor.gd"
+"path": "res://dialogue_editor/default_editor/default_editor.gd"
 }, {
 "base": "VBoxContainer",
 "class": "default_editor_tab",
 "language": "GDScript",
-"path": "res://dialogue_editor/_DefaultEditor/default_editor_tab.gd"
+"path": "res://dialogue_editor/default_editor/default_editor_tab.gd"
 }, {
 "base": "Label",
 "class": "dialogue_option",

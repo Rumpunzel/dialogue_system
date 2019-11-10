@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://dialogue_editor/_DefaultEditor/default_editor_tab.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/name_field.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=3]
 
@@ -42,6 +42,7 @@ script = ExtResource( 1 )
 save_button = NodePath("name_bar/help_divider/buttons_container/save")
 close_button = NodePath("name_bar/help_divider/buttons_container/close")
 delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
+name_field = NodePath("name_bar/help_divider/name_field")
 
 [node name="name_bar" type="MarginContainer" parent="."]
 margin_right = 1200.0

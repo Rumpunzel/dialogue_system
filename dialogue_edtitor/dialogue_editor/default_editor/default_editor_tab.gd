@@ -5,6 +5,8 @@ export(NodePath) var save_button
 export(NodePath) var close_button
 export(NodePath) var delete_button
 
+export(NodePath) var name_field
+
 var tab_id:String setget set_tab_id, get_tab_id
 var old_id:String
 
@@ -72,11 +74,14 @@ func set_tab_id(new_id:String):
 	if not tab_id == "":
 		name = tab_id
 	
-	emit_signal("new_id", name)
+	emit_signal("new_id", tab_id)
+	
+	get_node(name_field).text = tab_id
 
 
 func get_tab_id() -> String:
 	return tab_id
 
 func get_json_path():
-	return ""
+	# Overwrite this by returning the path to the json you want to load
+	pass
