@@ -8,7 +8,6 @@ export(NodePath) var delete_button
 export(NodePath) var name_field
 
 var json_path:String setget set_json_path, get_json_path
-var old_path:String
 
 var json:Dictionary
 
@@ -19,20 +18,21 @@ signal new_json
 func _ready():
 	get_node(save_button).connect("pressed", self, "save_changes")
 	get_node(close_button).connect("confirmed", self, "close_tab")
-	get_node(delete_button).connect("confirmed", self, "delete_character")
+	get_node(delete_button).connect("confirmed", self, "delete_entry")
 
 
 func setup(id:String, json_path:String):
 	set_json_path(json_path)
 	
-	old_path = json_path
-	
 	set_tab_id(id)
 
 func save_changes():
-	if not old_path == json_path:
-		delete_entry(old_path, json_path)
-		old_path = json_path
+	var new_path = "%s%s" % [json_path.get_base_dir().plus_file(name), get_parent().get_file_extension()]
+	json_helper.save_json(json, new_path)
+	
+	if not new_path == json_path:
+		file_helper.delete_file(json_path)
+		json_path = new_path
 	
 	if CONSTANTS.verbose_mode:
 		CONSTANTS.print_to_console("%s changes saved." % [name])
@@ -43,11 +43,11 @@ func close_tab(save_changes = true):
 	
 	queue_free()
 
-func delete_entry(path, new_path = null):
+func delete_entry(path = json_path, new_path = null):
 	if not new_path == null:
-		pass#json_helper.save_json()
+		json_helper.save_json(json, new_path)
 	
-	file_helper.delete_file(path)#json_helper.save_json(loaded_json, json_path)
+	file_helper.delete_file(path)
 	
 	if CONSTANTS.verbose_mode:
 		CONSTANTS.print_to_console("%s deleted." % [name])
@@ -68,9 +68,12 @@ func set_tab_id(new_id:String):
 func set_json_path(new_path:String):
 	json_path = new_path
 	
-	json = json_helper.load_json(json_path)
+	var new_json = json_helper.load_json(json_path)
 	
-	emit_signal("new_json", json)
+	if not new_json == null:
+		json = new_json
+		
+		emit_signal("new_json", json)
 
 
 func get_json_path() -> String:

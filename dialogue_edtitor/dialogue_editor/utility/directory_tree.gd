@@ -21,6 +21,7 @@ func _ready():
 	parse_tree(entries, root)
 	
 	connect("item_activated", self, "open_entry")
+	get_node(root_node).connect("tab_changed", self, "_tab_changed")
 
 
 func parse_tree(options, root_entry, column_offset = 0):
@@ -47,3 +48,8 @@ func open_entry(node = get_node(root_node)):
 
 func load_entries():
 	return file_helper.list_files_in_directory(entry_directory, true, file_ending)
+
+
+func _tab_changed(_index):
+	clear()
+	parse_tree(entries, root)

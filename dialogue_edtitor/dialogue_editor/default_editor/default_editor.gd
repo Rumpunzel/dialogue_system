@@ -7,6 +7,8 @@ export(PackedScene) var tab_scene
 
 export(NodePath) var new_tab_button
 
+export(NodePath) var directory_tree
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +19,7 @@ func _ready():
 #	pass
 
 
-func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
+func open_new_tab(tab_path:String = CONSTANTS.CHARACTERS_JSON.plus_file(new_tab_name), tab_name:String = new_tab_name):
 	var tabs = get_children()
 	var has_tab = -1
 	
@@ -39,3 +41,7 @@ func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
 			pass
 	
 	current_tab = has_tab
+
+func get_file_extension():
+	print(get_node(directory_tree).file_ending)
+	return get_node(directory_tree).file_ending

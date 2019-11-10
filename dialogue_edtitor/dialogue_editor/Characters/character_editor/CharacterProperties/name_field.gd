@@ -13,6 +13,6 @@ func _ready():
 
 func update_name(new_name):
 	if not editor_root.tab_exists(new_name):
-		editor_root.tab_id = new_name
+		editor_root.set_tab_id(new_name)
 	else:
-		text = editor_root.tab_id
+		text = editor_root.name
