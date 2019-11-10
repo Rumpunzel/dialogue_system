@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://dialogue_editor/properties/directory_entry.tscn" type="PackedScene" id=1]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/character_entry.gd" type="Script" id=2]
-
-[node name="character_entry" instance=ExtResource( 1 )]
-script = ExtResource( 2 )

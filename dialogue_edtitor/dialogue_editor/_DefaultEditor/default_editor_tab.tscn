@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://dialogue_editor/default_editor_tab.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/name_field.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/_DefaultEditor/default_editor_tab.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/name_field.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=3]
 
 [sub_resource type="GDScript" id=1]
