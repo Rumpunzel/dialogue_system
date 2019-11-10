@@ -1,5 +1,7 @@
 extends Node
 
+const CHARACTERS_JSON:String = "res://data/characters"
+const DIALOGUE_PATHS:String = "res://data/dialogues"
 # Default dialogue tree name
 const DEFAULT_TREE = "start"
 
