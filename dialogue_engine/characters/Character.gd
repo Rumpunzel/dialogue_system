@@ -27,7 +27,7 @@ var character_json:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_values()
-	#memories.load_values(id)
+	memories.load_values(id)
 	
 	if not CHARACTERS == null:
 		CHARACTERS.register_character(id, self)

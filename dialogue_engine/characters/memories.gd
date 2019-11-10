@@ -7,7 +7,7 @@ enum { NORMAL, BIG_DEAL }
 const SUCCESS_MAP = { true: PASSED, false: FAILED }
 const BIG_DEAL_MAP = { true: BIG_DEAL, false: NORMAL }
 
-const DEFAULT_MEMORY_PATH:String = "res://data/memores/%s_memory.json"
+const DEFAULT_MEMORY_PATH:String = "res://data/memories/%s_memory.json"
 
 const DEFAULT_MEMORY:Dictionary = { NORMAL: { PASSED: { }, FAILED: { } }, BIG_DEAL: { PASSED: { }, FAILED: { } } }
 
@@ -35,7 +35,7 @@ func remember_response(new_memory:Dictionary):
 		
 		dialogue_memories[big_deal_status][success_status][new_memory["id"]] = new_memory
 	
-	#store_values()
+	store_values()
 
 func remembers_dialogue_option(unique_id):
 	for memory_category in dialogue_memories.values():
