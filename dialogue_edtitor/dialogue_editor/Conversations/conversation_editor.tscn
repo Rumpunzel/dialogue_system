@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://dialogue_editor/_DefaultEditor/default_editor_tab.tscn" type="PackedScene" id=1]
+[ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.tscn" type="PackedScene" id=1]
 [ext_resource path="res://dialogue_editor/Conversations/conversation_editor.gd" type="Script" id=2]
+
+
 
 
 

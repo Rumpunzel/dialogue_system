@@ -28,16 +28,6 @@ func save_changes():
 	
 	.save_changes()
 
-func character_exists(id:String):
-	var json_path = Character.json_paths[Character.STATS_PATHS.MODIFIED]
-	var loaded_json = json_helper.load_json(json_path)
-	
-	for NPC in loaded_json.keys():
-		if NPC == id:
-			return true
-	
-	return false
-
 
 func set_tab_id(new_id:String):
 	.set_tab_id(new_id)

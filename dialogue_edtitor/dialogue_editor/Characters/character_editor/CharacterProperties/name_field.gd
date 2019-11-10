@@ -9,7 +9,6 @@ onready var editor_root:character_editor = get_node(root_node)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("text_confirmed", self, "update_name")
-	connect_signals()
 
 
 func update_name(new_name):
@@ -17,6 +16,3 @@ func update_name(new_name):
 		editor_root.tab_id = new_name
 	else:
 		text = editor_root.tab_id
-
-func connect_signals():
-	get_node(root_node).connect("new_id", self, "update_name")
