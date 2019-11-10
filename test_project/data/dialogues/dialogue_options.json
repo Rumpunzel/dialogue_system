@@ -12,8 +12,8 @@
     "loop_success_option_text_from": 1,
     "option_text": {
       "button_text": [
-        "And here it is again (still opens a new tree).",
-        "This option will open a new tree."
+        "This option will open a new tree.",
+        "And here it is again (still opens a new tree)."
       ]
     },
     "single_use": false
@@ -122,20 +122,20 @@
     "loop_successes_from": 1,
     "option_text": {
       "button_text": [
-        "Talk about the weather some more.",
-        "Talk about the weather."
+        "Talk about the weather.",
+        "Talk about the weather some more."
       ]
     },
     "single_use": false,
     "success_messages": [
       [
         {
-          "text": "Again? Seriously? Well ok, then..."
+          "text": "Yes, yes, quite indeed. How insightful, truly."
         }
       ],
       [
         {
-          "text": "Yes, yes, quite indeed. How insightful, truly."
+          "text": "Again? Seriously? Well ok, then..."
         }
       ]
     ],
