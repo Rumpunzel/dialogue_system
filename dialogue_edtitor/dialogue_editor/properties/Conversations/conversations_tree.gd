@@ -1,19 +1,19 @@
 extends Tree
 
-export(String, FILE, "*.json") var dialogue_options_file_path
+export(String, DIR) var conversations_directory
 
-var dialogue_options:Dictionary
+var conversations:Array
 
 var root
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	dialogue_options = json_helper.load_json(dialogue_options_file_path)
+	conversations = file_helper.list_files_in_directory(conversations_directory, true)
 	
 	root = create_item()
 	
-	parse_tree(dialogue_options, root)
+	parse_tree(conversations, root)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -25,18 +25,15 @@ func parse_tree(options, root_entry, column_offset = 0):
 	
 	for option in keys:
 		var data = options[option]
-		var entry = create_item(root_entry)
-		
-		if not typeof(option) == TYPE_INT:
-			entry.set_text(column_offset, str(option))
 		
 		if typeof(data) == TYPE_DICTIONARY:
-			parse_tree(data, entry, column_offset)
+			parse_tree(data, root_entry, column_offset)
 		else:
+			var entry = create_item(root_entry)
+			
 			match typeof(data):
 				TYPE_ARRAY:
+					entry.set_text(column_offset, str(option))
 					parse_tree(data, entry, column_offset)
 				_:
-					entry.set_text(column_offset + 1, str(data))
-		
-		entry.collapsed = true
+					entry.set_text(column_offset, str(data))

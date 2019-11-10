@@ -1,29 +1,59 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://dialogue_editor/DefaultEditor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://dialogue_editor/properties/Conversations/conversation_editor.tscn" type="PackedScene" id=2]
-[ext_resource path="res://dialogue_editor/properties/Conversations/tree_directory.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_editor/properties/Conversations/tree_entry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://dialogue_editor/DefaultEditor.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/properties/Conversations/conversations_tree.gd" type="Script" id=2]
 
-[node name="Conversations" instance=ExtResource( 1 )]
-new_tab_name = "New Conversation"
-tab_scene = ExtResource( 2 )
+[node name="Conversations" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+drag_to_rearrange_enabled = true
+script = ExtResource( 1 )
+new_tab_name = "New Tree"
+new_tab_button = NodePath("Menu/buttons_container/new_tab")
 
-[node name="new_tab" parent="Menu/buttons_container" index="0"]
-margin_right = 72.0
-text = "New Tree"
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
-[node name="directory" parent="Menu" index="1"]
-main_tab_name = "All Trees"
+[node name="buttons_container" type="HBoxContainer" parent="Menu"]
+margin_right = 1192.0
+margin_bottom = 20.0
 
-[node name="margin_container" parent="Menu/directory/All Entries/scroll_container" index="0"]
+[node name="new_tab" type="Button" parent="Menu/buttons_container"]
+margin_right = 127.0
+margin_bottom = 20.0
+text = "New Conversation"
+
+[node name="directory" type="TabContainer" parent="Menu"]
+margin_top = 24.0
+margin_right = 1192.0
+margin_bottom = 764.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+
+[node name="All Conversations" type="ScrollContainer" parent="Menu/directory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 72.0
+margin_right = -4.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tree" type="Tree" parent="Menu/directory/All Conversations"]
 margin_right = 1184.0
-margin_bottom = 704.0
-
-[node name="entry_list" parent="Menu/directory/All Entries/scroll_container/margin_container" index="0"]
-margin_right = 1174.0
-margin_bottom = 694.0
-script = ExtResource( 3 )
-entry_scene = ExtResource( 4 )
-
-[editable path="Menu/directory"]
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+script = ExtResource( 2 )
+conversations_directory = "res://data/dialogues"
