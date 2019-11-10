@@ -3,6 +3,8 @@ class_name directory_tree
 
 export(NodePath) var root_node
 
+export(String) var file_ending
+
 var entries
 
 var root
@@ -36,7 +38,7 @@ func parse_tree(options, root_entry, column_offset = 0):
 					entry.set_text(column_offset, str(option))
 					parse_tree(data, entry, column_offset)
 				_:
-					entry.set_text(column_offset, str(data))
+					entry.set_text(column_offset, str(data).trim_suffix(file_ending))
 
 func open_entry(node = get_node(root_node)):
 	node.open_new_tab(get_selected().get_text(0))
