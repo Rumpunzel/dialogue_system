@@ -2,4 +2,7 @@ extends Control
 
 
 func _ready():
-	$Characters/Klaus.initiate_dialogue($dialogue_window)
+	var klaus = $Characters/Klaus
+	klaus.memories.dialogue_memories = { }
+	klaus.character_perceptions = { }
+	klaus.initiate_dialogue($dialogue_window)
