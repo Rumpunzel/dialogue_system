@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
 }, {
-"base": "directory_tree",
-"class": "character_directory_tree",
-"language": "GDScript",
-"path": "res://dialogue_editor/Characters/character_editor/character_directory_tree.gd"
-}, {
 "base": "default_editor_tab",
 "class": "character_editor",
 "language": "GDScript",
@@ -124,7 +119,6 @@ _global_script_class_icons={
 "NPC": "",
 "Player": "",
 "TypingLabel": "",
-"character_directory_tree": "",
 "character_editor": "",
 "default_editor": "",
 "default_editor_tab": "",
