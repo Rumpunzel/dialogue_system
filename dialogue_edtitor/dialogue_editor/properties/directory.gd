@@ -1,7 +1,6 @@
 extends TabContainer
 
 export(String) var main_tab_name
-
 export(NodePath) var main_tab
 
 
@@ -9,3 +8,6 @@ export(NodePath) var main_tab
 func _ready():
 	get_node(main_tab).name = main_tab_name
 
+
+func get_root_node():
+	return get_node(root_node)

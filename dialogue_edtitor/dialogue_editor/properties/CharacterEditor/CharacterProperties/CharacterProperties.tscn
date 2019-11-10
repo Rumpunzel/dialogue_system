@@ -5,7 +5,8 @@
 [ext_resource path="res://dialogue_editor/utility/value_slider.tscn" type="PackedScene" id=3]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/approval__bar.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/perception_graph.gd" type="Script" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/editor_perception_graph.gd" type="Script" id=6]
+
 
 [node name="CharacterProperties" type="VBoxContainer"]
 margin_left = 270.0

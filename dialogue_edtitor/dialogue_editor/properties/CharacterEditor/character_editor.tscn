@@ -5,7 +5,7 @@
 [ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/CharacterProperties/character_name_field.gd" type="Script" id=4]
 [ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_properties.tscn" type="PackedScene" id=5]
-[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_directory/character_directory.gd" type="Script" id=6]
+[ext_resource path="res://dialogue_editor/properties/CharacterEditor/character_editor_directory_tree.gd" type="Script" id=6]
 
 [node name="character_editor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,8 +23,12 @@ script = ExtResource( 4 )
 
 [node name="character_properties" parent="." index="2" instance=ExtResource( 5 )]
 
-[node name="entry_list" parent="character_properties/character_divider/character_directory/All Entries/scroll_container/margin_container" index="0"]
+[node name="directory_tree" parent="character_properties/character_divider/character_directory/All Entries" index="0"]
 script = ExtResource( 6 )
+root_node = NodePath("../../../../..")
+
+[node name="CharacterProperties" parent="character_properties/data_divider" index="1"]
+root_node = NodePath("../../..")
 
 [editable path="character_properties"]
 

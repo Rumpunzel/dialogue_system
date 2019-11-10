@@ -34,3 +34,10 @@ text = "New Tab"
 margin_top = 24.0
 margin_right = 1192.0
 margin_bottom = 764.0
+
+[node name="directory_tree" parent="Menu/directory/All Entries" index="0"]
+margin_right = 1184.0
+margin_bottom = 704.0
+root_node = NodePath("../../../..")
+
+[editable path="Menu/directory"]
