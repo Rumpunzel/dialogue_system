@@ -19,7 +19,7 @@ func _ready():
 #	pass
 
 
-func open_new_tab(tab_path:String = CONSTANTS.CHARACTERS_JSON.plus_file(new_tab_name), tab_name:String = new_tab_name):
+func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
 	var tabs = get_children()
 	var has_tab = -1
 	
@@ -31,7 +31,10 @@ func open_new_tab(tab_path:String = CONSTANTS.CHARACTERS_JSON.plus_file(new_tab_
 	
 	if has_tab < 0:
 		var new_tab = tab_scene.instance()
+		
 		add_child(new_tab)
+		print(tab_name)
+		print(tab_path)
 		new_tab.setup(tab_name, tab_path)
 		
 		has_tab = (current_tab + 1) if not current_tab == 0 else tabs.size()

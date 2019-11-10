@@ -22,7 +22,7 @@ func _ready():
 	parse_tree(entries, root)
 	
 	connect("item_activated", self, "open_entry")
-	get_node(root_node).connect("tab_changed", self, "_tab_changed")
+	#get_node(root_node).connect("tab_changed", self, "_tab_changed")
 
 
 func parse_tree(options, root_entry, column_offset = 0):
@@ -32,7 +32,6 @@ func parse_tree(options, root_entry, column_offset = 0):
 		var data = options[option]
 		
 		if not data.get_base_dir().get_file() == root_entry.get_text(column_offset).get_file():
-			print(get_root().get_children())
 			var entry = create_item(root_entry)
 			
 			entry.set_text(column_offset, str(data).get_base_dir().get_file())
