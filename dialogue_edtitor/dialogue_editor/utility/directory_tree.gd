@@ -1,9 +1,11 @@
 extends Tree
 class_name directory_tree
 
-export(NodePath) var root_node
+export(String, DIR) var entry_directory
 
 export(String) var file_ending
+
+export(NodePath) var root_node
 
 var entries
 
@@ -32,16 +34,16 @@ func parse_tree(options, root_entry, column_offset = 0):
 		else:
 			var entry = create_item(root_entry)
 			
-			
 			match typeof(data):
 				TYPE_ARRAY:
 					entry.set_text(column_offset, str(option))
 					parse_tree(data, entry, column_offset)
 				_:
-					entry.set_text(column_offset, str(data).trim_suffix(file_ending))
+					entry.set_text(column_offset, str(data).get_file().trim_suffix(file_ending))
+					entry.set_text(column_offset + 1, str(data))
 
 func open_entry(node = get_node(root_node)):
-	node.open_new_tab(get_selected().get_text(0))
+	node.open_new_tab(get_selected().get_text(1), get_selected().get_text(0))
 
 func load_entries():
-	pass
+	return file_helper.list_files_in_directory(entry_directory, true, file_ending)

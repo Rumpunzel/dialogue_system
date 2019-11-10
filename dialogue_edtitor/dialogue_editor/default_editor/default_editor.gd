@@ -17,25 +17,25 @@ func _ready():
 #	pass
 
 
-func open_new_tab(tab_id:String = new_tab_name):
+func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
 	var tabs = get_children()
 	var has_tab = -1
 	
-	if not tab_id == new_tab_name:
+	if not tab_name == new_tab_name:
 		for i in range(1, tabs.size()):
-			if tabs[i].name == tab_id:
+			if tabs[i].name == tab_name:
 				has_tab = i
 				break
 	
 	if has_tab < 0:
 		var new_tab = tab_scene.instance()
 		add_child(new_tab)
-		new_tab.setup(tab_id if not tab_id == new_tab_name else "")
+		new_tab.setup(tab_name, tab_path)
 		
 		has_tab = (current_tab + 1) if not current_tab == 0 else tabs.size()
 		move_child(new_tab, has_tab)
 		
-		if not tab_id == null:
+		if not tab_name == null:
 			pass
 	
 	current_tab = has_tab
