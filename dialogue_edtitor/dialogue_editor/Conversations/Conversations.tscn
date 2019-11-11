@@ -7,10 +7,11 @@
 new_tab_name = "New Conversation"
 tab_scene = ExtResource( 2 )
 
-[node name="All Entries" parent="Menu/directory" index="0"]
-name_override = "All Conversations"
+[node name="new_tab" parent="Menu" index="0"]
+margin_right = 104.0
+text = "New Character"
 
-[node name="directory_tree" parent="Menu/directory/All Entries" index="0"]
+[node name="directory_tree" parent="Menu/directory/filter_container/All Entries" index="0"]
 entry_directory = "res://data/dialogues"
 file_ending = ".convo"
 

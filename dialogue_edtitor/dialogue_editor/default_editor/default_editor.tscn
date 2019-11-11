@@ -1,25 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://dialogue_editor/default_editor/default_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://dialogue_editor/utility/better_line_edit.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_editor/utility/directory.tscn" type="PackedScene" id=4]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends HSplitContainer
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	set(\"custom_constants/separation\", get_viewport().size.x * 0.3)
-"
+[ext_resource path="res://dialogue_editor/utility/directory.tscn" type="PackedScene" id=3]
 
 [node name="DefaultEditor" type="TabContainer"]
 anchor_right = 1.0
@@ -30,8 +13,8 @@ tab_align = 0
 drag_to_rearrange_enabled = true
 script = ExtResource( 1 )
 tab_scene = ExtResource( 2 )
-new_tab_button = NodePath("Menu/buttons_divider/new_tab")
-directory_tree = NodePath("Menu/directory/All Entries/directory_tree")
+new_tab_button = NodePath("Menu/new_tab")
+directory_tree = NodePath("Menu/directory/filter_container/All Entries/directory_tree")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -41,63 +24,40 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="buttons_divider" type="HSplitContainer" parent="Menu"]
-margin_right = 1192.0
-margin_bottom = 24.0
-split_offset = 20
-dragger_visibility = 1
-script = SubResource( 1 )
-
-[node name="new_tab" type="Button" parent="Menu/buttons_divider"]
-margin_right = 86.0
-margin_bottom = 24.0
+[node name="new_tab" type="Button" parent="Menu"]
+margin_right = 66.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
 text = "New Tab"
 
-[node name="group_container" type="HBoxContainer" parent="Menu/buttons_divider"]
-margin_left = 98.0
-margin_right = 1192.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-
-[node name="group_button" type="OptionButton" parent="Menu/buttons_divider/group_container"]
-margin_right = 87.0
-margin_bottom = 24.0
-text = "Groups"
-
-[node name="group_by" type="LineEdit" parent="Menu/buttons_divider/group_container"]
-margin_left = 91.0
-margin_right = 424.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 94, 0 )
-size_flags_horizontal = 3
-editable = false
-clear_button_enabled = true
-placeholder_text = "Group By"
-script = ExtResource( 3 )
-expand = true
-blink = false
-
-[node name="filter" type="LineEdit" parent="Menu/buttons_divider/group_container"]
-margin_left = 428.0
-margin_right = 1094.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 68, 0 )
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-clear_button_enabled = true
-placeholder_text = "Filter"
-caret_blink = true
-script = ExtResource( 3 )
-expand = true
-
-[node name="directory" parent="Menu" instance=ExtResource( 4 )]
-margin_top = 28.0
+[node name="directory" parent="Menu" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
 margin_right = 1192.0
 margin_bottom = 764.0
 
-[node name="directory_tree" parent="Menu/directory/All Entries" index="0"]
-margin_right = 1184.0
-margin_bottom = 700.0
-root_node = NodePath("../../../..")
+[node name="filter_container" parent="Menu/directory" index="0"]
+margin_right = 1192.0
+margin_bottom = 740.0
+
+[node name="filter_container" parent="Menu/directory/filter_container" index="0"]
+margin_right = 1192.0
+
+[node name="group_by" parent="Menu/directory/filter_container/filter_container" index="1"]
+margin_right = 456.0
+
+[node name="filter" parent="Menu/directory/filter_container/filter_container" index="2"]
+margin_left = 460.0
+margin_right = 1192.0
+
+[node name="All Entries" parent="Menu/directory/filter_container" index="1"]
+margin_right = 1192.0
+margin_bottom = 740.0
+
+[node name="directory_tree" parent="Menu/directory/filter_container/All Entries" index="0"]
+margin_right = 1192.0
+margin_bottom = 712.0
+root_node = NodePath("../../../../..")
 
 [editable path="Menu/directory"]
