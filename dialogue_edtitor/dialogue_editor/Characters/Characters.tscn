@@ -7,15 +7,10 @@
 new_tab_name = "New Character"
 tab_scene = ExtResource( 2 )
 
-[node name="new_tab" parent="Menu/buttons_container" index="0"]
-margin_right = 104.0
-text = "New Character"
-
 [node name="All Entries" parent="Menu/directory" index="0"]
 name_override = "All Characters"
 
 [node name="directory_tree" parent="Menu/directory/All Entries" index="0"]
-columns = 2
 entry_directory = "res://data/characters"
 file_ending = ".char"
 

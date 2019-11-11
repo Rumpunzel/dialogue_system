@@ -20,8 +20,10 @@ script = ExtResource( 4 )
 
 [node name="character_properties" parent="." index="2" instance=ExtResource( 5 )]
 
+[node name="All Entries" parent="character_properties/character_divider/character_directory" index="0"]
+name_override = "All Characters"
+
 [node name="directory_tree" parent="character_properties/character_divider/character_directory/All Entries" index="0"]
-columns = 2
 script = ExtResource( 6 )
 entry_directory = "res://data/characters"
 file_ending = ".char"
