@@ -8,6 +8,9 @@ new_tab_name = "New Conversation"
 tab_scene = ExtResource( 2 )
 new_tab_button = NodePath("../Conversations/Menu/buttons_container/new_tab")
 
+[node name="All Entries" parent="Menu/directory" index="0"]
+name_override = "All Conversations"
+
 [node name="directory_tree" parent="Menu/directory/All Entries" index="0"]
 columns = 2
 entry_directory = "res://data/dialogues"

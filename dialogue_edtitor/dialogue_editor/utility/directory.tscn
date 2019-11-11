@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue_editor/utility/directory_tree.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ScrollContainer
+
+export(String) var name_override
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	name = name_override
+"
 
 [node name="directory" type="TabContainer"]
 margin_top = 379.0
@@ -17,6 +28,7 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+script = SubResource( 1 )
 
 [node name="directory_tree" type="Tree" parent="All Entries"]
 margin_right = 386.0
