@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Tree",
 "class": "directory_tree",
 "language": "GDScript",
-"path": "res://dialogue_editor/utility/directory_tree.gd"
+"path": "res://dialogue_editor/utility/directory/directory_tree.gd"
 }, {
 "base": "BetterLineEdit",
 "class": "editor_name_field",
