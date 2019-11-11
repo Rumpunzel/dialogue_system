@@ -7,16 +7,10 @@ export(PackedScene) var tab_scene
 
 export(NodePath) var new_tab_button
 
-export(NodePath) var directory_tree
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(new_tab_button).connect("pressed", self, "open_new_tab")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
@@ -44,7 +38,3 @@ func open_new_tab(tab_path:String, tab_name:String = new_tab_name):
 			pass
 	
 	current_tab = has_tab
-
-func get_file_extension():
-	print(get_node(directory_tree).file_ending)
-	return get_node(directory_tree).file_ending

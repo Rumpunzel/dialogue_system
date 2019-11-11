@@ -11,8 +11,6 @@ tab_scene = ExtResource( 2 )
 margin_right = 104.0
 text = "New Character"
 
-[node name="directory_tree" parent="Menu/directory/filter_container/All Entries" index="0"]
+[node name="directory" parent="Menu" index="1"]
 entry_directory = "res://data/characters"
 file_ending = ".char"
-
-[editable path="Menu/directory"]

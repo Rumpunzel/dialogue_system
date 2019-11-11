@@ -14,7 +14,6 @@ drag_to_rearrange_enabled = true
 script = ExtResource( 1 )
 tab_scene = ExtResource( 2 )
 new_tab_button = NodePath("Menu/new_tab")
-directory_tree = NodePath("Menu/directory/filter_container/All Entries/directory_tree")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -36,28 +35,4 @@ anchor_bottom = 0.0
 margin_top = 24.0
 margin_right = 1192.0
 margin_bottom = 764.0
-
-[node name="filter_container" parent="Menu/directory" index="0"]
-margin_right = 1192.0
-margin_bottom = 740.0
-
-[node name="filter_container" parent="Menu/directory/filter_container" index="0"]
-margin_right = 1192.0
-
-[node name="group_by" parent="Menu/directory/filter_container/filter_container" index="1"]
-margin_right = 456.0
-
-[node name="filter" parent="Menu/directory/filter_container/filter_container" index="2"]
-margin_left = 460.0
-margin_right = 1192.0
-
-[node name="All Entries" parent="Menu/directory/filter_container" index="1"]
-margin_right = 1192.0
-margin_bottom = 740.0
-
-[node name="directory_tree" parent="Menu/directory/filter_container/All Entries" index="0"]
-margin_right = 1192.0
-margin_bottom = 712.0
-root_node = NodePath("../../../../..")
-
-[editable path="Menu/directory"]
+root_node = NodePath("../..")
