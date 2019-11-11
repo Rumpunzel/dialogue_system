@@ -7,7 +7,7 @@
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/character_properties.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/character_directory_tree.gd" type="Script" id=6]
 
-[node name="character_editor" index="0" instance=ExtResource( 1 )]
+[node name="character_editor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 portrait = NodePath("character_properties/character_divider/charatcer_info/Portrait")
 bio = NodePath("character_properties/character_divider/charatcer_info/Bio")
@@ -37,11 +37,7 @@ margin_bottom = 367.0
 [node name="filter_container" parent="character_properties/character_divider/character_directory/filter_container" index="0"]
 margin_right = 394.0
 
-[node name="group_by" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="1"]
-margin_right = 190.0
-
-[node name="filter" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="2"]
-margin_left = 194.0
+[node name="filter" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="1"]
 margin_right = 394.0
 
 [node name="All Entries" parent="character_properties/character_divider/character_directory/filter_container" index="1"]

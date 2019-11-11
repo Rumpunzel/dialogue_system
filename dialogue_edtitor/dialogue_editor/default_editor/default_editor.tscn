@@ -14,6 +14,7 @@ drag_to_rearrange_enabled = true
 script = ExtResource( 1 )
 tab_scene = ExtResource( 2 )
 new_tab_button = NodePath("Menu/new_tab")
+directory = NodePath("Menu/directory")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0

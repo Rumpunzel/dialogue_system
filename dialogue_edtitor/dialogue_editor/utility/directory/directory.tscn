@@ -2,8 +2,19 @@
 
 [ext_resource path="res://dialogue_editor/utility/directory/directory.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/utility/directory/groups_button.gd" type="Script" id=2]
-[ext_resource path="res://dialogue_editor/utility/better_line_edit.gd" type="Script" id=3]
-[ext_resource path="res://dialogue_editor/utility/directory/directory_tree.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/utility/directory/directory_tree.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends BetterLineEdit
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"text_changed\", self, \"confirm_text\")
+
+
+func confirm_text(new_text = text):
+	emit_signal(\"text_confirmed\", new_text)
+"
 
 [node name="directory" type="MarginContainer"]
 anchor_right = 1.0
@@ -27,21 +38,11 @@ margin_right = 87.0
 margin_bottom = 24.0
 text = "Groups"
 script = ExtResource( 2 )
-directory_tree = NodePath("../../All Entries/directory_tree")
-
-[node name="group_by" type="LineEdit" parent="filter_container/filter_container"]
-margin_left = 91.0
-margin_right = 459.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-editable = false
-clear_button_enabled = true
-placeholder_text = "Group By"
-caret_blink = true
-script = ExtResource( 3 )
+filter_field = NodePath("../filter")
+tree = NodePath("../../All Entries/directory_tree")
 
 [node name="filter" type="LineEdit" parent="filter_container/filter_container"]
-margin_left = 463.0
+margin_left = 91.0
 margin_right = 1200.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
@@ -49,7 +50,7 @@ size_flags_stretch_ratio = 2.0
 clear_button_enabled = true
 placeholder_text = "Filter"
 caret_blink = true
-script = ExtResource( 3 )
+script = SubResource( 1 )
 
 [node name="All Entries" type="ScrollContainer" parent="filter_container"]
 margin_top = 28.0
@@ -65,5 +66,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 hide_root = true
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 root_node = NodePath("../../..")
