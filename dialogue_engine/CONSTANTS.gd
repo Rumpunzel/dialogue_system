@@ -21,7 +21,7 @@ const CUSTOM_OPTION = "custom_option"
 export(String) var characters_path = ""
 
 # Print updates to console?
-var verbose_mode = true
+var verbose_mode = false
 var log_history:Dictionary = { }
 
 
