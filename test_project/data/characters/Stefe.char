@@ -1,1 +1,15 @@
-{"tags":{"race":"cute","faction":"friends"},"character_perceptions":{},"percieved_starting_values":{},"personal_values":{"politeness":5,"reliability":8,"selflessness":3,"sincerity":6},"portrait_path":"res://data/assets/images/lirikH.png"}
+{
+    "tags": {
+        "race": "cute",
+        "faction": "friends"
+    },
+    "character_perceptions": {},
+    "percieved_starting_values": {},
+    "personal_values": {
+        "politeness": 5,
+        "reliability": 8,
+        "selflessness": 3,
+        "sincerity": 6
+    },
+    "portrait_path": "res://data/assets/images/lirikH.png"
+}
