@@ -31,8 +31,7 @@ func open_new_tab(tab_path:String = "", tab_name:String = new_tab_name):
 		var new_tab = tab_scene.instance()
 		
 		add_child(new_tab)
-		print(tab_name)
-		print(tab_path)
+		
 		new_tab.setup(tab_name, tab_path)
 		
 		has_tab = (current_tab + 1) if not current_tab == 0 else tabs.size()

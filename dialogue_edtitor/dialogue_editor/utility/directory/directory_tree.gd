@@ -14,8 +14,11 @@ onready var root = get_node(root_node)
 
 var entries
 var entry_map:Dictionary
+var groups:Array
 
 var tree_root
+
+signal tree_parsed
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,9 +36,11 @@ func _ready():
 	#get_node(root_node).connect("tab_changed", self, "_tab_changed")
 
 
+
 func parse_tree(options, root_entry, filter, group_by = null, category = null):
 	clear()
-	entry_map = { }
+	entry_map.clear()
+	groups.clear()
 	tree_root = create_item()
 	
 	var keys = options.keys() if typeof(options) == TYPE_DICTIONARY else options.size()
@@ -44,24 +49,28 @@ func parse_tree(options, root_entry, filter, group_by = null, category = null):
 	if group_by == PATH:
 		base_directory = "%s/" % [root.entry_directory]
 	elif not group_by == null:
-		pass
+		base_directory = "%s/" % [root.entry_directory]
 	
 	for option in keys:
 		var data = options[option]
 		
 		if filter == "" or filter.to_lower() in data.to_lower():
 			var place_in_tree
+			var tags_dictionary = json_helper.load_json(data).get("tags", { })
 			
 			if group_by == null:
 				place_in_tree = [data.get_file()]
 			elif category == null:
 				place_in_tree = data.trim_prefix(base_directory).split("/", false)
 			else:
-				place_in_tree = []
+				place_in_tree = tags_dictionary.get(category, "").plus_file(data.get_file()).split("/", false)
 			
-			parse_branch(place_in_tree, root_entry, data, filter)
+			parse_branch(place_in_tree, root_entry, data, filter, tags_dictionary)
+	
+	emit_signal("tree_parsed")
 
-func parse_branch(branch:Array, root_entry, full_path, filter):
+
+func parse_branch(branch:Array, root_entry, full_path, filter, tags_dictionary:Dictionary):
 	var node_name = branch.pop_front()
 	var entry
 	
@@ -70,14 +79,24 @@ func parse_branch(branch:Array, root_entry, full_path, filter):
 		var leaf_name = node_name.trim_suffix(root.file_ending)
 		
 		entry.set_text(NAME, leaf_name)
+		entry.set_metadata(NAME, node_name)
 		entry_map[leaf_name] = entry
 	else:
 		entry = entry_map.get(node_name)
 	
 	if branch.empty():
-		entry.set_text(PATH, full_path)
+		entry.set_text(PATH, full_path.trim_prefix(root.entry_directory + "/"))
+		entry.set_metadata(PATH, full_path)
+		
+		entry.set_text(TAGS, extract_tags_from_array(tags_dictionary.values()))
+		entry.set_metadata(TAGS, str(tags_dictionary))
+		
+		for tag in tags_dictionary:
+			if not tag in groups:
+				groups.append(tag)
 	else:
-		parse_branch(branch, entry, full_path, filter)
+		parse_branch(branch, entry, full_path, filter, tags_dictionary)
+
 
 func group_tree(group_by, filter = ""):
 	match group_by:
@@ -88,5 +107,18 @@ func group_tree(group_by, filter = ""):
 		_:
 			parse_tree(entries, tree_root, filter, TAGS, group_by)
 
+
 func open_entry(node = get_node(root_node).get_root_node()):
-	node.open_new_tab(get_selected().get_text(PATH), get_selected().get_text(NAME))
+	node.open_new_tab(get_selected().get_metadata(PATH), get_selected().get_text(NAME))
+
+
+func extract_tags_from_array(array):
+	var return_string = ""
+	
+	for entry in array:
+		var tags = entry.split("/", false)
+		
+		for tag in tags:
+			return_string += "%s, " % [tag]#.capitalize()]
+	
+	return return_string.trim_suffix(", ")

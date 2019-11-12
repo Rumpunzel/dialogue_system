@@ -39,7 +39,7 @@ margin_bottom = 24.0
 text = "Groups"
 script = ExtResource( 2 )
 filter_field = NodePath("../filter")
-tree = NodePath("../../All Entries/directory_tree")
+tree_node = NodePath("../../All Entries/directory_tree")
 
 [node name="filter" type="LineEdit" parent="filter_container/filter_container"]
 margin_left = 91.0
@@ -66,5 +66,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 hide_root = true
+select_mode = 1
 script = ExtResource( 3 )
 root_node = NodePath("../../..")
