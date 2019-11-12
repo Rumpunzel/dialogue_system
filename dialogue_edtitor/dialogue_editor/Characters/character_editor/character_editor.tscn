@@ -14,6 +14,9 @@ bio = NodePath("character_properties/character_divider/charatcer_info/Bio")
 
 [node name="NPC" parent="." index="0" instance=ExtResource( 3 )]
 
+[node name="name_bar" parent="." index="1"]
+editor/display_folded = true
+
 [node name="name_field" parent="name_bar/help_divider" index="0"]
 placeholder_text = "Character Name"
 script = ExtResource( 4 )
@@ -21,33 +24,15 @@ script = ExtResource( 4 )
 [node name="character_properties" parent="." index="2" instance=ExtResource( 5 )]
 
 [node name="character_directory" parent="character_properties/character_divider" index="1"]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 379.0
-margin_right = 394.0
-margin_bottom = 746.0
 entry_directory = "res://data/characters"
 file_ending = ".char"
 root_node = NodePath("../../..")
 
-[node name="filter_container" parent="character_properties/character_divider/character_directory" index="0"]
-margin_right = 394.0
-margin_bottom = 367.0
-
-[node name="filter_container" parent="character_properties/character_divider/character_directory/filter_container" index="0"]
-margin_right = 394.0
-
-[node name="filter" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="1"]
-margin_right = 394.0
-
-[node name="All Entries" parent="character_properties/character_divider/character_directory/filter_container" index="1"]
-margin_right = 394.0
-margin_bottom = 367.0
-
 [node name="directory_tree" parent="character_properties/character_divider/character_directory/filter_container/All Entries" index="0"]
-margin_right = 394.0
-margin_bottom = 339.0
 script = ExtResource( 6 )
+
+[node name="reference_tree" parent="character_properties/data_divider/references" index="1"]
+root_node = NodePath("../../../..")
 
 [node name="CharacterProperties" parent="character_properties/data_divider" index="1"]
 root_node = NodePath("../../..")

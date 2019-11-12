@@ -1,16 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/Portrait/Portrait.tscn" type="PackedScene" id=1]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/Bio/Bio.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/utility/directory/directory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=4]
-
-
-
-
-
-
-
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/reference_tree.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=5]
 
 [node name="character_properties" type="HSplitContainer"]
 margin_top = 54.0
@@ -46,6 +40,30 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="character_directory" parent="character_divider" instance=ExtResource( 3 )]
+editor/display_folded = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 379.0
+margin_right = 394.0
+margin_bottom = 746.0
+
+[node name="filter_container" parent="character_divider/character_directory" index="0"]
+margin_right = 394.0
+margin_bottom = 367.0
+
+[node name="filter_container" parent="character_divider/character_directory/filter_container" index="0"]
+margin_right = 394.0
+
+[node name="filter" parent="character_divider/character_directory/filter_container/filter_container" index="1"]
+margin_right = 394.0
+
+[node name="All Entries" parent="character_divider/character_directory/filter_container" index="1"]
+margin_right = 394.0
+margin_bottom = 367.0
+
+[node name="directory_tree" parent="character_divider/character_directory/filter_container/All Entries" index="0"]
+margin_right = 394.0
+margin_bottom = 339.0
 
 [node name="data_divider" type="HSplitContainer" parent="."]
 margin_left = 406.0
@@ -57,7 +75,6 @@ size_flags_stretch_ratio = 2.0
 custom_constants/autohide = 0
 
 [node name="references" type="VBoxContainer" parent="data_divider"]
-editor/display_folded = true
 margin_right = 258.0
 margin_bottom = 746.0
 size_flags_horizontal = 3
@@ -70,13 +87,17 @@ text = "References"
 align = 1
 valign = 1
 
-[node name="tree" type="Tree" parent="data_divider/references"]
+[node name="reference_tree" type="Tree" parent="data_divider/references"]
 margin_top = 18.0
 margin_right = 258.0
 margin_bottom = 746.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 2
+hide_root = true
+script = ExtResource( 4 )
+values_to_exclude = [ "bio", "character_perceptions", "percieved_starting_values", "personal_values", "portrait_path" ]
 
-[node name="CharacterProperties" parent="data_divider" instance=ExtResource( 4 )]
+[node name="CharacterProperties" parent="data_divider" instance=ExtResource( 5 )]
 
 [editable path="character_divider/character_directory"]

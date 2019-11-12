@@ -5,7 +5,6 @@
 [ext_resource path="res://dialogue_editor/GameProperties/max_approval_label.gd" type="Script" id=3]
 [ext_resource path="res://dialogue_editor/GameProperties/maximum_approval_rating.gd" type="Script" id=4]
 
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
@@ -51,7 +50,6 @@ margin_bottom = 757.0
 custom_constants/separation = 10
 
 [node name="title_divider" type="HBoxContainer" parent="value_tabs/Perception Values/name_container/value_names"]
-editor/display_folded = true
 margin_right = 1178.0
 margin_bottom = 20.0
 
