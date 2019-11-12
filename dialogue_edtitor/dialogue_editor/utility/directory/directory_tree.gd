@@ -53,10 +53,10 @@ func parse_tree(options, root_entry, filter, group_by = null, category = null):
 	
 	for option in keys:
 		var data = options[option]
-		
-		if filter == "" or filter.to_lower() in data.to_lower():
+		var tags_dictionary = json_helper.load_json(data).get("tags", { })
+		print(tags_dictionary.values())
+		if filter == "" or filter.to_lower() in data.to_lower() or check_array_for_filter(filter.to_lower(), tags_dictionary.values()):
 			var place_in_tree
-			var tags_dictionary = json_helper.load_json(data).get("tags", { })
 			
 			if group_by == null:
 				place_in_tree = [data.get_file()]
@@ -122,3 +122,11 @@ func extract_tags_from_array(array):
 			return_string += "%s, " % [tag]#.capitalize()]
 	
 	return return_string.trim_suffix(", ")
+
+
+func check_array_for_filter(filter, array):
+	for entry in array:
+		if filter in entry.to_lower():
+			return true
+	
+	return false
