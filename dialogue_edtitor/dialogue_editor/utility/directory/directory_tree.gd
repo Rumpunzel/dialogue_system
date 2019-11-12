@@ -54,7 +54,7 @@ func parse_tree(options, root_entry, filter, group_by = null, category = null):
 	for option in keys:
 		var data = options[option]
 		var tags_dictionary = json_helper.load_json(data).get("tags", { })
-		print(tags_dictionary.values())
+		
 		if filter == "" or filter.to_lower() in data.to_lower() or check_array_for_filter(filter.to_lower(), tags_dictionary.values()):
 			var place_in_tree
 			
