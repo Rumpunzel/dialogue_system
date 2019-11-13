@@ -77,26 +77,6 @@ func parse(options, root_entry:TreeItem = tree_root, filter = "", group_by = nul
 			parse_branch(place_in_tree, root_entry, data, filter, tags_dictionary)
 
 
-#func parse_branch(branch:Array, root_entry:TreeItem, full_path:String = "", filter:String = "", tags_dictionary:Dictionary = { }):
-#	var node_name = branch.pop_front()
-#	var entry
-#
-#	if entry_map.get(node_name) == null:
-#		entry = create_item(root_entry)
-#		var leaf_name = node_name.trim_suffix(root.file_ending)
-#
-#		entry.set_text(NAME, leaf_name)
-#		entry.set_metadata(NAME, node_name)
-#		entry_map[leaf_name] = entry
-#	else:
-#		entry = entry_map.get(node_name)
-#
-#	if branch.empty():
-#
-#	else:
-#		parse_branch(branch, entry, full_path, filter, tags_dictionary)
-
-
 func open_entry(node = get_node(root_node).get_root_node()):
 	node.open_new_tab(get_selected().get_metadata(path_column), get_selected().get_text(NAME))
 

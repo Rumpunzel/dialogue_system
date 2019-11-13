@@ -16,10 +16,6 @@ signal tree_parsed
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func parse_tree(options, root_entry:TreeItem = tree_root, filter:String = "", group_by = null, category = null):
 	clear()
