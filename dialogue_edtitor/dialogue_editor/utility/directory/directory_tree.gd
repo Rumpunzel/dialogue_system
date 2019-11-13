@@ -120,7 +120,7 @@ func open_entry(node = get_node(root_node).get_root_node()):
 
 func extract_tags_from_array(array):
 	var return_string = ""
-	print(array)
+	
 	for entry in array:
 		if not typeof(entry) == TYPE_ARRAY:
 			var tags = entry.split("/", false)

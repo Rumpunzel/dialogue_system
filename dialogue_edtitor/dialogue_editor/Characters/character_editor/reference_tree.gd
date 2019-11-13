@@ -16,15 +16,15 @@ func setup(NPC, tag_name):
 	parse_tree(entries, tag_name)
 
 
-func parse_tree(options, tag_name, filter = ""):
+func parse_tree(options, tag_name):
 	clear()
 	entry_map.clear()
 	tree_root = create_item()
 	
 	var tag = options.get(tag_name, [ ])
-	print(tag)
+	
 	for values in tag:
-		parse_branch(Array(values.split("/", false)), tree_root, "", {})
+		parse_branch(Array(values.split("/", false)), tree_root)
 	
 	emit_signal("tree_parsed")
 
@@ -36,7 +36,7 @@ func parse(options):
 		return Array(str(options).split("/", false))
 
 
-func parse_branch(branch:Array, root_entry, filter, tags_dictionary:Dictionary):
+func parse_branch(branch:Array, root_entry):
 	var node_name = branch.pop_front()
 	var entry
 	
@@ -53,7 +53,7 @@ func parse_branch(branch:Array, root_entry, filter, tags_dictionary:Dictionary):
 		entry = entry_map.get(node_name)
 	
 	if not branch.empty():
-		parse_branch(branch, entry, filter, tags_dictionary)
+		parse_branch(branch, entry)
 
 
 func extract_tags_from_array(array):
@@ -63,7 +63,7 @@ func extract_tags_from_array(array):
 		var tags = entry.split("/", false)
 		
 		for tag in tags:
-			return_string += "%s, " % [tag]#.capitalize()]
+			return_string += "%s, " % [tag]
 	
 	return return_string.trim_suffix(", ")
 
