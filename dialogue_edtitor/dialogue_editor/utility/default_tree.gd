@@ -69,8 +69,12 @@ func extract_tags_from_array(array:Array):
 
 func check_array_for_filter(filter:String, array:Array):
 	for entry in array:
-		if filter in entry.to_lower():
-			return true
+		if typeof(entry) == TYPE_STRING:
+			if filter in entry.to_lower():
+				return true
+		else:
+			if check_array_for_filter(filter, entry):
+				return true
 	
 	return false
 
