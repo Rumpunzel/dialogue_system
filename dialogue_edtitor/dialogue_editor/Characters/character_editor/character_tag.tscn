@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://dialogue_editor/Characters/character_editor/character_tag.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/reference_tree.gd" type="Script" id=2]
+
+[node name="character_tag" type="PanelContainer"]
+margin_right = 244.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="tag_container" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 237.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="tag_container"]
+margin_right = 230.0
+margin_bottom = 14.0
+text = "Tag Name"
+
+[node name="h_separator" type="HSeparator" parent="tag_container"]
+margin_top = 18.0
+margin_right = 230.0
+margin_bottom = 22.0
+
+[node name="reference_tree" type="Tree" parent="tag_container"]
+margin_top = 26.0
+margin_right = 230.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+script = ExtResource( 2 )

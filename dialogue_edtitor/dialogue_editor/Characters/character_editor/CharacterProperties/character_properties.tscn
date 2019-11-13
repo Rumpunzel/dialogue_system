@@ -3,7 +3,7 @@
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/Portrait/Portrait.tscn" type="PackedScene" id=1]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/Bio/Bio.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/utility/directory/directory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/reference_tree.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/character_tag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/CharacterProperties.tscn" type="PackedScene" id=5]
 
 [node name="character_properties" type="HSplitContainer"]
@@ -87,16 +87,51 @@ text = "References"
 align = 1
 valign = 1
 
-[node name="reference_tree" type="Tree" parent="data_divider/references"]
+[node name="files_divider" type="VSplitContainer" parent="data_divider/references"]
 margin_top = 18.0
 margin_right = 258.0
 margin_bottom = 746.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
-hide_root = true
-script = ExtResource( 4 )
-values_to_exclude = [ "bio", "character_perceptions", "percieved_starting_values", "personal_values", "portrait_path" ]
+
+[node name="panel_container" type="PanelContainer" parent="data_divider/references/files_divider"]
+margin_right = 258.0
+margin_bottom = 728.0
+
+[node name="references_container" type="VBoxContainer" parent="data_divider/references/files_divider/panel_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 251.0
+margin_bottom = 721.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="data_divider/references/files_divider/panel_container/references_container"]
+margin_right = 244.0
+margin_bottom = 14.0
+text = "Tags"
+
+[node name="scroll_container" type="ScrollContainer" parent="data_divider/references/files_divider/panel_container/references_container"]
+margin_top = 18.0
+margin_right = 244.0
+margin_bottom = 714.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tags_container" type="VBoxContainer" parent="data_divider/references/files_divider/panel_container/references_container/scroll_container"]
+margin_right = 244.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="factions" parent="data_divider/references/files_divider/panel_container/references_container/scroll_container/tags_container" instance=ExtResource( 4 )]
+margin_bottom = 40.0
+tag_name = "factions"
+
+[node name="races" parent="data_divider/references/files_divider/panel_container/references_container/scroll_container/tags_container" instance=ExtResource( 4 )]
+margin_top = 44.0
+margin_bottom = 84.0
+tag_name = "races"
 
 [node name="CharacterProperties" parent="data_divider" instance=ExtResource( 5 )]
 
