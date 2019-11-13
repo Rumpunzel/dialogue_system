@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://dialogue_editor/default_editor/default_editor.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/utility/directory/directory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_editor/utility/tags_editor.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_editor/utility/tag.tscn" type="PackedScene" id=5]
 
 [node name="DefaultEditor" type="TabContainer"]
 anchor_right = 1.0
@@ -14,7 +16,7 @@ drag_to_rearrange_enabled = true
 script = ExtResource( 1 )
 tab_scene = ExtResource( 2 )
 new_tab_button = NodePath("Menu/new_tab")
-directory = NodePath("Menu/directory")
+directory = NodePath("Menu/directory_divider/directory")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -30,10 +32,68 @@ margin_bottom = 20.0
 size_flags_horizontal = 0
 text = "New Tab"
 
-[node name="directory" parent="Menu" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="directory_divider" type="HSplitContainer" parent="Menu"]
 margin_top = 24.0
 margin_right = 1192.0
 margin_bottom = 764.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="directory" parent="Menu/directory_divider" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 590.0
+margin_bottom = 740.0
 root_node = NodePath("../..")
+
+[node name="panel_container" type="PanelContainer" parent="Menu/directory_divider"]
+margin_left = 602.0
+margin_right = 1192.0
+margin_bottom = 740.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tags_container" type="VBoxContainer" parent="Menu/directory_divider/panel_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 583.0
+margin_bottom = 733.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="label_divider" type="HSplitContainer" parent="Menu/directory_divider/panel_container/tags_container"]
+margin_right = 576.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="Menu/directory_divider/panel_container/tags_container/label_divider"]
+margin_top = 3.0
+margin_right = 28.0
+margin_bottom = 17.0
+text = "Tags"
+
+[node name="button" type="Button" parent="Menu/directory_divider/panel_container/tags_container/label_divider"]
+margin_left = 540.0
+margin_right = 576.0
+margin_bottom = 20.0
+size_flags_horizontal = 8
+text = "Edit"
+
+[node name="h_separator" type="HSeparator" parent="Menu/directory_divider/panel_container/tags_container"]
+margin_top = 24.0
+margin_right = 576.0
+margin_bottom = 28.0
+
+[node name="scroll_container" type="ScrollContainer" parent="Menu/directory_divider/panel_container/tags_container"]
+margin_top = 32.0
+margin_right = 576.0
+margin_bottom = 726.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tags_editor" type="VBoxContainer" parent="Menu/directory_divider/panel_container/tags_container/scroll_container"]
+margin_right = 576.0
+margin_bottom = 694.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+tag_scene = ExtResource( 5 )

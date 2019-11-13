@@ -10,10 +10,11 @@ var tree_root
 signal tree_parsed
 
 
-func setup(NPC, tag_name):
-	entries = json_helper.load_json(NPC.json_path).get("tags", { })
+func setup(tags_json):
+	entries = tags_json
 	
-	parse_tree(entries, tag_name)
+	for entry in entries.keys():
+		parse_tree(entries, entry)
 
 
 func parse_tree(options, tag_name):
@@ -21,10 +22,10 @@ func parse_tree(options, tag_name):
 	entry_map.clear()
 	tree_root = create_item()
 	
-	var tag = options.get(tag_name, [ ])
+	var tag = parse_dictionary_to_arrays_of_paths(options)
 	
 	for values in tag:
-		parse_branch(Array(values.split("/", false)), tree_root)
+		parse_branch(values.split("/", false), tree_root)
 	
 	emit_signal("tree_parsed")
 
@@ -54,6 +55,25 @@ func parse_branch(branch:Array, root_entry):
 	
 	if not branch.empty():
 		parse_branch(branch, entry)
+
+
+func parse_dictionary_to_arrays_of_paths(dictionary:Dictionary):
+	if dictionary.empty():
+		return ""
+	else:
+		var array:Array = [ ]
+		
+		for key in dictionary.keys():
+			var string = parse_dictionary_to_arrays_of_paths(dictionary[key])
+			
+			if typeof(string) == TYPE_ARRAY:
+				print(string)
+				for tag in string:
+					array.append("%s/%s" % [key, tag])
+			else:
+				array.append("%s%s" % [key, ("/" + string) if not string == "" else ""])
+		
+		return array
 
 
 func extract_tags_from_array(array):

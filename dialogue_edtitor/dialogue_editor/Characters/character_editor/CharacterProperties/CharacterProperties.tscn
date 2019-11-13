@@ -7,11 +7,6 @@
 [ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/editor_perception_graph.gd" type="Script" id=6]
 
-
-
-
-
-
 [node name="CharacterProperties" type="VBoxContainer"]
 margin_left = 270.0
 margin_right = 794.0
@@ -28,8 +23,13 @@ text = "NPC Properties"
 align = 1
 valign = 1
 
-[node name="categories" type="TabContainer" parent="."]
+[node name="h_separator" type="HSeparator" parent="."]
 margin_top = 18.0
+margin_right = 524.0
+margin_bottom = 22.0
+
+[node name="categories" type="TabContainer" parent="."]
+margin_top = 26.0
 margin_right = 524.0
 margin_bottom = 746.0
 size_flags_horizontal = 3
@@ -50,13 +50,13 @@ custom_constants/autohide = 0
 
 [node name="loyalty_divier" type="VBoxContainer" parent="categories/Perception Values"]
 margin_right = 516.0
-margin_bottom = 340.0
+margin_bottom = 336.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="value_container" type="PanelContainer" parent="categories/Perception Values/loyalty_divier"]
 margin_right = 516.0
-margin_bottom = 308.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -64,14 +64,14 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 509.0
-margin_bottom = 301.0
+margin_bottom = 297.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="perception_values" type="GridContainer" parent="categories/Perception Values/loyalty_divier/value_container/values"]
 margin_right = 502.0
-margin_bottom = 294.0
+margin_bottom = 290.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
@@ -80,9 +80,9 @@ value_slider = ExtResource( 3 )
 root_node = NodePath("../../../../../..")
 
 [node name="approval_container" type="PanelContainer" parent="categories/Perception Values/loyalty_divier"]
-margin_top = 312.0
+margin_top = 308.0
 margin_right = 516.0
-margin_bottom = 340.0
+margin_bottom = 336.0
 
 [node name="number_divider" type="HBoxContainer" parent="categories/Perception Values/loyalty_divier/approval_container"]
 margin_left = 7.0
@@ -108,9 +108,9 @@ script = ExtResource( 4 )
 root_node = NodePath("../../../../../..")
 
 [node name="graph_container" type="PanelContainer" parent="categories/Perception Values"]
-margin_top = 352.0
+margin_top = 348.0
 margin_right = 516.0
-margin_bottom = 692.0
+margin_bottom = 684.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -118,13 +118,13 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 509.0
-margin_bottom = 333.0
+margin_bottom = 329.0
 custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
 
 [node name="perception_graph" parent="categories/Perception Values/graph_container/margin_container" instance=ExtResource( 5 )]
-margin_bottom = 276.0
+margin_bottom = 272.0
 script = ExtResource( 6 )
 root_node = NodePath("../../../../..")

@@ -1,4 +1,14 @@
 {
-    "factions": {},
-    "races": {}
+    "factions": {
+        "friends": {},
+        "test_npcs": {}
+    },
+    "races": {
+        "cute": {
+            "cat": {},
+            "imposter": {}
+        },
+        "elf": {},
+        "snail": {}
+    }
 }

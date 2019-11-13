@@ -11,6 +11,10 @@ tab_scene = ExtResource( 2 )
 margin_right = 104.0
 text = "New Character"
 
-[node name="directory" parent="Menu" index="1"]
+[node name="directory" parent="Menu/directory_divider" index="0"]
 entry_directory = "res://data/characters"
 file_ending = ".char"
+root_node = NodePath("../../..")
+
+[node name="tags_editor" parent="Menu/directory_divider/panel_container/tags_container/scroll_container" index="0"]
+tags_json = "res://data/characters/CHARACTER_TAGS.json"

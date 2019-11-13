@@ -1,16 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://dialogue_editor/Characters/character_editor/character_tag.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/Characters/character_editor/reference_tree.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/utility/tag.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/utility/reference_tree.gd" type="Script" id=2]
 
-[node name="character_tag" type="PanelContainer"]
+[node name="tag" type="PanelContainer"]
 margin_right = 244.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
-label = NodePath("tag_container/button_divider/label")
-reference_tree = NodePath("tag_container/reference_tree")
 
 [node name="tag_container" type="VBoxContainer" parent="."]
 margin_left = 7.0
