@@ -1,7 +1,7 @@
 {
     "tags": {
-        "race": "cute",
-        "faction": "friends"
+        "races": ["cute"],
+        "factions": ["friends"]
     },
     "character_perceptions": {},
     "percieved_starting_values": {},

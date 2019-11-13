@@ -1,6 +1,6 @@
 {
     "tags": {
-        "race": "cute/imposter"
+        "races": ["cute/imposter", "elf"]
     },
     "character_perceptions": {},
     "percieved_starting_values": {},

@@ -10,7 +10,7 @@
     },
     "portrait_path": "res://data/assets/images/alex.png",
     "tags": {
-        "faction": "friends",
-        "race": "snail"
+        "factions": ["friends"],
+        "races": ["snail"]
     }
 }

@@ -1,6 +1,6 @@
 {
     "tags": {
-        "faction": "test_npcs"
+        "factions": ["test_npcs"]
     },
     "bio": "",
     "character_perceptions": {
