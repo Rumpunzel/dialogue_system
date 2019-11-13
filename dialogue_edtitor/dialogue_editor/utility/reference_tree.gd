@@ -1,7 +1,5 @@
 extends default_tree
 
-const VALUE = 1
-
 
 func setup(tags_json):
 	entries = tags_json

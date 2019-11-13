@@ -1,7 +1,5 @@
 extends default_tree
 
-const VALUE = 1
-
 var tag_name
 
 
