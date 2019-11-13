@@ -78,7 +78,8 @@ func parse(options, root_entry:TreeItem = tree_root, filter = "", group_by = nul
 
 
 func open_entry(node = get_node(root_node).get_root_node()):
-	node.open_new_tab(get_selected().get_metadata(path_column), get_selected().get_text(NAME))
+	if not get_selected().get_metadata(path_column) == null:
+		node.open_new_tab(get_selected().get_metadata(path_column), get_selected().get_text(NAME))
 
 
 func set_full_path(entry:TreeItem, full_path:String, tags_dictionary:Dictionary = { }):

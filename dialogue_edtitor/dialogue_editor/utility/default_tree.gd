@@ -48,8 +48,10 @@ func parse_branch(branch:Array, root_entry:TreeItem, full_path:String = "", filt
 	
 	if not branch.empty():
 		parse_branch(branch, entry, full_path, filter, tags_dictionary)
+		entry.set_selectable(NAME, false)
 	else:
 		set_full_path(entry, full_path, tags_dictionary)
+		entry.set_selectable(NAME, true)
 
 
 func extract_tags_from_array(array:Array):
