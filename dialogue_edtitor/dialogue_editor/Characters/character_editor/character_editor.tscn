@@ -34,14 +34,8 @@ columns = 2
 script = ExtResource( 6 )
 show_tags = false
 
-[node name="factions" parent="character_properties/data_divider/references/files_divider/panel_container/references_container/scroll_container/tags_container" index="0"]
-margin_bottom = 346.0
-root_node = NodePath("../../../../../../../../..")
-
-[node name="races" parent="character_properties/data_divider/references/files_divider/panel_container/references_container/scroll_container/tags_container" index="1"]
-margin_top = 350.0
-margin_bottom = 696.0
-root_node = NodePath("../../../../../../../../..")
+[node name="tags_container" parent="character_properties/data_divider/references/files_divider/panel_container/references_container/scroll_container" index="0"]
+root_node = NodePath("../../../../../../../..")
 
 [node name="CharacterProperties" parent="character_properties/data_divider" index="1"]
 root_node = NodePath("../../..")
