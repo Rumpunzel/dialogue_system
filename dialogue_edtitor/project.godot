@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_editor/default_editor/default_editor_tab.gd"
 }, {
+"base": "Tree",
+"class": "default_tree",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/default_tree.gd"
+}, {
 "base": "Label",
 "class": "dialogue_option",
 "language": "GDScript",
@@ -122,6 +127,7 @@ _global_script_class_icons={
 "character_editor": "",
 "default_editor": "",
 "default_editor_tab": "",
+"default_tree": "",
 "dialogue_option": "",
 "directory_tree": "",
 "editor_name_field": "",
