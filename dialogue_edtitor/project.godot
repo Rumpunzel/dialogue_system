@@ -79,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd"
 }, {
-"base": "Tree",
+"base": "default_tree",
 "class": "directory_tree",
 "language": "GDScript",
 "path": "res://dialogue_editor/utility/directory/directory_tree.gd"
