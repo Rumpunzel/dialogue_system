@@ -4,7 +4,7 @@
 [ext_resource path="res://dialogue_editor/Characters/character_editor/character_tag.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/character_reference_tree.gd" type="Script" id=3]
 
-[node name="character_tag" index="0" instance=ExtResource( 1 )]
+[node name="character_tag" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="reference_tree" parent="tag_container" index="2"]

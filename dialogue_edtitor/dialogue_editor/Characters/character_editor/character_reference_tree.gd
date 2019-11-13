@@ -15,4 +15,3 @@ func parse(options, root_entry:TreeItem = tree_root, _filter:String = "", _group
 	
 	for values in tag:
 		parse_branch(Array(values.split("/", false)), root_entry)
-
