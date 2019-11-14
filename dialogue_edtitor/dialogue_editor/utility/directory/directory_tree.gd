@@ -65,16 +65,20 @@ func parse(options, root_entry:TreeItem = tree_root, filter = "", group_by = nul
 		var tags_dictionary = json_helper.load_json(data).get("tags", { })
 		
 		if filter == "" or filter.to_lower() in data.to_lower() or check_array_for_filter(filter.to_lower(), tags_dictionary.values()):
-			var place_in_tree
+			var place_in_tree:Array = [ ]
 			
 			if group_by == null:
-				place_in_tree = [data.get_file()]
+				place_in_tree = [[data.get_file()]]
 			elif category == null:
-				place_in_tree = data.trim_prefix(base_directory).split("/", false)
+				place_in_tree = [data.trim_prefix(base_directory).split("/", false)]
 			else:
-				place_in_tree = tags_dictionary.get(category, "").plus_file(data.get_file()).split("/", false)
+				var array = tags_dictionary.get(category, "")
+				
+				for entry in array:
+					place_in_tree.append(entry.plus_file(data.get_file()).split("/", false))
 			
-			parse_branch(place_in_tree, root_entry, data, filter, tags_dictionary)
+			for place in place_in_tree:
+				parse_branch(place, root_entry, data, filter, tags_dictionary)
 
 
 func open_entry(node = get_node(root_node).get_root_node()):
