@@ -22,6 +22,8 @@ var groups:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	entries_selectable = true
+	
 	path_column = PATH if show_tags else TAGS
 	
 	entries = file_helper.list_files_in_directory(root.entry_directory, true, root.file_ending)

@@ -3,6 +3,8 @@ class_name default_tree
 
 const NAME = 0
 
+export(bool) var entries_selectable = false
+
 #warning-ignore:unused_class_variable
 var entries
 var entry_map:Dictionary
@@ -51,7 +53,7 @@ func parse_branch(branch:Array, root_entry:TreeItem, full_path:String = "", filt
 		entry.set_selectable(NAME, false)
 	else:
 		set_full_path(entry, full_path, tags_dictionary)
-		entry.set_selectable(NAME, true)
+		entry.set_selectable(NAME, entries_selectable)
 
 
 func extract_tags_from_array(array:Array):
