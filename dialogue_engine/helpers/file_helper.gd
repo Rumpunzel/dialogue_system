@@ -1,5 +1,7 @@
 extends Node
 
+var files_found:Dictionary
+
 
 func list_files_in_directory(directory_path:String, recursive:bool, file_suffix:String = ""):
 	var files = []
@@ -17,10 +19,15 @@ func list_files_in_directory(directory_path:String, recursive:bool, file_suffix:
 			if recursive:
 				files += list_files_in_directory(directory_path.plus_file(file), recursive, file_suffix)
 		elif file.ends_with(file_suffix):
-			files.append(directory_path.plus_file(file))
+			var file_path = directory_path.plus_file(file)
 			
-			if CONSTANTS.verbose_mode:
-				CONSTANTS.print_to_console("Found file %s in directory %s" % [file, directory_path])
+			files.append(file_path)
+			
+			if not files_found.get(file) == file_path:
+				files_found[file] = file_path
+				
+				if CONSTANTS.verbose_mode:
+					CONSTANTS.print_to_console("Found file %s in directory %s" % [file, directory_path])
 	
 	directory.list_dir_end()
 	
