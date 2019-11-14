@@ -18,6 +18,8 @@ func _ready():
 	get_node(filter_field).connect("text_confirmed", self, "update_filtered_tree")
 	
 	tree.connect("tree_parsed", self, "setup_groups")
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -25,13 +27,14 @@ func _ready():
 
 
 func add_group(group_name):
-	add_item("%s%s" % [ITEM_STRING, group_name])
+	add_item(group_name.capitalize())
 
 func update_tree(id, filter = ""):
 	var item = get_item_text(id)
-	tree.group_tree(item.trim_prefix(ITEM_STRING), filter)
+	tree.group_tree(item.to_lower(), filter)
 	
-	text = item
+	selected = id
+	text = "%s%s" % [ITEM_STRING, item]
 
 func update_filtered_tree(filter):
 	update_tree(selected, filter)
@@ -46,3 +49,5 @@ func setup_groups():
 	
 	for grp in groups:
 		add_group(grp)
+	
+	text = "%s%s" % [ITEM_STRING, directory_tree.FOLDERS.capitalize()]
