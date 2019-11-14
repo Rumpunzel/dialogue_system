@@ -1,96 +1,15 @@
-extends Tree
-
-enum { NAME, VALUE }
-
-var entries
-var entry_map:Dictionary
-
-var tree_root
-
-signal tree_parsed
+extends default_tree
 
 
 func setup(tags_json):
 	entries = tags_json
 	
 	for entry in entries.keys():
-		parse_tree(entries, entry)
+		parse_tree(entries)
 
 
-func parse_tree(options, tag_name):
-	clear()
-	entry_map.clear()
-	tree_root = create_item()
-	
+func parse(options, root_entry:TreeItem = tree_root, _filter:String = "", _group_by = null, _category = null):
 	var tag = parse_dictionary_to_arrays_of_paths(options)
 	
 	for values in tag:
-		parse_branch(values.split("/", false), tree_root)
-	
-	emit_signal("tree_parsed")
-
-func parse(options):
-	if typeof(options) == TYPE_ARRAY or typeof(options) == TYPE_DICTIONARY:
-		for option in options.keys():
-			return [option] + parse(options[option])
-	else:
-		return Array(str(options).split("/", false))
-
-
-func parse_branch(branch:Array, root_entry):
-	var node_name = branch.pop_front()
-	var entry
-	
-	if entry_map.get(node_name) == null:
-		entry = create_item(root_entry)
-		var leaf_name = node_name
-		
-		entry.set_text(NAME, leaf_name)
-		entry.set_metadata(NAME, node_name)
-		#entry.set_editable(NAME, true)
-		
-		entry_map[leaf_name] = entry
-	else:
-		entry = entry_map.get(node_name)
-	
-	if not branch.empty():
-		parse_branch(branch, entry)
-
-
-func parse_dictionary_to_arrays_of_paths(dictionary:Dictionary):
-	if dictionary.empty():
-		return ""
-	else:
-		var array:Array = [ ]
-		
-		for key in dictionary.keys():
-			var string = parse_dictionary_to_arrays_of_paths(dictionary[key])
-			
-			if typeof(string) == TYPE_ARRAY:
-				print(string)
-				for tag in string:
-					array.append("%s/%s" % [key, tag])
-			else:
-				array.append("%s%s" % [key, ("/" + string) if not string == "" else ""])
-		
-		return array
-
-
-func extract_tags_from_array(array):
-	var return_string = ""
-	
-	for entry in array:
-		var tags = entry.split("/", false)
-		
-		for tag in tags:
-			return_string += "%s, " % [tag]
-	
-	return return_string.trim_suffix(", ")
-
-
-func check_array_for_filter(filter, array):
-	for entry in array:
-		if filter in entry.to_lower():
-			return true
-	
-	return false
+		parse_branch(values.split("/", false), root_entry)

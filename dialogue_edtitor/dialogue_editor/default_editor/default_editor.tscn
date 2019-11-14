@@ -42,12 +42,13 @@ size_flags_vertical = 3
 [node name="directory" parent="Menu/directory_divider" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 590.0
+margin_right = 788.0
 margin_bottom = 740.0
+size_flags_stretch_ratio = 2.0
 root_node = NodePath("../..")
 
 [node name="panel_container" type="PanelContainer" parent="Menu/directory_divider"]
-margin_left = 602.0
+margin_left = 800.0
 margin_right = 1192.0
 margin_bottom = 740.0
 size_flags_horizontal = 3
@@ -56,13 +57,13 @@ size_flags_vertical = 3
 [node name="tags_container" type="VBoxContainer" parent="Menu/directory_divider/panel_container"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 583.0
+margin_right = 385.0
 margin_bottom = 733.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="label_divider" type="HSplitContainer" parent="Menu/directory_divider/panel_container/tags_container"]
-margin_right = 576.0
+margin_right = 378.0
 margin_bottom = 20.0
 
 [node name="label" type="Label" parent="Menu/directory_divider/panel_container/tags_container/label_divider"]
@@ -72,26 +73,26 @@ margin_bottom = 17.0
 text = "Tags"
 
 [node name="button" type="Button" parent="Menu/directory_divider/panel_container/tags_container/label_divider"]
-margin_left = 540.0
-margin_right = 576.0
+margin_left = 342.0
+margin_right = 378.0
 margin_bottom = 20.0
 size_flags_horizontal = 8
 text = "Edit"
 
 [node name="h_separator" type="HSeparator" parent="Menu/directory_divider/panel_container/tags_container"]
 margin_top = 24.0
-margin_right = 576.0
+margin_right = 378.0
 margin_bottom = 28.0
 
 [node name="scroll_container" type="ScrollContainer" parent="Menu/directory_divider/panel_container/tags_container"]
 margin_top = 32.0
-margin_right = 576.0
+margin_right = 378.0
 margin_bottom = 726.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="tags_editor" type="VBoxContainer" parent="Menu/directory_divider/panel_container/tags_container/scroll_container"]
-margin_right = 576.0
+margin_right = 378.0
 margin_bottom = 694.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

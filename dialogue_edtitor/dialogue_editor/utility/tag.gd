@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name tag
 
 
 func setup_tree(tags_json, tag_name):
