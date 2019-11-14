@@ -1,12 +1,15 @@
 {
-    "tags": {
-        "races": ["cute/imposter", "elf"]
-    },
     "character_perceptions": {},
     "percieved_starting_values": {},
     "personal_values": {
         "politeness": 10,
         "selflessness": -10
     },
-    "portrait_path": "res://data/assets/images/merilin_portrait_trans.png"
+    "portrait_path": "res://data/assets/images/merilin_portrait_trans.png",
+    "tags": {
+        "races": [
+            "cute/imposter",
+            "elf"
+        ]
+    }
 }

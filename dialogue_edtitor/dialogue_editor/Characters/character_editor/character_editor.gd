@@ -22,9 +22,9 @@ func setup(id:String, json_path:String):
 	get_node(bio).set_bio(NPC.bio)
 
 func save_changes():
-	NPC.store_values()
-	
-	.save_changes()
+	pass#NPC.store_values()
+	print(json)
+	#.save_changes()
 
 
 func set_json_path(new_path:String):
