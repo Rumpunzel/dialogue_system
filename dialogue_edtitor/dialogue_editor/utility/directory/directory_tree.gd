@@ -26,8 +26,6 @@ func _ready():
 	
 	path_column = PATH if show_tags else TAGS
 	
-	entries = file_helper.list_files_in_directory(root.entry_directory, true, root.file_ending)
-	
 	for column in columns:
 		set_column_title(column, column_names.get(column, ""))
 	set_column_title(path_column, column_names[PATH])
@@ -42,6 +40,8 @@ func _ready():
 
 
 func group_tree(group_by, filter = ""):
+	load_entries()
+	
 	match group_by:
 		NOTHING:
 			parse_tree(entries, tree_root, filter)
@@ -86,6 +86,10 @@ func parse(options, root_entry:TreeItem = tree_root, filter = "", group_by = nul
 func open_entry(node = get_node(root_node).get_root_node()):
 	if not get_selected().get_metadata(path_column) == null:
 		node.open_new_tab(get_selected().get_metadata(path_column), get_selected().get_text(NAME))
+
+
+func load_entries():
+	entries = file_helper.list_files_in_directory(root.entry_directory, true, root.file_ending)
 
 
 func set_full_path(entry:TreeItem, full_path:String, tags_dictionary:Dictionary = { }):

@@ -14,6 +14,7 @@ var json:Dictionary
 signal new_json
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(save_button).connect("pressed", self, "save_changes")
@@ -21,10 +22,12 @@ func _ready():
 	get_node(delete_button).connect("confirmed", self, "delete_entry")
 
 
+
 func setup(id:String, json_path:String):
 	set_json_path(json_path)
 	
 	set_tab_id(id)
+
 
 func save_changes():
 	var new_path = "%s%s" % [json_path.get_base_dir().plus_file(name), get_parent().get_file_extension()]
@@ -37,11 +40,13 @@ func save_changes():
 	if CONSTANTS.verbose_mode:
 		CONSTANTS.print_to_console("%s changes saved." % [name])
 
+
 func close_tab(save_changes = true):
 	if save_changes:
 		save_changes()
 	
 	queue_free()
+
 
 func delete_entry(path = json_path, new_path = null):
 	if not new_path == null:
@@ -55,8 +60,10 @@ func delete_entry(path = json_path, new_path = null):
 	if path == json_path:
 		close_tab(false)
 
+
 func tab_exists(path:String):
 	return path == json_path
+
 
 
 func set_tab_id(new_id:String):
@@ -64,6 +71,7 @@ func set_tab_id(new_id:String):
 		name = new_id
 	
 	get_node(name_field).text = name
+
 
 func set_json_path(new_path:String):
 	json_path = new_path
@@ -74,6 +82,7 @@ func set_json_path(new_path:String):
 		json = new_json
 		
 		emit_signal("new_json", json)
+
 
 
 func get_json_path() -> String:
