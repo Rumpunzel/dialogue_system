@@ -24,6 +24,7 @@ var character_json:Dictionary
 var json_path:String setget set_json_path, get_json_path
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_values()
@@ -39,10 +40,12 @@ func _ready():
 #	pass
 
 
+
 func initiate_dialogue(dialogue_node, specific_dilaogue = CONSTANTS.DIALOGUE_PATHS):
 	var loaded_json = json_helper.load_json(specific_dilaogue)
 	if not loaded_json == null:
 		dialogue_node.switch_dialogue(loaded_json)
+
 
 func calculate_perception_value(perception_values:Dictionary):
 	var values = { }
@@ -55,6 +58,7 @@ func calculate_perception_value(perception_values:Dictionary):
 	
 	return values
 
+
 func load_values():
 	var loaded_json = json_helper.load_json(json_path)
 	
@@ -63,23 +67,29 @@ func load_values():
 	for key in character_json.keys():
 		set(key, character_json[key])
 
+
 func store_values():
 	for key in character_json.keys():
-		character_json[key] = get(key)
+		var property = get(key)
+		character_json[key] = property if not property == null else character_json[key]
 	
 	json_helper.save_json(character_json, json_path)
+
 
 func remember_response(new_memory:Dictionary):
 	memories.remember_response(new_memory)
 	store_values()
 
+
 func remembers_dialogue_option(unique_id):
 	return memories.remembers_dialogue_option(unique_id)
+
 
 
 func set_bio(new_bio:String):
 	bio = new_bio
 	character_json["bio"] = bio
+
 
 func set_id(new_id:String):
 	id = new_id
@@ -87,20 +97,25 @@ func set_id(new_id:String):
 	if not id == "":
 		name = id
 
+
 func set_json_path(new_path:String):
 	json_path = new_path
+
 
 func set_percieved_starting_values(new_values:Dictionary):
 	percieved_starting_values = new_values
 	character_json["percieved_starting_values"] = percieved_starting_values
 
+
 func set_portrait(new_portrait:Texture):
 	portrait = new_portrait
+
 
 func set_portrait_path(new_path:String):
 	portrait_path = new_path
 	portrait = load(portrait_path)
 	character_json["portrait_path"] = portrait_path
+
 
 
 func get_bio() -> String:
