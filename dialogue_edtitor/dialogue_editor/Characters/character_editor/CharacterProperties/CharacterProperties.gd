@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends TabContainer
 
 export(NodePath) var root_node setget , get_root_node
 

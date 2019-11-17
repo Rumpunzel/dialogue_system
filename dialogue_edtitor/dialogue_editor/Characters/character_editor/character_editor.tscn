@@ -37,6 +37,8 @@ show_tags = false
 root_node = NodePath("../../../../../../../..")
 
 [node name="CharacterProperties" parent="character_properties/data_divider" index="1"]
+margin_left = 270.0
+margin_right = 794.0
 root_node = NodePath("../../..")
 
 [editable path="character_properties"]
