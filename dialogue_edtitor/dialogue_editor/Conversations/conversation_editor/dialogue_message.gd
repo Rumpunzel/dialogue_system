@@ -19,10 +19,11 @@ func parse_message(new_messages, new_name):
 	name = new_name
 	
 	for message in new_messages:
-		var new_h_separator = HSeparator.new()
-		messages.add_child(new_h_separator)
+		if messages.get_child_count() > 1:
+			var new_h_separator = HSeparator.new()
+			messages.add_child(new_h_separator)
 		
 		var new_message = message_scene.instance()
-		new_message.set_message(message)
 		messages.add_child(new_message)
+		new_message.set_message(message)
 	

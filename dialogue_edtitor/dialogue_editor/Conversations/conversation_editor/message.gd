@@ -14,5 +14,8 @@ func _ready():
 
 
 func set_message(message):
-	$message_container/speaker.text = str(message.get("speaker", ""))
+	var speaker = message.get("speaker")
+	if not speaker == null:
+		$message_container/speaker.text = str(speaker)
+	
 	$message_container/message.text = message.get("text", "")

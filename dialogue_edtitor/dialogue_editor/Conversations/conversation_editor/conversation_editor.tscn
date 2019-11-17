@@ -7,7 +7,7 @@
 
 [node name="conversation_editor" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-trees_container = NodePath("trees_container")
+trees_container = NodePath("trees_panel/title_container/trees_container")
 
 [node name="name_field" parent="name_bar/help_divider" index="0"]
 placeholder_text = "Conversation Name"
@@ -16,10 +16,51 @@ root_node = NodePath("../../../../conversation_editor")
 [node name="buttons_container" parent="name_bar/help_divider" index="1"]
 editor/display_folded = true
 
-[node name="trees_container" type="TabContainer" parent="." index="1"]
+[node name="h_separator" type="HSeparator" parent="." index="1"]
 margin_top = 54.0
 margin_right = 1200.0
+margin_bottom = 58.0
+
+[node name="participants_panel" type="PanelContainer" parent="." index="2"]
+margin_top = 62.0
+margin_right = 1200.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+
+[node name="participants" type="Label" parent="participants_panel" index="0"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1193.0
+margin_bottom = 21.0
+text = "Participants"
+
+[node name="h_separator_2" type="HSeparator" parent="." index="3"]
+margin_top = 94.0
+margin_right = 1200.0
+margin_bottom = 98.0
+
+[node name="trees_panel" type="PanelContainer" parent="." index="4"]
+margin_top = 102.0
+margin_right = 1200.0
 margin_bottom = 800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="title_container" type="VBoxContainer" parent="trees_panel" index="0"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1193.0
+margin_bottom = 691.0
+
+[node name="dialogue_trees" type="Label" parent="trees_panel/title_container" index="0"]
+margin_right = 1186.0
+margin_bottom = 14.0
+text = "Dialogue Trees"
+
+[node name="trees_container" type="TabContainer" parent="trees_panel/title_container" index="1"]
+margin_top = 18.0
+margin_right = 1186.0
+margin_bottom = 684.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0

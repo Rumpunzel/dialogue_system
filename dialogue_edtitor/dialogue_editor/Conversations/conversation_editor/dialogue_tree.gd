@@ -27,5 +27,5 @@ func parse_tree(new_tree, new_name):
 		
 		if typeof(content) == TYPE_ARRAY:
 			var new_message = dialogue_message_scene.instance()
-			new_message.parse_message(content, thing)
 			messages_container.add_child(new_message)
+			new_message.parse_message(content, thing)

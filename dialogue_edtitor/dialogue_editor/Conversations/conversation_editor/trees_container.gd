@@ -24,5 +24,5 @@ func update_trees(new_json):
 
 func create_tree_panel(tree_json, tree_name):
 	var new_tree = dialogue_tree_scene.instance()
-	new_tree.parse_tree(tree_json, tree_name)
 	add_child(new_tree)
+	new_tree.parse_tree(tree_json, tree_name)
