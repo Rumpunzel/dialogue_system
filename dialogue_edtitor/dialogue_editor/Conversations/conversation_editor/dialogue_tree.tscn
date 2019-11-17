@@ -4,18 +4,19 @@
 [ext_resource path="res://dialogue_editor/Conversations/conversation_editor/dialogue_message.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dialogue_editor/Conversations/conversation_editor/tree_name.gd" type="Script" id=3]
 
-[node name="dialogue_tree" type="PanelContainer"]
+[node name="dialogue_tree" type="ScrollContainer"]
 margin_right = 1200.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 dialogue_message_scene = ExtResource( 2 )
 
 [node name="messages_container" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1193.0
-margin_bottom = 173.0
+margin_right = 1200.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="tree_name" type="LineEdit" parent="messages_container"]
 margin_right = 105.0
@@ -30,5 +31,5 @@ expand = true
 
 [node name="h_separator" type="HSeparator" parent="messages_container"]
 margin_top = 28.0
-margin_right = 1186.0
+margin_right = 1200.0
 margin_bottom = 32.0

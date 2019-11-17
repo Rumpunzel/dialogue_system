@@ -13,14 +13,16 @@ func _ready():
 
 
 func parse_message(new_messages, new_name):
-	$messages/label.text = new_name
+	var messages = $messages
+	
+	messages.get_node("label").text = new_name
 	name = new_name
 	
 	for message in new_messages:
 		var new_h_separator = HSeparator.new()
-		add_child(new_h_separator)
+		messages.add_child(new_h_separator)
 		
 		var new_message = message_scene.instance()
 		new_message.set_message(message)
-		add_child(new_message)
+		messages.add_child(new_message)
 	

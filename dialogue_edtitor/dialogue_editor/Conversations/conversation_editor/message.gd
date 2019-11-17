@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -14,5 +14,5 @@ func _ready():
 
 
 func set_message(message):
-	$speaker.text = str(message.get("speaker", ""))
-	$message.text = message.get("text", "")
+	$message_container/speaker.text = str(message.get("speaker", ""))
+	$message_container/message.text = message.get("text", "")

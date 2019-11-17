@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends TabContainer
 
 export(PackedScene) var dialogue_tree_scene
 
@@ -23,10 +23,6 @@ func update_trees(new_json):
 	
 
 func create_tree_panel(tree_json, tree_name):
-	if get_child_count() > 0:
-		var new_h_separator = HSeparator.new()
-		add_child(new_h_separator)
-	
 	var new_tree = dialogue_tree_scene.instance()
 	new_tree.parse_tree(tree_json, tree_name)
 	add_child(new_tree)

@@ -1,4 +1,4 @@
-extends PanelContainer
+extends ScrollContainer
 
 export(PackedScene) var dialogue_message_scene
 
