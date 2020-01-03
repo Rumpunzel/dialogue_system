@@ -42,7 +42,8 @@ func _ready():
 
 
 func initiate_dialogue(dialogue_node, specific_dilaogue = CONSTANTS.DIALOGUE_PATHS):
-	var loaded_json = json_helper.load_json(specific_dilaogue)
+	# TODO: implement dialogue var
+	var loaded_json = json_helper.load_json(specific_dilaogue.plus_file("default.convo"))
 	if not loaded_json == null:
 		dialogue_node.switch_dialogue(loaded_json)
 

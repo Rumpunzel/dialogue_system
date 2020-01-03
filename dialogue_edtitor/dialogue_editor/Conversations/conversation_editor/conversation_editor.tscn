@@ -41,6 +41,7 @@ margin_right = 1200.0
 margin_bottom = 58.0
 
 [node name="participants_panel" type="PanelContainer" parent="." index="2"]
+editor/display_folded = true
 margin_top = 62.0
 margin_right = 1200.0
 margin_bottom = 113.0
@@ -84,9 +85,10 @@ margin_right = 1200.0
 margin_bottom = 121.0
 
 [node name="trees_panel" type="PanelContainer" parent="." index="4"]
+editor/display_folded = true
 margin_top = 125.0
 margin_right = 1200.0
-margin_bottom = 800.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -94,7 +96,7 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1193.0
-margin_bottom = 668.0
+margin_bottom = 324.0
 
 [node name="dialogue_trees" type="Label" parent="trees_panel/title_container" index="0"]
 margin_right = 1186.0
@@ -104,9 +106,21 @@ text = "Dialogue Trees"
 [node name="trees_container" type="TabContainer" parent="trees_panel/title_container" index="1"]
 margin_top = 18.0
 margin_right = 1186.0
-margin_bottom = 661.0
+margin_bottom = 317.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 script = ExtResource( 3 )
 dialogue_tree_scene = ExtResource( 4 )
+
+[node name="h_separator_3" type="HSeparator" parent="." index="5"]
+margin_top = 460.0
+margin_right = 1200.0
+margin_bottom = 464.0
+
+[node name="graph_edit" type="GraphEdit" parent="." index="6"]
+margin_top = 468.0
+margin_right = 1200.0
+margin_bottom = 800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
