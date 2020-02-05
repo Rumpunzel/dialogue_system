@@ -23,8 +23,8 @@ func _ready():
 
 
 
-func setup(id:String, json_path:String):
-	set_json_path(json_path)
+func setup(id:String, path:String):
+	set_json_path(path)
 	
 	set_tab_id(id)
 
