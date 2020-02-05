@@ -99,12 +99,12 @@ func update_perceptions_graph(new_perceptions:Dictionary):
 func get_graph(new_perceptions:Dictionary):
 	new_perceptions = subject.calculate_perception_value(new_perceptions)
 	var points = []
-	var perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
-	points.resize(perception_values.size())
+	var values = GAME_CONSTANTS.PERCEPTION_VALUES
+	points.resize(values.size())
 	
 	if not radius == null and not center == null:
-		for i in perception_values.size():
-			var perception = perception_values[i]
+		for i in values.size():
+			var perception = values[i]
 			var new_rotation = modified_rotation(i)
 			var new_point = center + Vector2(0, -radius / 2 * (1 + new_perceptions.get(perception, 0))).rotated(new_rotation)
 			

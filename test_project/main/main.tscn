@@ -17,7 +17,6 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="parchment_background" type="TextureRect" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
@@ -51,3 +50,4 @@ script = ExtResource( 7 )
 [node name="Player" parent="Characters" instance=ExtResource( 8 )]
 
 [node name="Klaus" parent="Characters" instance=ExtResource( 9 )]
+json_path = "res://data/characters/Klaus.char"

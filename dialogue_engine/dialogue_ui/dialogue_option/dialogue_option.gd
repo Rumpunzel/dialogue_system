@@ -51,7 +51,7 @@ var clicked_alpha = 0.5
 var option_json:Dictionary
 
 
-var CHARACTERS
+var CHARACTERS: Characters
 
 var dialogue_counter:String = ""
 
@@ -147,7 +147,7 @@ func check_success():
 
 func check_perception_for_listeners(value):
 	for listener in listener_nodes:
-		var values = listener.character_perceptions.get(speaker, { NPC.PERCEPTION_VALUES: speaker.percieved_starting_values })[NPC.PERCEPTION_VALUES]
+		var values = listener.character_perceptions.get(speaker, { NPC.PERCEPTION_VALUES: CHARACTERS.character_nodes[speaker].percieved_starting_values })[NPC.PERCEPTION_VALUES]
 		
 		if not listener.personal_values.get(value, 0) == 0 and values.get(value, 0) < listener.personal_values[value]:
 			return false

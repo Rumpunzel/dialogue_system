@@ -21,7 +21,7 @@ var bio:String setget set_bio, get_bio
 
 var character_json:Dictionary
 
-var json_path:String setget set_json_path, get_json_path
+export(String, FILE, "*.char") var json_path:String setget set_json_path, get_json_path
 
 
 

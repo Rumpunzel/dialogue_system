@@ -1,1 +1,1 @@
-{"0":{"0":{"polite_option":{"approval_change":0,"big_deal":false,"failure_counter":0,"id":"polite_option","json":{"option_text":{"button_text":["This is a dialogue option."]},"success_messages":[[{"speaker":0,"text":"You say something polite, yet ultimately meaningless."}]],"tooltip":"It is small and polite.","value_changes":{"politeness":2}},"listeners":["Klaus"],"noteworthy":true,"speaker":"Player","success":true,"success_counter":1,"value_changes":{"politeness":2}}},"1":{}},"1":{"0":{},"1":{}}}
+{}
