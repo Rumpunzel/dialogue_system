@@ -17,8 +17,12 @@ custom_constants/vseparation = 50
 custom_constants/hseparation = 30
 columns = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+quick_show_options = true
 
-[node name="control" type="Control" parent="."]
+[node name="_placeholder" type="Control" parent="."]
 margin_right = 150.0
 margin_bottom = 32.0
 
@@ -47,13 +51,17 @@ margin_right = 750.0
 size_flags_horizontal = 3
 text = "Here is the dialogue feedback field."
 
-[node name="control_2" type="Control" parent="."]
+[node name="_placeholder_2" type="Control" parent="."]
 margin_top = 232.0
 margin_right = 150.0
 margin_bottom = 232.0
 
 [node name="options_tree" parent="." instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 180.0
+margin_top = 232.0
 margin_right = 750.0
+margin_bottom = 232.0
 size_flags_horizontal = 3
 custom_constants/separation = 10

@@ -1,21 +1,35 @@
 extends GridContainer
 class_name dialogue_window
 
-export(String) var default_speaker:String setget set_default_speaker, get_default_speaker
-export(Array, String) var default_listeners:Array = [] setget set_default_listeners, get_default_listeners
+# The id of the default speaker
+# Most of the times, this will be the Player
+# The speaker for each individual part in this dialogue can still be specified but this is the assumed default
+export(String) var default_speaker = "Player" setget set_default_speaker, get_default_speaker
+# Array of everyone else who is always participating in the dialogue
+# If someones joins later during the conversation, they do not belong here from the start
+export(Array, String) var default_listeners = [] setget set_default_listeners, get_default_listeners
 
-export(String, FILE, "*.json") var dialogue_options_file_path
+# Path in the file system to where all the dialogue options are stored
+export(String, FILE, "*.json") var dialogue_options_file_path = "res://data/dialogues/dialogue_options.json"
 
+# Whether the current dialogue options are already being shown while the dialogue message is still being spoken
+export(bool) var quick_show_options = false
+
+# References to the parts of this scene
 onready var speaker_name = $speaker_name
 onready var description_field = $description_field
 onready var dialogue_tree = $options_tree
 
+# Dictionary for all the dialogue options available
 var dialogue_options:Dictionary
 
+# The current dialogue tree the conversation is in at the moment
 var current_dialogue:Dictionary
+# A stack of all the dialogue trees to manage returning to previous trees and opening new ones to your heart's content
 var current_tree_stack:Array
+# The curent dialogue options available
 var current_options:Dictionary
-
+# If this conversation has just been started
 var first_time = true
 
 signal parsed_descriptions
@@ -23,63 +37,70 @@ signal parsed_descriptions
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#default_speaker = get_node(default_speaker_node).id
-	
 	dialogue_options = json_helper.load_json(dialogue_options_file_path)
 	
 	dialogue_tree.connect("choice_made", self, "switch_tree")
 	
 	connect("parsed_descriptions", self, "parse_options")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
-
+# Handles switchting from conversation to conversation
 func switch_dialogue(new_dialogue:Dictionary, new_tree = CONSTANTS.DEFAULT_TREE):
 	current_dialogue = new_dialogue
+	# Pushes the new tree on the tree stack to be able to always return here after entering new trees
 	current_tree_stack.push_front(new_tree)
 	
 	parse_tree()
 
+# Handles switching from tree to tree inside the same conversation
+# This is also used to return to the same tree again after going through the entire text message of a dialogue option
+#	by 'switching' to the same tree again
+# This is done to create as few exceptions as possible when handling new or old dialogue information
 func switch_tree(update:Dictionary):
 	var new_tree = update.get("new_tree", "")
 	
 	if not new_tree == "" and not new_tree == current_tree_stack.front():
+		# Pushes the new tree on the tree stack to be able to always return here after entering new trees
 		current_tree_stack.push_front(new_tree)
 	elif update.get("is_back_option", false):
+		# Returns to the previous tree on the stack if a back option is selected
 		current_tree_stack.pop_front()
 	
 	parse_tree(update)
 
+# Parses the new information from the new tree
 func parse_tree(update:Dictionary = { }):
 	var dialogue = current_dialogue.get(current_tree_stack.front(), { })
 	
+	# Get the message from the new tree
 	var new_message:Array = update.get("message", [ ])
+	# Get the gretting from the new tree if this is the first time this tree has been called
 	var greeting_message:Array = dialogue["greeting"] if first_time else [ ]
+	# Get the message from the current conversation
 	var message = dialogue["message"]
 	
 	first_time = false 
-	
+	# Use the message from the current conversation if there is not custom information given
 	new_message = (greeting_message + message) if new_message.empty() else new_message
 	
-	parse_descriptions(new_message.duplicate())
-	
 	current_options = update.get("options", dialogue.get("options", { }))
+	# Type out the new information
+	parse_descriptions(new_message)
 
 func parse_descriptions(descriptions:Array):
 	var new_description:Dictionary = descriptions.pop_front()
 	
 	update_speaker(new_description.get("speaker", ""))
 	update_description(new_description["text"])
-	yield(description_field, "finished_typing")
+	
+	if not quick_show_options:
+		yield(description_field, "finished_typing")
 	
 	if not descriptions.empty():
 		var continue_info = dialogue_option.CONTINUE_JSON
 		continue_info["success_messages"] = [descriptions]
 		
 		dialogue_tree.add_option(CONSTANTS.CONTINUE_OPTION, continue_info)
-		dialogue_tree.update_list_numbers()
 	else:
 		emit_signal("parsed_descriptions")
 

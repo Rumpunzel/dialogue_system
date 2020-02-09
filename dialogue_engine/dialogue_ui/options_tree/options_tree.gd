@@ -9,10 +9,6 @@ signal choice_made
 func _ready():
 	update_list_numbers()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
 
 func add_option(option_id:String, option_type = null):
 	var speaker_check = get_default_speaker()
@@ -74,6 +70,7 @@ func update_list_numbers():
 
 func clear_options():
 	for option in get_children():
+		remove_child(option)
 		option.queue_free()
 
 

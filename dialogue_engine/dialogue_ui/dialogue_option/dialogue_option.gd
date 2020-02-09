@@ -109,6 +109,9 @@ func parse_option(option_info, only_parse = false):
 		option_button.hint_tooltip = tooltip
 
 func check_option():
+	if exits_dialogue:
+		get_tree().quit()
+	
 	var new_click_status = check_success()
 	
 	CONSTANTS.print_to_console("\n" + ("SUCCESS!" if new_click_status >= PASSED else "FAILURE!"))
@@ -119,9 +122,6 @@ func check_option():
 		failure_counter += 1
 	
 	confirm_option(new_click_status >= PASSED)
-	
-	if exits_dialogue:
-		get_tree().quit()
 
 func check_success():
 	var new_status = PASSED
