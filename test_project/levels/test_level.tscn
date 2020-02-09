@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=1]
+[ext_resource path="res://dialogue_engine/game/game_scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dialogue_engine/characters/NPC.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_engine/characters/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/parchment_background.jpg" type="Texture" id=5]
+[ext_resource path="res://assets/images/waterfall.png" type="Texture" id=6]
+[ext_resource path="res://levels/test_level.gd" type="Script" id=7]
+
+[node name="test_level" instance=ExtResource( 2 )]
+script = ExtResource( 7 )
+
+[node name="parckment" type="TextureRect" parent="background" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="waterfall" type="TextureRect" parent="background/parckment" index="0"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -280.0
+margin_top = -340.0
+margin_right = -10.0
+margin_bottom = -10.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dialogue_window" parent="foreground/ui" index="0"]
+default_listeners = [ "Klaus" ]
+
+[node name="perception_graph" parent="foreground/ui" index="1" instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -300.0
+margin_right = -150.0
+margin_bottom = 200.0
+subject_node = NodePath("../../../characters/Klaus")
+object_node = NodePath("../../../characters/Player")
+
+[node name="Player" parent="characters" index="0" instance=ExtResource( 4 )]
+
+[node name="Klaus" parent="characters" index="1" instance=ExtResource( 3 )]
+json_path = "res://data/characters/Klaus.char"
+conversation_path = "res://data/dialogues/default.convo"

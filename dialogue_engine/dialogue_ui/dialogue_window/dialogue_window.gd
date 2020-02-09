@@ -1,4 +1,5 @@
 extends GridContainer
+class_name dialogue_window
 
 export(String) var default_speaker:String setget set_default_speaker, get_default_speaker
 export(Array, String) var default_listeners:Array = [] setget set_default_listeners, get_default_listeners

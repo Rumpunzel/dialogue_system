@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd"
 }, {
+"base": "GridContainer",
+"class": "dialogue_window",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.gd"
+}, {
 "base": "default_tree",
 "class": "directory_tree",
 "language": "GDScript",
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "editor_name_field",
 "language": "GDScript",
 "path": "res://dialogue_editor/Characters/character_editor/CharacterProperties/name_field.gd"
+}, {
+"base": "Node",
+"class": "game_scene",
+"language": "GDScript",
+"path": "res://dialogue_engine/game/game_scene.gd"
 }, {
 "base": "Node",
 "class": "memories",
@@ -134,8 +144,10 @@ _global_script_class_icons={
 "default_editor_tab": "",
 "default_tree": "",
 "dialogue_option": "",
+"dialogue_window": "",
 "directory_tree": "",
 "editor_name_field": "",
+"game_scene": "",
 "memories": "",
 "menu_option": "",
 "perception_graph": "",
