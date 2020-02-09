@@ -1,22 +1,31 @@
 extends Control
 class_name perception_graph
 
+# The NPC evaluating in this comparison
 export(NodePath) var subject_node = null
+# The character being evaluated by the subject
+# Most of the time this will be the player but this also works with other NPCs
 export(NodePath) var object_node = null
 
+# Convert the node paths to actual node references
 onready var subject:NPC = get_node(subject_node) if not subject_node == null else null
 onready var object:Character = get_node(object_node) if not object_node == null else null
 
+# Used for proper placement of the graph
 onready var center = get_rect().size / 2
 onready var radius = min(get_rect().size.y / 2, get_rect().size.x / 2)
 
+# Array of the name of the perception values
 var perception_names:Array = []
 
+# Dictionary of the actual values
 var perception_values:Dictionary
+# Array of the polygon points drawn on the graph of the NPC's values
 var polygon_points:Array = []
 
 
 func _ready():
+	# This is mostly used in the editor to update the graphs after editing perception values
 	GAME_CONSTANTS.connect("values_changed", self, "update_perception_values")
 	
 	update_perception_values()
@@ -38,25 +47,30 @@ func _process(_delta):
 	
 	update()
 
+# Draw the polygons on the graph
 func _draw():
+	# A red bar in the background of the graph displaying the approval rating of the subject towards the object
 	if not object == null:
 		draw_colored_polygon(get_approval_rating_graph(), Color.maroon)
 	
-	#draw_empty_circle(center, radius / 2, Color.black, 10)
-	
+	# Just some helper lines
 	for i in perception_names.size():
 		draw_line(center, center + Vector2(0, -radius).rotated((i / float(perception_names.size()) * TAU)), Color.black)
 	
+	# Get the subject's values
 	var graph_points = get_graph(perception_values) if not subject == null else []
 	
+	# Check if the resulting polygon for the subject is valid
 	if math_helper.get_unique_values_in_array(graph_points, 0.1) >= 3:
 		draw_colored_polygon(graph_points, Color.cornflower)
 		
-		if not object == null and not polygon_points.empty():
+		# Check if the resulting polygon for the object is valid
+		if not object == null and not polygon_points.empty() and math_helper.get_unique_values_in_array(polygon_points, 0.1) >= 3:
 			var per_color = Color.wheat
 			per_color.a = 0.7
 			draw_colored_polygon(polygon_points, per_color)
 	
+	# Draw more helper lines to make it look a little nicer
 	for i in perception_names.size():
 		draw_line(center + Vector2(0, -radius / 2).rotated((i / float(perception_names.size()) * TAU)), center + Vector2(0, -radius / 2).rotated(((i + 1) / float(perception_names.size()) * TAU)), Color.black)
 	
@@ -124,6 +138,7 @@ func modified_rotation(index):
 	
 	return (modified_index / float(value_size)) * TAU
 
+# Orders the perception values from top to bottom and then left to right instead of clockwise around the graph
 func get_modified_index(index):
 	return ceil(index / 2.0) * (1 if index % 2 == 0 else -1)
 

@@ -33,5 +33,9 @@ Of course there is gonna be, Stefe.
 
 ## Specifics
 
-$$tanh(0.15 * (x + 9.9667)) + tanh(0.15 * (x - 9.9667))$$
+
+
+![equation](http://www.sciweavers.org/tex2img.php?eq=tanh%280.15+%2A+%28x+%2B+9.9667%29%29+%2B+tanh%280.15+%2A+%28x+-+9.9667%29%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+
+[Wolfram Alpha.](https://tinyurl.com/u8mat65)
 

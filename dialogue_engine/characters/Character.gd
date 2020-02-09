@@ -63,7 +63,7 @@ func initiate_dialogue(specific_dilaogue = null):
 # Takes a dictionary as paramter to enable this function to be used out of context of a game (e.g. in an editor)
 func calculate_perception_value(perception_values:Dictionary) -> Dictionary:
 	var values = { }
-	
+	# See the readme in the dialogue_engine on the github on how exactly this works
 	for key in perception_values.keys():
 		var slope = GAME_CONSTANTS.PERCEPTION_VALUE_SLOPE
 		var growth_point = GAME_CONSTANTS.PERCERPTION_VALUE_GROWTH_POINT
@@ -72,7 +72,7 @@ func calculate_perception_value(perception_values:Dictionary) -> Dictionary:
 	
 	return values
 
-
+# For loading characters stats and values
 func load_values():
 	var loaded_json = json_helper.load_json(json_path)
 	
@@ -81,7 +81,7 @@ func load_values():
 	for key in character_json.keys():
 		set(key, character_json[key])
 
-
+# For storing value changes for this character
 func store_values():
 	for key in character_json.keys():
 		var property = get(key)
@@ -89,12 +89,12 @@ func store_values():
 	
 	json_helper.save_json(character_json, json_path)
 
-
+# Saving a response said to this character to disk
 func remember_response(new_memory:Dictionary):
 	memories.remember_response(new_memory)
 	store_values()
 
-
+# Checking if a character remembers a specific response
 func remembers_dialogue_option(unique_id):
 	return memories.remembers_dialogue_option(unique_id)
 
