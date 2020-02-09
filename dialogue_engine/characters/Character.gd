@@ -1,37 +1,40 @@
 extends Node
 class_name Character
 
+# for easier dictionary access
 enum STATS_PATHS { MODIFIED, DEFAULT }
-
+# the default stats of a character should there be no .char file specified
 const DEFAULT_CHARACTER_STATS:String = "res://dialogue_engine/characters/DEFAULT_CHARACTER_STATS.json"
 
 const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CONSTANTS.CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
 
+# the path to the .char file of the character
+export(String, FILE, "*.char") var json_path:String setget set_json_path, get_json_path
+# the path to the .convo file of the (default) conversation for this character
+export(String, FILE, "*.convo") var conversation_path:String setget set_conversation_path, get_conversation_path
+
+
 onready var id:String = name setget set_id, get_id
 onready var memories:memories = $memories
-
-onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
-
+# default perception characters will have of this character without ever metting them (basically reputations)
 var percieved_starting_values:Dictionary setget set_percieved_starting_values, get_percieved_starting_values
 
 var portrait:Texture setget set_portrait, get_portrait
 var portrait_path:String setget set_portrait_path, get_portrait_path
-
+# bio for the character editor / index
 var bio:String setget set_bio, get_bio
-
+# the contents of the .char file this node will save / load
 var character_json:Dictionary
-
-export(String, FILE, "*.char") var json_path:String setget set_json_path, get_json_path
-
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#setup the character
 	load_values()
 	memories.load_values(id)
 	
-	if not CHARACTERS == null:
-		CHARACTERS.register_character(id, self)
+	if not get_node("/root/CHARACTERS") == null:
+		get_node("/root/CHARACTERS").register_character(id, self)
 	else:
 		CONSTANTS.print_to_console("%s instanced outside of character manager!" % [name])
 
@@ -41,9 +44,8 @@ func _ready():
 
 
 
-func initiate_dialogue(dialogue_node, specific_dilaogue = CONSTANTS.DIALOGUE_PATHS):
-	# TODO: implement dialogue var
-	var loaded_json = json_helper.load_json(specific_dilaogue.plus_file("default.convo"))
+func initiate_dialogue(dialogue_node, specific_dilaogue = null):
+	var loaded_json = json_helper.load_json(conversation_path if specific_dilaogue == null else specific_dilaogue)
 	if not loaded_json == null:
 		dialogue_node.switch_dialogue(loaded_json)
 
@@ -91,6 +93,8 @@ func set_bio(new_bio:String):
 	bio = new_bio
 	character_json["bio"] = bio
 
+func set_conversation_path(new_path:String):
+	conversation_path = new_path
 
 func set_id(new_id:String):
 	id = new_id
@@ -98,19 +102,15 @@ func set_id(new_id:String):
 	if not id == "":
 		name = id
 
-
 func set_json_path(new_path:String):
 	json_path = new_path
-
 
 func set_percieved_starting_values(new_values:Dictionary):
 	percieved_starting_values = new_values
 	character_json["percieved_starting_values"] = percieved_starting_values
 
-
 func set_portrait(new_portrait:Texture):
 	portrait = new_portrait
-
 
 func set_portrait_path(new_path:String):
 	portrait_path = new_path
@@ -118,9 +118,11 @@ func set_portrait_path(new_path:String):
 	character_json["portrait_path"] = portrait_path
 
 
-
 func get_bio() -> String:
 	return bio
+
+func get_conversation_path() -> String:
+	return conversation_path
 
 func get_id() -> String:
 	return id

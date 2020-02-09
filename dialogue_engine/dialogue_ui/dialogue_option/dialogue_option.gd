@@ -50,9 +50,6 @@ var clicked_alpha = 0.5
 
 var option_json:Dictionary
 
-
-var CHARACTERS: Characters
-
 var dialogue_counter:String = ""
 
 var option_button
@@ -93,8 +90,6 @@ func init(option_id:String, option_info:Dictionary = CUSTOM_JSON):
 	option_json = option_info
 	
 	parse_option(option_json)
-	
-	CHARACTERS = CONSTANTS.get_CHARACTERS()
 	
 	listener_nodes = get_listener_nodes()
 

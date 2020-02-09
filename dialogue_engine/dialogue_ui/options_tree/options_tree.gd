@@ -2,8 +2,6 @@ extends VBoxContainer
 
 export(PackedScene) var dialogue_option_scene = preload("res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.tscn")
 
-onready var CHARACTERS = CONSTANTS.get_CHARACTERS()
-
 signal choice_made
 
 

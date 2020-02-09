@@ -27,22 +27,25 @@ func remember_response(new_memory:Dictionary):
 		modify_perception(new_memory["speaker"], new_memory["success"],  new_memory["value_changes"], new_memory["approval_change"])
 
 func modify_perception(target, option_success, value_changes, approval_change):
-	var target_node = CHARACTERS.character_nodes.get(target)
-	
-	character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, { PERCEPTION_VALUES: target_node.percieved_starting_values })[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, { APPROVAL_MODIFIER: 0 })[APPROVAL_MODIFIER] }
-	
-	character_perceptions[target][PERCEPTION_VALUES] = math_helper.vector_add_dictionaries([character_perceptions[target][PERCEPTION_VALUES], value_changes])
-	
-	if option_success:
-		character_perceptions[target][APPROVAL_MODIFIER] += approval_change
+	if not get_node("/root/CHARACTERS") == null:
+		var target_node = get_node("/root/CHARACTERS").character_nodes.get(target)
 		
-		if not character_perceptions[target][APPROVAL_MODIFIER] == 0:
-			CONSTANTS.print_to_console("%s now has a %0.2f point Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER], target])
-	
-	CONSTANTS.print_to_console("New Values for %s towards %s: %s" % [name, target, character_perceptions[target][PERCEPTION_VALUES]])
-	CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f%s" % [name, target, calculate_approval_rating(target, true), maximum_possible_approval_rating() + character_perceptions[target][APPROVAL_MODIFIER], (" (%0.2f base + %0.2f bonus)" % [maximum_possible_approval_rating(), character_perceptions[target][APPROVAL_MODIFIER]] if not character_perceptions[target][APPROVAL_MODIFIER] == 0 else "")])
-	
-	emit_signal("perceptions_changed", character_perceptions, target)
+		character_perceptions[target] = { PERCEPTION_VALUES: character_perceptions.get(target, { PERCEPTION_VALUES: target_node.percieved_starting_values })[PERCEPTION_VALUES], APPROVAL_MODIFIER: character_perceptions.get(target, { APPROVAL_MODIFIER: 0 })[APPROVAL_MODIFIER] }
+		
+		character_perceptions[target][PERCEPTION_VALUES] = math_helper.vector_add_dictionaries([character_perceptions[target][PERCEPTION_VALUES], value_changes])
+		
+		if option_success:
+			character_perceptions[target][APPROVAL_MODIFIER] += approval_change
+			
+			if not character_perceptions[target][APPROVAL_MODIFIER] == 0:
+				CONSTANTS.print_to_console("%s now has a %0.2f point Approval Bonus towards %s" % [name, character_perceptions[target][APPROVAL_MODIFIER], target])
+		
+		CONSTANTS.print_to_console("New Values for %s towards %s: %s" % [name, target, character_perceptions[target][PERCEPTION_VALUES]])
+		CONSTANTS.print_to_console("Approval Rating of %s towards %s is now: %0.2f of a possible %0.2f%s" % [name, target, calculate_approval_rating(target, true), maximum_possible_approval_rating() + character_perceptions[target][APPROVAL_MODIFIER], (" (%0.2f base + %0.2f bonus)" % [maximum_possible_approval_rating(), character_perceptions[target][APPROVAL_MODIFIER]] if not character_perceptions[target][APPROVAL_MODIFIER] == 0 else "")])
+		
+		emit_signal("perceptions_changed", character_perceptions, target)
+	else:
+		CONSTANTS.print_to_console("%s is outside of th character manager and cannot be changed!" % [name])
 
 func calculate_approval_rating(target, print_update = false):
 	var approval_rating = 0

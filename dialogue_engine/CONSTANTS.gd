@@ -18,8 +18,6 @@ const CONTINUE_OPTION = "_continue_option"
 const EXIT_OPTION = "_exit_option"
 const CUSTOM_OPTION = "custom_option"
 
-export(String) var characters_path = ""
-
 # Print updates to console?
 var verbose_mode = true
 var log_history:Dictionary = { }
@@ -33,6 +31,3 @@ func print_to_console(print_string):
 	
 	if verbose_mode:
 		print(print_string)
-
-func get_CHARACTERS():
-	return get_node(characters_path) if has_node(characters_path) else null
