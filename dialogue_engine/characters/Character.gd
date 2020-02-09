@@ -35,7 +35,7 @@ func _ready():
 	
 	# Register at the CHARACTERS singleton if in a game scene
 	# Maps the character id to this specific node
-	if not get_node("/root/CHARACTERS") == null:
+	if get_tree().root.has_node("CHARACTERS"):
 		get_node("/root/CHARACTERS").register_character(id, self)
 	else:
 		CONSTANTS.print_to_console("%s instanced outside of character manager!" % [name])
@@ -46,7 +46,7 @@ func _ready():
 
 func _exit_tree():
 	# Unregister character from the CHARACTERS manager when leaving scene
-	if not get_node("/root/CHARACTERS") == null:
+	if get_tree().root.has_node("CHARACTERS"):
 		get_node("/root/CHARACTERS").unregister_character(id)
 
 
