@@ -13,7 +13,7 @@ func _ready():
 	klaus.memories.dialogue_memories = { }
 	klaus.character_perceptions = { }
 	# start the default dialogue for Klaus
-	klaus.initiate_dialogue(dialogue_window)
+	klaus.initiate_dialogue()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

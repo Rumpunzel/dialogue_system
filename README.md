@@ -30,3 +30,8 @@ If the player critizises the order for this practice, it only makes sense for th
 ## Also there's gonna be Lying
 
 Of course there is gonna be, Stefe.
+
+## Specifics
+
+$$tanh(0.15 * (x + 9.9667)) + tanh(0.15 * (x - 9.9667))$$
+

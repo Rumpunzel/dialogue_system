@@ -1,38 +1,40 @@
 extends Node
 class_name Character
 
-# for easier dictionary access
+# For easier dictionary access
 enum STATS_PATHS { MODIFIED, DEFAULT }
-# the default stats of a character should there be no .char file specified
+# The default stats of a character should there be no .char file specified
 const DEFAULT_CHARACTER_STATS:String = "res://dialogue_engine/characters/DEFAULT_CHARACTER_STATS.json"
 
 const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CONSTANTS.CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
 
-# the path to the .char file of the character
+# The path to the .char file of the character
 export(String, FILE, "*.char") var json_path:String setget set_json_path, get_json_path
-# the path to the .convo file of the (default) conversation for this character
+# The path to the .convo file of the (default) conversation for this character
 export(String, FILE, "*.convo") var conversation_path:String setget set_conversation_path, get_conversation_path
 
 
 onready var id:String = name setget set_id, get_id
 onready var memories:memories = $memories
-# default perception characters will have of this character without ever metting them (basically reputations)
+# Default perception characters will have of this character without ever metting them (basically reputations)
 var percieved_starting_values:Dictionary setget set_percieved_starting_values, get_percieved_starting_values
 
 var portrait:Texture setget set_portrait, get_portrait
 var portrait_path:String setget set_portrait_path, get_portrait_path
-# bio for the character editor / index
+# Bio for the character editor / index
 var bio:String setget set_bio, get_bio
-# the contents of the .char file this node will save / load
+# The contents of the .char file this node will save / load
 var character_json:Dictionary
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#setup the character
+	# Setup the character
 	load_values()
 	memories.load_values(id)
 	
+	# Register at the CHARACTERS singleton if in a game scene
+	# Maps the character id to this specific node
 	if not get_node("/root/CHARACTERS") == null:
 		get_node("/root/CHARACTERS").register_character(id, self)
 	else:
@@ -42,15 +44,24 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func _exit_tree():
+	# Unregister character from the CHARACTERS manager when leaving scene
+	if not get_node("/root/CHARACTERS") == null:
+		get_node("/root/CHARACTERS").unregister_character(id)
 
 
-func initiate_dialogue(dialogue_node, specific_dilaogue = null):
+# Used to initiate dialogue with this character
+# The dialogue_window is currently handled by getting a relative path (has to be improved to make more flexible)
+func initiate_dialogue(specific_dilaogue = null):
+	# Load the default or a specified dialogue
 	var loaded_json = json_helper.load_json(conversation_path if specific_dilaogue == null else specific_dilaogue)
+	# Hand dialogue over to the dialogue window which will handle the rest of the dialogue
 	if not loaded_json == null:
-		dialogue_node.switch_dialogue(loaded_json)
+		get_node("%s/%s" % ["../..", CONSTANTS.DIALOGUE_WINDOW_PATH]).switch_dialogue(loaded_json)
 
-
-func calculate_perception_value(perception_values:Dictionary):
+# Calculates this characters personal values with the perception values they have of another character
+# Takes a dictionary as paramter to enable this function to be used out of context of a game (e.g. in an editor)
+func calculate_perception_value(perception_values:Dictionary) -> Dictionary:
 	var values = { }
 	
 	for key in perception_values.keys():
