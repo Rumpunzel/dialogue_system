@@ -97,8 +97,8 @@
     "success_messages": [
       [
         {
-          "speaker": 0,
-          "text": "You say something polite, yet ultimately meaningless."
+          "speaker": 1,
+          "text": "Something polite, yet ultimately meaningless."
         }
       ]
     ],
@@ -130,11 +130,13 @@
     "success_messages": [
       [
         {
+          "speaker": 2,
           "text": "Yes, yes, quite indeed. How insightful, truly."
         }
       ],
       [
         {
+          "speaker": 2,
           "text": "Again? Seriously? Well ok, then..."
         }
       ]
