@@ -166,7 +166,6 @@ func confirm_option(option_success):
 		CONSTANTS.print_to_console("No Updates, this Dialogue Option has already been passed before!")
 	
 	for listener in listener_nodes:
-		
 		listener.remember_response({ "id": id,
 				"speaker": speaker,
 				"listeners": listeners,
