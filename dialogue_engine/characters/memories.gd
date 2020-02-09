@@ -7,7 +7,7 @@ enum { NORMAL, BIG_DEAL }
 const SUCCESS_MAP = { true: PASSED, false: FAILED }
 const BIG_DEAL_MAP = { true: BIG_DEAL, false: NORMAL }
 
-const DEFAULT_MEMORY_PATH:String = "res://data/memories/%s_memory.json"
+const DEFAULT_MEMORY_PATH:String = "res://data/memories/%s.memory"
 
 const DEFAULT_MEMORY:Dictionary = { NORMAL: { PASSED: { }, FAILED: { } }, BIG_DEAL: { PASSED: { }, FAILED: { } } }
 
