@@ -4,4 +4,3 @@
 
 [node name="CONSTANTS" type="Node"]
 script = ExtResource( 1 )
-characters_path = "/root/main/Characters"

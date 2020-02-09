@@ -9,9 +9,9 @@ const DEFAULT_CHARACTER_STATS:String = "res://dialogue_engine/characters/DEFAULT
 const json_paths:Dictionary = { STATS_PATHS.MODIFIED: CONSTANTS.CHARACTERS_JSON, STATS_PATHS.DEFAULT: DEFAULT_CHARACTER_STATS }
 
 # The path to the .char file of the character
-export(String, FILE, "*.char") var json_path:String setget set_json_path, get_json_path
+export(String, FILE, "*.char") var json_path = "" setget set_json_path, get_json_path
 # The path to the .convo file of the (default) conversation for this character
-export(String, FILE, "*.convo") var conversation_path:String setget set_conversation_path, get_conversation_path
+export(String, FILE, "*.convo") var conversation_path setget set_conversation_path, get_conversation_path
 
 
 onready var id:String = name setget set_id, get_id
@@ -30,6 +30,8 @@ var character_json:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Setup the character
+	if json_path == "":
+		json_path = CHARACTERS.character_jsons.get(name, "")
 	load_values()
 	memories.load_values(id)
 	

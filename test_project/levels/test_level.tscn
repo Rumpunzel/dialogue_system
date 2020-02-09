@@ -52,5 +52,4 @@ object_node = NodePath("../../../characters/Player")
 [node name="Player" parent="characters" index="0" instance=ExtResource( 4 )]
 
 [node name="Klaus" parent="characters" index="1" instance=ExtResource( 3 )]
-json_path = "res://data/characters/Klaus.char"
 conversation_path = "res://data/dialogues/default.convo"

@@ -3,7 +3,7 @@ extends Node
 var files_found:Dictionary
 
 
-func list_files_in_directory(directory_path:String, recursive:bool, file_suffix:String = ""):
+func list_files_in_directory(directory_path:String, recursive:bool, file_suffix:String = "", as_dictionary = false):
 	var files = []
 	var directory = Directory.new()
 	
@@ -30,6 +30,14 @@ func list_files_in_directory(directory_path:String, recursive:bool, file_suffix:
 					CONSTANTS.print_to_console("Found file %s in directory %s" % [file, directory_path])
 	
 	directory.list_dir_end()
+	
+	if as_dictionary:
+		var dic_files = { }
+		
+		for file in files:
+			dic_files[file.get_file().trim_suffix(file_suffix)] = file
+		
+		files = dic_files
 	
 	return files
 
