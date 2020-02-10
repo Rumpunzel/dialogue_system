@@ -30,15 +30,18 @@ var character_json:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Setup the character
-	if json_path == "":
-		json_path = CHARACTERS.character_jsons.get(name, "")
-	load_values()
-	memories.load_values(id)
-	
-	# Register at the CHARACTERS singleton if in a game scene
-	# Maps the character id to this specific node
 	if get_tree().root.has_node("CHARACTERS"):
-		get_node("/root/CHARACTERS").register_character(id, self)
+		var character_manager = get_node("/root/CHARACTERS")
+		
+		if json_path == "":
+			json_path = character_manager.character_jsons.get(name, "")
+		
+		load_values()
+		memories.load_values(id)
+		
+		# Register at the CHARACTERS singleton if in a game scene
+		# Maps the character id to this specific node
+		character_manager.register_character(id, self)
 	else:
 		CONSTANTS.print_to_console("%s instanced outside of character manager!" % [name])
 
