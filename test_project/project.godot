@@ -1,0 +1,109 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/Character.gd"
+}, {
+"base": "Node",
+"class": "Characters",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/Characters.gd"
+}, {
+"base": "Character",
+"class": "NPC",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/NPC.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/Player.gd"
+}, {
+"base": "RichTextLabel",
+"class": "TypingLabel",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
+}, {
+"base": "Label",
+"class": "dialogue_option",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd"
+}, {
+"base": "GridContainer",
+"class": "dialogue_window",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.gd"
+}, {
+"base": "Node",
+"class": "game_scene",
+"language": "GDScript",
+"path": "res://dialogue_engine/game/game_scene.gd"
+}, {
+"base": "Node",
+"class": "memories",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/memories.gd"
+}, {
+"base": "Control",
+"class": "perception_graph",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
+} ]
+_global_script_class_icons={
+"Character": "",
+"Characters": "",
+"NPC": "",
+"Player": "",
+"TypingLabel": "",
+"dialogue_option": "",
+"dialogue_window": "",
+"game_scene": "",
+"memories": "",
+"perception_graph": ""
+}
+
+[application]
+
+config/name="test_project"
+run/main_scene="res://levels/test_level.tscn"
+config/icon="res://data/assets/images/icon.png"
+
+[autoload]
+
+CONSTANTS="*res://dialogue_engine/CONSTANTS.tscn"
+GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
+CHARACTERS="*res://dialogue_engine/characters/Characters.gd"
+file_helper="*res://dialogue_engine/helpers/file_helper.gd"
+json_helper="*res://dialogue_engine/helpers/json_helper.gd"
+math_helper="*res://dialogue_engine/helpers/math_helper.gd"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=1200
+window/size/height=800
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[node]
+
+name_num_separator=2
+name_casing=2
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false
