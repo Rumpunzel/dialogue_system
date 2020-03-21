@@ -2,10 +2,6 @@
 	path = dialogue_engine
 	url = https://github.com/Rumpunzel/dialogue_engine.git
 	branch = master
-[submodule "test_project"]
-	path = test_project
-	url = https://github.com/Rumpunzel/test_project.git
-	branch = master
 [submodule "dialogue_editor"]
 	path = dialogue_editor
 	url = https://github.com/Rumpunzel/dialogue_editor.git
