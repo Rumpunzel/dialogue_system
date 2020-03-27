@@ -10,19 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "Character",
+"class": "DialogueCharacter",
 "language": "GDScript",
-"path": "res://dialogue_engine/characters/Character.gd"
+"path": "res://dialogue_engine/characters/DialogueCharacter.gd"
 }, {
 "base": "Node",
-"class": "Characters",
+"class": "DialogueCharacters",
 "language": "GDScript",
-"path": "res://dialogue_engine/characters/Characters.gd"
+"path": "res://dialogue_engine/characters/DialogueCharacters.gd"
 }, {
-"base": "Character",
-"class": "NPC",
+"base": "DialogueCharacter",
+"class": "DialogueNPC",
 "language": "GDScript",
-"path": "res://dialogue_engine/characters/NPC.gd"
+"path": "res://dialogue_engine/characters/DialogueNPC.gd"
 }, {
 "base": "Character",
 "class": "Player",
@@ -60,9 +60,9 @@ _global_script_classes=[ {
 "path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
 } ]
 _global_script_class_icons={
-"Character": "",
-"Characters": "",
-"NPC": "",
+"DialogueCharacter": "",
+"DialogueCharacters": "",
+"DialogueNPC": "",
 "Player": "",
 "TypingLabel": "",
 "dialogue_option": "",
@@ -82,7 +82,7 @@ config/icon="res://data/assets/images/icon.png"
 
 CONSTANTS="*res://dialogue_engine/CONSTANTS.tscn"
 GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
-CHARACTERS="*res://dialogue_engine/characters/Characters.gd"
+CHARACTERS="*res://dialogue_engine/characters/DialogueCharacters.gd"
 file_helper="*res://dialogue_engine/helpers/file_helper.gd"
 json_helper="*res://dialogue_engine/helpers/json_helper.gd"
 math_helper="*res://dialogue_engine/helpers/math_helper.gd"
