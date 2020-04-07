@@ -152,9 +152,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="test_project"
+config/name="dialogue_system"
 run/main_scene="res://levels/test_level.tscn"
-config/icon="res://data/assets/images/icon.png"
+boot_splash/image="res://assets/images/LarianJamal.png"
+config/icon="res://assets/images/LarianJamal.png"
 
 [autoload]
 
