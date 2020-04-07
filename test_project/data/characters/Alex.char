@@ -1,0 +1,16 @@
+{
+    "bio": "am human, from humansvill\nwant many many friends\nnew friends get hat\nall hat people are friend\ntake hat new friend",
+    "character_perceptions": {},
+    "percieved_starting_values": {},
+    "personal_values": {
+        "politeness": 2,
+        "reliability": 6,
+        "selflessness": 2,
+        "sincerity": 6
+    },
+    "portrait_path": "res://data/assets/images/alex.png",
+    "tags": {
+        "factions": ["friends"],
+        "races": ["snail"]
+    }
+}
