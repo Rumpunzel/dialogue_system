@@ -1,11 +1,3 @@
-[submodule "dialogue_engine"]
-	path = dialogue_engine
-	url = https://github.com/Rumpunzel/dialogue_engine.git
-	branch = master
-[submodule "dialogue_editor"]
-	path = dialogue_editor
-	url = https://github.com/Rumpunzel/dialogue_editor.git
-	branch = master
 [submodule "test_project/dialogue_engine"]
 	path = test_project/dialogue_engine
 	url = https://github.com/Rumpunzel/dialogue_engine.git
