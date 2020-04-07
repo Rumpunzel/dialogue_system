@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://dialogue_editor/GameProperties/perception_values_editor.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/GameProperties/entry_container.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dialogue_editor/GameProperties/max_approval_label.gd" type="Script" id=3]
+[ext_resource path="res://dialogue_editor/GameProperties/maximum_approval_rating.gd" type="Script" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"pressed\", GAME_CONSTANTS, \"reset_values_to_default\")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="Game Properties" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value_tabs" type="TabContainer" parent="."]
+margin_right = 1200.0
+margin_bottom = 800.0
+tab_align = 0
+drag_to_rearrange_enabled = true
+
+[node name="Perception Values" type="HSplitContainer" parent="value_tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="name_container" type="PanelContainer" parent="value_tabs/Perception Values"]
+margin_right = 1192.0
+margin_bottom = 764.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="value_names" type="VBoxContainer" parent="value_tabs/Perception Values/name_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1185.0
+margin_bottom = 757.0
+custom_constants/separation = 10
+
+[node name="title_divider" type="HBoxContainer" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_right = 1178.0
+margin_bottom = 20.0
+
+[node name="title" type="Label" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_top = 3.0
+margin_right = 957.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Value Names"
+
+[node name="reset" type="Button" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_left = 961.0
+margin_right = 1076.0
+margin_bottom = 20.0
+text = "Reset to Default"
+script = SubResource( 1 )
+
+[node name="save" type="Button" parent="value_tabs/Perception Values/name_container/value_names/title_divider"]
+margin_left = 1080.0
+margin_right = 1178.0
+margin_bottom = 20.0
+text = "Save Changes"
+
+[node name="title_separator" type="HSeparator" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_top = 30.0
+margin_right = 1178.0
+margin_bottom = 34.0
+
+[node name="description" type="Label" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_top = 44.0
+margin_right = 1178.0
+margin_bottom = 58.0
+text = "Edit the values the Characters in the game use to determine how well they like each other (most importanly how they feel about the player)."
+autowrap = true
+
+[node name="scroll_container" type="ScrollContainer" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_top = 68.0
+margin_right = 1178.0
+margin_bottom = 702.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="perception_values_editor" type="VBoxContainer" parent="value_tabs/Perception Values/name_container/value_names/scroll_container"]
+margin_right = 1178.0
+margin_bottom = 634.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+entry_scene = ExtResource( 2 )
+save_button = NodePath("../../title_divider/save")
+reset_button = NodePath("../../title_divider/reset")
+
+[node name="panel_container" type="PanelContainer" parent="value_tabs/Perception Values/name_container/value_names"]
+margin_top = 712.0
+margin_right = 1178.0
+margin_bottom = 750.0
+size_flags_horizontal = 3
+
+[node name="max_value_splitter" type="HSplitContainer" parent="value_tabs/Perception Values/name_container/value_names/panel_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1171.0
+margin_bottom = 31.0
+size_flags_vertical = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="max_approval_label" type="Label" parent="value_tabs/Perception Values/name_container/value_names/panel_container/max_value_splitter"]
+margin_right = 1093.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+valign = 1
+autowrap = true
+script = ExtResource( 3 )
+
+[node name="maximum_approval_rating" type="LineEdit" parent="value_tabs/Perception Values/name_container/value_names/panel_container/max_value_splitter"]
+margin_left = 1105.0
+margin_right = 1164.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 59, 0 )
+size_flags_horizontal = 8
+align = 2
+placeholder_text = "100"
+caret_blink = true
+script = ExtResource( 4 )
+expand = true
+clear_button = false

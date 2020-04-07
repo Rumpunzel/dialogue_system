@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://dialogue_editor/default_editor/default_editor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/character_editor.tscn" type="PackedScene" id=2]
+
+[node name="Characters" instance=ExtResource( 1 )]
+new_tab_name = "New Character"
+tab_scene = ExtResource( 2 )
+
+[node name="new_tab" parent="Menu" index="0"]
+margin_right = 104.0
+text = "New Character"
+
+[node name="directory" parent="Menu/directory_divider" index="0"]
+entry_directory = "res://data/characters"
+file_ending = ".char"
+root_node = NodePath("../../..")
+
+[node name="tags_editor" parent="Menu/directory_divider/panel_container/tags_container/scroll_container" index="0"]
+tags_json = "res://data/characters/CHARACTER_TAGS.json"

@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/CharacterProperties.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/perception_values.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/utility/value_slider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/approval_bar.gd" type="Script" id=4]
+[ext_resource path="res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/editor_perception_graph.gd" type="Script" id=6]
+
+
+[node name="CharacterProperties" type="TabContainer"]
+margin_right = 524.0
+margin_bottom = 746.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+tab_align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Perception Values" type="VSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/autohide = 0
+
+[node name="loyalty_divier" type="VBoxContainer" parent="Perception Values"]
+margin_right = 516.0
+margin_bottom = 349.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="value_container" type="PanelContainer" parent="Perception Values/loyalty_divier"]
+margin_right = 516.0
+margin_bottom = 317.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="values" type="ScrollContainer" parent="Perception Values/loyalty_divier/value_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 509.0
+margin_bottom = 310.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="perception_values" type="GridContainer" parent="Perception Values/loyalty_divier/value_container/values"]
+margin_right = 502.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+script = ExtResource( 2 )
+value_slider = ExtResource( 3 )
+root_node = NodePath("../../../../..")
+
+[node name="approval_container" type="PanelContainer" parent="Perception Values/loyalty_divier"]
+margin_top = 321.0
+margin_right = 516.0
+margin_bottom = 349.0
+
+[node name="number_divider" type="HBoxContainer" parent="Perception Values/loyalty_divier/approval_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 509.0
+margin_bottom = 21.0
+custom_constants/separation = 10
+
+[node name="maximum_approval" type="Label" parent="Perception Values/loyalty_divier/approval_container/number_divider"]
+margin_right = 171.0
+margin_bottom = 14.0
+text = "Maximum Approval Rating:"
+
+[node name="approval_bar" type="ProgressBar" parent="Perception Values/loyalty_divier/approval_container/number_divider"]
+margin_left = 181.0
+margin_right = 502.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+step = 0.0
+percent_visible = false
+script = ExtResource( 4 )
+root_node = NodePath("../../../../..")
+
+[node name="graph_container" type="PanelContainer" parent="Perception Values"]
+margin_top = 361.0
+margin_right = 516.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="margin_container" type="MarginContainer" parent="Perception Values/graph_container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 509.0
+margin_bottom = 342.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+
+[node name="perception_graph" parent="Perception Values/graph_container/margin_container" instance=ExtResource( 5 )]
+margin_bottom = 285.0
+script = ExtResource( 6 )
+root_node = NodePath("../../../..")

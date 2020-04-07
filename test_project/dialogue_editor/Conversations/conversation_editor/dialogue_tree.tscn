@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://dialogue_editor/Conversations/conversation_editor/dialogue_tree.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/Conversations/conversation_editor/dialogue_message.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dialogue_editor/Conversations/conversation_editor/tree_name.gd" type="Script" id=3]
+
+[node name="dialogue_tree" type="ScrollContainer"]
+margin_right = 1200.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+dialogue_message_scene = ExtResource( 2 )
+
+[node name="messages_container" type="VBoxContainer" parent="."]
+margin_right = 1200.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tree_name" type="LineEdit" parent="messages_container"]
+margin_right = 105.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 105, 0 )
+size_flags_horizontal = 0
+clear_button_enabled = true
+placeholder_text = "Tree Name"
+caret_blink = true
+script = ExtResource( 3 )
+expand = true
