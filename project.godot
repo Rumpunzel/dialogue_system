@@ -1,0 +1,187 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "LineEdit",
+"class": "BetterLineEdit",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/better_line_edit.gd"
+}, {
+"base": "ProgressBar",
+"class": "BetterProgressBar",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/better_progress_bar.gd"
+}, {
+"base": "TextEdit",
+"class": "BetterTextEdit",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/better_text_edit.gd"
+}, {
+"base": "Button",
+"class": "ButtonWithConfirmation",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/button_with_confirmation.gd"
+}, {
+"base": "Node",
+"class": "DialogueCharacter",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/DialogueCharacter.gd"
+}, {
+"base": "Node",
+"class": "DialogueCharacters",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/DialogueCharacters.gd"
+}, {
+"base": "DialogueCharacter",
+"class": "DialogueNPC",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/DialogueNPC.gd"
+}, {
+"base": "RichTextLabel",
+"class": "TypingLabel",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
+}, {
+"base": "default_editor_tab",
+"class": "character_editor",
+"language": "GDScript",
+"path": "res://dialogue_editor/Characters/character_editor/character_editor.gd"
+}, {
+"base": "TabContainer",
+"class": "default_editor",
+"language": "GDScript",
+"path": "res://dialogue_editor/default_editor/default_editor.gd"
+}, {
+"base": "VBoxContainer",
+"class": "default_editor_tab",
+"language": "GDScript",
+"path": "res://dialogue_editor/default_editor/default_editor_tab.gd"
+}, {
+"base": "Tree",
+"class": "default_tree",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/default_tree.gd"
+}, {
+"base": "Label",
+"class": "dialogue_option",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/dialogue_option/dialogue_option.gd"
+}, {
+"base": "GridContainer",
+"class": "dialogue_window",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/dialogue_window/dialogue_window.gd"
+}, {
+"base": "default_tree",
+"class": "directory_tree",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/directory/directory_tree.gd"
+}, {
+"base": "BetterLineEdit",
+"class": "editor_name_field",
+"language": "GDScript",
+"path": "res://dialogue_editor/Characters/character_editor/CharacterProperties/name_field.gd"
+}, {
+"base": "Node",
+"class": "game_scene",
+"language": "GDScript",
+"path": "res://dialogue_engine/game/game_scene.gd"
+}, {
+"base": "Node",
+"class": "memories",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/memories.gd"
+}, {
+"base": "MenuButton",
+"class": "menu_option",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/options_button.gd"
+}, {
+"base": "Control",
+"class": "perception_graph",
+"language": "GDScript",
+"path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
+}, {
+"base": "PanelContainer",
+"class": "tag",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/tag.gd"
+}, {
+"base": "HBoxContainer",
+"class": "value_slider",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/value_slider.gd"
+}, {
+"base": "VBoxContainer",
+"class": "values_list",
+"language": "GDScript",
+"path": "res://dialogue_editor/utility/values_list.gd"
+} ]
+_global_script_class_icons={
+"BetterLineEdit": "",
+"BetterProgressBar": "",
+"BetterTextEdit": "",
+"ButtonWithConfirmation": "",
+"DialogueCharacter": "",
+"DialogueCharacters": "",
+"DialogueNPC": "",
+"TypingLabel": "",
+"character_editor": "",
+"default_editor": "",
+"default_editor_tab": "",
+"default_tree": "",
+"dialogue_option": "",
+"dialogue_window": "",
+"directory_tree": "",
+"editor_name_field": "",
+"game_scene": "",
+"memories": "",
+"menu_option": "",
+"perception_graph": "",
+"tag": "",
+"value_slider": "",
+"values_list": ""
+}
+
+[application]
+
+config/name="test_project"
+run/main_scene="res://levels/test_level.tscn"
+config/icon="res://data/assets/images/icon.png"
+
+[autoload]
+
+CONSTANTS="*res://dialogue_engine/CONSTANTS.tscn"
+GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
+CHARACTERS="*res://dialogue_engine/characters/DialogueCharacters.gd"
+file_helper="*res://dialogue_engine/helpers/file_helper.gd"
+json_helper="*res://dialogue_engine/helpers/json_helper.gd"
+math_helper="*res://dialogue_engine/helpers/math_helper.gd"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=1200
+window/size/height=800
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[node]
+
+name_num_separator=2
+name_casing=2
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

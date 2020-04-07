@@ -3,3 +3,5 @@
 *.pck
 *.7z
 *.memory
+import/
+.vscode/
