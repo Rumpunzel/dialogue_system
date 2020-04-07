@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/characters/DialogueNPC.gd"
 }, {
-"base": "Character",
-"class": "Player",
-"language": "GDScript",
-"path": "res://dialogue_engine/characters/Player.gd"
-}, {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
@@ -137,7 +132,6 @@ _global_script_class_icons={
 "DialogueCharacter": "",
 "DialogueCharacters": "",
 "DialogueNPC": "",
-"Player": "",
 "TypingLabel": "",
 "character_editor": "",
 "default_editor": "",
