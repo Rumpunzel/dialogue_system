@@ -6,7 +6,7 @@ export(String, FILE, "*.json") var tags_json
 
 
 func _ready():
-	var tags = json_helper.load_json(tags_json)
+	var tags = JSONHelper.load_json(tags_json)
 	
 	if not tags == null:
 		for tag in tags:

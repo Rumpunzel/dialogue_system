@@ -9,7 +9,7 @@ var root
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	dialogue_options = json_helper.load_json(dialogue_options_file_path)
+	dialogue_options = JSONHelper.load_json(dialogue_options_file_path)
 	
 	root = create_item()
 	

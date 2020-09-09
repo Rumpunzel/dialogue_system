@@ -5,7 +5,7 @@ var tag_name
 
 func setup(NPC, tag_string):
 	tag_name = tag_string
-	var json = json_helper.load_json(NPC.json_path)
+	var json = JSONHelper.load_json(NPC.json_path)
 	
 	if not json == null:
 		entries = json.get("tags", { })

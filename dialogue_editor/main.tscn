@@ -17,10 +17,13 @@ __meta__ = {
 [node name="editor" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Game Properties" parent="editor" instance=ExtResource( 3 )]
 margin_left = 4.0
-margin_top = 41.0
+margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 

@@ -31,7 +31,7 @@ func save_changes():
 	NPC.store_values()
 	
 	if not new_path == json_path:
-		file_helper.delete_file(json_path)
+		FileHelper.delete_file(json_path)
 		json_path = new_path
 	
 	if CONSTANTS.verbose_mode:

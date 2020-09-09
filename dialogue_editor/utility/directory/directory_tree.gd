@@ -64,7 +64,7 @@ func parse(options, root_entry:TreeItem = tree_root, filter = "", group_by = nul
 	
 	for option in keys:
 		var data = options[option]
-		var tags_dictionary = json_helper.load_json(data).get("tags", { })
+		var tags_dictionary = JSONHelper.load_json(data).get("tags", { })
 		
 		if filter == "" or filter.to_lower() in data.to_lower() or check_array_for_filter(filter.to_lower(), tags_dictionary.values()):
 			var place_in_tree:Array = [ ]
@@ -89,7 +89,7 @@ func open_entry(node = get_node(root_node).get_root_node()):
 
 
 func load_entries():
-	entries = file_helper.list_files_in_directory(root.entry_directory, true, root.file_ending)
+	entries = FileHelper.list_files_in_directory(root.entry_directory, true, root.file_ending)
 
 
 func set_full_path(entry:TreeItem, full_path:String, tags_dictionary:Dictionary = { }):

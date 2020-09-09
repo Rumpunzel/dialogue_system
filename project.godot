@@ -44,6 +44,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_engine/characters/DialogueNPC.gd"
 }, {
+"base": "Resource",
+"class": "FileHelper",
+"language": "GDScript",
+"path": "res://dialogue_engine/helpers/file_helper.gd"
+}, {
+"base": "Resource",
+"class": "JSONHelper",
+"language": "GDScript",
+"path": "res://dialogue_engine/helpers/json_helper.gd"
+}, {
+"base": "Resource",
+"class": "MathHelper",
+"language": "GDScript",
+"path": "res://dialogue_engine/helpers/math_helper.gd"
+}, {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
@@ -132,6 +147,9 @@ _global_script_class_icons={
 "DialogueCharacter": "",
 "DialogueCharacters": "",
 "DialogueNPC": "",
+"FileHelper": "",
+"JSONHelper": "",
+"MathHelper": "",
 "TypingLabel": "",
 "character_editor": "",
 "default_editor": "",
@@ -162,9 +180,6 @@ config/icon="res://assets/images/LarianJamal.png"
 CONSTANTS="*res://dialogue_engine/CONSTANTS.tscn"
 GAME_CONSTANTS="*res://data/GAME_CONSTANTS.gd"
 CHARACTERS="*res://dialogue_engine/characters/DialogueCharacters.gd"
-file_helper="*res://dialogue_engine/helpers/file_helper.gd"
-json_helper="*res://dialogue_engine/helpers/json_helper.gd"
-math_helper="*res://dialogue_engine/helpers/math_helper.gd"
 
 [debug]
 

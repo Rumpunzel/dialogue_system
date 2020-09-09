@@ -31,10 +31,10 @@ func setup(id:String, path:String):
 
 func save_changes():
 	var new_path = "%s%s" % [json_path.get_base_dir().plus_file(name), get_parent().get_file_extension()]
-	json_helper.save_json(json, new_path)
+	JSONHelper.save_json(json, new_path)
 	
 	if not new_path == json_path:
-		file_helper.delete_file(json_path)
+		FileHelper.delete_file(json_path)
 		json_path = new_path
 	
 	if CONSTANTS.verbose_mode:
@@ -50,9 +50,9 @@ func close_tab(save_changes = true):
 
 func delete_entry(path = json_path, new_path = null):
 	if not new_path == null:
-		json_helper.save_json(json, new_path)
+		JSONHelper.save_json(json, new_path)
 	
-	file_helper.delete_file(path)
+	FileHelper.delete_file(path)
 	
 	if CONSTANTS.verbose_mode:
 		CONSTANTS.print_to_console("%s deleted." % [name])
@@ -76,7 +76,7 @@ func set_tab_id(new_id:String):
 func set_json_path(new_path:String):
 	json_path = new_path
 	
-	var new_json = json_helper.load_json(json_path)
+	var new_json = JSONHelper.load_json(json_path)
 	
 	if not new_json == null:
 		json = new_json
