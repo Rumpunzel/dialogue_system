@@ -11,7 +11,7 @@
 [node name="test_level" instance=ExtResource( 2 )]
 script = ExtResource( 7 )
 
-[node name="parckment" type="TextureRect" parent="background" index="0"]
+[node name="parchment" type="TextureRect" parent="background" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 5 )
@@ -21,7 +21,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="waterfall" type="TextureRect" parent="background/parckment" index="0"]
+[node name="waterfall" type="TextureRect" parent="background/parchment" index="0"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
