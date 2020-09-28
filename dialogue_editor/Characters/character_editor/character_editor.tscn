@@ -25,12 +25,6 @@ entry_directory = "res://data/characters"
 file_ending = ".char"
 root_node = NodePath("../../..")
 
-[node name="groups_button" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="0"]
-margin_right = 75.0
-
-[node name="filter" parent="character_properties/character_divider/character_directory/filter_container/filter_container" index="1"]
-margin_left = 79.0
-
 [node name="directory_tree" parent="character_properties/character_divider/character_directory/filter_container/All Entries" index="0"]
 columns = 2
 script = ExtResource( 6 )
@@ -40,8 +34,6 @@ show_tags = false
 root_node = NodePath("../../../../../../../..")
 
 [node name="CharacterProperties" parent="character_properties/data_divider" index="1"]
-margin_left = 270.0
-margin_right = 794.0
 root_node = NodePath("../../..")
 
 [editable path="character_properties"]

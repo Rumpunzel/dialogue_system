@@ -22,7 +22,7 @@ func _ready():
 
 
 func setup_tags(NPC):
-	var tags = json_helper.load_json(character_tags)
+	var tags = JSONHelper.load_json(character_tags)
 	
 	for tag in tags:
 		var new_tag = character_tag.instance()
@@ -39,6 +39,9 @@ margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/autohide = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="character_divider" type="VSplitContainer" parent="."]
 margin_right = 394.0
@@ -66,7 +69,6 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="character_directory" parent="character_divider" instance=ExtResource( 3 )]
-editor/display_folded = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 379.0
@@ -80,7 +82,11 @@ margin_bottom = 367.0
 [node name="filter_container" parent="character_divider/character_directory/filter_container" index="0"]
 margin_right = 394.0
 
+[node name="groups_button" parent="character_divider/character_directory/filter_container/filter_container" index="0"]
+margin_right = 75.0
+
 [node name="filter" parent="character_divider/character_directory/filter_container/filter_container" index="1"]
+margin_left = 79.0
 margin_right = 394.0
 
 [node name="All Entries" parent="character_divider/character_directory/filter_container" index="1"]
@@ -154,5 +160,7 @@ character_tag = ExtResource( 4 )
 character_tags = "res://data/characters/CHARACTER_TAGS.json"
 
 [node name="CharacterProperties" parent="data_divider" instance=ExtResource( 5 )]
+margin_left = 270.0
+margin_right = 794.0
 
 [editable path="character_divider/character_directory"]
