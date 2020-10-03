@@ -1,149 +1,150 @@
 {
-  "_leave_option": {
-    "option_text": {
-      "button_text": [
-        "Leave."
-      ]
+    "_leave_option": {
+        "option_text": {
+            "button_text": [
+                "Leave."
+            ]
+        },
+        "tooltip": "Goodbye.",
+        "type": "_exit_option"
     },
-    "tooltip": "Goodbye.",
-    "type": "_exit_option"
-  },
-  "back_test": {
-    "loop_success_option_text_from": 1,
-    "option_text": {
-      "button_text": [
-        "This option will open a new tree.",
-        "And here it is again (still opens a new tree)."
-      ]
+    "back_test": {
+        "loop_success_option_text_from": 1,
+        "option_text": {
+            "button_text": [
+                "This option will open a new tree.",
+                "And here it is again (still opens a new tree)."
+            ]
+        },
+        "single_use": false
     },
-    "single_use": false
-  },
-  "big_deal_option": {
-    "approval_rating_change_on_success": 10,
-    "big_deal": true,
-    "failure_messages": [
-      [
-        {
-          "text": "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
+    "big_deal_option": {
+        "approval_rating_change_on_success": 10,
+        "big_deal": true,
+        "failure_messages": [
+            [{
+                "text": "Oops, Too soon. Too direct. Rich in many things but tact and empathy. This secret is not within your reach today."
+            }],
+            [{
+                "text": "You blew your second change, congratz, mate."
+            }],
+            [{
+                "text": "No idea how you're getting any more chances here..."
+            }]
+        ],
+        "loop_failures_from": 2,
+        "option_text": {
+            "button_text": [
+                "This dialogue option is a <{BIG DEAL!|big deal.}>"
+            ],
+            "button_text_after_failure": [
+                "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table."
+            ]
+        },
+        "required_approval_rating": 20,
+        "tooltip": "It will have drastic effects on this relationship.",
+        "value_changes": {
+            "politeness": -3,
+            "sincerity": 10
+        },
+        "values_enable_success": [
+            "selflessness"
+        ]
+    },
+    "heroic_option": {
+        "option_text": {
+            "button_text": [
+                "This is another dialogue option.",
+                "This is the dialogue option again."
+            ]
+        },
+        "single_use": false,
+        "success_messages": [
+            [{
+                "text": "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+            }]
+        ],
+        "tooltip": "It is a heroic option, indeed.",
+        "value_changes": {
+            "reliability": 1,
+            "selflessness": 2
         }
-      ],
-      [
-        {
-          "text": "You blew your second change, congratz, mate."
-        }
-      ],
-      [
-        {
-          "text": "No idea how you're getting any more chances here..."
-        }
-      ]
-    ],
-    "loop_failures_from": 2,
-    "option_text": {
-      "button_text": [
-        "This dialogue option is a <{BIG DEAL!|big deal.}>"
-      ],
-      "button_text_after_failure": [
-        "Even though you've failed this option the first time, the NPC has since reconcisered how they feel about you and this topic is once again on the table."
-      ]
     },
-    "required_approval_rating": 20,
-    "tooltip": "It will have drastic effects on this relationship.",
-    "value_changes": {
-      "politeness": -3,
-      "sincerity": 10
+    "nice_exit": {
+        "noteworthy": true,
+        "option_text": {
+            "button_text": [
+                "Thank you, Jamaliko."
+            ]
+        },
+        "tooltip": "(✿◠‿◠)",
+        "type": "_exit_option"
     },
-    "values_enable_success": [
-      "selflessness"
-    ]
-  },
-  "heroic_option": {
-    "option_text": {
-      "button_text": [
-        "This is another dialogue option.",
-        "This is the dialogue option again."
-      ]
-    },
-    "single_use": false,
-    "success_messages": [
-      [
-        {
-          "text": "You boast about your heroic deed.\nIt is quite impressive. Especially as seemingly no one has yet tired of listening to your stories."
+    "polite_option": {
+        "option_text": {
+            "button_text": [
+                "This is a dialogue option."
+            ]
+        },
+        "success_messages": [
+            [{
+                "speaker": 1,
+                "text": "Something polite, yet ultimately meaningless."
+            }]
+        ],
+        "tooltip": "It is small and polite.",
+        "value_changes": {
+            "politeness": 2
         }
-      ]
-    ],
-    "tooltip": "It is a heroic option, indeed.",
-    "value_changes": {
-      "reliability": 1,
-      "selflessness": 2
+    },
+    "lie_option": {
+        "option_text": {
+            "button_text": [
+                "I think this is a good system."
+            ]
+        },
+        "success_messages": [
+            [{
+                "speaker": "Jamal",
+                "text": "How very nice of you! (The character has no idea if you lied but it is saved to the backend)"
+            }]
+        ],
+        "tooltip": "You can press CTRL to turn this into a lie.",
+        "can_be_lie": true
+    },
+    "rude_exit": {
+        "noteworthy": true,
+        "option_text": {
+            "button_text": [
+                "Fuck you, Jamaliko."
+            ]
+        },
+        "tooltip": "( ︶︿︶)_╭∩╮",
+        "type": "_exit_option"
+    },
+    "weather_option": {
+        "loop_success_option_text_from": 1,
+        "loop_successes_from": 1,
+        "option_text": {
+            "button_text": [
+                "Talk about the weather.",
+                "Talk about the weather some more."
+            ]
+        },
+        "single_use": false,
+        "success_messages": [
+            [{
+                "speaker": 2,
+                "text": "Yes, yes, quite indeed. How insightful, truly."
+            }],
+            [{
+                "speaker": 2,
+                "text": "Again? Seriously? Well ok, then..."
+            }]
+        ],
+        "tooltip": "Wow, what social skills. I am impressed.",
+        "value_changes": {
+            "selflessness": -3
+        }
     }
-  },
-  "nice_exit": {
-    "noteworthy": true,
-    "option_text": {
-      "button_text": [
-        "Thank you, Jamaliko."
-      ]
-    },
-    "tooltip": "(✿◠‿◠)",
-    "type": "_exit_option"
-  },
-  "polite_option": {
-    "option_text": {
-      "button_text": [
-        "This is a dialogue option."
-      ]
-    },
-    "success_messages": [
-      [
-        {
-          "speaker": 1,
-          "text": "Something polite, yet ultimately meaningless."
-        }
-      ]
-    ],
-    "tooltip": "It is small and polite.",
-    "value_changes": {
-      "politeness": 2
-    }
-  },
-  "rude_exit": {
-    "noteworthy": true,
-    "option_text": {
-      "button_text": [
-        "Fuck you, Jamaliko."
-      ]
-    },
-    "tooltip": "( ︶︿︶)_╭∩╮",
-    "type": "_exit_option"
-  },
-  "weather_option": {
-    "loop_success_option_text_from": 1,
-    "loop_successes_from": 1,
-    "option_text": {
-      "button_text": [
-        "Talk about the weather.",
-        "Talk about the weather some more."
-      ]
-    },
-    "single_use": false,
-    "success_messages": [
-      [
-        {
-          "speaker": 2,
-          "text": "Yes, yes, quite indeed. How insightful, truly."
-        }
-      ],
-      [
-        {
-          "speaker": 2,
-          "text": "Again? Seriously? Well ok, then..."
-        }
-      ]
-    ],
-    "tooltip": "Wow, what social skills. I am impressed.",
-    "value_changes": {
-      "selflessness": -3
-    }
-  }
 }

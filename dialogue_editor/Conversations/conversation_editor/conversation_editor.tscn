@@ -30,7 +30,7 @@ save_button = NodePath("name_bar/help_divider/buttons_container/save")
 close_button = NodePath("name_bar/help_divider/buttons_container/close")
 delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
 name_field = NodePath("name_bar/help_divider/name_field")
-trees_container = NodePath("trees_panel/title_container/trees_container")
+trees_container = NodePath("participants_divider/options_divider/trees_panel/title_container/trees_container")
 
 [node name="name_field" parent="name_bar/help_divider" index="0"]
 placeholder_text = "Conversation Name"
@@ -41,29 +41,45 @@ margin_top = 54.0
 margin_right = 1200.0
 margin_bottom = 58.0
 
-[node name="participants_panel" type="PanelContainer" parent="." index="2"]
+[node name="participants_divider" type="VSplitContainer" parent="." index="2"]
 margin_top = 62.0
 margin_right = 1200.0
-margin_bottom = 113.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="participants_container" type="VBoxContainer" parent="participants_panel" index="0"]
+[node name="participants_panel" type="PanelContainer" parent="participants_divider" index="0"]
+margin_right = 1200.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="scroll_container" type="ScrollContainer" parent="participants_divider/participants_panel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1193.0
-margin_bottom = 44.0
+margin_bottom = 109.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="counter_divider" type="HSplitContainer" parent="participants_panel/participants_container" index="0"]
+[node name="participants_container" type="VBoxContainer" parent="participants_divider/participants_panel/scroll_container" index="0"]
+margin_right = 1186.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="counter_divider" type="HSplitContainer" parent="participants_divider/participants_panel/scroll_container/participants_container" index="0"]
 margin_right = 1186.0
 margin_bottom = 24.0
 
-[node name="participants" type="Label" parent="participants_panel/participants_container/counter_divider" index="0"]
+[node name="participants" type="Label" parent="participants_divider/participants_panel/scroll_container/participants_container/counter_divider" index="0"]
 margin_top = 5.0
 margin_right = 75.0
 margin_bottom = 19.0
 text = "Participants"
 
-[node name="spin_box" type="SpinBox" parent="participants_panel/participants_container/counter_divider" index="1"]
+[node name="spin_box" type="SpinBox" parent="participants_divider/participants_panel/scroll_container/participants_container/counter_divider" index="1"]
 margin_left = 1112.0
 margin_right = 1186.0
 margin_bottom = 24.0
@@ -71,56 +87,54 @@ size_flags_horizontal = 8
 min_value = 1.0
 value = 1.0
 
-[node name="item_list" type="ItemList" parent="participants_panel/participants_container" index="1"]
+[node name="item_list" type="ItemList" parent="participants_divider/participants_panel/scroll_container/participants_container" index="1"]
 margin_top = 28.0
 margin_right = 1186.0
-margin_bottom = 37.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 auto_height = true
 same_column_width = true
 script = SubResource( 1 )
 
-[node name="h_separator_2" type="HSeparator" parent="." index="3"]
-margin_top = 117.0
+[node name="options_divider" type="VSplitContainer" parent="participants_divider" index="1"]
+margin_top = 128.0
 margin_right = 1200.0
-margin_bottom = 121.0
-
-[node name="trees_panel" type="PanelContainer" parent="." index="4"]
-margin_top = 125.0
-margin_right = 1200.0
-margin_bottom = 456.0
+margin_bottom = 738.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="title_container" type="VBoxContainer" parent="trees_panel" index="0"]
+[node name="trees_panel" type="PanelContainer" parent="participants_divider/options_divider" index="0"]
+margin_right = 1200.0
+margin_bottom = 299.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="title_container" type="VBoxContainer" parent="participants_divider/options_divider/trees_panel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1193.0
-margin_bottom = 324.0
+margin_bottom = 292.0
 
-[node name="dialogue_trees" type="Label" parent="trees_panel/title_container" index="0"]
+[node name="dialogue_trees" type="Label" parent="participants_divider/options_divider/trees_panel/title_container" index="0"]
 margin_right = 1186.0
 margin_bottom = 14.0
 text = "Dialogue Trees"
 
-[node name="trees_container" type="TabContainer" parent="trees_panel/title_container" index="1"]
+[node name="trees_container" type="TabContainer" parent="participants_divider/options_divider/trees_panel/title_container" index="1"]
 margin_top = 18.0
 margin_right = 1186.0
-margin_bottom = 317.0
+margin_bottom = 285.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 script = ExtResource( 3 )
 dialogue_tree_scene = ExtResource( 4 )
 
-[node name="h_separator_3" type="HSeparator" parent="." index="5"]
-margin_top = 460.0
+[node name="graph_edit" type="GraphEdit" parent="participants_divider/options_divider" index="1"]
+margin_top = 311.0
 margin_right = 1200.0
-margin_bottom = 464.0
-
-[node name="graph_edit" type="GraphEdit" parent="." index="6"]
-margin_top = 468.0
-margin_right = 1200.0
-margin_bottom = 800.0
+margin_bottom = 610.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_offset = Vector2( 0, -4 )
+scroll_offset = Vector2( 0, -174 )
