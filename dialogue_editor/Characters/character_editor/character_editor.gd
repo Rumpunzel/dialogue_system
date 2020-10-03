@@ -1,5 +1,6 @@
-extends default_editor_tab
-class_name character_editor
+class_name CharacterEditor, "res://dialogue_editor/assets/icons/icon_character_editor.svg"
+extends DefaultEditorTab
+
 
 export(NodePath) var portrait
 export(NodePath) var bio

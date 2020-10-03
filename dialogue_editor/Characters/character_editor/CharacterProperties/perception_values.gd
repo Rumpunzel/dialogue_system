@@ -1,15 +1,21 @@
 extends GridContainer
 
+
 enum { VALUE_NAME, SLIDER }
+
 
 export(PackedScene) var value_slider
 
 export(NodePath) var root_node
 
-onready var editor_root:character_editor = get_node(root_node).root_node
 
-var perception_entries:Array = []
+onready var editor_root: CharacterEditor = get_node(root_node).root_node
+
+
+var perception_entries: Array = []
 var NPC = null
+
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +26,13 @@ func _ready():
 	editor_root.connect("current_NPC", self, "set_NPC")
 
 
-func update_perceptions_graph(value_name:String, new_value):
+
+
+func update_perceptions_graph(value_name: String, new_value):
 	if value_name.length() > 0:
 		NPC.personal_values[value_name] = new_value
+
+
 
 func update_perception_entries():
 	var new_perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
@@ -55,6 +65,8 @@ func update_perception_entries():
 	
 	perception_entries.resize(new_perception_values.size())
 
+
+
 func update_perception_values(new_values):
 	var perception_values = GAME_CONSTANTS.PERCEPTION_VALUES
 	
@@ -63,6 +75,8 @@ func update_perception_values(new_values):
 
 		if NPC.personal_values.has(perception):
 			perception_entries[i][SLIDER].update_value(new_values[perception], null, false)
+
+
 
 func set_NPC(new_NPC):
 	NPC = new_NPC

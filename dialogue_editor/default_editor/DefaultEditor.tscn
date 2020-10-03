@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://dialogue_editor/default_editor/default_editor.gd" type="Script" id=1]
-[ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://dialogue_editor/utility/directory/directory.tscn" type="PackedScene" id=3]
-[ext_resource path="res://dialogue_editor/utility/tags_editor.gd" type="Script" id=4]
-[ext_resource path="res://dialogue_editor/utility/tag.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogue_editor/utility/tags_editor.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/default_editor/DefaultEditor.gd" type="Script" id=2]
+[ext_resource path="res://dialogue_editor/default_editor/DefaultEditorTab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogue_editor/utility/tag.tscn" type="PackedScene" id=4]
+[ext_resource path="res://dialogue_editor/utility/directory/directory.tscn" type="PackedScene" id=5]
+
 
 [node name="DefaultEditor" type="TabContainer"]
 anchor_right = 1.0
@@ -13,8 +14,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 drag_to_rearrange_enabled = true
-script = ExtResource( 1 )
-tab_scene = ExtResource( 2 )
+script = ExtResource( 2 )
+tab_scene = ExtResource( 3 )
 new_tab_button = NodePath("Menu/new_tab")
 directory = NodePath("Menu/directory_divider/directory")
 
@@ -39,7 +40,7 @@ margin_bottom = 764.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="directory" parent="Menu/directory_divider" instance=ExtResource( 3 )]
+[node name="directory" parent="Menu/directory_divider" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 788.0
@@ -96,5 +97,5 @@ margin_right = 378.0
 margin_bottom = 694.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 4 )
-tag_scene = ExtResource( 5 )
+script = ExtResource( 1 )
+tag_scene = ExtResource( 4 )

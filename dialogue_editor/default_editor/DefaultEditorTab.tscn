@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://dialogue_editor/default_editor/default_editor_tab.gd" type="Script" id=1]
+[ext_resource path="res://dialogue_editor/default_editor/DefaultEditorTab.gd" type="Script" id=1]
 [ext_resource path="res://dialogue_editor/Characters/character_editor/CharacterProperties/name_field.gd" type="Script" id=2]
 [ext_resource path="res://dialogue_editor/utility/button_with_confirmation.gd" type="Script" id=3]
 
@@ -33,16 +33,19 @@ func parse_action(action):
 			 confirm_dialog(false)
 "
 
-[node name="default_editor_tab" type="VBoxContainer"]
+[node name="DefaultEditorTab" type="VBoxContainer"]
 margin_right = 1200.0
 margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
-save_button = NodePath("name_bar/help_divider/buttons_container/save")
-close_button = NodePath("name_bar/help_divider/buttons_container/close")
-delete_button = NodePath("name_bar/help_divider/buttons_container/delete")
-name_field = NodePath("name_bar/help_divider/name_field")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+save_button = NodePath("../DefaultEditorTab/name_bar/help_divider/buttons_container/save")
+close_button = NodePath("../DefaultEditorTab/name_bar/help_divider/buttons_container/close")
+delete_button = NodePath("../DefaultEditorTab/name_bar/help_divider/buttons_container/delete")
+name_field = NodePath("../DefaultEditorTab/name_bar/help_divider/name_field")
 
 [node name="name_bar" type="MarginContainer" parent="."]
 margin_right = 1200.0
@@ -70,7 +73,7 @@ placeholder_text = "Tab Name"
 caret_blink = true
 script = ExtResource( 2 )
 expand = true
-root_node = NodePath("../../..")
+root_node = NodePath("../../../../DefaultEditorTab")
 
 [node name="buttons_container" type="HBoxContainer" parent="name_bar/help_divider"]
 margin_left = 949.0

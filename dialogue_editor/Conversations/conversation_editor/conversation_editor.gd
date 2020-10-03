@@ -1,4 +1,4 @@
-extends default_editor_tab
+extends DefaultEditorTab
 
 export(NodePath) var trees_container
 

@@ -1,4 +1,4 @@
-extends perception_graph
+extends PerceptionGraph
 
 export(NodePath) var root_node
 

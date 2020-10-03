@@ -1,5 +1,9 @@
+class_name DefaultEditorTab, "res://dialogue_editor/assets/icons/icon_default_editor_tab.svg"
 extends VBoxContainer
-class_name default_editor_tab
+
+
+signal new_json
+
 
 export(NodePath) var save_button
 export(NodePath) var close_button
@@ -7,11 +11,11 @@ export(NodePath) var delete_button
 
 export(NodePath) var name_field
 
-var json_path:String setget set_json_path, get_json_path
 
-var json:Dictionary
+var json_path: String setget set_json_path
 
-signal new_json
+var json: Dictionary
+
 
 
 
@@ -23,10 +27,12 @@ func _ready():
 
 
 
-func setup(id:String, path:String):
+
+func setup(id: String, path: String):
 	set_json_path(path)
 	
 	set_tab_id(id)
+
 
 
 func save_changes():
@@ -41,11 +47,13 @@ func save_changes():
 		CONSTANTS.print_to_console("%s changes saved." % [name])
 
 
+
 func close_tab(save_changes = true):
 	if save_changes:
 		save_changes()
 	
 	queue_free()
+
 
 
 func delete_entry(path = json_path, new_path = null):
@@ -61,19 +69,21 @@ func delete_entry(path = json_path, new_path = null):
 		close_tab(false)
 
 
-func tab_exists(path:String):
+
+func tab_exists(path: String):
 	return path == json_path
 
 
 
-func set_tab_id(new_id:String):
+
+func set_tab_id(new_id: String):
 	if not new_id == "":
 		name = new_id
 	
 	get_node(name_field).text = name
 
 
-func set_json_path(new_path:String):
+func set_json_path(new_path: String):
 	json_path = new_path
 	
 	var new_json = JSONHelper.load_json(json_path)
@@ -82,8 +92,3 @@ func set_json_path(new_path:String):
 		json = new_json
 		
 		emit_signal("new_json", json)
-
-
-
-func get_json_path() -> String:
-	return json_path

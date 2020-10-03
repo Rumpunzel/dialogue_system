@@ -1,5 +1,6 @@
+class_name DefaultEditor, "res://dialogue_editor/assets/icons/icon_default_editor.svg"
 extends TabContainer
-class_name default_editor
+
 
 export var new_tab_name = "New Tab"
 
@@ -9,9 +10,13 @@ export(NodePath) var new_tab_button
 export(NodePath) var directory
 
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(new_tab_button).connect("pressed", self, "open_new_tab")
+
+
 
 
 func open_new_tab(tab_path:String = "", tab_name:String = new_tab_name):
@@ -43,8 +48,11 @@ func open_new_tab(tab_path:String = "", tab_name:String = new_tab_name):
 	current_tab = has_tab
 
 
+
+
 func get_file_directory():
 	return get_node(directory).get_entry_directory()
+
 
 func get_file_extension():
 	return get_node(directory).get_file_ending()

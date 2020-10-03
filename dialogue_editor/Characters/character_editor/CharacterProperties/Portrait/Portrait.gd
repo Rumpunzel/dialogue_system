@@ -9,9 +9,10 @@ export(String, FILE, "*.png") var default_portrait
 
 onready var portrait = get_node(portrait_node)
 
-var portrait_path:String
+var portrait_path: String
 
 signal new_portrait
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,10 +21,14 @@ func _ready():
 	get_node(reset_button).connect("confirmed", self, "reset_portrait")
 
 
+
+
 func reset_portrait(initializing = false):
 	set_portrait(default_portrait, initializing)
 
-func set_portrait(new_portrait_path:String, initializing = false):
+
+
+func set_portrait(new_portrait_path: String, initializing = false):
 	portrait_path = new_portrait_path
 	
 	if portrait_path.length() > 0:
