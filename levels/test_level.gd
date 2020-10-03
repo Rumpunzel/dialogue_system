@@ -5,6 +5,7 @@ extends game_scene
 func _ready():
 	# reset Klaus
 	var klaus = $characters/Klaus
+	
 	klaus.memories.dialogue_memories = { }
 	klaus.character_perceptions = { }
 	# start the default dialogue for Klaus

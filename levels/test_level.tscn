@@ -38,6 +38,14 @@ __meta__ = {
 }
 
 [node name="dialogue_window" parent="foreground/ui" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 250.0
+margin_bottom = 250.0
 default_listeners = [ "Klaus" ]
 
 [node name="perception_graph" parent="foreground/ui" index="1" instance=ExtResource( 1 )]

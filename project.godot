@@ -29,10 +29,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://dialogue_editor/utility/button_with_confirmation.gd"
 }, {
+"base": "DefaultEditorTab",
+"class": "CharacterEditor",
+"language": "GDScript",
+"path": "res://dialogue_editor/Characters/character_editor/character_editor.gd"
+}, {
+"base": "Reference",
+"class": "CharacterMemories",
+"language": "GDScript",
+"path": "res://dialogue_engine/characters/CharacterMemories.gd"
+}, {
 "base": "Node",
 "class": "Constants",
 "language": "GDScript",
 "path": "res://dialogue_engine/CONSTANTS.gd"
+}, {
+"base": "TabContainer",
+"class": "DefaultEditor",
+"language": "GDScript",
+"path": "res://dialogue_editor/default_editor/DefaultEditor.gd"
+}, {
+"base": "VBoxContainer",
+"class": "DefaultEditorTab",
+"language": "GDScript",
+"path": "res://dialogue_editor/default_editor/DefaultEditorTab.gd"
 }, {
 "base": "TypingLabel",
 "class": "DescriptionField",
@@ -87,27 +107,12 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "PerceptionGraph",
 "language": "GDScript",
-"path": "res://dialogue_engine/dialogue_ui/perception_graph/perception_graph.gd"
+"path": "res://dialogue_engine/dialogue_ui/perception_graph/PerceptionGraph.gd"
 }, {
 "base": "RichTextLabel",
 "class": "TypingLabel",
 "language": "GDScript",
 "path": "res://dialogue_engine/dialogue_ui/typing_label.gd"
-}, {
-"base": "default_editor_tab",
-"class": "character_editor",
-"language": "GDScript",
-"path": "res://dialogue_editor/Characters/character_editor/character_editor.gd"
-}, {
-"base": "TabContainer",
-"class": "default_editor",
-"language": "GDScript",
-"path": "res://dialogue_editor/default_editor/default_editor.gd"
-}, {
-"base": "VBoxContainer",
-"class": "default_editor_tab",
-"language": "GDScript",
-"path": "res://dialogue_editor/default_editor/default_editor_tab.gd"
 }, {
 "base": "Tree",
 "class": "default_tree",
@@ -128,11 +133,6 @@ _global_script_classes=[ {
 "class": "game_scene",
 "language": "GDScript",
 "path": "res://dialogue_engine/game/game_scene.gd"
-}, {
-"base": "Node",
-"class": "memories",
-"language": "GDScript",
-"path": "res://dialogue_engine/characters/memories.gd"
 }, {
 "base": "MenuButton",
 "class": "menu_option",
@@ -159,9 +159,13 @@ _global_script_class_icons={
 "BetterProgressBar": "",
 "BetterTextEdit": "",
 "ButtonWithConfirmation": "",
+"CharacterEditor": "res://dialogue_editor/assets/icons/icon_character_editor.svg",
+"CharacterMemories": "",
 "Constants": "",
+"DefaultEditor": "res://dialogue_editor/assets/icons/icon_default_editor.svg",
+"DefaultEditorTab": "res://dialogue_editor/assets/icons/icon_default_editor_tab.svg",
 "DescriptionField": "res://dialogue_engine/assets/icons/icon_description_field.svg",
-"DialogueCharacter": "",
+"DialogueCharacter": "res://dialogue_engine/assets/icons/icon_dialogue_character.svg",
 "DialogueCharacters": "",
 "DialogueNPC": "",
 "DialogueOption": "res://dialogue_engine/assets/icons/icon_dialogue_option.svg",
@@ -172,14 +176,10 @@ _global_script_class_icons={
 "OptionsTree": "res://dialogue_engine/assets/icons/icon_options_tree.svg",
 "PerceptionGraph": "res://dialogue_engine/assets/icons/icon_perception_graph.svg",
 "TypingLabel": "",
-"character_editor": "",
-"default_editor": "",
-"default_editor_tab": "",
 "default_tree": "",
 "directory_tree": "",
 "editor_name_field": "",
 "game_scene": "",
-"memories": "",
 "menu_option": "",
 "tag": "",
 "value_slider": "",
@@ -207,7 +207,6 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1200
 window/size/height=800
-window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
 [node]
