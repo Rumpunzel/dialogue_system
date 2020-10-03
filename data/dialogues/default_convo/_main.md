@@ -1,7 +1,7 @@
 # greeting
 
->This is a [glorious](I made dis!) dialogue system.
->We all know that it is and that it will be that forever. It is known.
+This is a [glorious](I made dis!) dialogue system.
+We all know that it is and that it will be that forever. It is known.
 
 # message
 
