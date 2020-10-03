@@ -2,7 +2,7 @@ extends Tree
 
 export(String, FILE, "*.json") var dialogue_options_file_path
 
-var dialogue_options:Dictionary
+var dialogue_options: Dictionary
 
 var root
 
