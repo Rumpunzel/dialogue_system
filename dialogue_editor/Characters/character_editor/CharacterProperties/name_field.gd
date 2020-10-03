@@ -3,7 +3,7 @@ class_name editor_name_field
 
 export(NodePath) var root_node
 
-onready var editor_root:character_editor = get_node(root_node)
+onready var editor_root = get_node(root_node)
 
 
 # Called when the node enters the scene tree for the first time.
