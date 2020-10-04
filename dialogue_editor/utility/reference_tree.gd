@@ -1,4 +1,4 @@
-extends default_tree
+extends DefaultTree
 
 
 func setup(tags_json):
@@ -8,7 +8,7 @@ func setup(tags_json):
 		parse_tree(entries)
 
 
-func parse(options, root_entry:TreeItem = tree_root, _filter:String = "", _group_by = null, _category = null):
+func parse(options, root_entry: TreeItem = tree_root, _filter: String = "", _group_by = null, _category = null):
 	var tag = parse_dictionary_to_arrays_of_paths(options)
 	
 	for values in tag:

@@ -9,6 +9,9 @@ margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="tag_container" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -34,6 +37,7 @@ margin_left = 194.0
 margin_right = 230.0
 margin_bottom = 20.0
 size_flags_horizontal = 8
+toggle_mode = true
 text = "Edit"
 
 [node name="h_separator" type="HSeparator" parent="tag_container"]
@@ -49,3 +53,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource( 2 )
+entries_selectable = true
+entries_editable = true

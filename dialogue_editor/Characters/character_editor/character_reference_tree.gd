@@ -1,4 +1,4 @@
-extends default_tree
+extends DefaultTree
 
 var tag_name
 

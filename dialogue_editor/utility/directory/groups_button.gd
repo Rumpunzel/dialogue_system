@@ -41,8 +41,8 @@ func update_filtered_tree(filter):
 
 func setup_groups():
 	clear()
-	add_group(directory_tree.FOLDERS)
-	add_group(directory_tree.NOTHING)
+	add_group(DirectoryTree.FOLDERS)
+	add_group(DirectoryTree.NOTHING)
 	
 	groups = tree.groups
 	groups.sort()
@@ -50,4 +50,4 @@ func setup_groups():
 	for grp in groups:
 		add_group(grp)
 	
-	text = "%s%s" % [ITEM_STRING, directory_tree.FOLDERS.capitalize()]
+	text = "%s%s" % [ITEM_STRING, DirectoryTree.FOLDERS.capitalize()]
